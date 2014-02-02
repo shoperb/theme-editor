@@ -1,0 +1,2 @@
+class ProductAttributeDrop < AttributeDrop
+end
