@@ -5,7 +5,6 @@ module Shoperb
       class Shop < Base
         include Singleton
       end
-      ::Shop = Shop
     end
   end
 end

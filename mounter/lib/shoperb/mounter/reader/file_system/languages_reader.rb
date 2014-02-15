@@ -3,7 +3,7 @@ module Shoperb
     module Reader
       module FileSystem
 
-        class CategoriesReader < PluralBase
+        class LanguagesReader < PluralBase
 
         end
 

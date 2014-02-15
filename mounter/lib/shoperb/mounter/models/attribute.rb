@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
     module Models
-      class Category < Base
+      class Attribute < Base
       end
     end
   end

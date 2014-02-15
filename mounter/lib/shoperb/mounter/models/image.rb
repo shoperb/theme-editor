@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
     module Models
-      class Category < Base
+      class Image < Base
       end
     end
   end

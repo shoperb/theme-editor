@@ -22,13 +22,16 @@ module Shoperb
             name = self.class.name.split('::').last.gsub('Reader','')
             config_path = File.join(self.runner.path, 'config', 'models',"#{name.underscore}.yml")
             result = []
+            klass = "Shoperb::Mounter::Models::#{name}".singularize.constantize
+            klass.mounting_point = mounting_point
             if File.exists?(config_path)
               objs = self.read_yaml(config_path)
+
               if data = objs[name.downcase]
                 data.each do |obj|
-                  result << "Shoperb::Mounter::Models::#{name}".singularize.constantize.new(obj)
+                  result << klass.new(obj)
                 end
-              end
+              end if objs
             end
             result
           end

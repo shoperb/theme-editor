@@ -1,7 +1,8 @@
 module Shoperb
   module Mounter
     module Models
-      class Category < Base
+      class Product < Base
+        has_many :variants
       end
     end
   end

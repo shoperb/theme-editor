@@ -30,7 +30,7 @@ module Shoperb
           end
 
           def link_to_root(text)
-            link_to text, "/#{@context["params"]["locale"]}"
+            link_to text, "/#{@context.registers[:request].params["locale"]}"
           end
 
           def link_to(text, url, title = nil)

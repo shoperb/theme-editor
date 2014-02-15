@@ -43,7 +43,6 @@ module Shoperb
       # @param [ Object ] elements Element(s) related to the resource
       #
       def register_resource(name, elements)
-        puts name
         self.resources ||= {}
 
         (elements.respond_to?(:values) ? elements.values : [*elements]).each do |element|

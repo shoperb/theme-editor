@@ -9,7 +9,6 @@ module Shoperb
           File.join('app','assets')
         end
       end
-      ::Theme = Theme
     end
   end
 end

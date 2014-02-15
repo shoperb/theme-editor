@@ -31,7 +31,9 @@ module Shoperb
          # @return [ Array ] List of classes
          #
          def readers
-           [ThemeReader, ShopReader, LayoutsReader, TemplatesReader, FragmentsReader, CategoriesReader, CartReader]
+           FileSystem::SingletonBase.subclasses +
+             FileSystem::PluralBase.subclasses +
+             FileSystem::LiquidBase.subclasses
          end
 
        end

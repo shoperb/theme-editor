@@ -5,7 +5,6 @@ module Shoperb
       class Cart < Base
         include Singleton
       end
-      ::Cart = Cart
     end
   end
 end
