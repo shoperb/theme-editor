@@ -73,13 +73,16 @@ module Shoperb::Editor
           :search       => SearchDrop.new(params[:query]),
           :menus        => MenusDrop.new,
           :pages        => PagesDrop.new,
-          :categories   => CategoriesDrop.new(mounting_point.categories),
+          :categories   => CategoriesDrop.new(categories),
           :shop         => ShopDrop.new(shop),
           :cart         => CartDrop.new(cart),
           :current_page => params[:page].to_i,
           :path         => request.path,
-          :params       => params
-        }
+          :params       => params,
+          :orders       => CollectionDrop.new(orders),
+          :order        => OrderDrop.new(orders.first),
+          :order_items  => CollectionDrop.new(order_items)
+        }.stringify_keys
       end
 
       # Return the default Liquid registers used inside the Shoperb Liquid context
@@ -87,16 +90,12 @@ module Shoperb::Editor
       # @return [ Hash ] The default liquid registers object
       #
       def shoperb_default_registers
-        {
+        self.mounting_point.resources.merge(
           request:        self.request,
-          theme:          self.theme,
-          shop:           self.shop,
-          cart:           self.cart,
-          page:           self.page,
           mounting_point: self.mounting_point,
           inline_editor:  false,
           logger:         Shoperb::Editor::Logger
-        }
+        )
       end
 
     end

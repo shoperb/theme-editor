@@ -28,18 +28,6 @@ module Shoperb::Editor
         self.liquid_assigns = env['editor.liquid_assigns']
       end
 
-      def theme
-        self.mounting_point.theme
-      end
-
-      def shop
-        self.mounting_point.shop
-      end
-
-      def cart
-        self.mounting_point.cart
-      end
-
       def params
         self.request.params.deep_symbolize_keys
       end
@@ -61,6 +49,10 @@ module Shoperb::Editor
 
       def log(msg)
         Shoperb::Editor::Logger.info msg
+      end
+
+      def method_missing(name, *args, &block)
+        self.mounting_point.send(name, *args, &block)
       end
 
     end

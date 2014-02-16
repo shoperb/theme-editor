@@ -27,7 +27,7 @@ module Shoperb
             if File.exists?(config_path)
               objs = self.read_yaml(config_path)
 
-              if data = objs[name.downcase]
+              if data = objs[name.underscore]
                 data.each do |obj|
                   result << klass.new(obj)
                 end

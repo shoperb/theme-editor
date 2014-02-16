@@ -5,22 +5,22 @@ module Shoperb
       module Relations
         extend ActiveSupport::Concern
         module ClassMethods
-          def has_many relation
+          def has_many relation, options={}
             class_eval <<-STRING
-              def #{relation}
+              def #{options[:name] || relation}
                 if mounting_point.respond_to?(:#{relation})
-                  mounting_point.#{relation}.select { |v| v.#{to_s.downcase.underscore}_id == id }
+                  mounting_point.#{relation}.select { |v| v.#{to_s.demodulize.underscore}_id == id }
                 elsif mounting_point.respond_to?(:#{relation.to_s.singularize})
                   mounting_point.#{relation.to_s.singularize}
                 end
               end
             STRING
           end
-          def has_one relation
+          def has_one relation, options={}
             class_eval <<-STRING
-              def #{relation}
+              def #{options[:name] || relation}
                 if mounting_point.respond_to?(:#{relation.to_s.pluralize})
-                  mounting_point.#{relation.to_s.pluralize}.detect { |v| v.#{to_s.downcase.underscore}_id == id || v.#{to_s.downcase.underscore}_id.nil? }
+                  mounting_point.#{relation.to_s.pluralize}.detect { |v| v.#{to_s.demodulize.underscore}_id == id || v.#{to_s.downcase.underscore}_id.nil? }
                 elsif mounting_point.respond_to?(:#{relation})
                   mounting_point.#{relation}
                 end
@@ -28,11 +28,11 @@ module Shoperb
             STRING
           end
 
-          def belongs_to relation
+          def belongs_to relation, options={}
             class_eval <<-STRING
-              def #{relation}
+              def #{options[:name] || relation}
                 if mounting_point.respond_to?(:#{relation.to_s.pluralize})
-                  mounting_point.#{relation.to_s.pluralize}.detect { |v| #{to_s.downcase.underscore}_id == v.id || v.id.nil? }
+                  mounting_point.#{relation.to_s.pluralize}.detect { |v| #{to_s.demodulize.underscore}_id == v.id || v.id.nil? }
                 elsif mounting_point.respond_to?(:#{relation.to_s.singularize})
                   mounting_point.#{relation.to_s.singularize}
                 end
@@ -46,7 +46,7 @@ module Shoperb
         extend ActiveSupport::Concern
         module ClassMethods
           def all
-            mounting_point.send(self.to_s.pluralize)
+            mounting_point.send(self.to_s.demodulize.pluralize.underscore)
           end
         end
       end
@@ -65,6 +65,12 @@ module Shoperb
             end
           end
           eval "::#{subclass.to_s.demodulize} = #{subclass}"
+        end
+
+        def to_liquid
+          if klass = Object.const_get(self.class.name + "Drop")
+            klass.new(self)
+          end
         end
       end
 

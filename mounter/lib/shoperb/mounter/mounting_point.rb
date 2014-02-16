@@ -49,12 +49,16 @@ module Shoperb
           element.mounting_point = self
         end
 
-        self.resources[name.to_sym] = elements
+        self.resources[name.to_s] = elements
       end
 
       def method_missing(name, *args, &block)
 
-        (self.resources || {})[name.to_sym] || super
+        (self.resources || {})[name.to_s] || raise([name, caller].inspect)
+      end
+
+      def respond_to? name, include_all=false
+        (self.resources || {}).has_key?(name.to_s) || super(name, include_all)
       end
 
       def inspect
