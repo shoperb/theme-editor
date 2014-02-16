@@ -54,7 +54,7 @@ module Shoperb
 
       def method_missing(name, *args, &block)
 
-        (self.resources || {})[name.to_s] || raise([name, caller].inspect)
+        (self.resources || {})[name.to_s] || super
       end
 
       def respond_to? name, include_all=false
