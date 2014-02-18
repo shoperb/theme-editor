@@ -1,0 +1,103 @@
+{% include "crumbs" %}
+<section role="main">
+    <div class="row">
+        <div class="columns large-6">
+            <aside class="account-navigation">
+                <header>
+                    <div class="title">MY ACCOUNT</div>
+                </header>
+                <ul>
+                    <li><a href="javascript:void(0);">Wishlist</a></li>
+                    <li class="active"><a href="javascript:void(0);">My Orders</a></li>
+                    <li><a href="javascript:void(0);">Settings</a></li>
+                </ul>
+            </aside>
+        </div>
+        <div class="columns large-18">
+            <div class="order">
+                <div class="row">
+                    <div class="columns large-24">
+                        <div class="content-block">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="order-nr">1548758545</td>
+                                        <td class="amount">$1.803</td>
+                                        <td class="date">25 October 2013</td>
+                                        <td class="status">Processing</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="columns large-24">
+                        <div class="content-block">
+                            <table class="order-items">
+                                <tbody>
+                                {% for n in (1..2) %}
+                                <tr class="cart-item">
+                                    <td class="picture">
+                                        <img src="http://placehold.it/50x50" alt=""/>
+                                    </td>
+                                    <td class="title">
+                                        Macbook pro with retina display and 13 inches screen
+                                    </td>
+                                    <td class="quantity">
+                                        <button class="quantity decrease" type="button">
+                                            <span class="icon-minus"></span>
+                                        </button>
+                                        <div class="field">
+                                            <input type="text" value="1" placeholder="Qty"/>
+                                        </div>
+                                        <button class="quantity increase" type="button">
+                                            <span class="icon-plus"></span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <div class="price">
+                                            <span class="currency-prefix">$</span>
+                                            <span class="amount">1,199</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="columns large-8">
+                        <div class="content-block">
+                            <div class="title">Subtotal</div>
+                            <div class="value">$ 1.798</div>
+                        </div>
+                    </div>
+                    <div class="columns large-8">
+                        <div class="content-block">
+                            <div class="title">VAT</div>
+                            <div class="value">$ 359</div>
+                        </div>
+                    </div>
+                    <div class="columns large-8">
+                        <div class="content-block">
+                            <div class="title">Shipping</div>
+                            <div class="value">$ 5</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="columns large-24">
+                        <div class="content-block">
+                            <div class="title">Total</div>
+                            <div class="value">$ 1.803</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

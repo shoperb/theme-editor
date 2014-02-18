@@ -1,0 +1,11 @@
+cart_items:
+  -
+    cart_id: 1
+    name: 'Bla1'
+    amount: 4
+    product_id: 2
+  -
+    cart_id: 1
+    name: 'Bla2'
+    amount: 3
+    product_id: 1

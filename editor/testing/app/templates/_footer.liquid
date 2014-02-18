@@ -1,0 +1,53 @@
+<footer class="main-footer">
+    <div class="navigation-row">
+        <div class="row">
+            <div class="columns large-15">
+                <nav class="footer-navigation">
+                    <ul class="horizontal-list">
+                        {% if menus['shop'] %}
+                            <li>
+                                <div class="title">{{ menus['shop'].name }}</div>
+                                <ul>
+                                    {% for item in menus['shop'].links %}
+                                        <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                        {% if menus['shipping'] %}
+                            <li>
+                                <div class="title">{{ menus['shipping'].name }}</div>
+                                <ul>
+                                    {% for item in menus['shipping'].links %}
+                                    <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                        {% if menus['payment'] %}
+                            <li>
+                                <div class="title">{{ menus['payment'].name }}</div>
+                                <ul>
+                                    {% for item in menus['payment'].links %}
+                                    <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+            <div class="columns large-9">
+                <form class="mailing-list" action="">
+                    <p>{{ 'newsletter.title' | t }}</p>
+                    <div class="field">
+                        <input type="text" placeholder="{{ 'newsletter.email_placeholder' | t }}"/>
+                    </div>
+                    <div class="buttons">
+                        <button type="submit" class="secondary small">{{ 'newsletter.subscribe' | t }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -19,7 +19,9 @@ class ProductCollectionDrop < Liquid::Drop
   end
 
   def url
-    @context.registers[:controller].send(:store_collection_path, record)
+    # TODO: Url Helper
+    # @context.registers[:controller].send(:store_collection_path, record)
+    "collection"
   end
 
   def products

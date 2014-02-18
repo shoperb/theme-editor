@@ -1,0 +1,19 @@
+<header class="main-header">
+    <div class="row">
+        <div class="columns large-24">
+            <section class="logo-holder">
+                {{ "default-logo.png" | asset_url | image_tag : shop.title | link_to_root }}
+            </section>
+            {% include 'cart' %}
+            <nav class="main-navigation">
+                <ul class="horizontal-list">
+                    <li><a href="javascript:void(0);">My Account</a></li>
+                    <li><a href="javascript:void(0);">Wishlist</a></li>
+                    <li><a href="javascript:void(0);">My Orders</a></li>
+                    <li><a href="javascript:void(0);">Sign In</a></li>
+                    <li><a href="javascript:void(0);">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>

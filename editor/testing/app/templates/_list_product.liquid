@@ -1,0 +1,27 @@
+{% assign variant  = product.variants.first %}
+<div class="list-product">
+    <figure class="picture">
+        <a href="{{ product.url }}">
+            {% if product.image %}
+                {{ product.image.size-240.url | image_tag: product.name }}
+            {% else %}
+                <img src="http://placehold.it/240x200" alt=""/>
+            {% endif %}
+            <div class="price">
+                <div class="price-amount">
+                    {{ variant.current_price | money }}
+                </div>
+            </div>
+        </a>
+    </figure>
+    <h2 class="name"><a href="{{ product.url }}">{{ product.name }}</a></h2>
+    <div class="actions"><form class="add-to-cart" action="/cart/add" method="POST">
+        <input type="hidden" name="variant" value="{{ variant.id }}"/>
+        <input type="hidden" name="amount" value="1"/>
+        {% if product.available? %}
+            <button class="add-to-cart expand" type="submit">{{ 'product.add_to_cart' | t }}</button>
+        {% else %}
+            <button class="add-to-cart expand" disabled="disabled" type="submit">{{ 'product.unavailable_short' | t }}</button>
+        {% endif %}
+    </form></div>
+</div>

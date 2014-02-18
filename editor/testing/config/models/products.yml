@@ -1,0 +1,9 @@
+products:
+  -
+    id: 1
+    name: 'Product 1'
+    description: 'Desc Prod1'
+  -
+    id: 2
+    name: 'Product 2'
+    description: 'Desc Prod2'

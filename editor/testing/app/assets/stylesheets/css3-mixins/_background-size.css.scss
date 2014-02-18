@@ -1,0 +1,10 @@
+@mixin background-size($size) {
+  $size: unquote($size);
+  @include experimental(background-size, $size,
+    -moz,
+    -webkit,
+    not -o,
+    not -ms,
+    official
+  );
+}

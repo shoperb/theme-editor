@@ -1,0 +1,32 @@
+@include buttons{
+  @include border-radius(3px);
+  @include transition(none);
+  text-transform: uppercase;
+  line-height: 1.142857143;
+  outline: none;
+
+  &:hover{
+    @include background(linear-gradient(-180deg, #F8836D 0%, #F57056 100%));
+    @include box-shadow(inset 0px -2px 0px 0px #E36C55);
+    background-color: $primary-color;
+  }
+
+  &:focus, &:active{
+    @include background(linear-gradient(-180deg, #E5684F 0%, #F57056 100%));
+    @include box-shadow(inset 0px 2px 0px 0px #D4614B);
+  }
+
+  &.secondary{
+    @include box-shadow(none);
+    border: 1px solid #373C4D;
+
+    &:hover{
+      background: lighten(#65AEB3, 5%);
+    }
+
+    &:focus, &:active{
+      @include box-shadow(inset 0px 2px 0px 0px darken($primary-color, 10%));
+      background-color: $primary-color;
+    }
+  }
+}

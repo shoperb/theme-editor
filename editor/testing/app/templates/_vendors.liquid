@@ -1,0 +1,14 @@
+{% if menus['brands'] && menus['brands'].links.any? %}
+    <nav class="manufacturer-nav">
+        <header>
+            <div class="title">{{ 'categories.brands' | t }}</div>
+        </header>
+        <ul>
+            {% for item in menus['brands'].links %}
+                <li>
+                    <a href="{{ item.url }}">{{ item.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+{% endif %}

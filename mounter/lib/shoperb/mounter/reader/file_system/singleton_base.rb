@@ -13,6 +13,7 @@ module Shoperb
             instance = "Shoperb::Mounter::Models::#{name}".constantize.instance
 
             instance.marshal_load data
+            instance.id = data["id"]
 
             yield(instance) if block_given?
 

@@ -1,0 +1,7 @@
+customers:
+  -
+    first_name: 'First'
+    last_name: 'Last'
+  -
+    first_name: 'First2'
+    first_name: 'Last2'

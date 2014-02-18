@@ -1,0 +1,16 @@
+<section class="sub-navigation">
+    <div class="row">
+        <div class="columns large-16">
+            <nav>
+                <ul class="horizontal-list">
+                    {% for category in categories %}
+                        <li><a href="{{ category.url }}">{{ category.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+        <div class="columns large-8">
+            {% include 'search' %}
+        </div>
+    </div>
+</section>

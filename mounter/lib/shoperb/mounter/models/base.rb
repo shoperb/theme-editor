@@ -32,7 +32,7 @@ module Shoperb
             class_eval <<-STRING
               def #{options[:name] || relation}
                 if mounting_point.respond_to?(:#{relation.to_s.pluralize})
-                  mounting_point.#{relation.to_s.pluralize}.detect { |v| #{to_s.demodulize.underscore}_id == v.id || v.id.nil? }
+                  mounting_point.#{relation.to_s.pluralize}.detect { |v| #{relation.to_s.singularize}_id == v.id }
                 elsif mounting_point.respond_to?(:#{relation.to_s.singularize})
                   mounting_point.#{relation.to_s.singularize}
                 end

@@ -1,0 +1,122 @@
+@mixin style-placeholder{
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+@mixin clearfix{
+  *zoom: 1;
+  &:before,
+  &:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin medium{
+  @media #{$medium}{
+    @content;
+  }
+
+  .lt-ie9 & {
+    @content;
+  }
+}
+
+@mixin inputs{
+  input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"],
+  input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"],
+  input[type="tel"], input[type="time"], input[type="url"], textarea{
+    @content;
+  }
+}
+
+@mixin buttons{
+  button, .button, input[type=submit]{
+    @content;
+  }
+}
+
+@mixin icons{
+  [class*="icon-"]{
+    @content;
+  }
+}
+
+@mixin fancy-image{
+  @include border-radius(3px);
+}
+
+@mixin content-block{
+  @include border-radius(3px);
+  @include box-shadow(0px 2px 0px 0px #E9EFF3);
+  background: #FFFFFF;
+
+  &.padded{
+    padding: 20px 20px 16px;
+  }
+}
+
+.columns.collapse{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@mixin price{
+  @include border-radius($global-rounded);
+  background: $primary-color;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+@mixin small-button{
+  @include background(linear-gradient(-180deg, #FBFDFD 0%, #F4F6F7 100%));
+  @include box-shadow(0px 1px 0px 0px rgba(0,0,0,0.05), inset 0px 1px 0px 0px #FFFFFF);
+  border: 1px solid #C2CED5;
+  color: #889DA8;
+  width: 36px;
+  height: 36px;
+  padding: 5px 0;
+
+  &:hover{
+    @include background(linear-gradient(-180deg, #FFFFFF 0%, #F9FBFC 100%));
+    @include box-shadow(0px 1px 0px 0px rgba(0,0,0,0.05), inset 0px 1px 0px 0px #FFFFFF);
+    border: 1px solid #C2CED5;
+    color: #889DA8;
+  }
+
+  &:active{
+    @include box-shadow(inset 0px 3px 0px 0px #ECF2F5);
+    background: #EEF3F5;
+    border: 1px solid #C2CED5;
+    color: #889DA8;
+  }
+
+  &.disabled{
+    @include box-shadow(0px 1px 0px 0px rgba(0,0,0,0.05), inset 0px 1px 0px 0px #FFFFFF);
+    @include opacity(0.5);
+    color: #889DA8;
+    border: 1px solid #C2CED5;
+    cursor: default;
+
+    &:hover, &:active{
+      @include background(linear-gradient(-180deg, #FFFFFF 0%, #F9FBFC 100%));
+      @include box-shadow(0px 1px 0px 0px rgba(0,0,0,0.05), inset 0px 1px 0px 0px #FFFFFF);
+      @include opacity(0.5);
+      color: #889DA8;
+      border: 1px solid #C2CED5;
+    }
+  }
+}

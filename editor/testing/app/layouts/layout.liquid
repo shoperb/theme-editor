@@ -1,0 +1,79 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    {% if meta.title == blank %}
+        {% if product %}
+            <title>
+                {{ shop.name }}: {{ product.name }}
+            </title>
+        {% elsif template_name == 'category' %}
+            <title>
+                {{ shop.name }}:
+                {% for category in category.parents %}
+                    {{ category.name }} &raquo;
+                {% endfor %}
+                {{ category.name }}
+            </title>
+        {% elsif template_name == 'cart' %}
+            <title>{{ shop.name }}: {{ 'cart.title' | t }}</title>
+        {% else %}
+            <title>{{ shop.name }}</title>
+        {% endif %}
+    {% elsif meta.title != blank %}
+        <title>{{ shop.meta_title }} | {{ shop.name }}</title>
+    {% endif %}
+    <meta name="description" content="{{ shop.meta_description }}" />
+    <meta name="keywords" content="{{ shop.meta_keywords }}" />
+    <meta name="author" content="www.shoperb.com" />
+
+    {{ "favicon.ico"  | asset_url | icon_tag }}
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <!-- CSS concatenated and minified via ant build script-->
+    {{ "style.css" | asset_url | stylesheet_tag }}
+    <!-- end CSS-->
+
+    {{ "custom.modernizr.js" | asset_url | javascript_tag }}
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-20120733-1']);
+        _gaq.push(['_setDomainName', '.{{ shop.domain }}']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_setAllowHash', false]);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+
+</head>
+<body class="">
+
+    {% include 'header' %}
+    {% include 'subheader' %}
+
+    {{ content_for_layout }}
+
+    {% include 'footer' %}
+
+
+    {{ "jquery-1.10.2.min.js" | asset_url | javascript_tag }}
+    {{ "lodash.js" | asset_url | javascript_tag }}
+    {{ "numeral.js" | asset_url | javascript_tag }}
+    {{ "languages.js" | asset_url | javascript_tag }}
+    {{ "application.js" | asset_url | javascript_tag }}
+
+</body>
+</html>

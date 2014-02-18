@@ -67,7 +67,7 @@ class CollectionDrop < Liquid::Drop
   end
 
   def limited
-    (collection.respond_to?(:limit) && collection.limit(limit_value)) || collection.slice(0..limit_value)
+    collection.take(limit_value)
   end
 
   def handle_method

@@ -1,0 +1,19 @@
+/* Backgrounds */
+
+@mixin background($backgrounds...) {
+  @if $experimental-support-for-webkit {      background: prefix('-webkit-',$backgrounds); }
+  @if $experimental-support-for-mozilla {      background:    prefix('-moz-',$backgrounds); }
+  @if $experimental-support-for-opera {      background:      prefix('-o-',$backgrounds); }
+  @if $experimental-support-for-microsoft {      background:      prefix('-ms-',$backgrounds); }
+  background: $backgrounds ;
+}
+
+@mixin vertical-gradient($start, $stop){
+  background: $start;
+  @include background(linear-gradient(top, $start 0%, $stop 100%));
+}
+
+@mixin horizontal-gradient($start, $stop){
+  background: $start;
+  @include background(linear-gradient(left, $start 0%, $stop 100%));
+}

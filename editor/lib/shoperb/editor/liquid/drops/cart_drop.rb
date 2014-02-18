@@ -15,7 +15,7 @@ class CartDrop < Liquid::Drop
   end
 
   def quantity
-    record.items.sum(:amount)
+    record.items.sum(&:amount)
   end
 
   def requires_shipping?

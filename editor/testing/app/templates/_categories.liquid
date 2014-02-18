@@ -1,0 +1,10 @@
+<ul>
+  {% for category in categories %}
+  <li{% if category.open? %} class="active"{% endif %}>
+    {{ category | link_to_category }}
+    {% if category.open? and category.children? %}
+      {% include "categories" with category.children %}
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>

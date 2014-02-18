@@ -1,0 +1,22 @@
+<section class="breadcrumbs-navigation">
+    <div class="row">
+        <ul class="breadcrumbs">
+            {% if category %}
+                {% for category in category.parents %}
+                    <li>{{ category | link_to_category }}</li>
+                {% endfor %}
+                <li{% unless product %} class="current"{% endunless %}>{{ category | link_to_category }}</li>
+            {% endif %}
+            {% if product %}
+                <li class="current"><a href="{{ product.url }}">{{ product.name | escape }}</a></li>
+            {% endif %}
+            {% if template_name == 'cart' %}
+                <li class="current"><a href="/cart">{{ 'cart.title' | t }}</a></li>
+            {% endif %}
+            {% if collection %}
+                <li class="current"><a href="{{ collection.url }}">{{ collection.name }}</a></li>
+            {% endif %}
+
+        </ul>
+    </div>
+</section>

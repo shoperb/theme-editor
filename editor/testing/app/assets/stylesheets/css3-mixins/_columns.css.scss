@@ -1,0 +1,13 @@
+@mixin column-count($cc) {
+  $cc: unquote($cc);
+  @include experimental(column-count, $cc,
+    -moz, -webkit, not -o, not -ms, official
+  );
+}
+
+@mixin column-gap($cg) {
+  $cg: unquote($cg);
+  @include experimental(column-gap, $cg,
+    -moz, -webkit, not -o, not -ms, official
+  );
+}

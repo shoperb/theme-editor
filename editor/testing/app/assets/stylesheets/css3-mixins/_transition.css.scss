@@ -1,0 +1,53 @@
+/* Transitions */
+$transitionable-prefixed-values: transform, transform-origin !default;
+$delays: 0;
+@mixin transition-property($properties...){
+  @if $experimental-support-for-webkit    {       -webkit-transition-property : prefixed-for-transition(-webkit, $properties); }
+  @if $experimental-support-for-mozilla   {          -moz-transition-property : prefixed-for-transition(-moz,    $properties); }
+  @if $experimental-support-for-opera     {            -o-transition-property : prefixed-for-transition(-o,      $properties); }
+  transition-property : $properties;
+}
+
+@mixin transition-duration($durations...){
+  @include experimental(transition-duration, $durations,
+    -moz, -webkit, -o, not -ms, official
+  );
+}
+
+@mixin transition-delay($delays...){
+  @include experimental(transition-delay, $delays,
+    -moz, -webkit, -o, not -ms, official
+  );
+}
+
+@mixin animation-delay($delays...){
+  @include experimental(animation-delay, $delays,
+    -moz, -webkit, -o, not -ms, official
+  );
+}
+
+@mixin transition($transitions...){
+  $webkit-value: comma-list();
+  $moz-value: comma-list();
+  $o-value: comma-list();
+
+  @each $transition in $transitions {
+    $property: nth($transition, 1);
+    $duration: false;
+    $timing-function: false;
+    $delay: false;
+    @if length($transition) > 1 { $duration:        nth($transition, 2); }
+    @if length($transition) > 2 { $timing-function: nth($transition, 3); }
+    @if length($transition) > 3 { $delay:           nth($transition, 4); $has-delays: true; }
+    @if is-time($timing-function) and not $delay { $delay: $timing-function; $timing-function: false; }
+
+    $webkit-value: append($webkit-value, compact(prefixed-for-transition(-webkit, $property) $duration $timing-function $delay));
+    $moz-value: append(   $moz-value, compact(prefixed-for-transition(   -moz, $property) $duration $timing-function $delay));
+    $o-value: append(     $o-value, compact(prefixed-for-transition(     -o, $property) $duration $timing-function $delay));
+  }
+
+  @if $experimental-support-for-webkit    {       -webkit-transition : $webkit-value; }
+  @if $experimental-support-for-mozilla   {          -moz-transition : $moz-value;    }
+  @if $experimental-support-for-opera     {            -o-transition : $o-value;      }
+  transition : $transitions;
+}

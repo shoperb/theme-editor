@@ -1,0 +1,35 @@
+{% include "crumbs" %}
+<section role="main">
+    <div class="row">
+        <div class="columns large-24">
+            <section class="cart-content" id="js-cart-content">
+                {% if cart.items.any? %}
+                    <form action="/cart/update" method="POST">
+                        <table class="cart-items">
+                            <tbody>
+                                {% for item in cart.items %}
+                                    {% include "cart_item" %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </form>
+                    <div class="totals">
+                        <span class="title">{{ 'cart.total_label' | t }}</span>
+                        <span class="total-amount">{{ cart.total | money_with_currency }}</span>
+                    </div>
+                    <form action="/cart/checkout" method="POST">
+                        <div class="buttons checkout clearfix">
+                            <button type="submit" class="right">{{ 'checkout' | t }}</button>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </form>
+                {% else %}
+                    <div class="content-block padded cart-empty-block">
+                        <div class="notice cart-empty-notice">{{ 'cart.empty' | t }}<a href="/products">{{ 'cart.back_to_products' | t }}</a></div>
+                    </div>
+                {% endif %}
+            </section>
+        </div>
+    </div>
+</section>

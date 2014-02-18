@@ -1,0 +1,87 @@
+.hero{
+  padding-top: 8px;
+  padding-bottom: 8px;
+
+  h1{
+    @include alt-font-book;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: -83px;
+    left: 0;
+    font-size: 36px;
+    color: #8A9AA3;
+    line-height: 43px;
+
+    &.subtitle{
+      font-size: 24px;
+      top: -47px;
+    }
+  }
+
+  .hero-image{
+    width: 980px;
+    margin: 0 auto;
+  }
+
+  .hero-product{
+    position: relative;
+  }
+
+  .price{
+    @include price;
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    font-size: 36px;
+    color: #FFFFFF;
+    line-height: 22px;
+    text-transform: uppercase;
+    right: 156px;
+    top: -110px;
+
+    .title{
+      font-size: 18px;
+    }
+  }
+}
+
+.banner-product{
+  position: relative;
+
+  &.large{
+    .price{
+      min-width: 150px;
+      padding: 0 10px;
+      height: 150px;
+      font-size: 36px;
+      line-height: 1.2;
+
+      .title{
+        font-size: 18px;
+        line-height: 22px;
+      }
+    }
+  }
+
+  .price{
+    @include price;
+    min-width: 100px;
+    height: 100px;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    font-size: 20px;
+    text-transform: uppercase;
+    line-height: 24px;
+    padding: 0 10px;
+  }
+}
+
+.preview-products{
+  margin-top: 50px;
+}
+
+.bottom-banner-products{
+  margin-bottom: 39px;
+}

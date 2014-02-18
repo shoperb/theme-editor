@@ -6,7 +6,7 @@ class CategoriesDrop < CollectionDrop
   end
 
   def roots
-    CategoriesDrop.new(Category.active.roots)
+    CategoriesDrop.new(Category)
   end
 
   def handle_method

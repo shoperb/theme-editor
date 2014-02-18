@@ -1,0 +1,15 @@
+<section class="search">
+    <form id="search-form" action="/search" method="GET">
+        <div class="field category-field">
+            <select name="categories" id="search-categories" data-behaviour="select">
+                <option value="">{{ 'search.all_categories' | t }}</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="field query-field">
+            <input type="text" name="query" placeholder="{{ 'search.search_placeholder' | t }}" value="{% if search.performed %}{{ search.terms }}{% endif %}"/>
+        </div>
+    </form>
+</section>
