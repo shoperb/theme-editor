@@ -16,6 +16,10 @@ class CollectionDrop < Liquid::Drop
     end
   end
 
+  def collection
+    @collection || []
+  end
+
   def count
     collection.count
   end
@@ -59,7 +63,7 @@ class CollectionDrop < Liquid::Drop
   private
 
   def paginate(page, per_page)
-    self.class.new(collection.page(page).per(per_page))
+    self.class.new(collection.slice(page * per_page, per_page))
   end
 
   def limit_value

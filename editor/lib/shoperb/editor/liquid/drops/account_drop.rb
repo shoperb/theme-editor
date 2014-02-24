@@ -7,7 +7,7 @@ class AccountDrop < Liquid::Drop
   end
 
   def shops
-    CollectionDrop.new(@record.shops.by_name)
+    CollectionDrop.new(@record.shops)
   end
 
 end

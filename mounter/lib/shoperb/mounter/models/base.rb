@@ -67,10 +67,18 @@ module Shoperb
           eval "::#{subclass.to_s.demodulize} = #{subclass}"
         end
 
+        class << self
+          delegate :take, to: :all
+        end
+
         def to_liquid
           if klass = Object.const_get(self.class.name + "Drop")
             klass.new(self)
           end
+        end
+
+        def to_param
+          id
         end
       end
 

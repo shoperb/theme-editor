@@ -19,9 +19,7 @@ class ProductDrop < Liquid::Drop
   end
 
   def url
-    # TODO: Url Helper
-    #@context.registers[:controller].send(:store_product_path, record)
-    "product"
+    controller.product_path(record)[1..-1]
   end
 
   def max_price

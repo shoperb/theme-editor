@@ -27,9 +27,7 @@ class CategoryDrop < Liquid::Drop
   end
   
   def url
-    # TODO: Url Helper
-    # record.id ? @context.registers[:controller].send(:store_category_path, record) : ""
-    "category"
+    controller.category_path(record.id)[1..-1]
   end
 
   def root

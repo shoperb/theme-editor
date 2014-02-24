@@ -40,7 +40,7 @@
             </aside>
         </div>
         <div class="columns large-18">
-            {% paginate category.products_with_children.order_by_name_asc by 9 %}
+            {% paginate category.products_with_children by 9 %}
                 {% for product in paginate.collection %}
                     {% assign current = forloop.index0 | modulo: 3  %}
                     {% if current == 0 %}

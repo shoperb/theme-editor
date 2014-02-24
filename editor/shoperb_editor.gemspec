@@ -22,11 +22,9 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'thor'
   gem.add_dependency 'thin',                  '~> 1.6.1'
-  gem.add_dependency 'activesupport',         '4.0.2'
-  gem.add_dependency 'actionpack',            '4.0.2'
+  gem.add_dependency 'rails',                 '4.0.2'
   gem.add_dependency 'RedCloth',              '~> 4.2.8'
   gem.add_dependency 'redcarpet',             '~> 3.0.0'
-  gem.add_dependency 'rails',            '4.0.2'
   gem.add_dependency 'shoperb_mounter'
   gem.add_dependency 'liquid'
   gem.add_dependency 'sprockets',             '~> 2.0'

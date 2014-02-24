@@ -2,159 +2,169 @@
 {% assign variant  = product.variants.first %}
 {% assign quantity = product.attributes['quantity-description'].value %}
 <section role="main">
-    <section class="product-details-section">
-        <div class="row">
-            <div class="columns large-24">
-                <div class="product-details" data-product-details data-currency-symbol="{{ shop.currency.symbol }}" data-currency-code="{{ shop.currency.code }}">
-                    <div class="row">
-                        <section class="product-images">
-                            <figure class="product-image">
-                                {% if product.image %}
-                                    {{ product.image.size-480.url | image_tag: product.name }}
-                                {% else %}
-                                    <img src="http://placehold.it/400x400" alt=""/>
-                                {% endif %}
-                            </figure>
-                        </section>
-                        <section class="product-info">
-                            <h1>{{ product.name }}</h1>
-                            {% if product.vendor %}
-                            <div class="manufacturer">
-                                <a href="javascript:void(0);">{{ product.vendor.name }}</a>
-                            </div>
-                            {% endif %}
-                            <div class="pricing">
-                                <div class="previous-price {% unless variant.discount? %}hidden{%endunless%}" data-previous-price>
-                                    {{ variant.price | money }}
-                                </div>
-                                <div class="current-price" data-current-price>
-                                    {{ variant.current_price | money }}
-                                </div>
-                            </div>
-                            <div class="description">
-                                <p>
-                                    {{ product.description | strip_html | truncate: 290 }}
-                                </p>
-                            </div>
-
-                                <form class="add-to-cart-form" action="/cart/add" method="POST">
-                                    <input type="hidden" name="amount" value="1"/>
-                                    <input type="hidden" name="variant" value="{{ variant.id }}"/>
-                                    <div class="variations">
-                                        {% if product.variants.many? %}
-                                            <div class="row">
-                                                <div class="form-col large-24">
-                                                    <div class="field">
-                                                        <select name="variant" id="variant" data-behaviour="select" data-variant-select>
-                                                            <option value="">Select Variant</option>
-                                                            {% for variant in product.variants %}
-                                                                <option data-variant='{{ variant.json }}' value="{{ variant.id }}">{{ variant.name }}</option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <script type="text/template" id="variant-select-template">
-                                                <div class="form-col large-8">
-                                                    <div class="field">
-                                                        <select name="<%= name %>" id="variant-<%= name %>" data-behaviour="select">
-                                                            <option value="">Select <%= name %></option>
-                                                            <%= options %>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </script>
-                                            <div class="row" data-variant-container>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                    <div class="row">
-                                        {% if product.available? %}
-                                            <div class="form-col large-8">
-                                                <div class="buttons">
-                                                    <button class="expand large add-to-cart">{{ 'product.add_to_cart' | t}}</button>
-                                                </div>
-                                            </div>
+    <section class="product-single" data-product-details data-currency-symbol="{{ shop.currency.symbol }}" data-currency-code="{{ shop.currency.code }}">
+        <section class="product-details-section">
+            <div class="row">
+                <div class="columns large-24">
+                    <div class="product-details" >
+                        <div class="row">
+                            <section class="product-images">
+                                <figure class="product-image">
+                                    {% if product.image %}
+                                        {% if product.images.many? %}
+                                            <ul data-orbit>
+                                                {% for image in product.images %}
+                                                    <li>{{ image.size-480.url | image_tag: product.name }}</li>
+                                                {% endfor %}
+                                            </ul>
                                         {% else %}
-                                            <div class="form-col large-16">
-                                                <div class="buttons">
-                                                    <button disabled="disabled" class="expand large add-to-cart">{{ 'product.unavailable' | t}}</button>
-                                                </div>
-                                            </div>
+                                            {{ product.image.size-480.url | image_tag: product.name }}
                                         {% endif %}
+                                    {% else %}
+                                        <img src="http://placehold.it/400x400" alt=""/>
+                                    {% endif %}
+                                </figure>
+                            </section>
+                            <section class="product-info">
+                                <h1>{{ product.name }}</h1>
+                                {% if product.vendor %}
+                                <div class="manufacturer">
+                                    <a href="javascript:void(0);">{{ product.vendor.name }}</a>
+                                </div>
+                                {% endif %}
+                                <div class="pricing">
+                                    <div class="previous-price {% unless variant.discount? %}hidden{%endunless%}" data-previous-price>
+                                        {{ variant.price | money }}
                                     </div>
-                                </form>
+                                    <div class="current-price" data-current-price>
+                                        {{ variant.current_price | money }}
+                                    </div>
+                                </div>
+                                <div class="description">
+                                    <p>
+                                        {{ product.description | strip_html }}
+                                    </p>
+                                </div>
 
-                        </section>
+                                    <form class="add-to-cart-form" action="/cart/add" method="POST">
+                                        <input type="hidden" name="amount" value="1"/>
+                                        <input type="hidden" name="variant" value="{{ variant.id }}"/>
+                                        <div class="variations">
+                                            {% if product.variants.many? %}
+                                                <div class="row">
+                                                    <div class="form-col large-24">
+                                                        <div class="field">
+                                                            <select name="variant" id="variant" data-behaviour="select" data-variant-select>
+                                                                <option value="">Select Variant</option>
+                                                                {% for variant in product.variants %}
+                                                                    <option data-variant='{{ variant.json }}' value="{{ variant.id }}">{{ variant.name }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <script type="text/template" id="variant-select-template">
+                                                    <div class="form-col large-8">
+                                                        <div class="field">
+                                                            <select name="<%= name %>" id="variant-<%= name %>" data-behaviour="select">
+                                                                <option value="">Select <%= name %></option>
+                                                                <%= options %>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </script>
+                                                <div class="row" data-variant-container>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="row">
+                                            {% if product.available? %}
+                                                <div class="form-col large-8">
+                                                    <div class="buttons">
+                                                        <button class="expand large add-to-cart">{{ 'product.add_to_cart' | t}}</button>
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                                <div class="form-col large-16">
+                                                    <div class="buttons">
+                                                        <button disabled="disabled" class="expand large add-to-cart">{{ 'product.unavailable' | t}}</button>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </form>
+
+                            </section>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </section>
+        <div class="row">
+            <div class="columns large-15">
+                <section class="long-description content-block padded">
+                    <div class="title">{{ 'product.description' | t }}</div>
+                    <div class="content">
+                        {{ product.description}}
+                    </div>
+                </section>
+            </div>
+            <div class="columns large-9">
+                <section class="technical-specification content-block padded">
+                    <div class="title">{{ 'product.tech_spec' | t }}</div>
+                    <ul>
+                        {% if variant.width %}
+                        <li>
+                            <div class="title">{{ 'product.width' | t }}</div>
+                            <div class="content"><span data-variant-width>{{ variant.width }}</span> cm</div>
+                        </li>
+                        {% endif %}
+                        {% if variant.height %}
+                        <li>
+                            <div class="title">{{ 'product.height' | t }}</div>
+                            <div class="content"><span data-variant-height>{{ variant.height }}</span> cm</div>
+                        </li>
+                        {% endif %}
+                        {% if variant.depth %}
+                        <li>
+                            <div class="title">{{ 'product.depth' | t }}</div>
+                            <div class="content"><span data-variant-depth>{{ variant.depth }}</span> cm</div>
+                        </li>
+                        {% endif %}
+                        {% if variant.weight %}
+                        <li>
+                            <div class="title">{{ 'product.weight' | t }}</div>
+                            <div class="content"><span data-variant-weight>{{ variant.weight }}</span> kg</div>
+                        </li>
+                        {% endif %}
+                        {% for attribute in product.attributes %}
+                        <li>
+                            <div class="title">{{ attribute.name }}</div>
+                            <div class="content">{{ attribute.value }}</div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="recommended-products">
+                <div class="columns large-24">
+                    <div class="title">{{ 'product.recommended' | t }}</div>
+                </div>
+                <div class="columns large-6">
+                    {% include 'list_product' %}
+                </div>
+                <div class="columns large-6">
+                    {% include 'list_product' %}
+                </div>
+                <div class="columns large-6">
+                    {% include 'list_product' %}
+                </div>
+                <div class="columns large-6">
+                    {% include 'list_product' %}
                 </div>
             </div>
         </div>
     </section>
-    <div class="row">
-        <div class="columns large-15">
-            <section class="long-description content-block padded">
-                <div class="title">{{ 'product.description' | t }}</div>
-                <div class="content">
-                    {{ product.description}}
-                </div>
-            </section>
-        </div>
-        <div class="columns large-9">
-            <section class="technical-specification content-block padded">
-                <div class="title">{{ 'product.tech_spec' | t }}</div>
-                <ul>
-                    {% if variant.width %}
-                    <li>
-                        <div class="title">{{ 'product.width' | t }}</div>
-                        <div class="content">{{ variant.width }} cm</div>
-                    </li>
-                    {% endif %}
-                    {% if variant.height %}
-                    <li>
-                        <div class="title">{{ 'product.height' | t }}</div>
-                        <div class="content">{{ variant.height }} cm</div>
-                    </li>
-                    {% endif %}
-                    {% if variant.depth %}
-                    <li>
-                        <div class="title">{{ 'product.depth' | t }}</div>
-                        <div class="content">{{ variant.width }} cm</div>
-                    </li>
-                    {% endif %}
-                    {% if variant.weight %}
-                    <li>
-                        <div class="title">{{ 'product.weight' | t }}</div>
-                        <div class="content">{{ variant.weight }} kg</div>
-                    </li>
-                    {% endif %}
-                    {% for attribute in product.attributes %}
-                    <li>
-                        <div class="title">{{ attribute.name }}</div>
-                        <div class="content">{{ attribute.value }}</div>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </section>
-        </div>
-    </div>
-    <div class="row">
-        <div class="recommended-products">
-            <div class="columns large-24">
-                <div class="title">{{ 'product.recommended' | t }}</div>
-            </div>
-            <div class="columns large-6">
-                {% include 'list_product' %}
-            </div>
-            <div class="columns large-6">
-                {% include 'list_product' %}
-            </div>
-            <div class="columns large-6">
-                {% include 'list_product' %}
-            </div>
-            <div class="columns large-6">
-                {% include 'list_product' %}
-            </div>
-        </div>
-    </div>
 </section>

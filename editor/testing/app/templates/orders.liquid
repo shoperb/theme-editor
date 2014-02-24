@@ -7,9 +7,9 @@
                     <div class="title">MY ACCOUNT</div>
                 </header>
                 <ul>
-                    <li><a href="javascript:void(0);">Wishlist</a></li>
-                    <li class="active"><a href="javascript:void(0);">My Orders</a></li>
-                    <li><a href="javascript:void(0);">Settings</a></li>
+                  <!--<li><a href="javascript:void(0);">Wishlist</a></li>-->
+                  <li class="active"><a href="{{url.orders}}">My Orders</a></li>
+                  <li><a href="javascript:void(0);">Settings</a></li>
                 </ul>
             </aside>
         </div>
@@ -17,8 +17,22 @@
             <div class="orders">
                 <table>
                     <tbody>
-                        {% for i in (1..3) %}
-                            <tr>
+                    {% for o in orders %}
+                    <tr>
+                      <td class="order-nr">
+                        <a href="http://checkout.shoperb.me/invoices/{{o.token}}">{{o.name}} (prod)</a>
+                        <a href="http://checkout.shoperb.biz/invoices/{{o.token}}">{{o.name}} (stag)</a>
+                        <a href="http://checkout.myshoperb.dev:3000/invoices/{{o.token}}">{{o.name}}(dev)</a>
+                        {{o | link_to_order}}
+                      </td>
+                      <td class="amount">{{o.currency.symbol}}{{o.total}}</td>
+                      <td class="date">{{o.created_at}}</td>
+                      <td class="status">{{o.state}}</td>
+                    </tr>
+                    {% endfor %}
+
+                    {% for i in (1..2) %}
+                    <tr>
                                 <td class="order-nr">
                                     <a href="javascript:void(0);">1548758545</a>
                                 </td>

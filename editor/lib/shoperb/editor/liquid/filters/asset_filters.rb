@@ -28,7 +28,7 @@ module Shoperb
           end
 
           def asset_url(asset)
-            "/#{@context.registers["theme"].asset_url}/#{asset}"
+            "/#{@context.registers[:theme].asset_url}/#{asset}"
           end
 
         end

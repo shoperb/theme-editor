@@ -2,10 +2,8 @@ module Shoperb
   module Mounter
     module Models
       class Layout < Base
-        def render context
-          template = Liquid::Template.new
-          template.parse File.read(filepath)
-          template.render(context)
+        def parse
+          Liquid::Template.parse(Pathname.new(filepath).read)
         end
       end
     end

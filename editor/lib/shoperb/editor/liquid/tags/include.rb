@@ -3,8 +3,8 @@ module Liquid
   class Include
 
     def render(context)
-      partial = context.registers[:mounting_point].resources["fragments"]["_#{@template_name[1..-2]}"]
-      partial.render(context)
+      partial = context.registers[:mounting_point].fragments["_#{@template_name[1..-2]}"]
+      partial.parse.render(context)
     end
 
   end

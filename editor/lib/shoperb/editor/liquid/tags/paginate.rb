@@ -33,12 +33,14 @@ module Liquid
 
         current   = context["current_page"] == 0 ? 1 : context["current_page"]
         scope     = collection.send(:paginate, current, @per_page)
+        offset    = current * @per_page
+        num_pages = collection.count / @per_page
         paginator = {
-          :pages      => scope.collection.num_pages,
-          :total      => scope.collection.total_count,
-          :last       => scope.collection.total_count - 1,
-          :size       => scope.collection.limit_value,
-          :offset     => scope.collection.respond_to?(:offset_value) ? scope.collection.offset_value : scope.collection.offset,
+          :pages      => num_pages,
+          :total      => collection.count,
+          :last       => collection.count - 1,
+          :size       => @per_page,
+          :offset     => offset,
           :first      => 1,
           :page       => current,
           :previous   => nil,
@@ -50,7 +52,7 @@ module Liquid
         path = context['path']
 
         has_prev_page = (paginator[:page] - 1) >= 1
-        has_next_page = (paginator[:page] + 1) <= scope.collection.num_pages
+        has_next_page = (paginator[:page] + 1) <= num_pages
 
         paginator[:previous]  = link(::I18n.t('pagination.previous'), paginator[:page] - 1, path) if has_prev_page
         paginator[:next]      = link(::I18n.t('pagination.next'), paginator[:page] + 1, path)     if has_next_page

@@ -7,9 +7,10 @@
                     <div class="title">MY ACCOUNT</div>
                 </header>
                 <ul>
-                    <li><a href="javascript:void(0);">Wishlist</a></li>
-                    <li class="active"><a href="javascript:void(0);">My Orders</a></li>
-                    <li><a href="javascript:void(0);">Settings</a></li>
+                  <!--<li><a href="javascript:void(0);">Wishlist</a></li>-->
+                  <li class="active"><a href=<a href="{{url.orders}}">My Orders</a></li>
+                  >
+                  <li><a href="javascript:void(0);">Settings</a></li>
                 </ul>
             </aside>
         </div>
@@ -17,14 +18,14 @@
             <div class="order">
                 <div class="row">
                     <div class="columns large-24">
-                        <div class="content-block">
-                            <table>
+                      <div class="content-block">
+                        <table>
                                 <tbody>
                                     <tr>
-                                        <td class="order-nr">1548758545</td>
-                                        <td class="amount">$1.803</td>
-                                        <td class="date">25 October 2013</td>
-                                        <td class="status">Processing</td>
+                                      <td class="order-nr">{{order.name}}</td>
+                                      <td class="amount">{{order.currency.symbol}}{{order.total}}</td>
+                                      <td class="date">{{order.created_at}}</td>
+                                      <td class="status">{{order.state}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -36,31 +37,30 @@
                         <div class="content-block">
                             <table class="order-items">
                                 <tbody>
-                                {% for n in (1..2) %}
+                                {% for item in order.items %}
                                 <tr class="cart-item">
-                                    <td class="picture">
-                                        <img src="http://placehold.it/50x50" alt=""/>
-                                    </td>
-                                    <td class="title">
-                                        Macbook pro with retina display and 13 inches screen
-                                    </td>
-                                    <td class="quantity">
-                                        <button class="quantity decrease" type="button">
-                                            <span class="icon-minus"></span>
-                                        </button>
-                                        <div class="field">
-                                            <input type="text" value="1" placeholder="Qty"/>
-                                        </div>
-                                        <button class="quantity increase" type="button">
-                                            <span class="icon-plus"></span>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <div class="price">
-                                            <span class="currency-prefix">$</span>
-                                            <span class="amount">1,199</span>
-                                        </div>
-                                    </td>
+                                  <td class="picture">
+                                    <img src="http://placehold.it/50x50" alt=""/>
+                                  </td>
+                                  <td class="title">{{item.name}}</td>
+                                  <td class="quantity">
+                                    <!--<button class="quantity decrease" type="button">-->
+                                    <!--<span class="icon-minus"></span>-->
+                                    <!--</button>-->
+                                    <!--<div class="field">-->
+                                    <!--<input type="text" value="1" placeholder="Qty"/>-->
+                                    <!--</div>-->
+                                    <!--<button class="quantity increase" type="button">-->
+                                    <!--<span class="icon-plus"></span>-->
+                                    <!--</button>-->
+                                    <div class="field">{{item.qty}}</div>
+                                  </td>
+                                  <td>
+                                    <div class="price">
+                                      <span class="currency-prefix">{{order.currency.symbol}}</span>
+                                      <span class="amount">{{item.total}}</span>
+                                    </div>
+                                  </td>
                                 </tr>
                                 {% endfor %}
                                 </tbody>
@@ -72,19 +72,19 @@
                     <div class="columns large-8">
                         <div class="content-block">
                             <div class="title">Subtotal</div>
-                            <div class="value">$ 1.798</div>
+                          <div class="value">{{order.currency.symbol}} {{ order.subtotal }}</div>
                         </div>
                     </div>
                     <div class="columns large-8">
                         <div class="content-block">
                             <div class="title">VAT</div>
-                            <div class="value">$ 359</div>
+                          <div class="value">{{order.currency.symbol}} {{ order.total_taxes }}</div>
                         </div>
                     </div>
                     <div class="columns large-8">
                         <div class="content-block">
                             <div class="title">Shipping</div>
-                            <div class="value">$ 5</div>
+                          <div class="value">{{order.currency.symbol}} {{ order.total_shipping }}</div>
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                     <div class="columns large-24">
                         <div class="content-block">
                             <div class="title">Total</div>
-                            <div class="value">$ 1.803</div>
+                          <div class="value">{{order.currency.symbol}} {{order.total}}</div>
                         </div>
                     </div>
                 </div>

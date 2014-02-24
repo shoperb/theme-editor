@@ -1,7 +1,9 @@
 variants:
   -
     product_id: 1
+    currency_id: 1
     current_price: 45
   -
     product_id: 2
+    currency_id: 2
     current_price: 54

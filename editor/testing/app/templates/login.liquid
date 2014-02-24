@@ -1,0 +1,10 @@
+{{url.login}} {{url.logout}} {{ form_actions.new_login }}
+TODO: parse errors! <br/>
+
+<form action="{{ form_actions.new_login }}" method="post">
+  {{ form_actions.auth_input }}
+  <input name="account[email]" placeholder="email"/>
+  <input name="account[password]" placeholder="password"/>
+
+  <input type="submit"/>
+</form>

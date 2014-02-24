@@ -10,6 +10,10 @@ module Liquid
       @context.registers[:site]
     end
 
+    def controller
+      @context.registers[:controller]
+    end
+
   end
 
   class Template
