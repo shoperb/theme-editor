@@ -58,6 +58,10 @@ module Shoperb
           self.all
         end
 
+        def self.find id
+          self.all.detect { |o| o.id.to_s == id.to_s }
+        end
+
         def self.inherited(subclass)
           subclass.class_eval do
             def self.mounting_point
