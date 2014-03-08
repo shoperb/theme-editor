@@ -5,7 +5,11 @@ module Shoperb
         has_many :products
 
         def ancestors
-          []
+          IgnoringArray.new
+        end
+
+        def children
+          IgnoringArray.new
         end
 
         def products_for_self_and_children

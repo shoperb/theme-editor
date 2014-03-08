@@ -9,5 +9,4 @@ module Liquid
 
   end
 
-  ::Liquid::Template.register_tag('include', Include)
 end
