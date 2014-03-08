@@ -1,15 +1,18 @@
 require 'better_errors'
 require 'coffee_script'
 require 'action_pack'
+
 require 'shoperb/editor/engine'
 
 require 'action_controller'
+require 'shoperb/editor/globalize'
 require 'shoperb/editor/misc/renderer'
 require 'shoperb/editor/controllers/application_controller'
-Dir[File.join(File.dirname(__FILE__), 'controllers', '*.rb')].each { |lib| require lib }
+Dir[File.join(File.dirname(__FILE__), 'controllers', 'store', '*.rb')].each { |lib| require lib }
 
 require 'shoperb/editor/listen'
 require 'shoperb/editor/server/middleware'
+require 'shoperb/editor/server/favicon'
 require 'shoperb/editor/server/dynamic_assets'
 require 'shoperb/editor/server/timezone'
 
@@ -23,7 +26,6 @@ module Shoperb::Editor
 
       @reader = reader
       @app    = self.create_rack_app(@reader)
-      #::Liquid::Template.file_system = File.join('.', 'app', 'templates')
     end
 
     def call(env)
@@ -35,6 +37,7 @@ module Shoperb::Editor
 
     def create_rack_app(reader)
       Rack::Builder.new do
+        use Favicon
         use DynamicAssets, reader.mounting_point.path
         use Rack::Runtime
         use Rack::MethodOverride

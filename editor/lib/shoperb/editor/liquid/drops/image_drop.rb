@@ -21,6 +21,8 @@ class ImageDrop < Liquid::Drop
   def before_method(method, *args)
     if image = record.image_sizes.detect { |s| s.name == method.to_s }
       ImageDrop.new(image)
+      #else
+      #  self
     end
   end
 

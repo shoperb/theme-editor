@@ -6,6 +6,8 @@ module Shoperb
         include Singleton
         belongs_to :currency
       end
+
+      ::Store = Shop
     end
   end
 end

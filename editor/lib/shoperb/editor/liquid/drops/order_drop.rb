@@ -7,11 +7,15 @@ class OrderDrop < Liquid::Drop
   end
 
   def name
-    "#" + record.order_number
+    "#" + record.number
   end
 
   def number
-    record.order_number
+    record.number
+  end
+
+  def token
+    record.token
   end
 
   def email
@@ -23,7 +27,7 @@ class OrderDrop < Liquid::Drop
   end
 
   def subtotal
-    record.total_items
+    record.subtotal
   end
 
   def total_shipping
@@ -46,12 +50,29 @@ class OrderDrop < Liquid::Drop
     record.created_at
   end
 
+
+  def state
+    record.state
+  end
+
+
   # TODO: tax lines
   # TODO: shipping method
-  # TODO: payment method
+
+  def payment_method
+    record.payment_method.to_liquid
+  end
+
+  def payment_method_name
+    record.payment_method.name
+  end
 
   def billing_address
     AddressDrop.new(record.bill_address)
+  end
+
+  def shipping_address?
+    !!record.ship_address
   end
 
   def shipping_address
@@ -70,8 +91,14 @@ class OrderDrop < Liquid::Drop
     CurrencyDrop.new(record.currency)
   end
 
+
+  def url
+    @context.registers[:controller].send(:store_order_path, number)
+  end
+
+
   def inspect
-    "#<Order #{record.order_number}>"
+    "#<Order #{record.number}>"
   end
 
   def to_s

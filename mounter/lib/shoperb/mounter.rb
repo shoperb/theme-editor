@@ -33,6 +33,7 @@ require 'shoperb/mounter/utils/yaml'
 require 'shoperb/mounter/utils/string'
 require 'shoperb/mounter/utils/output'
 require 'shoperb/mounter/utils/yaml_front_matters_template'
+require 'shoperb/mounter/utils/ignoring_array'
 
 # Main
 require 'shoperb/mounter/version'

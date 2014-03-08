@@ -11,25 +11,27 @@ class LinkDrop < Liquid::Drop
   end
 
   def url
+    controller = @context.registers[:controller]
+    path       = "store_#{record.style.downcase}_path"
+
     case record.style
       when Link::STYLE_CUSTOM
         record.value
       when Link::STYLE_HOME
-        # TODO: Url Helper
-        # @context.registers[:controller].send(:store_root_path)
-        "/"
+        controller.send(:store_root_path)
       when Link::STYLE_SEARCH
-        # TODO: Url Helper
-        # @context.registers[:controller].send(:store_search_path)
-        "/search"
-      when Link::STYLE_PAGE
-        "/#{record.entity.to_param}"
+        controller.send(:store_search_path)
       else
-        # TODO: Url Helper
-        # @context.registers[:controller].send("store_#{record.style.downcase}_path", record.entity)
-        record.entity.to_s.underscore
+        index_action? ? controller.send(path) : controller.send(path, record.entity)
     end
   end
+
+
+  def index_action?
+    s = record.style.downcase
+    s == s.pluralize
+  end
+
 
   def menu
     record.menu

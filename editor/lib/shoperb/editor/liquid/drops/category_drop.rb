@@ -27,7 +27,7 @@ class CategoryDrop < Liquid::Drop
   end
   
   def url
-    controller.category_path(record.id)[1..-1]
+    record.id ? @context.registers[:controller].send(:store_category_path, record) : ""
   end
 
   def root
@@ -56,6 +56,10 @@ class CategoryDrop < Liquid::Drop
 
   def children
     CategoriesDrop.new(record.children)
+  end
+
+  def children?
+    record.children.any?
   end
 
   def products

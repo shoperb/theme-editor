@@ -33,27 +33,25 @@ module Liquid
 
         current   = context["current_page"] == 0 ? 1 : context["current_page"]
         scope     = collection.send(:paginate, current, @per_page)
-        offset    = current * @per_page
-        num_pages = collection.count / @per_page
         paginator = {
-          :pages      => num_pages,
-          :total      => collection.count,
-          :last       => collection.count - 1,
-          :size       => @per_page,
-          :offset     => offset,
-          :first      => 1,
-          :page       => current,
-          :previous   => nil,
-          :next       => nil,
-          :parts      => [],
-          :collection => scope
+            :pages      => scope.collection.num_pages,
+            :total      => scope.collection.total_count,
+            :last       => scope.collection.total_count - 1,
+            :size       => scope.collection.limit_value,
+            :offset     => scope.collection.respond_to?(:offset_value) ? scope.collection.offset_value : scope.collection.offset,
+            :first      => 1,
+            :page       => current,
+            :previous   => nil,
+            :next       => nil,
+            :parts      => [],
+            :collection => scope
         }
 
         path = context['path']
 
         has_prev_page = (paginator[:page] - 1) >= 1
-        has_next_page = (paginator[:page] + 1) <= num_pages
-
+        has_next_page = (paginator[:page] + 1) <= scope.collection.num_pages
+        
         paginator[:previous]  = link(::I18n.t('pagination.previous'), paginator[:page] - 1, path) if has_prev_page
         paginator[:next]      = link(::I18n.t('pagination.next'), paginator[:page] + 1, path)     if has_next_page
 
@@ -61,7 +59,7 @@ module Liquid
 
         if paginator[:pages] > 1
           1.upto(paginator[:pages]) do |page|
-
+            
             if paginator[:page] == page
               paginator[:parts] << no_link(page)
             elsif page == 1
@@ -78,7 +76,7 @@ module Liquid
             end
 
             hellip_break = false
-
+            
           end
         end
 
@@ -103,6 +101,4 @@ module Liquid
     end
 
   end
-
-  ::Liquid::Template.register_tag('paginate', Paginate)
 end

@@ -18,9 +18,13 @@ module Shoperb
             self.runner.mounting_point
           end
 
+          def config_path name
+            File.join(self.runner.path, 'config', 'models',"#{name.underscore}.yml")
+          end
+
           def read
             name = self.class.name.split('::').last.gsub('Reader','')
-            config_path = File.join(self.runner.path, 'config', 'models',"#{name.underscore}.yml")
+            config_path = config_path(name)
             result = []
             klass = "Shoperb::Mounter::Models::#{name}".singularize.constantize
             klass.mounting_point = mounting_point

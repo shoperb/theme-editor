@@ -25,6 +25,10 @@ module Shoperb
 
           output
         end
+
+        def persist_translation
+          Translation.instance
+        end
       end
     end
   end

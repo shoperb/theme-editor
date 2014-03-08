@@ -3,7 +3,7 @@ class CollectionDrop < Liquid::Drop
   attr_reader :collection
 
   def initialize(collection = nil)
-    @collection = collection || []
+    @collection = IgnoringArray.new(collection || [])
   end
 
   def before_method(method)
@@ -14,10 +14,6 @@ class CollectionDrop < Liquid::Drop
     limited.each do |item|
       yield item.to_liquid
     end
-  end
-
-  def collection
-    @collection || []
   end
 
   def count
@@ -63,7 +59,7 @@ class CollectionDrop < Liquid::Drop
   private
 
   def paginate(page, per_page)
-    self.class.new(collection.slice(page * per_page, per_page))
+    self.class.new(collection.page(page).per(per_page))
   end
 
   def limit_value
@@ -71,7 +67,7 @@ class CollectionDrop < Liquid::Drop
   end
 
   def limited
-    collection.take(limit_value)
+    (collection.respond_to?(:limit) && collection.limit(limit_value)) || collection.slice(0..limit_value)
   end
 
   def handle_method

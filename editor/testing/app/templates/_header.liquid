@@ -10,8 +10,39 @@
                     <li><a href="javascript:void(0);">My Account</a></li>
                     <li><a href="javascript:void(0);">Wishlist</a></li>
                     <li><a href="javascript:void(0);">My Orders</a></li>
-                    <li><a href="javascript:void(0);">Sign In</a></li>
-                    <li><a href="javascript:void(0);">Register</a></li>
+                    <li class="login-button">
+                        <a href="{{url.login}}">{{ 'sign_in' | t }}</a>
+                        <div class="dropdown login-dropdown">
+                            <form action="{{ form_actions.new_login }}" method="post">
+                                {{ form_actions.auth_input }}
+                                <div class="row">
+                                    <div class="form-col large-24">
+                                        <div class="field">
+                                            <input type="text" name="account[email]" placeholder="{{ 'e-mail' | t }}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-col large-24">
+                                        <div class="field">
+                                            <input type="text" name="account[password]" placeholder="{{ 'password' | t }}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-col large-12">
+                                        <a href="javascript:void(0);" class="forgot-password">{{ 'forgot_password' | t}}</a>
+                                    </div>
+                                    <div class="form-col large-12">
+                                        <div class="buttons right">
+                                            <button class="" type="submit">{{ 'sign_in' | t }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <li><a href="javascript:void(0);">{{ 'sign_up' | t }}</a></li>
                 </ul>
             </nav>
         </div>

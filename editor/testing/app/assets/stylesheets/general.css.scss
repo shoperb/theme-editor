@@ -25,14 +25,29 @@ $header-height: 70px;
 
   .main-navigation{
     float: right;
-    padding-top: 25px;
-    padding-bottom: 28px;
 
     ul{
       margin-bottom: 0;
 
       li{
-        margin: 0 15px;
+        padding: 25px 15px 23px;
+        position: relative;
+
+        .dropdown{
+          display: none;
+        }
+
+        &:hover{
+          background: #2D313E;
+
+          .dropdown{
+            display: block;
+          }
+
+          a{
+            color: $primary-color;
+          }
+        }
 
         &:last-child{
           margin-right: 19px;
@@ -51,9 +66,40 @@ $header-height: 70px;
           line-height: 16px;
           text-transform: uppercase;
 
-          &:hover{
-            color: white;
-          }
+        }
+      }
+    }
+
+    .dropdown{
+      width: 320px;
+      position: absolute;
+      top: 65px;
+      right: 0;
+      z-index: 3;
+      padding: 20px;
+      background: #2D313E;
+      @include border-radius(0 0 3px 3px);
+      @include box-shadow(0px 2px 0px 0px rgba(0,0,0,0.10));
+
+      &.login-dropdown{
+        width: 230px;
+      }
+
+      @include buttons{
+        @include box-shadow(none);
+        font-size: 12px;
+        padding: 14px 18px 13px;
+      }
+
+      .forgot-password{
+        text-transform: none;
+        font-size: 12px;
+        @include inline-block;
+        margin-top: 11px;
+        color: #8A8FA1;
+
+        &:hover{
+          text-decoration: underline;
         }
       }
     }
@@ -69,7 +115,6 @@ $header-height: 70px;
     height: $header-height;
 
     text-align: center;
-    margin-left: 19px;
     position: relative;
     z-index: 3;
 
@@ -131,6 +176,7 @@ $header-height: 70px;
 
         .quantity{
           width: 10px;
+          white-space: nowrap;
         }
 
         .name{
@@ -147,6 +193,7 @@ $header-height: 70px;
           color: $primary-color;
           text-align: right;
           width: 10px;
+          white-space: nowrap;
         }
       }
 
@@ -517,6 +564,67 @@ $header-height: 70px;
 .contact-page-content{
   padding-top: 40px;
   padding-bottom: 90px;
+}
+
+.orbit-container{
+  .orbit-slides-container{
+    li{
+      min-height: 400px;
+      background: white;
+    }
+  }
+}
+
+.orbit-container .orbit-prev, .orbit-container .orbit-next{
+  background: #373C4D;
+  background: rgba(#373C4D, 0.3);
+  width: 40px;
+  height: 40px;
+  @include border-radius($global-rounded);
+  margin-top: -20px;
+}
+
+.orbit-container .orbit-prev{
+  left: 10px;
+  > span{
+    border: none;
+    @include shoperb-icon;
+    @extend .icon-left;
+    color: white;
+    font-size: 12px;
+    margin-top: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    text-indent: 0;
+    line-height: 40px;
+  }
+}
+
+.orbit-container .orbit-next{
+  right: 10px;
+  > span{
+    border: none;
+    @include shoperb-icon;
+    @extend .icon-right;
+    color: white;
+    font-size: 12px;
+    margin-top: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    text-indent: 0;
+    line-height: 40px;
+    margin-left: 0;
+    left: 0;
+  }
+}
+
+.login-page-content{
+  padding-top: 50px;
+  padding-bottom: 110px;
 }
 
 /* Helpers */

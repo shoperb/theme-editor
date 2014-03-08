@@ -6,10 +6,10 @@ module Shoperb
         extend ActiveSupport::Concern
         module ClassMethods
           def has_many relation, options={}
-            class_eval <<-STRING
+            class_eval <<-STRING, __FILE__, __LINE__ + 1
               def #{options[:name] || relation}
                 if mounting_point.respond_to?(:#{relation})
-                  mounting_point.#{relation}.select { |v| v.#{to_s.demodulize.underscore}_id == id }
+                  IgnoringArray.new(mounting_point.#{relation}.select { |v| v.#{to_s.demodulize.underscore}_id == id })
                 elsif mounting_point.respond_to?(:#{relation.to_s.singularize})
                   mounting_point.#{relation.to_s.singularize}
                 end
@@ -17,7 +17,7 @@ module Shoperb
             STRING
           end
           def has_one relation, options={}
-            class_eval <<-STRING
+            class_eval <<-STRING, __FILE__, __LINE__ + 1
               def #{options[:name] || relation}
                 if mounting_point.respond_to?(:#{relation.to_s.pluralize})
                   mounting_point.#{relation.to_s.pluralize}.detect { |v| v.#{to_s.demodulize.underscore}_id == id || v.#{to_s.downcase.underscore}_id.nil? }
@@ -29,7 +29,7 @@ module Shoperb
           end
 
           def belongs_to relation, options={}
-            class_eval <<-STRING
+            class_eval <<-STRING, __FILE__, __LINE__ + 1
               def #{options[:name] || relation}
                 if mounting_point.respond_to?(:#{relation.to_s.pluralize})
                   mounting_point.#{relation.to_s.pluralize}.detect { |v| #{relation.to_s.singularize}_id == v.id }
@@ -46,13 +46,17 @@ module Shoperb
         extend ActiveSupport::Concern
         module ClassMethods
           def all
-            mounting_point.send(self.to_s.demodulize.pluralize.underscore)
+            IgnoringArray.new(mounting_point.send(self.to_s.demodulize.pluralize.underscore))
           end
         end
       end
       class Base < OpenStruct
         include Relations
         include All
+
+        def self.method_missing(name, *args, &block)
+          self.all
+        end
 
         def self.inherited(subclass)
           subclass.class_eval do

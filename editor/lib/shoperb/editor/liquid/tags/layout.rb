@@ -14,11 +14,8 @@ module Liquid
     end
 
     def render(context)
-      context.registers[:layout] = @layout_name == "none" ? nil : @layout_name
-      nil
+      context.registers[:layouts] = @layout_name == "none" ? nil : @layout_name
     end
 
   end
-
-  ::Liquid::Template.register_tag('layout', Layout)
 end

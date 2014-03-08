@@ -90,6 +90,16 @@ class VariantDrop < Liquid::Drop
     "#<Variant SKU: '#{record.sku}'>"
   end
 
+  def json
+    h = record.as_json(only: [:id, :name, :weight, :width, :height, :depth]).merge(current_price: current_price, has_discount: discount?, discount_price: discount_price)
+    record.variant_attributes.each do |attr|
+      h[:attributes] = [] unless h[:attributes]
+      h[:attributes] << {id: attr.id, name: attr.name, value: attr.value}
+    end
+
+    h.to_json
+  end
+
   def inspect
     to_s
   end

@@ -8,7 +8,8 @@ module Shoperb
 
           def read
             super do |theme|
-              Shoperb::Mounter.locale = data['locales'].first.to_sym rescue Shoperb::Mounter.locale
+              Shoperb::Mounter.locale = Shoperb::Mounter.locale
+
               theme.filepath = root_dir
             end
           end

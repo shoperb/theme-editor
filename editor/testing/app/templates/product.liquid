@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="description">
                                     <p>
-                                        {{ product.description | strip_html }}
+                                        {{ product.description | strip_html | truncate: 290 }}
                                     </p>
                                 </div>
 

@@ -1,0 +1,28 @@
+class PaymentMethodDrop < Liquid::Drop
+
+  attr_reader :record
+
+  def initialize(record)
+    @record = record
+  end
+
+  def name
+    record.name
+  end
+
+  def provider
+    record.name
+  end
+
+  def state
+    record.state
+  end
+
+  def invoice_instructions
+    record.payment_method.invoice_instructions
+  end
+
+  def checkout_instructions
+    record.payment_method.instructions
+  end
+end

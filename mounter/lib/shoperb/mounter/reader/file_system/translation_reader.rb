@@ -3,26 +3,18 @@ module Shoperb
     module Reader
       module FileSystem
 
-        class SingletonBase < Base
+        class TranslationReader < SingletonBase
 
-          def config_path name
-            File.join(self.runner.path, 'config',"#{name.underscore}.yml")
+          def config_path
+            File.join(self.runner.path, 'config',"translations.json")
           end
 
           def read
             name = self.class.name.split('::').last.gsub('Reader','')
-            config_path = config_path(name)
-
-            data = self.read_yaml(config_path)
-
             klass = "Shoperb::Mounter::Models::#{name}".constantize
             klass.mounting_point = self.runner.mounting_point
             instance = klass.instance
-            data.each do |key, value|
-              instance.send("#{key}=", value)
-            end
-            yield(instance) if block_given?
-
+            instance.data = File.read(config_path).force_encoding('utf-8')
             instance
           end
 

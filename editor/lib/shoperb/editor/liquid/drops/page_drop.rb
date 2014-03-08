@@ -23,9 +23,7 @@ class PageDrop < Liquid::Drop
   end
 
   def url
-    # TODO: Url Helper
-    # @context.registers[:controller].send(:store_page_path, record)
-    record.name
+    @context.registers[:controller].send(:store_page_path, record)
   end
 
   def to_s
