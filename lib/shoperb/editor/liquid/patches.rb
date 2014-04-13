@@ -1,8 +1,16 @@
 module Liquid
 
   class DelegateDrop < Drop
+    def initialize(record)
+      @record = record
+    end
+
     def method_missing name, *args, &block
-      @record.respond_to?(name) ? @record.send(name, *args, &block) : super
+      @record.send name, *args, &block
+    end
+
+    def inspect
+      "<#{self.class.to_s} #{@record.inspect} >"
     end
   end
 
@@ -38,4 +46,13 @@ module Liquid
     end
   end
 
+  class EditorFileSystem
+    def read_template_file(partial_name, context)
+      Shoperb::Editor::Models::Fragment.render!(partial_name, context)
+    end
+
+  end
+
 end
+
+Liquid::Template.file_system = Liquid::EditorFileSystem.new

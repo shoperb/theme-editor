@@ -2,6 +2,17 @@ module Shoperb
   module Editor
     module Models
       class Base < OpenStruct
+
+        def to_liquid
+          if klass = Object.const_get(self.class.model_name.classify + "Drop")
+            klass.new(self)
+          end
+        end
+
+        def inspect
+          "#{self.class.model_name}(#{self.id})"
+        end
+
         def self.method_missing(name, *args, &block)
           self.all
         end
@@ -12,7 +23,7 @@ module Shoperb
             objs = YAML::load(File.open(file).read.force_encoding('utf-8'))
             result = process_file objs
           end
-          IgnoringArray.new(result)
+          DelegateArray.new(result)
         end
 
         def self.process_file objs
@@ -48,18 +59,30 @@ module Shoperb
         class << self
           def has_many relation, options={}
             class_eval <<-STRING, __FILE__, __LINE__ + 1
-
+              def #{options[:name] || relation}
+                klass = #{relation.to_s.singularize.classify.inspect}.constantize
+                IgnoringArray.new(klass.all.select { |object| object.#{model_name}_id == self.id })
+              end
             STRING
           end
+
           def has_one relation, options={}
             class_eval <<-STRING, __FILE__, __LINE__ + 1
-
+              def #{options[:name] || relation}
+                klass = #{relation.to_s.classify.inspect}.constantize
+                klass.all.detect { |object| object.#{model_name}_id == self.id }
+              end
             STRING
           end
 
           def belongs_to relation, options={}
             class_eval <<-STRING, __FILE__, __LINE__ + 1
-
+              def #{options[:name] || relation}
+                if relation_id = self.#{relation}_id
+                  klass = #{relation.to_s.classify.inspect}.constantize
+                  klass.all.detect { |object| object.id == relation_id }
+                end
+              end
             STRING
           end
         end

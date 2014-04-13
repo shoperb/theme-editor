@@ -39,5 +39,3 @@ module UrlFilters
   end
 
 end
-
-::Liquid::Template.register_filter UrlFilters

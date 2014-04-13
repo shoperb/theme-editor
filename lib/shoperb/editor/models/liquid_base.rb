@@ -15,6 +15,17 @@ module Shoperb
           ::Liquid::Template.parse(File.read(path))
         end
 
+        def render! locals, registers
+          template = parse
+
+          [template, template.render!(locals.stringify_keys!, :registers => registers)]
+        end
+
+        def self.render! name, locals, registers
+          all.detect { |template| /[^_]#{name}.liquid\z/ =~ template.path }.
+            render!(locals.stringify_keys!, registers)
+        end
+
       end
     end
   end

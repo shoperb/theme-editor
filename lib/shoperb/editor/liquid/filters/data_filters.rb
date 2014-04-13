@@ -114,5 +114,3 @@ module DataFilters
   end
 
 end
-
-::Liquid::Template.register_filter DataFilters

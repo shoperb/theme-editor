@@ -20,3 +20,5 @@ tmp
 layouts/
 models/
 templates/
+assets/
+translations.json

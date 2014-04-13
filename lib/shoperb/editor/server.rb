@@ -1,29 +1,39 @@
 module Shoperb
   module Editor
     class Server < Sinatra::Base
+      set :root, Dir.pwd
+      set :views, Proc.new { File.join(root, "templates") }
+
+      enable :sessions
+
+      register Sinatra::Flash
       register Routes
       register Assets
-      register Sinatra::Reloader
 
-      def render_liquid template, options
-        options.reverse_merge!(shoperb_default_assigns)
-        self.response = Theme.instance.render(template, options)
-      end
-
-      def shoperb_default_assigns
-        {
-          :search       => SearchDrop.new(request.params[:query]),
+      def liquid template, locals={}
+        Theme.instance.render(template, locals.reverse_merge!(
+          :errors       => CollectionDrop.new(flash[:errors]),
+          :meta         => MetaDrop.new(locals.delete(:meta)),
+          :categories   => CategoriesDrop.new(Category.all),
+          :cart         => CartDrop.new(current_cart),
           :menus        => MenusDrop.new,
           :pages        => PagesDrop.new,
-          :categories   => CategoriesDrop.new(Category.all),
-          :shop         => ShopDrop.new(Shop.instance),
-          :cart         => CartDrop.new(Cart.instance),
+          :search       => SearchDrop.new(params[:query]),
+          :shop         => ShopDrop.new(shop),
           :path         => request.path,
-          :params       => request.params,
-          :orders       => CollectionDrop.new(Order.all),
-          :order        => OrderDrop.new(Order.all.first),
-          :order_items  => CollectionDrop.new(OrderItem.all)
-        }.stringify_keys
+          :params       => params,
+          :url          => UrlDrop::Get.new,
+          :form_actions => UrlDrop::Post.new,
+          :collections  => ProductCollectionsDrop.new
+        ), { server: self })
+      end
+
+      def current_cart
+        Cart.all.first
+      end
+
+      def shop
+        Shop.all.first
       end
     end
   end

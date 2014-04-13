@@ -7,20 +7,15 @@ module Shoperb
           File.join('app','assets')
         end
 
-        def render(name, locals)
-          registers = { :theme => self, :layout => :"../layouts/layout" }
+        def render(name, locals, registers={})
+          registers = { :theme => self, :layout => "layout" }.merge(registers)
 
-          template = Template.all.detect { |template| /#{name}.liquid\z/ =~ template.path }.parse
+          template, output = Template.render!(name, locals, registers)
 
-          binding.pry
+          layout_name = template.registers[:layout]
 
-          output = template.render!(locals.stringify_keys!, :registers => registers)
-
-          layout = template.registers[:layout]
-
-          unless layout.blank?
-            layout = mounting_point.layouts.fetch(layout).parse
-            output = layout.render!(locals.merge!(:content_for_layout => output).stringify_keys!, :registers => registers)
+          unless layout_name.blank?
+            layout, output = Layout.render!(layout, locals.merge!(:content_for_layout => output), registers)
           end
 
           output

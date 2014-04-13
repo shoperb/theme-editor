@@ -22,10 +22,7 @@ module AssetFilters
   end
 
   def asset_url(asset)
-    binding.pry
-    "/#{@context.registers[:theme].asset_url}/#{asset}"
+    "/#{@context.registers[:server].settings.assets_path}/#{asset}"
   end
 
 end
-
-::Liquid::Template.register_filter AssetFilters

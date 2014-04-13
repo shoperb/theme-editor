@@ -45,5 +45,4 @@ module Liquid
       %(<input type="hidden" name="#{name}" value="#{value}">)
     end
   end
-  Liquid::Template.register_tag 'form', Form
 end

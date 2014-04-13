@@ -1,0 +1,2 @@
+class VariantAttributeDrop < AttributeDrop
+end

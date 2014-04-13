@@ -55,5 +55,3 @@ module HtmlFilters
   end
 
 end
-
-::Liquid::Template.register_filter HtmlFilters

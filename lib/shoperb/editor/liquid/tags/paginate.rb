@@ -101,5 +101,4 @@ module Liquid
     end
 
   end
-  Liquid::Template.register_tag 'paginate', Paginate
 end
