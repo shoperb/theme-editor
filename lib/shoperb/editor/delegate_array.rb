@@ -8,7 +8,7 @@ class DelegateArray < Array
   end
 
   def num_pages
-    [0,1,2,3,4,5].sample
+    [0, 1, 2, 3, 4, 5].sample
   end
 
   def inspect

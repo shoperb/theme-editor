@@ -4,11 +4,11 @@ module Shoperb
       class Theme < SingletonBase
 
         def asset_url
-          File.join('app','assets')
+          File.join('app', 'assets')
         end
 
         def render(name, locals, registers={})
-          registers = { :theme => self, :layout => "layout" }.merge(registers)
+          registers = {:theme => self, :layout => "layout"}.merge(registers)
 
           template, output = Template.render!(name, locals, registers)
 

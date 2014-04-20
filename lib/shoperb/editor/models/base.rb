@@ -61,7 +61,7 @@ module Shoperb
             class_eval <<-STRING, __FILE__, __LINE__ + 1
               def #{options[:name] || relation}
                 klass = #{relation.to_s.singularize.classify.inspect}.constantize
-                IgnoringArray.new(klass.all.select { |object| object.#{model_name}_id == self.id })
+                DelegateArray.new(klass.all.select { |object| object.#{model_name}_id == self.id })
               end
             STRING
           end

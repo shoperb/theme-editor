@@ -3,6 +3,6 @@ require 'rack'
 #require 'shoperb_editor'
 require ::File.expand_path('../../lib/shoperb/editor', __FILE__)
 Rack::Handler::WEBrick.run(
-  Shoperb::Editor::Server.new,
-  :Port => 3000
+    Shoperb::Editor::Server.new,
+    :Port => 3000
 )

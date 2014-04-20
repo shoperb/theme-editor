@@ -12,7 +12,7 @@ module Shoperb
 
         def self.render! name, context
           all.detect { |template| /_#{name}.liquid\z/ =~ template.path }.
-            render!(context)
+              render!(context)
         end
       end
     end

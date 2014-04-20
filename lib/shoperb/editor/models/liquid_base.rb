@@ -23,7 +23,7 @@ module Shoperb
 
         def self.render! name, locals, registers
           all.detect { |template| /[^_]#{name}.liquid\z/ =~ template.path }.
-            render!(locals.stringify_keys!, registers)
+              render!(locals.stringify_keys!, registers)
         end
 
       end

@@ -4,12 +4,12 @@ module Shoperb
       def self.registered(app)
         app.before '/:locale/*' do
           I18n.locale =
-          if Language.all.map(&:code).include?(params[:locale])
-            request.path_info = '/' + params[:splat ][0]
-            params[:locale]
-          elsif (shop = Shop.instance) && shop.language_code
-            shop.language_code
-          end
+              if Language.all.map(&:code).include?(params[:locale])
+                request.path_info = '/' + params[:splat][0]
+                params[:locale]
+              elsif (shop = Shop.instance) && shop.language_code
+                shop.language_code
+              end
         end
 
         app.get '/categories/:id' do
@@ -38,10 +38,10 @@ module Shoperb
         end
 
         app.get '/products/:id' do
-          product   = Page.all.detect { |c| c.id.to_s == params[:id] }
-          product_drop  = ProductDrop.new(product)
+          product = Product.all.detect { |c| c.id.to_s == params[:id] }
+          product_drop = ProductDrop.new(product)
           category = product.category
-          template  = product.template.presence || :product
+          template = product.template.presence || :product
 
           liquid template, :product => product_drop, :category => category, :meta => product_drop
         end
