@@ -20,7 +20,7 @@ module Shoperb
         def self.all
           result = []
           if File.exists?(file)
-            objs = YAML::load(File.open(file).read.force_encoding('utf-8'))
+            objs   = YAML::load(File.open(file).read.force_encoding('utf-8'))
             result = process_file objs
           end
           DelegateArray.new(result)

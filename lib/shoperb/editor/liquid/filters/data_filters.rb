@@ -34,7 +34,7 @@ module DataFilters
   end
 
   def money_precision(money)
-    fmt = "%05.2f" % money.to_f
+    fmt                      = "%05.2f" % money.to_f
     cost_dollars, cost_cents = fmt.split '.'
     if cost_cents.to_i == 0
       0

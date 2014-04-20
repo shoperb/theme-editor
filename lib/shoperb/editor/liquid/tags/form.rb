@@ -39,8 +39,8 @@ module Liquid
 
     def auth_token(context)
       controller = context.registers[:controller]
-      name = controller.send(:request_forgery_protection_token).to_s
-      value = controller.send(:form_authenticity_token)
+      name       = controller.send(:request_forgery_protection_token).to_s
+      value      = controller.send(:form_authenticity_token)
 
       %(<input type="hidden" name="#{name}" value="#{value}">)
     end

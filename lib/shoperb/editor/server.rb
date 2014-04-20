@@ -12,20 +12,20 @@ module Shoperb
 
       def liquid template, locals={}
         Theme.instance.render(template, locals.reverse_merge!(
-            :errors => CollectionDrop.new(flash[:errors]),
-            :meta => MetaDrop.new(locals.delete(:meta)),
-            :categories => CategoriesDrop.new(Category.all),
-            :cart => CartDrop.new(current_cart),
-            :menus => MenusDrop.new,
-            :pages => PagesDrop.new,
-            :search => SearchDrop.new(params[:query]),
-            :shop => ShopDrop.new(shop),
-            :path => request.path,
-            :params => params,
-            :url => UrlDrop::Get.new,
+            :errors       => CollectionDrop.new(flash[:errors]),
+            :meta         => MetaDrop.new(locals.delete(:meta)),
+            :categories   => CategoriesDrop.new(Category.all),
+            :cart         => CartDrop.new(current_cart),
+            :menus        => MenusDrop.new,
+            :pages        => PagesDrop.new,
+            :search       => SearchDrop.new(params[:query]),
+            :shop         => ShopDrop.new(shop),
+            :path         => request.path,
+            :params       => params,
+            :url          => UrlDrop::Get.new,
             :form_actions => UrlDrop::Post.new,
-            :collections => ProductCollectionsDrop.new
-        ), {server: self})
+            :collections  => ProductCollectionsDrop.new
+        ),                    {server: self})
       end
 
       def current_cart

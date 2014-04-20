@@ -38,10 +38,10 @@ module Shoperb
         end
 
         app.get '/products/:id' do
-          product = Product.all.detect { |c| c.id.to_s == params[:id] }
+          product      = Product.all.detect { |c| c.id.to_s == params[:id] }
           product_drop = ProductDrop.new(product)
-          category = product.category
-          template = product.template.presence || :product
+          category     = product.category
+          template     = product.template.presence || :product
 
           liquid template, :product => product_drop, :category => category, :meta => product_drop
         end

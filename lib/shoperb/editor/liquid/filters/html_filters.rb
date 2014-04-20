@@ -10,7 +10,7 @@ module HtmlFilters
     options = args_to_options(args)
 
     previous_label = options[:prev] || I18n.t('pagination.previous')
-    next_label = options[:next] || I18n.t('pagination.next')
+    next_label     = options[:next] || I18n.t('pagination.next')
 
     previous_link = (
     if paginate['previous'].blank?
