@@ -5,27 +5,27 @@ module Liquid
       @record = record
     end
 
+    def inspect
+      "<#{self.class.to_s} #{@record.inspect}>"
+    end
+
     def method_missing name, *args, &block
       @record.send name, *args, &block
     end
 
-    def inspect
-      "<#{self.class.to_s} #{@record.inspect} >"
+    def self.invokable?(method_name)
+      # unless @invokable_methods
+      #   blacklist = Liquid::Drop.public_instance_methods + [:each]
+      #   if include?(Enumerable)
+      #     blacklist += Enumerable.public_instance_methods
+      #     blacklist -= [:sort, :count, :first, :min, :max, :include?]
+      #   end
+      #   whitelist = [:to_liquid] + (public_instance_methods - blacklist)
+      #   @invokable_methods = Set.new(whitelist.map(&:to_s))
+      # end
+      # @invokable_methods.include?(method_name.to_s)
+      true
     end
-  end
-
-  class Template
-
-    # creates a new <tt>Template</tt> object from liquid source code
-    def parse_with_utf8(source, context = {})
-      if RUBY_VERSION =~ /1\.9/
-        source = source.force_encoding('UTF-8') if source.present?
-      end
-      self.parse_without_utf8(source, context)
-    end
-
-    alias_method_chain :parse, :utf8
-
   end
 
   module StandardFilters

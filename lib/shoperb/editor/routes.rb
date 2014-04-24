@@ -24,35 +24,35 @@ module Shoperb
 
         app.get '/orders/:id' do
           order = Order.all.detect { |c| c.id.to_s == params[:id] }
-          liquid :order, :order => order
+          liquid :order, order: order
         end
 
         app.get '/pages/:id' do
           page = Page.all.detect { |c| c.id.to_s == params[:id] }
-          liquid page.template.to_sym, :page => page, :meta => page
+          liquid page.template.to_sym, page: page, meta: page
         end
 
         app.get '/products' do
           products = Product.all
-          liquid :products, :products => ProductsDrop.new(products)
+          liquid :products, products: ProductsDrop.new(products)
         end
 
         app.get '/products/:id' do
           product      = Product.all.detect { |c| c.id.to_s == params[:id] }
           product_drop = ProductDrop.new(product)
-          category     = product.category
+          category     = CategoryDrop.new(product.category)
           template     = product.template.presence || :product
 
-          liquid template, :product => product_drop, :category => category, :meta => product_drop
+          liquid template, product: product_drop, category: category, meta: product_drop
         end
 
         app.get '/orders' do
           orders = Order.all
-          liquid :orders, :orders => orders
+          liquid :orders, orders: orders
         end
 
         app.get '/cart' do
-          liquid :cart, cart: Cart.instance
+          liquid :cart
         end
 
         app.get '/' do
