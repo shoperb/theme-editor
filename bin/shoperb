@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+
+require 'slop'
+require 'shoperb/editor'
+
+slop_options = {
+    ignore_case: true,
+    autocreate:  true
+}
+
+Slop.parse slop_options do
+
+  command 'pull' do
+    run do |options, args|
+      require 'shoperb/oauth'
+      Shoperb::OAuth.pull options.to_hash(true)
+    end
+  end
+
+  command 'push' do
+    run do |options, args|
+      require 'shoperb/oauth'
+      Shoperb::OAuth.push options.to_hash(true)
+    end
+  end
+
+  command 'mount' do
+    run do |options, args|
+      require 'shoperb/mounter'
+      Shoperb::Mounter.start options.to_hash(true)
+    end
+  end
+
+end

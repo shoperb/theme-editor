@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'shoperb/editor/version'
+require 'shoperb/editor'
 
 Gem::Specification.new do |gem|
   gem.name    = 'shoperb_theme_editor'
@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
 
   gem.authors  = ['Rainer Sai']
   gem.email    = ['rainer.sai@perfectline.co']
-  gem.summary  = %q{The Shoperb editor is a site generator for the Shoperb engine}
+  gem.summary  = %q{shoperb_theme_editor is a theme manager for Shoperb}
   gem.homepage = 'http://www.shoperb.com'
 
   gem.files         = `git ls-files`.split($/)
@@ -26,6 +26,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'actionview'
   gem.add_dependency 'actionpack'
   gem.add_dependency 'liquid'
+  gem.add_dependency 'slop'
   gem.add_dependency 'sprockets', '~> 2.0'
 
   gem.add_development_dependency 'pry'

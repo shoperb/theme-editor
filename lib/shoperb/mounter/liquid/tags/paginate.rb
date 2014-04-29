@@ -12,7 +12,7 @@ module Liquid
 
   class Paginate < ::Liquid::Block
 
-    Syntax = /(#{::Liquid::Expression}+)\s+by\s+([0-9]+)/
+    Syntax = /(#{/(?:(?-mix:(?-mix:"[^"]*"|'[^']*')|(?:[^\s,\|'"]|(?-mix:"[^"]*"|'[^']*'))+)(?:(?-mix:^(?:'[^']+'|"[^"]+"|[^'"])*(?-mix:\|)(?:(?-mix:"[^"]+"|'[^']+'|[^\s|:,]+))(?:(?-mix::(?:(?-mix:"[^"]+"|'[^']+'|[^\s|:,]+)))(?:(?-mix:,(?:(?-mix:"[^"]+"|'[^']+'|[^\s|:,]+))))*)?))*)/}+)\s+by\s+([0-9]+)/
 
     def initialize(tag_name, markup, tokens)
       if markup =~ Syntax

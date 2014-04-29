@@ -1,5 +1,5 @@
 module Shoperb
-  module Editor
+  module Mounter
     module Liquid
       class PageNotFound < ::Liquid::Error;
       end

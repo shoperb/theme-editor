@@ -1,6 +1,7 @@
 GIT
   remote: git://github.com/Shopify/liquid.git
-  revision: ee7edacacca5044c25edb59386f21ff4a9585774
+  revision: f15d24509d0f429f56284da527e6186708a27725
+  ref: f15d24509d0f429f56284da527e6186708a27725
   specs:
     liquid (3.0.0)
 
@@ -16,6 +17,7 @@ PATH
       sinatra-asset-pipeline
       sinatra-contrib
       sinatra-flash
+      slop
       sprockets (~> 2.0)
 
 GEM
@@ -50,7 +52,7 @@ GEM
     json (1.8.1)
     method_source (0.8.2)
     minitest (5.3.3)
-    multi_json (1.9.2)
+    multi_json (1.9.3)
     pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
@@ -60,8 +62,8 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rake (10.3.0)
-    sass (3.3.5)
+    rake (10.3.1)
+    sass (3.3.6)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -84,7 +86,7 @@ GEM
     sinatra-flash (0.3.0)
       sinatra (>= 1.0.0)
     slop (3.5.0)
-    sprockets (2.12.0)
+    sprockets (2.12.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
