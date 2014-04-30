@@ -11,16 +11,15 @@ require_relative './mounter/server'
 require_relative './mounter/models'
 require_relative './mounter/liquid'
 
-
 I18n.enforce_available_locales = false
 
 module Shoperb
   module Mounter
 
-    def self.start options={}
-      instance = Server.new(options)
+    def self.start
+      instance = Server.new
       Rack::Handler::WEBrick.run(instance,
-        :Port => instance.settings.editor_options[:port]
+        :Port => Shoperb.config[:port]
       )
     end
 

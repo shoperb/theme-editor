@@ -36,11 +36,6 @@ module Shoperb
       def shop
         Shop.instance
       end
-
-      def initialize(options={})
-        self.class.set :editor_options, options.merge(port: 3000)
-        super()
-      end
     end
   end
 end

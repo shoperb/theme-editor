@@ -3,11 +3,6 @@ module Shoperb
     module Routes
       def self.registered(app)
 
-        app.get '/sso' do
-          binding.pry
-          exit
-        end
-
         app.before '/:locale/*' do
           I18n.locale =
               if Language.all.map(&:code).include?(params[:locale])

@@ -3,31 +3,38 @@
 require 'slop'
 require 'shoperb/editor'
 
-slop_options = {
-    ignore_case: true,
-    autocreate:  true
-}
-
-Slop.parse slop_options do
+Slop.parse autocreate: true do
 
   command 'pull' do
     run do |options, args|
       require 'shoperb/oauth'
-      Shoperb::OAuth.pull options.to_hash(true)
+      Shoperb.with_configuration(options) do
+        Shoperb::OAuth.pull *args
+      end
     end
   end
 
   command 'push' do
     run do |options, args|
       require 'shoperb/oauth'
-      Shoperb::OAuth.push options.to_hash(true)
+      Shoperb.with_configuration(options) do
+        Shoperb::OAuth.push *args
+      end
     end
   end
 
   command 'mount' do
     run do |options, args|
       require 'shoperb/mounter'
-      Shoperb::Mounter.start options.to_hash(true)
+      Shoperb.with_configuration(options) do
+        Shoperb::Mounter.start
+      end
+    end
+  end
+
+  command 'clean' do
+    run do |options, args|
+      Shoperb::Configuration.destroy
     end
   end
 

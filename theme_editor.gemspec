@@ -27,6 +27,9 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'actionpack'
   gem.add_dependency 'liquid'
   gem.add_dependency 'slop'
+  gem.add_dependency 'oauth2'
+  gem.add_dependency 'launchy'
+  gem.add_dependency 'hashie'
   gem.add_dependency 'sprockets', '~> 2.0'
 
   gem.add_development_dependency 'pry'
