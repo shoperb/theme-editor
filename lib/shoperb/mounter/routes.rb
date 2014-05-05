@@ -57,7 +57,7 @@ module Shoperb
         end
 
         app.get '/' do
-          liquid :index
+          liquid :frontpage
         end
 
       end
