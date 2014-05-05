@@ -1,0 +1,2 @@
+class MenusDrop < CollectionDrop
+end

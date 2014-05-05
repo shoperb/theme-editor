@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+lib = File.expand_path('../../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
+require 'slop'
+require 'shoperb/editor'
+
+Slop.parse ignore_case: true, strict: true do
+
+  banner 'Usage: shoperb [action] [options]'
+
+  command 'pull' do
+    description 'Usage: shoperb pull <shop_id> [options]'
+    run do |options, args|
+      require 'shoperb/oauth'
+      Shoperb.with_configuration(options) do
+        Shoperb::OAuth.pull *args
+      end
+    end
+  end
+
+  command 'push' do
+    description 'Usage: shoperb push <shop_id> [options]'
+    run do |options, args|
+      require 'shoperb/oauth'
+      Shoperb.with_configuration(options) do
+        Shoperb::OAuth.push *args
+      end
+    end
+  end
+
+  command 'mount' do
+    description 'Usage: shoperb mount [options]'
+    run do |options, args|
+      require 'shoperb/mounter'
+      Shoperb.with_configuration(options) do
+        Shoperb::Mounter.start
+      end
+    end
+  end
+
+  command 'clean' do
+    description 'Usage: shoperb clean'
+    run do |options, args|
+      Shoperb::Configuration.destroy
+    end
+  end
+
+end
