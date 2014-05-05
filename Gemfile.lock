@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    shoperb_theme_editor (0.0.1)
+    shoperb-theme-editor (0.0.1)
       actionpack
       actionview
       activesupport
@@ -126,4 +126,4 @@ PLATFORMS
 DEPENDENCIES
   liquid!
   pry
-  shoperb_theme_editor!
+  shoperb-theme-editor!

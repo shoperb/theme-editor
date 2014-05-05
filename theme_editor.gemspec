@@ -1,12 +1,7 @@
 # -*- encoding: utf-8 -*-
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'shoperb/editor'
-
 Gem::Specification.new do |gem|
-  gem.name    = 'shoperb_theme_editor'
-  gem.version = Shoperb::Editor::VERSION
-
+  gem.name    = 'shoperb-theme-editor'
+  gem.version = '0.0.1'
 
   gem.authors  = ['Rainer Sai']
   gem.email    = ['rainer.sai@perfectline.co']

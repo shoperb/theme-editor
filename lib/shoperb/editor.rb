@@ -1,9 +1,6 @@
 require 'shoperb/configuration'
 
 module Shoperb
-  module Editor
-    VERSION = '0.0.1'
-  end
 
   class << self
     attr_accessor :config
