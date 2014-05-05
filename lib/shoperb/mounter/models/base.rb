@@ -22,6 +22,9 @@ module Shoperb
           if File.exists?(file)
             objs   = YAML::load(File.open(file).read.force_encoding('utf-8'))
             result = process_file objs
+          elsif File.exists?(default_file = File.expand_path("../../default_models/#{file}", __dir__))
+            objs   = YAML::load(File.open(default_file).read.force_encoding('utf-8'))
+            result = process_file objs
           end
           DelegateArray.new(result)
         end

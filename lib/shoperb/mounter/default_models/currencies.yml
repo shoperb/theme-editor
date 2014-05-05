@@ -1,0 +1,12 @@
+currencies:
+  -
+    id: 1
+    name: 'Euro'
+    code: 'EUR'
+    symbol: '€'
+
+  -
+    id: 2
+    name: 'United States Dollar'
+    code: 'USD'
+    symbol: '$'

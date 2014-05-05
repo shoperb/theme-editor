@@ -1,6 +1,6 @@
 class SearchDrop < Liquid::DelegateDrop
 
   def initialize *args
-    @record = Search.instance
+    @record = Shoperb::Mounter::Models::Search.instance
   end
 end
