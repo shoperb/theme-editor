@@ -1,8 +1,0 @@
-production:
-  host: <%= config[:host] %>
-<% if config[:email] -%>
-  email: <%= config[:email] %>
-  password: <%= config[:password] %>
-<% elsif config[:api_key] -%>
-  api_key: <%= config[:api_key] -%>
-<% end -%>

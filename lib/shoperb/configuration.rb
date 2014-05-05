@@ -38,7 +38,7 @@ module Shoperb
         :'oauth-redirect-uri' => '',
         :'oauth-site' => 'http://sso.shoperb.biz',
         :'oauth-cache' => {},
-        :port => '3000'
+        :port => '4000'
       }
     end
 

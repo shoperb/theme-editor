@@ -16,6 +16,10 @@ class CollectionDrop < Liquid::DelegateDrop
     end
   end
 
+  def [] name
+    @collection.detect { |object| object.send(:name) == name }
+  end
+
   def first
     collection.first.to_liquid
   end
