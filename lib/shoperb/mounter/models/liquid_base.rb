@@ -3,12 +3,24 @@ module Shoperb
     module Models
       class LiquidBase < OpenStruct
 
-        def self.method_missing(name, *args, &block)
-          self.all
-        end
+        class << self
+          def method_missing(name, *args, &block)
+            all
+          end
 
-        def self.all
-          Dir[File.join(File.expand_path('templates'), matcher)].map { |path| new(path: path) }
+          def all
+            Dir[File.join(directory, matcher)].map { |path| new(path: path) }
+          end
+
+          def directory
+            File.join(File.expand_path('templates'))
+          end
+
+          def render! name, locals, registers
+            path = all.detect { |template| /[^_]#{name}.liquid\z/ =~ template.path }
+            raise "File not found: #{name}.liquid in #{directory}" unless path
+            path.render!(locals.stringify_keys!, registers)
+          end
         end
 
         def parse
@@ -22,12 +34,6 @@ module Shoperb
         rescue Exception => e
           raise e, "'#{e.message}' in #{path}"
         end
-
-        def self.render! name, locals, registers
-          all.detect { |template| /[^_]#{name}.liquid\z/ =~ template.path }.
-              render!(locals.stringify_keys!, registers)
-        end
-
       end
     end
   end

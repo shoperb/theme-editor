@@ -2,7 +2,8 @@ module Shoperb
   module Mounter
     module Models
       class Category < Base
-        has_many :products
+        self.finder= :name
+        has_many :products, attribute: :name
       end
     end
   end
