@@ -49,6 +49,8 @@ module Liquid
   class EditorFileSystem
     def read_template_file(partial_name, context)
       Shoperb::Editor::Models::Fragment.render!(partial_name, context)
+    rescue Exception => e
+      raise e, "'#{e.message}' in #{partial_name}"
     end
 
   end

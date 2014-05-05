@@ -20,7 +20,7 @@ module Shoperb
 
           [template, template.render!(locals.stringify_keys!, :registers => registers)]
         rescue Exception => e
-          raise e, "Error in #{path}"
+          raise e, "'#{e.message}' in #{path}"
         end
 
         def self.render! name, locals, registers
