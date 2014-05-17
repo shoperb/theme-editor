@@ -26,6 +26,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'launchy'
   gem.add_dependency 'hashie'
   gem.add_dependency 'sprockets', '~> 2.0'
+  gem.add_dependency 'rubyzip', '>= 1.0.0'
 
   gem.add_development_dependency 'pry'
 end

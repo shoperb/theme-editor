@@ -35,8 +35,8 @@ module Shoperb
         :'oauth-client-secret' => '',
         :'oauth-username' => '',
         :'oauth-password' => '',
-        :'oauth-redirect-uri' => '',
-        :'oauth-site' => 'http://sso.shoperb.biz',
+        :'oauth-redirect-uri' => 'http://localhost:4000/callback',
+        :'oauth-site' => 'http://perfectline.shoperb.biz/admin',
         :'oauth-cache' => {},
         :port => '4000'
       }
