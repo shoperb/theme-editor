@@ -1,7 +1,17 @@
 require 'oauth2'
 require 'launchy'
+require 'fileutils'
 
 require_relative './oauth/server'
+require_relative './theme'
+
+OAuth2::Response.register_parser(:zip, ['application/zip']) do |body|
+  file = Tempfile.new('theme.zip')
+  file.write(body)
+  file
+end
+
+OAuth2::Response::CONTENT_TYPES
 
 module Shoperb
   module OAuth
@@ -10,17 +20,22 @@ module Shoperb
 
       attr_accessor :auth_code, :client, :token, :server
 
-      def pull
+      def pull directory=nil
         initialize
-        access_token.get 'theme/download'
+        response = access_token.get('theme/download')
+        Theme.unpack response.parsed, directory
       end
 
       def push
         initialize
+        file = Theme.pack
+        theme = Faraday::UploadIO.new(file, 'application/zip')
+        access_token.post('theme/upload', body: { zip: theme })
+      ensure
+        FileUtils.rm_r(file) if File.exists?(file)
       end
 
       def sync
-        initialize
       end
 
       def initialize

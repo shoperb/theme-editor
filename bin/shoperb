@@ -14,7 +14,7 @@ Slop.parse ignore_case: true, strict: true do
     run do |options, args|
       require 'shoperb/oauth'
       Shoperb.with_configuration(options) do
-        Shoperb::OAuth.pull
+        Shoperb::OAuth.pull args.first
       end
     end
   end
