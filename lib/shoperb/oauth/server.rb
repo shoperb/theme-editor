@@ -3,8 +3,8 @@ module Shoperb
   module OAuth
     class Server < Sinatra::Base
 
-      get '/callback' do
-        Shoperb.config[:'oauth-cache'] = Hash[OAuth.get_authented_token(params[:code]).to_hash.map{ |k, v| [k.to_s, v] }]
+      get URI(Shoperb.config['oauth-redirect-uri']).path do
+        Shoperb.config['oauth-cache'] = OAuth.get_authented_token(params[:code]).to_hash.with_indifferent_access
         erb :callback
       end
 

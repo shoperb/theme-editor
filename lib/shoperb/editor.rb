@@ -5,8 +5,8 @@ module Shoperb
   class << self
     attr_accessor :config
 
-    def with_configuration options
-      self.config = Shoperb::Configuration.new(options.to_hash)
+    def with_configuration options, *args
+      self.config = Shoperb::Configuration.new(options.to_hash, *args)
       begin
         yield
       ensure

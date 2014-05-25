@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'slop'
 require 'shoperb/editor'
 
-Slop.parse ignore_case: true, strict: true do
+Slop.parse ignore_case: true, autocreate: true do
 
   banner 'Usage: shoperb [action] [options]'
 
@@ -13,7 +13,7 @@ Slop.parse ignore_case: true, strict: true do
     description 'Usage: shoperb pull [options]'
     run do |options, args|
       require 'shoperb/oauth'
-      Shoperb.with_configuration(options) do
+      Shoperb.with_configuration(options, *args) do
         Shoperb::OAuth.pull args.first
       end
     end
@@ -23,7 +23,7 @@ Slop.parse ignore_case: true, strict: true do
     description 'Usage: shoperb push [options]'
     run do |options, args|
       require 'shoperb/oauth'
-      Shoperb.with_configuration(options) do
+      Shoperb.with_configuration(options, *args) do
         Shoperb::OAuth.push
       end
     end
@@ -33,7 +33,7 @@ Slop.parse ignore_case: true, strict: true do
     description 'Usage: shoperb mount [options]'
     run do |options, args|
       require 'shoperb/mounter'
-      Shoperb.with_configuration(options) do
+      Shoperb.with_configuration(options, *args) do
         Shoperb::Mounter.start
       end
     end
@@ -43,7 +43,7 @@ Slop.parse ignore_case: true, strict: true do
     description 'Usage: shoperb sync [options]'
     run do |options, args|
       require 'shoperb/oauth'
-      Shoperb.with_configuration(options) do
+      Shoperb.with_configuration(options, *args) do
         Shoperb::OAuth.sync
       end
     end
