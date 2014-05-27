@@ -68,7 +68,7 @@ module Shoperb
             name.split('::').last.underscore
           end
 
-          def file base="models"
+          def file base="data"
             "#{base}/#{model_name.pluralize}.#{file_extension}"
           end
 

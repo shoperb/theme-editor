@@ -19,6 +19,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'sinatra-asset-pipeline'
   gem.add_dependency 'activesupport'
   gem.add_dependency 'actionview'
+  gem.add_dependency 'actionpack'
   gem.add_dependency 'liquid'
   gem.add_dependency 'slop'
   gem.add_dependency 'oauth2'

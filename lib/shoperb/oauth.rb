@@ -17,9 +17,11 @@ module Shoperb
 
       def pull directory=nil
         require_relative './theme'
+        directory = directory ? "./#{directory}" : '.'
         initialize
         response = access_token.get('theme/download')
         Theme.unpack response.parsed, directory
+        Theme.clone_models directory
       end
 
       def push
@@ -29,7 +31,7 @@ module Shoperb
         theme = Faraday::UploadIO.new(file, 'application/zip')
         access_token.post('theme/upload', body: { zip: theme })
       ensure
-        FileUtils.rm_r(file) if File.exists?(file)
+        FileUtils.rm_r(file, verbose: Shoperb.config['verbose']) if File.exists?(file)
       end
 
       def sync

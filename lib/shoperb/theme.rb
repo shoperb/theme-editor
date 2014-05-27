@@ -35,14 +35,13 @@ module Shoperb
       end
 
       def unpack file, directory
-        directory = directory ? "./#{directory}" : '.'
         Zip::File.open(file) { |zip_file|
           handle = zip_file.entries.first.name.split('/').first
           zip_file.each { |entry|
             name = entry.name.gsub(/\A#{handle}\//, '')
             extract_path = File.join(directory || '.', name)
-            FileUtils.mkdir_p(File.dirname(extract_path))
-            FileUtils.rm_r(extract_path) if File.exists?(extract_path)
+            FileUtils.mkdir_p(File.dirname(extract_path), verbose: Shoperb.config['verbose'])
+            FileUtils.rm_r(extract_path, verbose: Shoperb.config['verbose']) if File.exists?(extract_path)
             entry.extract(extract_path)
           }
         }
@@ -51,6 +50,14 @@ module Shoperb
           file.close
           file.unlink
         end
+      end
+
+      def clone_models directory
+        data_path = "#{directory}/data"
+        FileUtils.mkdir_p(data_path, verbose: Shoperb.config['verbose'])
+        files = Dir["#{File.expand_path('../mounter/default_models', __FILE__)}/*.yml"]
+        files.delete_if { |file| File.exists?(File.join(data_path, Pathname.new(file).basename)) }
+        FileUtils.cp files, data_path, verbose: Shoperb.config['verbose']
       end
 
     end
