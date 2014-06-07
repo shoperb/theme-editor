@@ -42,7 +42,7 @@ module Shoperb
     end
 
     def ask name
-      default = self.class.defaults[name].presence
+      default = DEFAULTS[name].presence
       if question = QUESTION[name]
         puts question
         default = DEFAULTS[name].presence
