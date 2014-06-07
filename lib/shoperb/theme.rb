@@ -16,18 +16,19 @@ module Shoperb
     class << self
 
       def pack
-        handle = Pathname.new(Dir.pwd)
+        base = Pathname.new(Dir.pwd)
+        handle = Pathname.new(Shoperb.config['handle'] ? File.expand_path("../#{Shoperb.config['handle']}") : base)
         zip = Zip::OutputStream.write_buffer do |out|
           FILES.each do |matcher|
-            Dir[File.join(Dir.pwd, matcher)].each do |file|
-              filename = Pathname.new(file).relative_path_from(handle)
+            Dir[File.join(base, matcher)].each do |file|
+              filename = Pathname.new(file).relative_path_from(base)
               out.put_next_entry("#{handle.basename}/#{filename}")
               out.write File.read(file)
             end
           end
         end
 
-        file = File.new("#{handle}/#{File.basename(handle)}.zip", 'w+b')
+        file = File.new("#{base.basename}/#{handle.basename}.zip", 'w+b')
         file.write(zip.string)
         file.path
       ensure
@@ -36,9 +37,9 @@ module Shoperb
 
       def unpack file, directory
         Zip::File.open(file) { |zip_file|
-          handle = zip_file.entries.first.name.split('/').first
+          Shoperb.config['handle'] = zip_file.entries.first.name.split('/').first
           zip_file.each { |entry|
-            name = entry.name.gsub(/\A#{handle}\//, '')
+            name = entry.name.gsub(/\A#{Shoperb.config['handle']}\//, '')
             extract_path = File.join(directory || '.', name)
             FileUtils.mkdir_p(File.dirname(extract_path), verbose: Shoperb.config['verbose'])
             FileUtils.rm_r(extract_path, verbose: Shoperb.config['verbose']) if File.exists?(extract_path)
