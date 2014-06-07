@@ -27,8 +27,7 @@ module Shoperb
             end
           end
         end
-
-        file = File.new("#{base.basename}/#{handle.basename}.zip", 'w+b')
+        file = File.new("#{handle.basename}.zip", 'w+b')
         file.write(zip.string)
         file.path
       ensure
