@@ -4,12 +4,12 @@ require 'fileutils'
 module Shoperb
   module Theme
     FILES = %w{
-      config/translations.json
-      fonts/*.(eot|woff|ttf)
-      images/*
-      javascripts/*.js
+      translations/*.json
+      assets/fonts/*.{eot,woff,ttf}
+      assets/images/**/*.{jpeg,jpg,gif,png}
+      assets/javascripts/*.js
       layouts/*.liquid
-      stylesheets/*.css
+      assets/stylesheets/*.css
       templates/*.liquid
     }
 
@@ -27,7 +27,7 @@ module Shoperb
           end
         end
 
-        file = File.new("#{handle}.zip", 'w+b')
+        file = File.new("#{handle}/#{File.basename(handle)}.zip", 'w+b')
         file.write(zip.string)
         file.path
       ensure
