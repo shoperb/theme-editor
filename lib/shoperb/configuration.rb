@@ -51,6 +51,10 @@ module Shoperb
       end || default
     end
 
+    def reset *names
+      names.each { |name| self[name] = DEFAULTS[name] }
+    end
+
     def destroy
       File.delete(file) if File.exist?(file)
     end

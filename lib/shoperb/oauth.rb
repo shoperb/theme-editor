@@ -74,6 +74,8 @@ module Shoperb
 
       def access_token
         OAuth2::AccessToken.new(client, get_token.token) if have_token?
+      rescue OAuth2::Error => e
+        handle_oauth_error e
       end
 
       def have_token?
@@ -90,6 +92,14 @@ module Shoperb
         Thread.new do
           Rack::Handler::WEBrick.run instance, Port: Shoperb.config['port']
         end
+      end
+
+      def handle_oauth_error exception
+        case exception.code
+          when "invalid_client"
+            Shoperb.config.reset('oauth-client-id', 'oauth-client-secret', 'oauth-cache')
+        end
+        raise exception
       end
     end
 
