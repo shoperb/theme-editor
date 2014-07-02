@@ -1,4 +1,4 @@
-require 'shoperb/configuration'
+require "shoperb/configuration"
 
 module Shoperb
 

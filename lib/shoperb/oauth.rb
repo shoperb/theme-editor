@@ -1,9 +1,9 @@
-require 'oauth2'
-require 'launchy'
-require 'fileutils'
+require "oauth2"
+require "launchy"
+require "fileutils"
 
-OAuth2::Response.register_parser(:zip, ['application/zip']) do |body|
-  file = Tempfile.new('theme.zip')
+OAuth2::Response.register_parser(:zip, ["application/zip"]) do |body|
+  file = Tempfile.new("theme.zip")
   file.write(body)
   file
 end
@@ -16,22 +16,22 @@ module Shoperb
       attr_accessor :auth_code, :client, :token, :server
 
       def pull directory=nil
-        require_relative './theme'
-        directory = directory ? "./#{directory}" : '.'
+        require_relative "./theme"
+        directory = directory ? "./#{directory}" : "."
         initialize
-        response = access_token.get('themes/download')
+        response = access_token.get("themes/download")
         Theme.unpack response.parsed, directory
         Theme.clone_models directory
       end
 
       def push
-        require_relative './theme'
+        require_relative "./theme"
         initialize
         file = Theme.pack
-        theme = Faraday::UploadIO.new(file, 'application/zip')
-        access_token.post('themes/upload', body: { zip: theme })
+        theme = Faraday::UploadIO.new(file, "application/zip")
+        access_token.post("themes/upload", body: { zip: theme })
       ensure
-        FileUtils.rm_r(file, verbose: Shoperb.config['verbose']) if File.exists?(file)
+        FileUtils.rm_r(file, verbose: Shoperb.config["verbose"]) if File.exists?(file)
       end
 
       def sync
@@ -39,11 +39,11 @@ module Shoperb
 
       def initialize
         self.client = OAuth2::Client.new(
-          Shoperb.config['oauth-client-id'],
-          Shoperb.config['oauth-client-secret'],
-          site: "#{Shoperb.config['oauth-site']}/admin",
-          token_url: 'oauth/token',
-          authorize_url: 'oauth/authorize'
+          Shoperb.config["oauth-client-id"],
+          Shoperb.config["oauth-client-secret"],
+          site: "#{Shoperb.config["oauth-site"]}/admin",
+          token_url: "oauth/token",
+          authorize_url: "oauth/authorize"
         ) do |faraday|
           faraday.request  :multipart
           faraday.request  :url_encoded
@@ -61,15 +61,15 @@ module Shoperb
       end
 
       def get_token
-        client.password.get_token(Shoperb.config['oauth-username'], Shoperb.config['oauth-password'])
+        client.password.get_token(Shoperb.config["oauth-username"], Shoperb.config["oauth-password"])
       end
 
       def authorize_url
-        client.auth_code.authorize_url(redirect_uri: Shoperb.config['oauth-redirect-uri'], scope: 'admin')
+        client.auth_code.authorize_url(redirect_uri: Shoperb.config["oauth-redirect-uri"], scope: "admin")
       end
 
       def get_authented_token(code)
-        client.auth_code.get_token(code, redirect_uri: Shoperb.config['oauth-redirect-uri'])
+        client.auth_code.get_token(code, redirect_uri: Shoperb.config["oauth-redirect-uri"])
       end
 
       def access_token
@@ -79,25 +79,25 @@ module Shoperb
       end
 
       def have_token?
-        (cache = Shoperb.config['oauth-cache']) && (cache['access_token']).to_s.size > 0 && valid_expired_token?
+        (cache = Shoperb.config["oauth-cache"]) && (cache["access_token"]).to_s.size > 0 && valid_expired_token?
       end
 
       def valid_expired_token?
-        Shoperb.config['oauth-cache']['expires_at'].to_s.size == 0 || (Shoperb.config['oauth-cache']['expires_at'].to_s.size > 0 && Time.at(Shoperb.config['oauth-cache']['expires_at'].to_i) > Time.now)
+        Shoperb.config["oauth-cache"]["expires_at"].to_s.size == 0 || (Shoperb.config["oauth-cache"]["expires_at"].to_s.size > 0 && Time.at(Shoperb.config["oauth-cache"]["expires_at"].to_i) > Time.now)
       end
 
       def start_server
-        require_relative './oauth/server'
+        require_relative "./oauth/server"
         instance = Server.new
         Thread.new do
-          Rack::Handler::WEBrick.run instance, Port: Shoperb.config['port']
+          Rack::Handler::WEBrick.run instance, Port: Shoperb.config["port"]
         end
       end
 
       def handle_oauth_error exception
         case exception.code
           when "invalid_client"
-            Shoperb.config.reset('oauth-client-id', 'oauth-client-secret', 'oauth-cache')
+            Shoperb.config.reset("oauth-client-id", "oauth-client-secret", "oauth-cache")
         end
         raise exception
       end

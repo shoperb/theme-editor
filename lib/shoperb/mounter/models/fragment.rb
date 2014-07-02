@@ -3,7 +3,7 @@ module Shoperb
     module Models
       class Fragment < LiquidBase
         def self.matcher
-          '_*.liquid'
+          "_*.liquid"
         end
 
         def render! context

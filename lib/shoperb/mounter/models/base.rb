@@ -65,7 +65,7 @@ module Shoperb
           end
 
           def model_name
-            name.split('::').last.underscore
+            name.split("::").last.underscore
           end
 
           def file base="data"
@@ -77,16 +77,21 @@ module Shoperb
           end
 
           def method_missing(name, *args, &block)
-            all
+            class_eval do
+              define_method name do |*args, &block|
+                all
+              end
+            end
+            send(name, *args, &block)
           end
 
           def all
             result = []
             if File.exists?(file)
-              objs   = YAML::load(File.open(file).read.force_encoding('utf-8'))
+              objs   = YAML::load(File.open(file).read.force_encoding("utf-8"))
               result = process_file objs
             elsif File.exists?(default_file)
-              objs   = YAML::load(File.open(default_file).read.force_encoding('utf-8'))
+              objs   = YAML::load(File.open(default_file).read.force_encoding("utf-8"))
               result = process_file objs
             else
               raise "File not found: [#{file}, #{default_file}]"

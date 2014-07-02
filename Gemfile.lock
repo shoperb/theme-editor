@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    shoperb-theme-editor (0.0.5)
+    shoperb-theme-editor (0.0.7)
       actionpack
       actionview
       activesupport
@@ -29,16 +29,16 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    actionpack (4.1.1)
-      actionview (= 4.1.1)
-      activesupport (= 4.1.1)
+    actionpack (4.1.2)
+      actionview (= 4.1.2)
+      activesupport (= 4.1.2)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    actionview (4.1.1)
-      activesupport (= 4.1.1)
+    actionview (4.1.2)
+      activesupport (= 4.1.2)
       builder (~> 3.1)
       erubis (~> 2.7.0)
-    activesupport (4.1.1)
+    activesupport (4.1.2)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
@@ -53,7 +53,7 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     erubis (2.7.0)
-    execjs (2.2.0)
+    execjs (2.2.1)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     haml (4.0.5)
@@ -85,8 +85,8 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     rake (10.3.2)
-    rubyzip (1.1.4)
-    sass (3.3.8)
+    rubyzip (1.1.6)
+    sass (3.3.9)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)

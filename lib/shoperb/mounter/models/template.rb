@@ -4,7 +4,7 @@ module Shoperb
       class Template < LiquidBase
 
         def self.matcher
-          '[^_]*.liquid'
+          "[^_]*.liquid"
         end
 
       end

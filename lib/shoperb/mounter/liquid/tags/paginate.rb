@@ -47,13 +47,13 @@ module Liquid
             :collection => scope
         }
 
-        path = context['path']
+        path = context["path"]
 
         has_prev_page        = (paginator[:page] - 1) >= 1
         has_next_page        = (paginator[:page] + 1) <= scope.collection.num_pages
 
-        paginator[:previous] = link(::I18n.t('pagination.previous'), paginator[:page] - 1, path) if has_prev_page
-        paginator[:next]     = link(::I18n.t('pagination.next'), paginator[:page] + 1, path) if has_next_page
+        paginator[:previous] = link(::I18n.t("pagination.previous"), paginator[:page] - 1, path) if has_prev_page
+        paginator[:next]     = link(::I18n.t("pagination.next"), paginator[:page] + 1, path) if has_next_page
 
         hellip_break = false
 
@@ -68,7 +68,7 @@ module Liquid
               paginator[:parts] << link(page, page, path)
             elsif page <= paginator[:page] - window_size || page >= paginator[:page] + window_size
               next if hellip_break
-              paginator[:parts] << no_link('&hellip;')
+              paginator[:parts] << no_link("&hellip;")
               hellip_break = true
               next
             else
@@ -80,7 +80,7 @@ module Liquid
           end
         end
 
-        context['paginate'] = paginator.stringify_keys!
+        context["paginate"] = paginator.stringify_keys!
 
         render_all(@nodelist, context)
       end
@@ -93,11 +93,11 @@ module Liquid
     end
 
     def no_link(title)
-      {'title' => title, 'is_link' => false, 'hellip_break' => title == '&hellip;'}
+      {"title" => title, "is_link" => false, "hellip_break" => title == "&hellip;"}
     end
 
     def link(title, page, path)
-      {'title' => title, 'url' => path + "?page=#{page}", 'is_link' => true}
+      {"title" => title, "url" => path + "?page=#{page}", "is_link" => true}
     end
 
   end
