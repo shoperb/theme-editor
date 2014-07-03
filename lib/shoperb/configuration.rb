@@ -25,10 +25,9 @@ module Shoperb
     attr_accessor :file
 
     def initialize options={}, directory = nil
-      self.file = "#{directory ? "./#{directory}" : '.'}/shoperb"
+      self.file = "#{directory ? "./#{directory}" : '.'}/.shoperb"
       FileUtils.mkdir_p(File.dirname(self.file))
       super()
-      merge!(conf("~/.shoperb"))
       merge!(conf)
       merge!(options)
     end
