@@ -37,7 +37,7 @@ module Shoperb
       def sync
       end
 
-      def initialize
+      def make_client
         self.client = OAuth2::Client.new(
           Shoperb.config["oauth-client-id"],
           Shoperb.config["oauth-client-secret"],
@@ -49,6 +49,10 @@ module Shoperb
           faraday.request  :url_encoded
           faraday.adapter  :net_http
         end
+      end
+
+      def initialize
+        make_client
 
         unless have_token?
           url = authorize_url
@@ -79,11 +83,11 @@ module Shoperb
       end
 
       def have_token?
-        (cache = Shoperb.config["oauth-cache"]) && (cache["access_token"]).to_s.size > 0 && valid_expired_token?
+        (cache = Shoperb.config["oauth-cache"]) && cache["access_token"] && valid_expired_token?
       end
 
       def valid_expired_token?
-        Shoperb.config["oauth-cache"]["expires_at"].to_s.size == 0 || (Shoperb.config["oauth-cache"]["expires_at"].to_s.size > 0 && Time.at(Shoperb.config["oauth-cache"]["expires_at"].to_i) > Time.now)
+        !Shoperb.config["oauth-cache"]["expires_at"] || Time.at(Shoperb.config["oauth-cache"]["expires_at"].to_i) > Time.now
       end
 
       def start_server

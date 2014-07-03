@@ -5,11 +5,11 @@ require "liquid"
 require "action_view"
 require "action_dispatch"
 require_relative "./mounter/delegate_array"
+require_relative "./mounter/models"
+require_relative "./mounter/liquid"
 require_relative "./mounter/routes"
 require_relative "./mounter/assets"
 require_relative "./mounter/server"
-require_relative "./mounter/models"
-require_relative "./mounter/liquid"
 
 I18n.enforce_available_locales = false
 

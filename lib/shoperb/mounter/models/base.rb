@@ -9,6 +9,10 @@ module Shoperb
           end
         end
 
+        def relation_klass relation
+          relation.singularize.classify.constantize
+        end
+
         def inspect
           "#{self.class.model_name}(#{self.id})"
         end
@@ -20,8 +24,7 @@ module Shoperb
             options[:attribute] ||= :id
             class_eval <<-STRING, __FILE__, __LINE__ + 1
               def #{options[:name] || relation}
-                klass = #{relation.to_s.singularize.classify.inspect}.constantize
-                DelegateArray.new(klass.all.select { |object| object.#{model_name}_#{options[:attribute]} == self.#{options[:attribute]} })
+                DelegateArray.new(relation_klass("#{relation}").all.select { |object| object.#{model_name}_#{options[:attribute]} == self.#{options[:attribute]} })
               end
             STRING
           end
@@ -30,8 +33,7 @@ module Shoperb
             options[:attribute] ||= :id
             class_eval <<-STRING, __FILE__, __LINE__ + 1
               def #{options[:name] || relation}
-                klass = #{relation.to_s.classify.inspect}.constantize
-                klass.all.detect { |object| object.#{model_name}_#{options[:attribute]} == self.#{options[:attribute]} }
+                relation_klass("#{relation}").all.detect { |object| object.#{model_name}_#{options[:attribute]} == self.#{options[:attribute]} }
               end
             STRING
           end
@@ -41,8 +43,7 @@ module Shoperb
             class_eval <<-STRING, __FILE__, __LINE__ + 1
               def #{options[:name] || relation}
                 if relation_id = self.#{relation}_#{options[:attribute]}
-                  klass = #{relation.to_s.classify.inspect}.constantize
-                  klass.all.detect { |object| object.#{options[:attribute]} == relation_id }
+                  relation_klass("#{relation}").all.detect { |object| object.#{options[:attribute]} == relation_id }
                 end
               end
             STRING
@@ -86,17 +87,18 @@ module Shoperb
           end
 
           def all
-            result = []
-            if File.exists?(file)
-              objs   = YAML::load(File.open(file).read.force_encoding("utf-8"))
-              result = process_file objs
+            result = if File.exists?(file)
+              process_file get_objs(file)
             elsif File.exists?(default_file)
-              objs   = YAML::load(File.open(default_file).read.force_encoding("utf-8"))
-              result = process_file objs
+              process_file get_objs(default_file)
             else
               raise "File not found: [#{file}, #{default_file}]"
             end
             DelegateArray.new(result)
+          end
+
+          def get_objs file
+            YAML::load(File.open(file).read.force_encoding("utf-8"))
           end
 
           def process_file objs
