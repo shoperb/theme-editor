@@ -13,7 +13,7 @@ module Shoperb
           end
 
           def directory
-            File.join(File.expand_path('templates'))
+            File.join(File.expand_path("templates"))
           end
 
           def render! name, locals, registers

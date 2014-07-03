@@ -1,11 +1,11 @@
 cart_items:
   -
     cart_name: mycart
-    name: 'Item 1'
+    name: "Item 1"
     amount: 4
     product_id: 2
   -
     cart_name: mycart
-    name: 'Item 2'
+    name: "Item 2"
     amount: 3
     product_id: 1

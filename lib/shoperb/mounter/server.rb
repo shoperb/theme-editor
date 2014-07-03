@@ -1,4 +1,4 @@
-require 'sinatra'
+require "sinatra"
 module Shoperb
   module Mounter
     class Server < Sinatra::Base

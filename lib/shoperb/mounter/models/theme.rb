@@ -4,7 +4,7 @@ module Shoperb
       class Theme < SingletonBase
 
         def asset_url
-          File.join('app', 'assets')
+          File.join("app", "assets")
         end
 
         def render(name, locals, registers={})

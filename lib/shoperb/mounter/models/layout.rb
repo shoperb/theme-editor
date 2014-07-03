@@ -3,7 +3,7 @@ module Shoperb
     module Models
       class Layout < LiquidBase
         def self.matcher
-          '../layouts/*.liquid'
+          "../layouts/*.liquid"
         end
       end
     end

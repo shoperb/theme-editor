@@ -1,6 +1,11 @@
 class DelegateArray < Array
   def method_missing(name, *args, &block)
-    DelegateArray.new(self)
+    class_eval do
+      define_method name do |*args, &block|
+        DelegateArray.new(self)
+      end
+    end
+    send(name, *args, &block)
   end
 
   def total_count
