@@ -1,9 +1,13 @@
 require "sinatra"
+require_relative "./exception_handler"
+
 module Shoperb
   module Mounter
     class Server < Sinatra::Base
       set :root, Dir.pwd
       set :views, Proc.new { File.join(root, "templates") }
+
+      use ExceptionHandler
 
       enable :sessions
 

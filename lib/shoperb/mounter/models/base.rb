@@ -1,7 +1,14 @@
+require_relative "./relations"
+require_relative "./introspection"
+require_relative "./file_loading"
 module Shoperb
   module Mounter
     module Models
       class Base < OpenStruct
+
+        include Relations
+        include Introspection
+        include FileLoading
 
         def to_liquid
           if klass = Object.const_get(self.class.model_name.classify + "Drop")
@@ -9,45 +16,8 @@ module Shoperb
           end
         end
 
-        def relation_klass relation
-          relation.singularize.classify.constantize
-        end
-
-        def inspect
-          "#{self.class.model_name}(#{self.id})"
-        end
-
         class << self
           attr_accessor :finder
-
-          def has_many relation, options={}
-            options[:attribute] ||= :id
-            class_eval <<-STRING, __FILE__, __LINE__ + 1
-              def #{options[:name] || relation}
-                DelegateArray.new(relation_klass("#{relation}").all.select { |object| object.#{model_name}_#{options[:attribute]} == self.#{options[:attribute]} })
-              end
-            STRING
-          end
-
-          def has_one relation, options={}
-            options[:attribute] ||= :id
-            class_eval <<-STRING, __FILE__, __LINE__ + 1
-              def #{options[:name] || relation}
-                relation_klass("#{relation}").all.detect { |object| object.#{model_name}_#{options[:attribute]} == self.#{options[:attribute]} }
-              end
-            STRING
-          end
-
-          def belongs_to relation, options={}
-            options[:attribute] ||= :id
-            class_eval <<-STRING, __FILE__, __LINE__ + 1
-              def #{options[:name] || relation}
-                if relation_id = self.#{relation}_#{options[:attribute]}
-                  relation_klass("#{relation}").all.detect { |object| object.#{options[:attribute]} == relation_id }
-                end
-              end
-            STRING
-          end
 
           def finder= attribute
             @finder = attribute
@@ -61,20 +31,8 @@ module Shoperb
             eval "::#{subclass.to_s.demodulize} = #{subclass}"
           end
 
-          def file_extension
-            "yml"
-          end
-
           def model_name
             name.split("::").last.underscore
-          end
-
-          def file base="data"
-            "#{base}/#{model_name.pluralize}.#{file_extension}"
-          end
-
-          def default_file
-            File.expand_path("../#{file("default_models")}", __dir__)
           end
 
           def method_missing(name, *args, &block)
@@ -84,31 +42,6 @@ module Shoperb
               end
             end
             send(name, *args, &block)
-          end
-
-          def all
-            result = if File.exists?(file)
-              process_file get_objs(file)
-            elsif File.exists?(default_file)
-              process_file get_objs(default_file)
-            else
-              raise "File not found: [#{file}, #{default_file}]"
-            end
-            DelegateArray.new(result)
-          end
-
-          def get_objs file
-            YAML::load(File.open(file).read.force_encoding("utf-8"))
-          end
-
-          def process_file objs
-            result = []
-            if data = objs[model_name.pluralize]
-              data.each do |obj|
-                result << new(obj)
-              end
-            end if objs
-            result
           end
         end
 

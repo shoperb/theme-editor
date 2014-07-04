@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |gem|
   gem.name    = "shoperb-theme-editor"
-  gem.version = "0.0.8"
+  gem.version = "0.0.9"
 
   gem.authors  = ["Rainer Sai"]
   gem.email    = ["rainer.sai@perfectline.co"]
@@ -26,6 +26,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "haml"
   gem.add_dependency "slop"
   gem.add_dependency "oauth2"
+  gem.add_dependency "rollbar"
   gem.add_dependency "launchy"
   gem.add_dependency "sprockets", "~> 2.0"
   gem.add_dependency "rubyzip", ">= 1.0.0"

@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    shoperb-theme-editor (0.0.7)
+    shoperb-theme-editor (0.0.9)
       actionpack
       actionview
       activesupport
@@ -17,6 +17,7 @@ PATH
       launchy
       liquid
       oauth2
+      rollbar
       rubyzip (>= 1.0.0)
       sass
       sinatra
@@ -29,16 +30,16 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    actionpack (4.1.2)
-      actionview (= 4.1.2)
-      activesupport (= 4.1.2)
+    actionpack (4.1.4)
+      actionview (= 4.1.4)
+      activesupport (= 4.1.4)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    actionview (4.1.2)
-      activesupport (= 4.1.2)
+    actionview (4.1.4)
+      activesupport (= 4.1.4)
       builder (~> 3.1)
       erubis (~> 2.7.0)
-    activesupport (4.1.2)
+    activesupport (4.1.4)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
@@ -85,6 +86,8 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     rake (10.3.2)
+    rollbar (0.13.1)
+      multi_json (~> 1.3)
     rubyzip (1.1.6)
     sass (3.3.9)
     sinatra (1.4.5)
