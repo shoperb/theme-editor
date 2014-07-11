@@ -65,7 +65,7 @@ module Shoperb
       end
 
       def get_token
-        client.password.get_token(Shoperb.config["oauth-username"], Shoperb.config["oauth-password"])
+        client.password.get_token(Shoperb.config["oauth-username"], Shoperb.config["oauth-password"], scope: "admin")
       end
 
       def authorize_url
@@ -73,7 +73,7 @@ module Shoperb
       end
 
       def get_authented_token(code)
-        client.auth_code.get_token(code, redirect_uri: Shoperb.config["oauth-redirect-uri"])
+        client.auth_code.get_token(code, redirect_uri: Shoperb.config["oauth-redirect-uri"], scope: "admin")
       end
 
       def access_token

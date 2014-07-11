@@ -1,6 +1,7 @@
 require "json"
 require "active_support/core_ext/object/blank"
 require "active_support/core_ext/hash/indifferent_access"
+require "active_support/core_ext/hash/except"
 
 module Shoperb
   class Configuration < HashWithIndifferentAccess
@@ -8,15 +9,16 @@ module Shoperb
     QUESTION = {
       "oauth-site" => "Insert Shoperb url",
       "oauth-username" => "Insert Shoperb username",
-      "oauth-password" => "Insert Shoperb password",
-      "oauth-client-id" => "Insert Shoperb OAuth client id",
-      "oauth-client-secret" => "Insert Shoperb OAuth client secret",
-      "oauth-redirect-uri" => "Insert Shoperb OAuth callback url"
+      "oauth-password" => "Insert Shoperb password"
+    }.with_indifferent_access
+
+    HARDCODED = {
+      "oauth-client-id" => "bjpgvfwp4rtyq7g0gb7ravovehalhm7",
+      "oauth-client-secret" => "j31wvmre3dkxyx82tj08tmjdjalv5lp",
+      "oauth-redirect-uri" => "http://localhost:4000/callback"
     }.with_indifferent_access
 
     DEFAULTS = {
-      "oauth-redirect-uri" => "http://localhost:4000/callback",
-      "oauth-site" => "http://perfectline.shoperb.biz",
       "oauth-cache" => {}.with_indifferent_access,
       "port" => "4000",
       "verbose" => false
@@ -30,10 +32,11 @@ module Shoperb
       super()
       merge!(conf)
       merge!(options)
+      merge!(HARDCODED)
     end
 
     def save
-      File.open(self.file, "w") { |f| f.write(JSON.pretty_generate(self)) }
+      File.open(self.file, "w") { |f| f.write(JSON.pretty_generate(self.except(*HARDCODED.keys))) }
     end
 
     def [] name
@@ -59,7 +62,7 @@ module Shoperb
     end
 
     def conf path=self.file
-      File.exist?(path) ? JSON.parse(File.read(path)) || {} : {}
+      File.exist?(path) && (content = File.read(path).presence)? JSON.parse(content) || {} : {}
     end
 
   end
