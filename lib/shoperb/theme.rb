@@ -22,6 +22,12 @@ module Shoperb
 
     class << self
 
+      def init name="blank"
+        raise "No such template, possible options are 'blank', 'bootstrap', 'foundation'" unless ["blank", "bootstrap", "foundation"].include?(name)
+        template_path = File.expand_path("../init/#{name}", __FILE__)
+        FileUtils.cp_r("#{template_path}/.", base)
+      end
+
       def matchers compilable: false
         compilable ? COMPILABLE : FILES
       end

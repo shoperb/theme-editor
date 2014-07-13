@@ -39,6 +39,15 @@ Slop.parse ignore_case: true, autocreate: true do
     end
   end
 
+  command "init" do
+    run do |options, args|
+      require "shoperb/theme"
+      Shoperb.with_configuration(options, *args) do
+        Shoperb::Theme.init args.first
+      end
+    end
+  end
+
   command "sync" do
     description "Usage: shoperb sync [options]"
     run do |options, args|

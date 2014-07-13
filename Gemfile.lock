@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    shoperb-theme-editor (0.0.9)
+    shoperb-theme-editor (0.0.11)
       actionpack
       actionview
       activesupport
