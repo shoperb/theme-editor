@@ -1,5 +1,6 @@
 require "zip"
 require "fileutils"
+require 'pathname'
 
 module Shoperb
   module Theme
