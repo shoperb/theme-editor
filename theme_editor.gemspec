@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |gem|
   gem.name    = "shoperb-theme-editor"
-  gem.version = "0.0.11"
+  gem.version = "0.0.12"
 
   gem.authors  = ["Rainer Sai"]
   gem.email    = ["rainer.sai@perfectline.co"]
