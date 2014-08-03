@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |gem|
   gem.name    = "shoperb-theme-editor"
-  gem.version = "0.0.12"
+  gem.version = "0.0.13"
 
   gem.authors  = ["Rainer Sai"]
   gem.email    = ["rainer.sai@perfectline.co"]
@@ -13,23 +13,24 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency "sinatra"
-  gem.add_dependency "sinatra-contrib"
+  gem.add_dependency "sinatra", "~> 1"
+  gem.add_dependency "sinatra-contrib", "~> 1"
   gem.add_dependency "sinatra-flash"
   gem.add_dependency "sinatra-asset-pipeline"
-  gem.add_dependency "activesupport"
-  gem.add_dependency "actionview"
-  gem.add_dependency "actionpack"
-  gem.add_dependency "liquid"
-  gem.add_dependency "coffee-script"
-  gem.add_dependency "sass"
-  gem.add_dependency "haml"
-  gem.add_dependency "slop"
-  gem.add_dependency "oauth2"
-  gem.add_dependency "rollbar"
-  gem.add_dependency "launchy"
-  gem.add_dependency "sprockets", "~> 2.0"
-  gem.add_dependency "rubyzip", ">= 1.0.0"
+  gem.add_dependency "activesupport", "~> 4"
+  gem.add_dependency "actionview", "~> 4"
+  gem.add_dependency "actionpack", "~> 4"
+  gem.add_dependency "liquid", "3.0.0"
+  gem.add_dependency "coffee-script", "~> 2"
+  gem.add_dependency "sass", "~> 3"
+  gem.add_dependency "haml", "~> 4"
+  gem.add_dependency "slop", "~> 3"
+  gem.add_dependency "colorize"
+  gem.add_dependency "oauth2", "~> 1"
+  gem.add_dependency "rollbar", "~> 1"
+  gem.add_dependency "launchy", "~> 2"
+  gem.add_dependency "sprockets", "~> 2"
+  gem.add_dependency "rubyzip", "~> 1"
 
   gem.add_development_dependency "pry"
 end

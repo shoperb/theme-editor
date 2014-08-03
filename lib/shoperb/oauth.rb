@@ -13,13 +13,15 @@ module Shoperb
 
     class << self
 
-      attr_accessor :auth_code, :client, :token, :server
+      attr_accessor :auth_code, :client, :token, :server, :server_started
 
       def pull directory=nil
         require_relative "./theme"
         directory = directory ? "./#{directory}" : "."
         initialize
-        response = access_token.get("themes/download")
+        response = Logger.notify "Downloading#{" to #{directory}" unless directory == "."}" do
+          access_token.get("themes/download")
+        end
         Theme.unpack response.parsed, directory
         Theme.clone_models directory
       end
@@ -29,9 +31,11 @@ module Shoperb
         initialize
         file = Theme.pack
         theme = Faraday::UploadIO.new(file, "application/zip")
-        access_token.post("themes/upload", body: { zip: theme })
+        Logger.notify "Uploading" do
+          access_token.post("themes/upload", body: { zip: theme })
+        end
       ensure
-        FileUtils.rm_r(file, verbose: Shoperb.config["verbose"]) if File.exists?(file)
+        FileUtils.rm_r(file) if file && File.exists?(file)
       end
 
       def sync
@@ -57,7 +61,7 @@ module Shoperb
         unless have_token?
           url = authorize_url
           self.server = start_server
-          sleep 2 # Wait for server to start
+          sleep 2 while !server_started
           Launchy.open url
           sleep 2 while !have_token?
           self.server.kill
@@ -93,8 +97,11 @@ module Shoperb
       def start_server
         require_relative "./oauth/server"
         instance = Server.new
+        this, cb = self, -> {
+          this.server_started = true
+        }
         Thread.new do
-          Rack::Handler::WEBrick.run instance, Port: Shoperb.config["port"]
+          Rack::Handler::WEBrick.run instance, Port: Shoperb.config["port"], StartCallback: cb
         end
       end
 

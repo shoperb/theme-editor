@@ -27,7 +27,7 @@ module Shoperb
     attr_accessor :file
 
     def initialize options={}, directory = nil
-      self.file = "#{directory ? "./#{directory}" : "."}/.shoperb"
+      self.file = Utils.rel_path(File.expand_path("#{directory ? "./#{directory}" : "."}/.shoperb"))
       FileUtils.mkdir_p(File.dirname(self.file))
       super()
       merge!(conf)
@@ -36,7 +36,9 @@ module Shoperb
     end
 
     def save
-      File.open(self.file, "w") { |f| f.write(JSON.pretty_generate(self.except(*HARDCODED.keys))) }
+      Logger.notify "Saving configuration to #{file}" do
+        Utils.write_file(file) { JSON.pretty_generate(self.except(*HARDCODED.keys)) }
+      end
     end
 
     def [] name
@@ -58,7 +60,9 @@ module Shoperb
     end
 
     def destroy
-      File.delete(file) if File.exist?(file)
+      Logger.notify "Deleting configuration at #{file}" do
+        File.delete(file)
+      end if File.exist?(file)
     end
 
     def conf path=self.file

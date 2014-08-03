@@ -1,3 +1,5 @@
+require "shoperb/utils"
+require "shoperb/logger"
 require "shoperb/rollbar"
 require "shoperb/configuration"
 
