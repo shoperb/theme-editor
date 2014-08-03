@@ -2,6 +2,7 @@ require "shoperb/utils"
 require "shoperb/logger"
 require "shoperb/rollbar"
 require "shoperb/configuration"
+require "shoperb/theme"
 
 module Shoperb
 

@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    shoperb-theme-editor (0.0.13)
+    shoperb-theme-editor (0.0.14)
       actionpack (~> 4)
       actionview (~> 4)
       activesupport (~> 4)
@@ -16,7 +16,7 @@ PATH
       colorize
       haml (~> 4)
       launchy (~> 2)
-      liquid (= 3.0.0)
+      liquid
       oauth2 (~> 1)
       rollbar (~> 1)
       rubyzip (~> 1)

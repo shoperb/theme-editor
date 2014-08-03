@@ -5,12 +5,28 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "slop"
 require "shoperb/editor"
 
-Slop.parse ignore_case: true, autocreate: true do
+def apply_global_opts
+  Shoperb::Configuration::OPTIONS.each do |option, msg|
+    on option, msg
+  end
+end
 
-  banner "Usage: shoperb [action] [options]"
+def with_description base
+  <<-eos
+#{description}
+
+#{base}
+  eos
+end
+
+Slop.parse ignore_case: true, help: true, strict: true do
+
+  apply_global_opts
 
   command "pull" do
-    description "Usage: shoperb pull [options]"
+    apply_global_opts
+    description "Downloads your shops shoperb theme"
+    banner with_description("Usage: shoperb pull <directory> [options]")
     run do |options, args|
       require "shoperb/oauth"
       Shoperb.with_configuration(options, *args) do
@@ -20,7 +36,9 @@ Slop.parse ignore_case: true, autocreate: true do
   end
 
   command "push" do
-    description "Usage: shoperb push [options]"
+    apply_global_opts
+    description "Uploads your local shoperb theme to your shop"
+    banner with_description("Usage: shoperb push [options]")
     run do |options, args|
       require "shoperb/oauth"
       Shoperb.with_configuration(options, *args) do
@@ -30,7 +48,9 @@ Slop.parse ignore_case: true, autocreate: true do
   end
 
   command "mount" do
-    description "Usage: shoperb mount [options]"
+    apply_global_opts
+    description "Serves local as a shoperb theme file"
+    banner with_description("Usage: shoperb mount [options]")
     run do |options, args|
       require "shoperb/mounter"
       Shoperb.with_configuration(options, *args) do
@@ -40,8 +60,13 @@ Slop.parse ignore_case: true, autocreate: true do
   end
 
   command "init" do
+    apply_global_opts
+    description "Initiates a shoperb theme template"
+    banner with_description <<-eos
+Available styles are: #{Shoperb::Theme::AVAILABLE_TEMPLATES.join(", ")}
+Usage: shoperb init <style> [options]
+eos
     run do |options, args|
-      require "shoperb/theme"
       Shoperb.with_configuration(options, *args) do
         Shoperb::Theme.init args.first
       end
@@ -49,7 +74,9 @@ Slop.parse ignore_case: true, autocreate: true do
   end
 
   command "sync" do
-    description "Usage: shoperb sync [options]"
+    apply_global_opts
+    description "(Not implemented) Syncronizes your shoperb shops products/categories/etc to your local data"
+    banner with_description("Usage: shoperb sync [options]")
     run do |options, args|
       require "shoperb/oauth"
       Shoperb.with_configuration(options, *args) do
@@ -59,7 +86,9 @@ Slop.parse ignore_case: true, autocreate: true do
   end
 
   command "clean" do
-    description "Usage: shoperb clean"
+    apply_global_opts
+    description "Removes configuration file"
+    banner with_description("Usage: shoperb push [options]")
     run do |options, args|
       Shoperb::Configuration.destroy
     end

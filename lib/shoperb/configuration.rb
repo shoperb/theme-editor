@@ -6,6 +6,15 @@ require "active_support/core_ext/hash/except"
 module Shoperb
   class Configuration < HashWithIndifferentAccess
 
+    OPTIONS = {
+      "oauth-site" => "Shoperb shop url",
+      "oauth-username" => "Your shoperb shop username",
+      "oauth-password" => "Your shoperb shop username",
+      "oauth-redirect-uri" => "Url shoperb will redirect to after granting access",
+      "verbose" => "Enable verbose mode",
+      "port" => "Port you want your local shoperb theme instance to run at"
+    }
+
     QUESTION = {
       "oauth-site" => "Insert Shoperb url",
       "oauth-username" => "Insert Shoperb username",
