@@ -15,6 +15,7 @@ PATH
       coffee-script (~> 2)
       colorize
       haml (~> 4)
+      i18n
       launchy (~> 2)
       liquid
       oauth2 (~> 1)
