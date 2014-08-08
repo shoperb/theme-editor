@@ -1,15 +1,35 @@
-require "liquid"
+module Shoperb
+  module Mounter
+    module Liquid
 
-%w{. drops tags filters}.each do |dir|
-  Dir[File.join(File.dirname(__FILE__), "liquid", dir, "*.rb")].each { |lib| require lib }
+      Shoperb.autoload_all self, "shoperb/mounter/liquid"
+
+
+      module Drop
+        Shoperb.autoload_all self, "shoperb/mounter/liquid/drops"
+      end
+
+      module Filter
+        Shoperb.autoload_all self, "shoperb/mounter/liquid/filters"
+      end
+
+      module Tag
+        Shoperb.autoload_all self, "shoperb/mounter/liquid/tags"
+      end
+
+      Template.register_filter Filter::Url
+      Template.register_filter Filter::Datum
+      Template.register_filter Filter::Asset
+      Template.register_filter Filter::Html
+      Template.register_filter Filter::Standard
+      Template.register_filter Filter::Translate
+
+      Template.register_tag "layout", Tag::Layout
+      Template.register_tag "paginate", Tag::Paginate
+      Template.register_tag "form", Tag::Form
+
+      Template.file_system = EditorFileSystem.new
+
+    end
+  end
 end
-
-Liquid::Template.register_filter UrlFilters
-Liquid::Template.register_filter DataFilters
-Liquid::Template.register_filter AssetFilters
-Liquid::Template.register_filter HtmlFilters
-Liquid::Template.register_filter TranslateFilter
-
-Liquid::Template.register_tag "layout", Liquid::Layout
-Liquid::Template.register_tag "paginate", Liquid::Paginate
-Liquid::Template.register_tag "form", Liquid::Form

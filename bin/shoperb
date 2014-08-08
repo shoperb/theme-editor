@@ -1,9 +1,6 @@
 #!/usr/bin/env ruby
-lib = File.expand_path("../../lib", __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require "slop"
-require "shoperb/editor"
+require_relative "../lib/shoperb/editor"
 
 def apply_global_opts
   Shoperb::Configuration::OPTIONS.each do |option, msg|
@@ -28,7 +25,6 @@ Slop.parse ignore_case: true, help: true, strict: true do
     description "Downloads your shops shoperb theme"
     banner with_description("Usage: shoperb pull <directory> [options]")
     run do |options, args|
-      require "shoperb/oauth"
       Shoperb.with_configuration(options, *args) do
         Shoperb::OAuth.pull args.first
       end
@@ -40,7 +36,6 @@ Slop.parse ignore_case: true, help: true, strict: true do
     description "Uploads your local shoperb theme to your shop"
     banner with_description("Usage: shoperb push [options]")
     run do |options, args|
-      require "shoperb/oauth"
       Shoperb.with_configuration(options, *args) do
         Shoperb::OAuth.push
       end
@@ -52,7 +47,6 @@ Slop.parse ignore_case: true, help: true, strict: true do
     description "Serves local as a shoperb theme file"
     banner with_description("Usage: shoperb mount [options]")
     run do |options, args|
-      require "shoperb/mounter"
       Shoperb.with_configuration(options, *args) do
         Shoperb::Mounter.start
       end
@@ -78,7 +72,6 @@ eos
     description "(Not implemented) Syncronizes your shoperb shops products/categories/etc to your local data"
     banner with_description("Usage: shoperb sync [options]")
     run do |options, args|
-      require "shoperb/oauth"
       Shoperb.with_configuration(options, *args) do
         Shoperb::OAuth.sync
       end

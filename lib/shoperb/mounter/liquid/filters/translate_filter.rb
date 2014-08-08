@@ -1,3 +1,0 @@
-module TranslateFilter
-
-end

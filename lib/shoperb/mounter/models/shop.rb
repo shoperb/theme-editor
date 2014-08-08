@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class Shop < SingletonBase
+    module Model
+      class Shop < Abstract::SingletonBase
         belongs_to :currency, attribute: :name
       end
     end

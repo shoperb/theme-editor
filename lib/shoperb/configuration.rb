@@ -1,8 +1,3 @@
-require "json"
-require "active_support/core_ext/object/blank"
-require "active_support/core_ext/hash/indifferent_access"
-require "active_support/core_ext/hash/except"
-
 module Shoperb
   class Configuration < HashWithIndifferentAccess
 
@@ -22,8 +17,8 @@ module Shoperb
     }.with_indifferent_access
 
     HARDCODED = {
-      "oauth-client-id" => "bjpgvfwp4rtyq7g0gb7ravovehalhm7",
-      "oauth-client-secret" => "j31wvmre3dkxyx82tj08tmjdjalv5lp",
+      "oauth-client-id" => "m4np67amygv6ys5gjih52njbi1bs157",
+      "oauth-client-secret" => "oexe8nha8g6ci5a3dax7szlzlv95lbm",
       "oauth-redirect-uri" => "http://localhost:4000/callback"
     }.with_indifferent_access
 
@@ -57,9 +52,8 @@ module Shoperb
     def ask name
       default = DEFAULTS[name].presence
       if question = QUESTION[name]
-        puts question
         default = DEFAULTS[name].presence
-        puts "Default is '#{default}'" if default
+        Logger.info "#{question} #{"(Default is '#{default}') " if default}: "
         gets.strip.presence || default
       end || default
     end

@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class Image < Base
+    module Model
+      class Image < Abstract::Base
       end
     end
   end

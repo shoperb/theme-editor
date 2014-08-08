@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class Search < SingletonBase
+    module Model
+      class Search < Abstract::SingletonBase
       end
     end
   end

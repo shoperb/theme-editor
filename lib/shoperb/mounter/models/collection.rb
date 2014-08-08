@@ -1,9 +1,8 @@
 module Shoperb
   module Mounter
-    module Models
-      class Collection < Base
+    module Model
+      class Collection < Abstract::Base
       end
     end
   end
 end
-

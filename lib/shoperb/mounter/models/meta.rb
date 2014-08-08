@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class Meta < Base
+    module Model
+      class Meta < Abstract::Base
       end
     end
   end

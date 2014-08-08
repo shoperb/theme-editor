@@ -1,9 +1,11 @@
-require "sinatra"
-require_relative "./exception_handler"
+Sinatra.autoload :Flash, "sinatra/flash"
 
 module Shoperb
   module Mounter
     class Server < Sinatra::Base
+
+      Shoperb.autoload_all self, "shoperb/mounter/server"
+
       set :root, Dir.pwd
       set :views, Proc.new { File.join(root, "templates") }
 
@@ -16,34 +18,35 @@ module Shoperb
       register Assets
 
       def liquid template, locals={}
-        Theme.instance.render(template, locals.reverse_merge!(default_locals(locals)), {server: self})
+        Model::Theme.instance.render(template, locals.reverse_merge!(default_locals(locals)), {server: self})
       end
 
       def current_cart
-        Cart.instance
+        Model::Cart.instance
       end
 
       def shop
-        Shop.instance
+        Model::Shop.instance
       end
 
       def default_locals locals
         {
-          :errors       => CollectionDrop.new(flash[:errors]),
-          :meta         => MetaDrop.new(locals.delete(:meta)),
-          :categories   => CategoriesDrop.new(Category.all),
-          :cart         => CartDrop.new(current_cart),
-          :menus        => MenusDrop.new,
-          :pages        => PagesDrop.new,
-          :search       => SearchDrop.new(params[:query]),
-          :shop         => ShopDrop.new(shop),
+          :errors       => Liquid::Drop::Collection.new(flash[:errors]),
+          :meta         => Liquid::Drop::Meta.new(locals.delete(:meta)),
+          :categories   => Liquid::Drop::Categories.new(Model::Category.all),
+          :cart         => Liquid::Drop::Cart.new(current_cart),
+          :menus        => Liquid::Drop::Menus.new,
+          :pages        => Liquid::Drop::Pages.new,
+          :search       => Liquid::Drop::Search.new(params[:query]),
+          :shop         => Liquid::Drop::Shop.new(shop),
           :path         => request.path,
           :params       => params,
-          :url          => UrlDrop::Get.new,
-          :form_actions => UrlDrop::Post.new,
-          :collections  => ProductCollectionsDrop.new
+          :url          => Liquid::Drop::Url::Get.new,
+          :form_actions => Liquid::Drop::Url::Post.new,
+          :collections  => Liquid::Drop::ProductCollections.new
         }
       end
+
     end
   end
 end

@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class Layout < LiquidBase
+    module Model
+      class Layout < Abstract::LiquidBase
         def self.matcher
           "../layouts/*.liquid"
         end

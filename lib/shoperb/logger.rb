@@ -1,11 +1,8 @@
-require "logger"
 require "colorize"
-require "active_support/core_ext/module/attribute_accessors"
-require "active_support/core_ext/module/delegation"
 
 module Shoperb
-
   module Logger
+    extend self
 
     LEVELS = {
       "DEBUG" => { color: :green },
@@ -21,35 +18,34 @@ module Shoperb
       end
     end
 
-    class << self
-
-      LEVELS.each do |name, opts|
-        delegate name.downcase, to: :logger
-      end
-
-      alias :success :debug
-
-      def notify msg
-        e, result = nil, nil
-        self.info      "          #{msg}"
-        action_result = begin
-          result = yield
-        rescue Exception => e
-          false
+    LEVELS.each do |name, opts|
+      define_method name.downcase do |message, &block|
+        Array(message).each do |msg|
+          logger.send(name.downcase, msg, &block)
         end
-        self.info "\r"
-        if action_result
-          self.success "SUCCESS   #{msg}"
-        else
-          self.error   "ERROR     #{msg}"
-        end
-        self.info "\n"
-        raise e if e
-        result
       end
+    end
 
+    alias :success :debug
+
+    def notify msg
+      e, result = nil, nil
+      self.info      "          #{msg}"
+      action_result = begin
+        result = yield
+      rescue Exception => e
+        false
+      end
+      self.info "\r"
+      if action_result
+        self.success "SUCCESS   #{msg}"
+      else
+        self.error   "ERROR     #{msg}"
+      end
+      self.info "\n"
+      raise e if e
+      result
     end
 
   end
-
 end

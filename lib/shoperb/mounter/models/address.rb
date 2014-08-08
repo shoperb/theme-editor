@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class Address < Base
+    module Model
+      class Address < Abstract::Base
       end
     end
   end

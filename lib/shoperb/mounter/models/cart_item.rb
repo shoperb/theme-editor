@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class CartItem < Base
+    module Model
+      class CartItem < Abstract::Base
         belongs_to :cart, attribute: :name
         belongs_to :product, attribute: :name
       end

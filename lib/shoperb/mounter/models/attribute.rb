@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class Attribute < Base
+    module Model
+      class Attribute < Abstract::Base
       end
     end
   end

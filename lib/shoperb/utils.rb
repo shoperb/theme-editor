@@ -26,5 +26,6 @@ module Shoperb
     def write_file target
       File.open(target, "w+b") { |f| f.write(yield) }
     end
+
   end
 end

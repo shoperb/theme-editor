@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class Vendor < Base
+    module Model
+      class Vendor < Abstract::Base
       end
     end
   end

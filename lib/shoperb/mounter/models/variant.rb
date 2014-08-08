@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class Variant < Base
+    module Model
+      class Variant < Abstract::Base
         belongs_to :product, attribute: :name
         belongs_to :currency, attribute: :name
       end

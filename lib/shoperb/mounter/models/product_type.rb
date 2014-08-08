@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class ProductType < Base
+    module Model
+      class ProductType < Abstract::Base
       end
     end
   end

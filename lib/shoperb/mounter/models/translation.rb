@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class Translation < SingletonBase
+    module Model
+      class Translation < Abstract::SingletonBase
         belongs_to :theme
 
         def parsed

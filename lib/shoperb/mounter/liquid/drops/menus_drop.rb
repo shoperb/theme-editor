@@ -1,2 +1,0 @@
-class MenusDrop < CollectionDrop
-end

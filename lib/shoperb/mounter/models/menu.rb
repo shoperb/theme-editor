@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class Menu < Base
+    module Model
+      class Menu < Abstract::Base
       end
     end
   end

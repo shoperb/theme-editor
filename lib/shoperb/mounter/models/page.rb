@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class Page < Base
+    module Model
+      class Page < Abstract::Base
       end
     end
   end

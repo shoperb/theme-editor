@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class Theme < SingletonBase
+    module Model
+      class Theme < Abstract::SingletonBase
 
         def asset_url
           File.join("app", "assets")

@@ -1,26 +1,31 @@
-require "sinatra/asset_pipeline"
-require "sinatra/flash"
-require "active_support/all"
-require "liquid"
-require "action_view"
-require "action_dispatch"
-require_relative "./mounter/delegate_array"
-require_relative "./mounter/models"
-require_relative "./mounter/liquid"
-require_relative "./mounter/routes"
-require_relative "./mounter/assets"
-require_relative "./mounter/server"
-
-I18n.enforce_available_locales = false
-
 module Shoperb
   module Mounter
+    extend self
 
-    def self.start
+    def start
       instance = Server.new
       Rack::Handler::WEBrick.run(instance,
-        :Port => Shoperb.config[:port]
+        Port: Shoperb[:port],
+        AccessLog: [],
+        Logger: WEBrick::Log::new("/dev/null", 7),
+        StartCallback: -> { Logger.success "Server started\n" }
       )
+    end
+
+    Shoperb.autoload_all self, "shoperb/mounter"
+
+    module Model
+
+      module Abstract
+        Shoperb.autoload_all self, "shoperb/mounter/models/abstract"
+      end
+
+      module Concerns
+        Shoperb.autoload_all self, "shoperb/mounter/models/concerns"
+      end
+
+      Shoperb.autoload_all self, "shoperb/mounter/models"
+
     end
 
   end

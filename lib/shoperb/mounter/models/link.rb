@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class Link < Base
+    module Model
+      class Link < Abstract::Base
       end
     end
   end

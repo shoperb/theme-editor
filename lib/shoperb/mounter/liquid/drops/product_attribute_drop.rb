@@ -1,2 +1,0 @@
-class ProductAttributeDrop < AttributeDrop
-end

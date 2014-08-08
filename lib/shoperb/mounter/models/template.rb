@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
-    module Models
-      class Template < LiquidBase
+    module Model
+      class Template < Abstract::LiquidBase
 
         def self.matcher
           "[^_]*.liquid"
