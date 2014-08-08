@@ -13,16 +13,16 @@ module Shoperb
 
             options = args_to_options(args)
 
-            previous_label = options[:prev] || I18n.t("pagination.previous")
-            next_label     = options[:next] || I18n.t("pagination.next")
+            %{<div class="pagination">
+            #{html_pagination_link("previous", options[:prev] || I18n.t("pagination.previous"))}
+            #{pagination_page_links(paginate)}
+            #{html_pagination_link("next", options[:next] || I18n.t("pagination.next"))}
+              </div>}
+          end
 
-            previous_link = (
-            if paginate["previous"].blank?
-              "<span class=\"disabled prev-page\">#{previous_label}</span>"
-            else
-              "<a href=\"#{paginate["previous"]["url"]}\" class=\"prev-page\">#{previous_label}</a>"
-            end)
+          private
 
+          def pagination_page_links paginate
             links = ""
             paginate["parts"].each do |part|
               links << (
@@ -34,22 +34,16 @@ module Shoperb
                 "<span class=\"page current\">#{part["title"]}</span>"
               end)
             end
-
-            next_link = (
-            if paginate["next"].blank?
-              "<span class=\"disabled next-page\">#{next_label}</span>"
-            else
-              "<a href=\"#{paginate["next"]["url"]}\" class=\"next-page\">#{next_label}</a>"
-            end)
-
-            %{<div class="pagination">
-                      #{previous_link}
-            #{links}
-            #{next_link}
-                    </div>}
+            links
           end
 
-          private
+          def pagination_link type, label
+            if paginate[type].blank?
+              "<span class=\"disabled next-page\">#{label}</span>"
+            else
+              "<a href=\"#{paginate[type]["url"]}\" class=\"next-page\">#{label}</a>"
+            end
+          end
 
           def args_to_options(*args)
             options = {}

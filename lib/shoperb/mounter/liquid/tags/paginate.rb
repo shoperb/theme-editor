@@ -25,52 +25,16 @@ module Shoperb
 
               current   = context["current_page"] == 0 ? 1 : context["current_page"]
               scope     = collection.send(:paginate, current, @per_page)
-              paginator = {
-                  :pages      => scope.collection.num_pages,
-                  :total      => scope.collection.total_count,
-                  :last       => scope.collection.total_count - 1,
-                  :size       => scope.collection.limit_value,
-                  :offset     => scope.collection.respond_to?(:offset_value) ? scope.collection.offset_value : scope.collection.offset,
-                  :first      => 1,
-                  :page       => current,
-                  :previous   => nil,
-                  :next       => nil,
-                  :parts      => [],
-                  :collection => scope
-              }
+
+              paginator = base(scope, current)
 
               path = context["path"]
 
-              has_prev_page        = (paginator[:page] - 1) >= 1
-              has_next_page        = (paginator[:page] + 1) <= scope.collection.num_pages
-
-              paginator[:previous] = link(::I18n.t("pagination.previous"), paginator[:page] - 1, path) if has_prev_page
-              paginator[:next]     = link(::I18n.t("pagination.next"), paginator[:page] + 1, path) if has_next_page
+              add_prev_next paginator, scope, path
 
               hellip_break = false
 
-              if paginator[:pages] > 1
-                1.upto(paginator[:pages]) do |page|
-
-                  if paginator[:page] == page
-                    paginator[:parts] << no_link(page)
-                  elsif page == 1
-                    paginator[:parts] << link(page, page, path)
-                  elsif page == paginator[:pages]
-                    paginator[:parts] << link(page, page, path)
-                  elsif page <= paginator[:page] - window_size || page >= paginator[:page] + window_size
-                    next if hellip_break
-                    paginator[:parts] << no_link("&hellip;")
-                    hellip_break = true
-                    next
-                  else
-                    paginator[:parts] << link(page, page, path)
-                  end
-
-                  hellip_break = false
-
-                end
-              end
+              add_pages paginator, path, hellip_break
 
               context["paginate"] = paginator.stringify_keys!
 
@@ -79,6 +43,55 @@ module Shoperb
           end
 
           private
+
+          def base scope, current
+            {
+              :pages      => scope.collection.num_pages,
+              :total      => scope.collection.total_count,
+              :last       => scope.collection.total_count - 1,
+              :size       => scope.collection.limit_value,
+              :offset     => scope.collection.respond_to?(:offset_value) ? scope.collection.offset_value : scope.collection.offset,
+              :first      => 1,
+              :page       => current,
+              :previous   => nil,
+              :next       => nil,
+              :parts      => [],
+              :collection => scope
+            }
+          end
+
+          def add_pages paginator, path, hellip_break
+            if paginator[:pages] > 1
+              1.upto(paginator[:pages]) do |page|
+
+                if paginator[:page] == page
+                  paginator[:parts] << no_link(page)
+                elsif page == 1
+                  paginator[:parts] << link(page, page, path)
+                elsif page == paginator[:pages]
+                  paginator[:parts] << link(page, page, path)
+                elsif page <= paginator[:page] - window_size || page >= paginator[:page] + window_size
+                  next if hellip_break
+                  paginator[:parts] << no_link("&hellip;")
+                  hellip_break = true
+                  next
+                else
+                  paginator[:parts] << link(page, page, path)
+                end
+
+                hellip_break = false
+
+              end
+            end
+          end
+
+          def add_pre_next paginator, scope, path
+            has_prev_page        = (paginator[:page] - 1) >= 1
+            has_next_page        = (paginator[:page] + 1) <= scope.collection.num_pages
+
+            paginator[:previous] = link(::I18n.t("pagination.previous"), paginator[:page] - 1, path) if has_prev_page
+            paginator[:next]     = link(::I18n.t("pagination.next"), paginator[:page] + 1, path) if has_next_page
+          end
 
           def window_size
             3
