@@ -2,8 +2,8 @@ products:
   -
     name: "Product 1"
     description: "Desc Prod"
-    category_name: "Category 1"
+    category_name: "Category1"
   -
     name: "Product 2"
     description: "Desc Prod"
-    category_name: "Category 2"
+    category_name: "Category2"

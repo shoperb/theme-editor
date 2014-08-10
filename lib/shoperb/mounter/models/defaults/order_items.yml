@@ -1,7 +1,7 @@
 order_items:
   -
-    order_id: 1
-    name: "Bla1"
+    order_name: asdasdas
+    name: Bla1
   -
-    order_id: 1
-    name: "Bla2"
+    order_name: asdasdas
+    name: Bla2

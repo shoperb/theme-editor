@@ -14,9 +14,9 @@ module Shoperb
             options = args_to_options(args)
 
             %{<div class="pagination">
-            #{html_pagination_link("previous", options[:prev] || I18n.t("pagination.previous"))}
+            #{pagination_link(paginate, "previous", options[:prev] || I18n.t("pagination.previous"))}
             #{pagination_page_links(paginate)}
-            #{html_pagination_link("next", options[:next] || I18n.t("pagination.next"))}
+            #{pagination_link(paginate, "next", options[:next] || I18n.t("pagination.next"))}
               </div>}
           end
 
@@ -37,7 +37,7 @@ module Shoperb
             links
           end
 
-          def pagination_link type, label
+          def pagination_link paginate, type, label
             if paginate[type].blank?
               "<span class=\"disabled next-page\">#{label}</span>"
             else

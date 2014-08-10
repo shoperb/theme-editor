@@ -11,15 +11,14 @@ module Shoperb
     extend self
     mattr_accessor :auth_code, :client, :token
 
-    def pull directory=nil
-      directory = directory ? "./#{directory}" : "."
+    def pull
       initialize
       atoken = access_token
       response = Logger.notify "Downloading" do
         atoken.get("themes/download")
       end
-      Theme.unpack response.parsed, directory
-      Theme.clone_models directory
+      Theme.unpack response.parsed
+      Theme.clone_models
     end
 
     def push
@@ -54,6 +53,7 @@ module Shoperb
     end
 
     def initialize
+      oauth_client
       Logger.notify "Asking for permission" do
         start_server(authorize_url)
       end unless have_token?
@@ -86,9 +86,8 @@ module Shoperb
     end
 
     def start_server url
-      instance = Server.new
       thread = Thread.new do
-        Rack::Handler::WEBrick.run instance,
+        Rack::Handler::WEBrick.run Server.new,
          Port: Shoperb["port"],
          StartCallback: -> { Launchy.open url },
          AccessLog: [],
@@ -106,7 +105,7 @@ module Shoperb
       raise exception
     end
 
-    Shoperb.autoload_all self, "shoperb/oauth"
+    Shoperb.autoload_all self, "shoperb/o_auth"
 
   end
 end

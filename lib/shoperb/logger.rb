@@ -35,6 +35,8 @@ module Shoperb
         result = yield
       rescue Exception => e
         false
+      else
+        true
       end
       self.info "\r"
       if action_result

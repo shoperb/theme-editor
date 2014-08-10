@@ -23,10 +23,10 @@ module Shoperb
 
               raise Error.new("Cannot paginate array '#{@collection_name}'. Not found.") if collection.nil?
 
-              current   = context["current_page"] == 0 ? 1 : context["current_page"]
+              current   = context["params.page"].to_i
               scope     = collection.send(:paginate, current, @per_page)
 
-              paginator = base(scope, current)
+              paginator = base(scope, current, context)
 
               path = context["path"]
 
@@ -44,13 +44,13 @@ module Shoperb
 
           private
 
-          def base scope, current
+          def base scope, current, context
             {
-              :pages      => scope.collection.num_pages,
-              :total      => scope.collection.total_count,
-              :last       => scope.collection.total_count - 1,
-              :size       => scope.collection.limit_value,
-              :offset     => scope.collection.respond_to?(:offset_value) ? scope.collection.offset_value : scope.collection.offset,
+              :total      => context["params.pagination.total"].to_i,
+              :size       => context["params.pagination.size"].to_i,
+              :pages      => context["params.pagination.pages"].to_i,
+              :last       => context["params.pagination.last"].to_i,
+              :offset     => context["params.pagination.offset"].to_i,
               :first      => 1,
               :page       => current,
               :previous   => nil,
@@ -85,7 +85,7 @@ module Shoperb
             end
           end
 
-          def add_pre_next paginator, scope, path
+          def add_prev_next paginator, scope, path
             has_prev_page        = (paginator[:page] - 1) >= 1
             has_next_page        = (paginator[:page] + 1) <= scope.collection.num_pages
 

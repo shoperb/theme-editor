@@ -7,7 +7,7 @@ module Shoperb
           if source.kind_of?(::Liquid::Template)
             source
           else
-            template = Template.new
+            template = ::Liquid::Template.new
             template.parse(source)
             template
           end

@@ -22,7 +22,7 @@ $ gem install shoperb-theme-editor
 ### pull
 Downloads your shops shoperb theme
 ```bash
-$ shoperb pull <directory> [options]
+$ shoperb pull [options]
 ```
 
 ### push
@@ -47,4 +47,10 @@ $ shoperb init <foundation,bootstrap,blank> [options]
 Removes configuration file
 ```bash
 $ shoperb clean
+```
+
+### dummy_data
+Clones default dummy data to the theme (also done on pull and init). Won't overwrite already excisting data files.
+```bash
+$ shoperb dummy_data
 ```

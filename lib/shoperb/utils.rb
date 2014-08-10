@@ -10,6 +10,11 @@ module Shoperb
       end
     end
 
+    def cp_desc files
+      content = (files.is_a?(String) ? Dir[files] : files).map(&Pathname.method(:new)).map(&:basename).to_sentence
+      "Copying #{content}"
+    end
+
     def rel_path path
       pathname = Pathname.new(path)
       pathname.relative_path_from(calc_base(pathname))

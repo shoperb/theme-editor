@@ -18,10 +18,13 @@ module Shoperb
   class Error < Exception
 
     def self.report e
-      Logger.error "\r#{e.class.name} => #{e.message}\n"
-      unless Rollbar.configuration.exception_level_filters.has_key?(e.class.to_s)
+      display = "\r#{e.class.name}"
+      display += " => #{e.message}" if e.message.presence
+      Logger.error "#{display}\n"
+      # Report all errors for now
+      #unless Rollbar.configuration.exception_level_filters.has_key?(e.class.to_s)
         ::Rollbar.report_exception(e)
-      end
+      #end
     end
 
   end

@@ -1,8 +1,8 @@
 module Shoperb
   module Mounter
     module Model
-      class Menu < Abstract::Base
-        has_many :links
+      class ProductAttribute < Abstract::Base
+        belongs_to :product
       end
     end
   end

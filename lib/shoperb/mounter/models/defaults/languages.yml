@@ -1,13 +1,9 @@
 languages:
   -
-    id: 1
     code: "et"
   -
-    id: 2
     code: "en"
   -
-    id: 3
     code: "es"
   -
-    id: 4
     code: "ru"

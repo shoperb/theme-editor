@@ -24,8 +24,16 @@ module Shoperb
 
     def init name="blank"
       raise Error.new("No such template, possible options are 'blank', 'bootstrap', 'foundation'") unless AVAILABLE_TEMPLATES.include?(name)
+      basics_path = File.expand_path("../init/basics", __FILE__)
+      Logger.notify Utils.cp_desc("#{basics_path}/*") do
+        FileUtils.cp_r("#{basics_path}/.", Utils.base)
+      end
       template_path = File.expand_path("../init/#{name}", __FILE__)
-      FileUtils.cp_r("#{template_path}/.", Utils.base)
+      Logger.notify Utils.cp_desc("#{template_path}/*") do
+        FileUtils.cp_r("#{template_path}/.", Utils.base)
+      end
+      clone_models
+
     end
 
     def matchers compilable: false
@@ -55,13 +63,13 @@ module Shoperb
       file.close if file
     end
 
-    def unpack file, directory
+    def unpack file
       Zip::File.open(file.path) { |zip_file|
         raise Error.new("Downloaded file is empty") unless zip_file.entries.any?
         Shoperb["handle"] = zip_file.entries.first.name.split("/").first
         zip_file.each { |entry|
           name = entry.name.gsub(/\A#{Shoperb["handle"]}\//, "")
-          extract_path = Utils.rel_path(File.join(directory || ".", name))
+          extract_path = Utils.rel_path(Utils.base + name)
           Utils.mkdir File.dirname(extract_path)
           Logger.notify "Extracting #{entry.name} to #{extract_path}" do
             entry.extract(extract_path) { true }
@@ -75,12 +83,11 @@ module Shoperb
       end
     end
 
-    def clone_models directory
-      data_path = "#{directory}/data"
-      Utils.mkdir File.dirname(data_path)
-      files = Dir["#{File.expand_path("../mounter/default_models", __FILE__)}/*.yml"]
+    def clone_models
+      Utils.mkdir(data_path = Utils.base + "data")
+      files = Dir["#{File.expand_path("../mounter/models/defaults", __FILE__)}/*"]
       files.delete_if { |file| File.exists?(File.join(data_path, Pathname.new(file).basename)) }
-      Logger.notify "Copying #{files.map(&Utils.method(:rel_path)).to_sentence} to #{data_path}" do
+      Logger.notify Utils.cp_desc(["defaults"]) do
         FileUtils.cp files, data_path
       end if files.any?
     end

@@ -17,18 +17,18 @@ module Shoperb
         Shoperb.autoload_all self, "shoperb/mounter/liquid/tags"
       end
 
-      Template.register_filter Filter::Url
-      Template.register_filter Filter::Datum
-      Template.register_filter Filter::Asset
-      Template.register_filter Filter::Html
-      Template.register_filter Filter::Standard
-      Template.register_filter Filter::Translate
+      ::Liquid::Template.register_filter Filter::Url
+      ::Liquid::Template.register_filter Filter::Datum
+      ::Liquid::Template.register_filter Filter::Asset
+      ::Liquid::Template.register_filter Filter::Html
+      ::Liquid::Template.register_filter Filter::Standard
+      ::Liquid::Template.register_filter Filter::Translate
 
-      Template.register_tag "layout", Tag::Layout
-      Template.register_tag "paginate", Tag::Paginate
-      Template.register_tag "form", Tag::Form
+      ::Liquid::Template.register_tag "layout", Tag::Layout
+      ::Liquid::Template.register_tag "paginate", Tag::Paginate
+      ::Liquid::Template.register_tag "form", Tag::Form
 
-      Template.file_system = EditorFileSystem.new
+      ::Liquid::Template.file_system = EditorFileSystem.new
 
     end
   end

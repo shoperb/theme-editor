@@ -1,5 +1,4 @@
 orders:
   -
-    id: 1
-    name: "asdasdas"
+    name: asdasdas
     order_number: 4353453453

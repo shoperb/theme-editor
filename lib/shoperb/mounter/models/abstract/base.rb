@@ -14,15 +14,31 @@ module Shoperb
             end
           end
 
-          class << self
-            attr_accessor :finder
+          def self.inherited base
+            base.cattr_accessor :finder
+            base.finder = :name
+          end
 
-            def finder= attribute
-              @finder = attribute
+          def has_key? name
+            true
+          end
+
+          def url
+            "/#{self.class.model_name.pluralize}/#{super.presence || name}"
+          end
+
+          def id
+            self.send self.class.finder
+          end
+
+          class << self
+
+            def invokable?(method_name)
+              true
             end
 
             def find id
-              all.detect { |o| o.send(finder || :id).to_s == id.to_s }
+              all.detect { |o| o.id.to_s == id.to_s }
             end
 
             def model_name

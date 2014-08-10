@@ -2,7 +2,7 @@ module Shoperb
   module Mounter
     module Model
       class Currency < Abstract::Base
-        has_many :variants, attribute: :name
+        self.finder = :code
       end
     end
   end

@@ -23,10 +23,10 @@ Slop.parse ignore_case: true, help: true, strict: true do
   command "pull" do
     apply_global_opts
     description "Downloads your shops shoperb theme"
-    banner with_description("Usage: shoperb pull <directory> [options]")
+    banner with_description("Usage: shoperb pull [options]")
     run do |options, args|
       Shoperb.with_configuration(options, *args) do
-        Shoperb::OAuth.pull args.first
+        Shoperb::OAuth.pull
       end
     end
   end
@@ -49,6 +49,17 @@ Slop.parse ignore_case: true, help: true, strict: true do
     run do |options, args|
       Shoperb.with_configuration(options, *args) do
         Shoperb::Mounter.start
+      end
+    end
+  end
+
+  command "dummy_data" do
+    apply_global_opts
+    description "Clones default dummy data to the theme (also done on pull and init). Won't overwrite already excisting data files."
+    banner with_description("Usage: shoperb clone_dummy_data [options]")
+    run do |options, args|
+      Shoperb.with_configuration(options, *args) do
+        Shoperb::Theme.clone_models
       end
     end
   end

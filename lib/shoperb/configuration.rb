@@ -30,8 +30,8 @@ module Shoperb
 
     attr_accessor :file
 
-    def initialize options={}, directory = nil
-      self.file = Utils.rel_path(File.expand_path("#{directory ? "./#{directory}" : "."}/.shoperb"))
+    def initialize options={}
+      self.file = Utils.base + ".shoperb"
       FileUtils.mkdir_p(File.dirname(self.file))
       super()
       merge!(conf)
@@ -40,7 +40,7 @@ module Shoperb
     end
 
     def save
-      Logger.notify "Saving configuration to #{file}" do
+      Logger.notify "Saving configuration to #{file.basename}" do
         Utils.write_file(file) { JSON.pretty_generate(self.except(*HARDCODED.keys)) }
       end
     end

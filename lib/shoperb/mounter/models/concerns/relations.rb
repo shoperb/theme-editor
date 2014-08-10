@@ -6,39 +6,65 @@ module Shoperb
           extend ActiveSupport::Concern
 
           module ClassMethods
-            def relation_klass relation
-              relation.to_s.singularize.classify
-            end
 
             def has_many relation, options={}
-              class_eval <<-STRING, __FILE__, __LINE__ + 1
+              class_eval <<-RUBY, __FILE__, __LINE__ + 1
                 def #{options[:name] || relation}
-                  DelegateArray.new(Model.const_get("#{relation_klass(relation)}").all.select { |object| object.#{model_name}_#{primary_key(options)} == self.#{primary_key(options)} })
+                  DelegateArray.new(#{has_finder(relation, :select)})
                 end
-              STRING
+              RUBY
             end
 
             def has_one relation, options={}
-              class_eval <<-STRING, __FILE__, __LINE__ + 1
+              class_eval <<-RUBY, __FILE__, __LINE__ + 1
                 def #{options[:name] || relation}
-                  Model.const_get("#{relation_klass(relation)}").all.detect { |object| object.#{model_name}_#{primary_key(options)} == self.#{primary_key(options)} }
+                  #{has_finder(relation, :detect)}
                 end
-              STRING
+              RUBY
+            end
+
+            def has_and_belongs_to_many relation, options={}
+              class_eval <<-RUBY, __FILE__, __LINE__ + 1
+                def #{options[:name] || relation}
+                  DelegateArray.new(#{relation_klass(relation)}.all.select { |object| object.#{model_name}_#{finder.to_s.pluralize}.to_a.include?(self.#{finder}) })
+                end
+              RUBY
             end
 
             def belongs_to relation, options={}
-              class_eval <<-STRING, __FILE__, __LINE__ + 1
+              class_eval <<-RUBY, __FILE__, __LINE__ + 1
                 def #{options[:name] || relation}
-                  if relation_id = self.#{relation}_#{primary_key(options)}
-                    Model.const_get("#{relation_klass(relation)}").all.detect { |object| object.#{primary_key(options)} == relation_id }
-                  end
+                  #{polymorphic_relation_klass(relation, options)}.all.detect #{belongs_to_finder(relation)}
                 end
-              STRING
+              RUBY
             end
 
-            def primary_key options={}
-              options[:attribute] ||= :id
+            private
+
+            def polymorphic_relation_klass relation, options
+              options[:polymorphic] ? "Model.const_get(self.class.send(:relation_name, #{relation}_type))" : relation_klass(relation)
             end
+
+            def relation_klass relation
+              "Model::#{relation_name(relation)}"
+            end
+
+            def relation_name relation
+              relation.to_s.singularize.classify
+            end
+
+            def belongs_to_finder relation
+              "{ |object| object.#{primary_key(relation)} == self.#{relation}_#{primary_key(relation)} }"
+            end
+
+            def has_finder relation, scanner
+              "#{relation_klass(relation)}.all.#{scanner} { |object| object.#{model_name}_#{primary_key(relation)} == self.#{primary_key(relation)} }"
+            end
+
+            def primary_key relation
+              Mounter.const_get(relation_klass(relation)).finder
+            end
+
           end
         end
       end

@@ -3,8 +3,7 @@ module Shoperb
     extend self
 
     def start
-      instance = Server.new
-      Rack::Handler::WEBrick.run(instance,
+      Rack::Handler::WEBrick.run(Server.new,
         Port: Shoperb[:port],
         AccessLog: [],
         Logger: WEBrick::Log::new("/dev/null", 7),
