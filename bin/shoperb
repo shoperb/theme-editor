@@ -80,7 +80,7 @@ eos
 
   command "sync" do
     apply_global_opts
-    description "(Not implemented) Syncronizes your shoperb shops products/categories/etc to your local data"
+    description "Syncronizes your shoperb shops products/categories/etc to your local data"
     banner with_description("Usage: shoperb sync [options]")
     run do |options, args|
       Shoperb.with_configuration(options, *args) do

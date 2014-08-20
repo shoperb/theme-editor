@@ -54,3 +54,9 @@ Clones default dummy data to the theme (also done on pull and init). Won't overw
 ```bash
 $ shoperb dummy_data
 ```
+
+### sync
+Clones products, categories, images, collections & vendors from your shop.
+```bash
+$ shoperb sync
+```

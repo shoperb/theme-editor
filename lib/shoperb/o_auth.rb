@@ -6,6 +6,10 @@ OAuth2::Response.register_parser(:zip, ["application/zip"]) do |body|
   end
 end
 
+OAuth2::Response.register_parser(:json, ["application/json"]) do |body|
+  JSON.parse(body)
+end
+
 module Shoperb
   module OAuth
     extend self
@@ -34,6 +38,12 @@ module Shoperb
     end
 
     def sync
+      initialize
+      atoken = access_token
+      Sync.products(atoken)
+      Sync.categories(atoken)
+      Sync.collections(atoken)
+      Sync.vendors(atoken)
     end
 
     def oauth_client
