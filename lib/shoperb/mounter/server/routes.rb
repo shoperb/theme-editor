@@ -40,12 +40,17 @@ module Shoperb
             liquid :frontpage
           end
 
+          app.get "/search" do
+            params.merge!(:category => Liquid::Drop::Category.new(Model::Category.find(params[:categories]))) if params[:categories].present?
+            liquid :search, params
+          end
+
         end
 
         def resource_route app, klass, template: klass.to_s.demodulize.underscore
           app.get "/#{template.pluralize}/:id" do
-            item = klass.all.find(params[:id])
-            drop = Mounter.const_get("Liquid::Drop::#{klass}").new(item)
+            item = klass.find(params[:id])
+            drop = Mounter.const_get("Liquid::Drop::#{klass.to_s.demodulize}").new(item)
             params.merge!(template.to_sym => drop)
             params.merge!(:meta => drop)
             liquid((block_given? ? yield(item) : template), params)

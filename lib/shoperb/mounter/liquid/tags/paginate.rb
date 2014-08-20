@@ -87,7 +87,7 @@ module Shoperb
 
           def add_prev_next paginator, scope, path
             has_prev_page        = (paginator[:page] - 1) >= 1
-            has_next_page        = (paginator[:page] + 1) <= scope.collection.num_pages
+            has_next_page        = (paginator[:page] + 1) <= paginator[:pages]
 
             paginator[:previous] = link(::I18n.t("pagination.previous"), paginator[:page] - 1, path) if has_prev_page
             paginator[:next]     = link(::I18n.t("pagination.next"), paginator[:page] + 1, path) if has_next_page

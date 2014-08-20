@@ -12,6 +12,7 @@ module Shoperb
             @app.call env
           rescue Exception => e
             Error.report(e)
+            raise e
           end
         end
 

@@ -42,7 +42,7 @@ module Shoperb
       @client = OAuth2::Client.new(
         Shoperb["oauth-client-id"],
         Shoperb["oauth-client-secret"],
-        site: "#{Shoperb["oauth-site"]}/admin",
+        site: "https://#{Shoperb["oauth-site"]}.shoperb.me/admin",
         token_url: "oauth/token",
         authorize_url: "oauth/authorize"
       ) do |faraday|

@@ -2,7 +2,7 @@ module Shoperb
   class Configuration < HashWithIndifferentAccess
 
     OPTIONS = {
-      "oauth-site" => "Shoperb shop url",
+      "oauth-site" => "Your shoperb shop domain",
       "oauth-username" => "Your shoperb shop username",
       "oauth-password" => "Your shoperb shop username",
       "oauth-redirect-uri" => "Url shoperb will redirect to after granting access",
@@ -11,14 +11,14 @@ module Shoperb
     }
 
     QUESTION = {
-      "oauth-site" => "Insert Shoperb url",
+      "oauth-site" => "Insert Shoperb domain",
       "oauth-username" => "Insert Shoperb username",
       "oauth-password" => "Insert Shoperb password"
     }.with_indifferent_access
 
     HARDCODED = {
-      "oauth-client-id" => "m4np67amygv6ys5gjih52njbi1bs157",
-      "oauth-client-secret" => "oexe8nha8g6ci5a3dax7szlzlv95lbm",
+      "oauth-client-id" => "jsikb3aoa42w1qkybugvj3t3l6tef2y",
+      "oauth-client-secret" => "np47hizd5b9v5749psdyklybt11ygr4",
       "oauth-redirect-uri" => "http://localhost:4000/callback"
     }.with_indifferent_access
 

@@ -33,7 +33,11 @@ module Shoperb
 
             [template, template.render!(locals.stringify_keys!, :registers => registers)]
           rescue Exception => e
-            raise(e.is_a?(Error) ? e : Error.new("'#{e.message}' in #{Utils.rel_path(path)}"))
+            raise(e.is_a?(Error) ? e :
+              Error.new("'#{e.message}' in #{Utils.rel_path(path)}").tap do |fe|
+                fe.set_backtrace e.backtrace
+              end
+            )
           end
 
         end
