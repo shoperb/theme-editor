@@ -4,7 +4,7 @@ module Shoperb
       class Template < Abstract::LiquidBase
 
         def self.matcher
-          "[^_]*.liquid"
+          "[^_]*.{liquid,liquid.haml}"
         end
 
       end

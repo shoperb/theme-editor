@@ -18,18 +18,23 @@ module Shoperb
             end
 
             def render! name, locals, registers
-              instance = all.detect { |template| /[^_]#{name}.liquid\z/ =~ template.path }
-              raise Error.new("File not found: #{name}.liquid in #{Utils.rel_path(directory)}") unless instance
+              instance = all.detect { |template| /[^_]#{name}.liquid.haml\z/ =~ template.path }
+              instance ||= all.detect { |template| /[^_]#{name}.liquid\z/ =~ template.path }
+              raise Error.new("File not found: #{name}.liquid(.haml) in #{Utils.rel_path(directory)}") unless instance
               instance.render!(locals.stringify_keys!, registers)
             end
           end
 
-          def parse
-            Liquid::Template.parse(File.read(path))
+          def parse content=File.read(path)
+            Liquid::Template.parse(content)
+          end
+
+          def parse_haml content=File.read(path)
+            parse(Haml::Engine.new(content).render)
           end
 
           def render! locals, registers
-            template = parse
+            template = path.ends_with?(".haml") ? parse_haml : parse
 
             [template, template.render!(locals.stringify_keys!, :registers => registers)]
           rescue Exception => e

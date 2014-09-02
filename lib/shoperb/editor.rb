@@ -14,7 +14,6 @@ autoload :Rack,               "rack"
 autoload :I18n,               "i18n"
 autoload :CoffeeScript,       "coffee_script"
 autoload :Sass,               "sass"
-autoload :Haml,               "haml"
 autoload :Liquid,             "liquid"
 autoload :ActionView,         "action_view"
 autoload :WEBrick,            "webrick"
@@ -26,6 +25,8 @@ autoload :Logger,             "logger"
 autoload :URI,                "uri"
 autoload :Mime,               "action_dispatch/http/mime_type"
 autoload :Slop,               "slop"
+
+require "haml"
 
 module Shoperb
   extend self

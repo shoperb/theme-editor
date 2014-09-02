@@ -15,7 +15,7 @@ module Shoperb
 
           app.get "/products" do
             products = Model::Product.all
-            liquid :products, products: Liquid::Drop::Products.new(products)
+            render_any :products, products: Liquid::Drop::Products.new(products)
           end
 
           app.get "/products/:id" do
@@ -24,25 +24,25 @@ module Shoperb
             category     = Liquid::Drop::Category.new(product.category)
             template     = product.template.presence || :product
 
-            liquid template, product: product_drop, category: category, meta: product_drop
+            render_any template, product: product_drop, category: category, meta: product_drop
           end
 
           app.get "/orders" do
             orders = Model::Order.all
-            liquid :orders, orders: orders
+            render_any :orders, orders: orders
           end
 
           app.get "/cart" do
-            liquid :cart
+            render_any :cart
           end
 
           app.get "/" do
-            liquid :frontpage
+            render_any :frontpage
           end
 
           app.get "/search" do
             params.merge!(:category => Liquid::Drop::Category.new(Model::Category.find(params[:categories]))) if params[:categories].present?
-            liquid :search, params
+            render_any :search, params
           end
 
         end
@@ -53,7 +53,7 @@ module Shoperb
             drop = Mounter.const_get("Liquid::Drop::#{klass.to_s.demodulize}").new(item)
             params.merge!(template.to_sym => drop)
             params.merge!(:meta => drop)
-            liquid((block_given? ? yield(item) : template), params)
+            render_any((block_given? ? yield(item) : template), params)
           end
         end
 
