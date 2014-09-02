@@ -37,7 +37,7 @@ module Shoperb
           end
 
           app.get "/" do
-            render_any :frontpage
+            render_home
           end
 
           app.get "/search" do

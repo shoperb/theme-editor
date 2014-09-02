@@ -29,6 +29,10 @@ module Shoperb
           Model::Theme.instance.render(template, locals.reverse_merge!(default_locals(locals)), {server: self})
         end
 
+        def render_home locals={}
+          render_any [:home, :index, :frontpage], locals
+        end
+
         def current_cart
           Model::Cart.instance
         end

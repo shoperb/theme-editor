@@ -15,7 +15,7 @@ module Shoperb
           layout_name = template.registers[:layout]
 
           unless layout_name.blank?
-            layout, output = Layout.render!(layout, locals.merge!(:content_for_layout => output), registers)
+            layout, output = Layout.render!(layout_name, locals.merge!(:content_for_layout => output), registers)
           end
 
           output

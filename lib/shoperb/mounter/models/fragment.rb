@@ -4,7 +4,7 @@ module Shoperb
       class Fragment < Abstract::LiquidBase
 
         def self.matcher
-          "_*.liquid"
+          "_*.{liquid,liquid.haml}"
         end
 
         def render! context
@@ -12,8 +12,13 @@ module Shoperb
         end
 
         def self.render! name, context
-          instance = all.detect { |template| /_#{name}.liquid\z/ =~ template.path }
-          raise Error.new("File not found: _#{name}.liquid in #{Utils.rel_path(directory)}") unless instance
+          names = [name].flatten
+          instance = nil
+          names.each do |current_name|
+            instance ||= all.detect { |template| /_#{current_name}.liquid.haml\z/ =~ template.path }
+            instance ||= all.detect { |template| /_#{current_name}.liquid\z/ =~ template.path }
+          end
+          raise Error.new("File not found: _#{name}.liquid(.haml) in #{Utils.rel_path(directory)}") unless instance
           instance.render!(context)
         end
 
