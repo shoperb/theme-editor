@@ -14,8 +14,12 @@ module Shoperb
           alias :t :translate
 
           def all_translations
-            content = File.read(File.join(Utils.base, "translations", "translations.json")).presence || "{}"
-            JSON.parse(content, object_class: HashWithIndifferentAccess)
+            Dir[File.join(Utils.base, "translations", "*.json")].map do |file|
+              JSON.parse(File.read(file).presence || "{}", object_class: HashWithIndifferentAccess)
+            end.inject({}) do |hash, trans|
+              hash.merge!(trans)
+              hash
+            end
           end
         end
       end
