@@ -7,8 +7,8 @@ module Shoperb
         extend self
 
         def registered(app)
-          app.register Sinatra::AssetPipeline
           app.set :assets_path, -> { File.join("assets") }
+          app.register Sinatra::AssetPipeline
         end
 
       end

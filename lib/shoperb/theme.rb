@@ -6,15 +6,15 @@ module Shoperb
       translations/*.json
       assets/fonts/*.{eot,woff,ttf}
       assets/images/**/*.{jpeg,jpg,gif,png}
-      assets/javascripts/*.js
+      assets/javascripts/**/*.js
       layouts/*.liquid
-      assets/stylesheets/*.css
+      assets/stylesheets/**/*.css
       templates/*.liquid
     }.freeze
 
     COMPILABLE = %w{
-      assets/javascripts/*.js.coffee
-      assets/stylesheets/*.css.{sass,scss}
+      assets/javascripts/**/*.js.coffee
+      assets/stylesheets/**/*.css.{sass,scss}
       templates/*.liquid.haml
       layouts/*.liquid.haml
     }.freeze
@@ -68,10 +68,11 @@ module Shoperb
         raise Error.new("Downloaded file is empty") unless zip_file.entries.any?
         Shoperb["handle"] = zip_file.entries.first.name.split("/").first
         zip_file.each { |entry|
-          name = entry.name.gsub(/\A#{Shoperb["handle"]}\//, "")
+          entry_name = Pathname.new(entry.name).cleanpath.to_s
+          name = entry_name.gsub(/\A#{Shoperb["handle"]}\//, "")
           extract_path = Utils.rel_path(Utils.base + name)
           Utils.mkdir File.dirname(extract_path)
-          Logger.notify "Extracting #{entry.name} to #{extract_path}" do
+          Logger.notify "Extracting #{entry_name} to #{extract_path}" do
             entry.extract(extract_path) { true }
           end
         }
