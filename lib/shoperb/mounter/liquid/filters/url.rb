@@ -29,9 +29,7 @@ module Shoperb
 
 
           def link_to_locale(text, locale)
-            url = @context.registers[:controller].url_for(locale: locale)
-
-            link_to text, url
+            link_to text, "/#{locale}"
           end
 
           def link_to_root(text)

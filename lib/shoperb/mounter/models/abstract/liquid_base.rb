@@ -33,11 +33,11 @@ module Shoperb
           end
 
           def parse content=File.read(path)
-            Liquid::Template.parse(content)
+            Liquid::Template.parse(content.force_encoding('UTF-8'))
           end
 
           def parse_haml content=File.read(path)
-            parse(Haml::Engine.new(content).render)
+            parse(Haml::Engine.new(content.force_encoding('UTF-8')).render)
           end
 
           def render! locals, registers
