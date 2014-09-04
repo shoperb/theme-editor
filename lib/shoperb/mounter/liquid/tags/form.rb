@@ -23,20 +23,11 @@ module Shoperb
               @nodelist << %(<form action='/submit-form' method="post">)
               @nodelist << %(<input type="text" name="contact_form_name" value="#{@subject}" style="color: black; display: none;" />)
               @nodelist << %(<input type="text" name="first_last_name" value="" style="color: black; display: none;" />)
-              @nodelist << auth_token(context)
               @nodelist += old_list
               @nodelist << %(</form>)
 
               render_all(@nodelist, context)
             end
-          end
-
-          def auth_token(context)
-            controller = context.registers[:controller]
-            name       = controller.send(:request_forgery_protection_token).to_s
-            value      = controller.send(:form_authenticity_token)
-
-            %(<input type="hidden" name="#{name}" value="#{value}">)
           end
         end
       end
