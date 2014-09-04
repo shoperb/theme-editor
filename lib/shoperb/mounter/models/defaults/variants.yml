@@ -1,7 +1,9 @@
 variants:
   -
     product_name: "Product 1"
+    currency_name: Euro
     current_price: 45
   -
-    product_id: "Product 2"
+    product_name: "Product 2"
+    currency_name: Euro
     current_price: 54

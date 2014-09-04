@@ -5,7 +5,7 @@ module Shoperb
         class SingletonBase < Abstract::Base
 
           class << self
-            def file base="models"
+            def file base="data"
               "#{base}/#{self.model_name}.#{self.file_extension}"
             end
 

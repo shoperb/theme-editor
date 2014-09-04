@@ -63,10 +63,10 @@ module Shoperb
         end
 
         def set_locale app
-          app.before "/?:locale/?*" do
-            Liquid::Filter::Translate.locale = if shop.possible_languages.include?(params[:locale])
-              request.path_info = "/" + params[:splat][0]
-              params[:locale]
+          app.before "*" do
+            Liquid::Filter::Translate.locale = if request.path_info=~(/\A\/(#{shop.possible_languages.join("|")})\/.*/)
+              request.path_info = $2
+              $1
             elsif shop.language_code
               shop.language_code
             end
