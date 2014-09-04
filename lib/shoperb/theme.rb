@@ -2,7 +2,14 @@ module Shoperb
   module Theme
     extend self
 
-    FILES = %w{
+    COMPILABLE = %w{
+      assets/javascripts/**/*.js.coffee
+      assets/stylesheets/**/*.css.{sass,scss}
+      templates/*.liquid.haml
+      layouts/*.liquid.haml
+    }.freeze
+
+    FILES = (%w{
       translations/*.json
       assets/fonts/*.{eot,woff,ttf}
       assets/images/**/*.{jpeg,jpg,gif,png}
@@ -10,14 +17,9 @@ module Shoperb
       layouts/*.liquid
       assets/stylesheets/**/*.css
       templates/*.liquid
-    }.freeze
 
-    COMPILABLE = %w{
-      assets/javascripts/**/*.js.coffee
-      assets/stylesheets/**/*.css.{sass,scss}
-      templates/*.liquid.haml
-      layouts/*.liquid.haml
-    }.freeze
+    } + COMPILABLE).freeze
+
 
     AVAILABLE_TEMPLATES = ["blank", "bootstrap", "foundation"]
 
