@@ -11,7 +11,12 @@ module Shoperb
           resource_route(app, Model::Category)
           resource_route(app, Model::Collection)
           resource_route(app, Model::Order)
-          resource_route(app, Model::Page) { |page| page.template.to_sym }
+
+          Model::Page.all.each do |page|
+            app.get "/#{page.template}" do
+              render_any(page.template, params)
+            end
+          end
 
           app.get "/products" do
             products = Model::Product.all
@@ -53,7 +58,7 @@ module Shoperb
             drop = Mounter.const_get("Liquid::Drop::#{klass.to_s.demodulize}").new(item)
             params.merge!(template.to_sym => drop)
             params.merge!(:meta => drop)
-            render_any((block_given? ? yield(item) : template), params)
+            render_any(template, params)
           end
         end
 
