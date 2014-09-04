@@ -4,6 +4,10 @@ module Shoperb
       module Drop
         class Shop < Liquid::DelegateDrop
 
+          def possible_languages
+            @record.possible_languages
+          end
+
         end
       end
     end
