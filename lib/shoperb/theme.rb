@@ -97,11 +97,9 @@ module Shoperb
       end
     end
 
-    def files compilable: false
+    def files compilable: false, &block
       matchers(compilable: compilable).each do |matcher|
-        Pathname.glob(Utils.base + matcher) do |file|
-          yield(file)
-        end
+        Pathname.glob(Utils.base + matcher, &block)
       end
     end
 
