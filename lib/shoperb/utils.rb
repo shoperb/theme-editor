@@ -2,22 +2,17 @@ module Shoperb
   module Utils
     extend self
 
-    def mkdir path
-      unless Dir.exists?(path)
-        Logger.notify "Making directory #{path}" do
-          FileUtils.mkdir_p path
-        end
-      end
+    mattr_accessor :path do
+      Dir.pwd
     end
 
-    def cp_desc files
-      content = (files.is_a?(String) ? Dir[files] : files).map(&Pathname.method(:new)).map(&:basename).to_sentence
-      "Copying #{content}"
+    def mkdir path
+      FileUtils.mkdir_p path
     end
 
     def rel_path path
-      pathname = Pathname.new(path)
-      pathname.relative_path_from(calc_base(pathname))
+      path = Pathname.new(path) unless path.is_a?(Pathname)
+      path.relative_path_from(calc_base(path))
     end
 
     def calc_base path
@@ -25,12 +20,26 @@ module Shoperb
     end
 
     def base
-      Pathname.new(Dir.pwd)
+      Pathname.new(path)
     end
 
     def write_file target
       File.open(target, "w+b") { |f| f.write(yield) }
     end
 
+    def mk_tempfile content, *names
+      Tempfile.new(names).tap do |file|
+        file.write(content)
+        file.flush
+        file.open
+      end
+    end
+
+    def rm_tempfile file
+      if file && File.exists?(file)
+        file.close
+        file.unlink
+      end
+    end
   end
 end

@@ -20,10 +20,10 @@ Slop.parse ignore_case: true, help: true, strict: true do
 
   apply_global_opts
 
-  command "pull" do
+  command "clone" do
     apply_global_opts
     description "Downloads your shops shoperb theme"
-    banner with_description("Usage: shoperb pull [options]")
+    banner with_description("Usage: shoperb clone <directory> [<handle>] [options]")
     run do |options, args|
       Shoperb.with_configuration(options, *args) do
         Shoperb::OAuth.pull
@@ -31,34 +31,48 @@ Slop.parse ignore_case: true, help: true, strict: true do
     end
   end
 
+  command "pull" do
+    apply_global_opts
+    description "Updates your local shoperb theme"
+    banner with_description("Usage: shoperb pull [options]")
+    run do |options, args|
+      Shoperb.with_configuration(options) do
+        Shoperb::OAuth.pull
+      end
+    end
+  end
+
   command "push" do
     apply_global_opts
-    description "Uploads your local shoperb theme to your shop"
+    description "Updates your remote shoperb theme"
     banner with_description("Usage: shoperb push [options]")
     run do |options, args|
-      Shoperb.with_configuration(options, *args) do
+      Shoperb.with_configuration(options) do
         Shoperb::OAuth.push
       end
     end
   end
 
-  command "mount" do
+  mount = ->(*vars) {
     apply_global_opts
     description "Serves local as a shoperb theme file"
     banner with_description("Usage: shoperb mount [options]")
     run do |options, args|
-      Shoperb.with_configuration(options, *args) do
+      Shoperb.with_configuration(options) do
         Shoperb::Mounter.start
       end
     end
-  end
+  }
+
+  command "mount", &mount
+  command "serve", &mount
 
   command "dummy_data" do
     apply_global_opts
     description "Clones default dummy data to the theme (also done on pull and init). Won't overwrite already excisting data files."
     banner with_description("Usage: shoperb clone_dummy_data [options]")
     run do |options, args|
-      Shoperb.with_configuration(options, *args) do
+      Shoperb.with_configuration(options) do
         Shoperb::Theme.clone_models
       end
     end
@@ -72,7 +86,7 @@ Available styles are: #{Shoperb::Theme::AVAILABLE_TEMPLATES.join(", ")}
 Usage: shoperb init <style> [options]
 eos
     run do |options, args|
-      Shoperb.with_configuration(options, *args) do
+      Shoperb.with_configuration(options) do
         Shoperb::Theme.init args.first
       end
     end
@@ -83,18 +97,9 @@ eos
     description "Syncronizes your shoperb shops products/categories/etc to your local data"
     banner with_description("Usage: shoperb sync [options]")
     run do |options, args|
-      Shoperb.with_configuration(options, *args) do
+      Shoperb.with_configuration(options) do
         Shoperb::OAuth.sync
       end
-    end
-  end
-
-  command "clean" do
-    apply_global_opts
-    description "Removes configuration file"
-    banner with_description("Usage: shoperb push [options]")
-    run do |options, args|
-      Shoperb::Configuration.destroy
     end
   end
 

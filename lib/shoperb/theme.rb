@@ -27,15 +27,12 @@ module Shoperb
     def init name="blank"
       raise Error.new("No such template, possible options are 'blank', 'bootstrap', 'foundation'") unless AVAILABLE_TEMPLATES.include?(name)
       basics_path = File.expand_path("../init/basics", __FILE__)
-      Logger.notify Utils.cp_desc("#{basics_path}/*") do
-        FileUtils.cp_r("#{basics_path}/.", Utils.base)
-      end
       template_path = File.expand_path("../init/#{name}", __FILE__)
-      Logger.notify Utils.cp_desc("#{template_path}/*") do
+      Logger.notify "Copying #{name} template" do
+        FileUtils.cp_r("#{basics_path}/.", Utils.base)
         FileUtils.cp_r("#{template_path}/.", Utils.base)
       end
       clone_models
-
     end
 
     def matchers compilable: false
@@ -48,21 +45,16 @@ module Shoperb
 
     def pack
       compile
-      zip_path = "#{handle.basename}.zip"
       zip = Zip::OutputStream.write_buffer do |out|
         files do |file|
           filename = Utils.rel_path(file)
           out.put_next_entry(zip_file_path = "#{handle.basename}/#{filename}")
-          Logger.notify "Packing #{filename} to #{zip_path}/#{zip_file_path}" do
+          Logger.notify "Packing #{filename}" do
             out.write File.read(file)
           end
         end
       end
-      file = File.new(zip_path, "w+b")
-      file.write(zip.string)
-      file.path
-    ensure
-      file.close if file
+      Utils.mk_tempfile zip.string, "#{handle.basename}-", ".zip"
     end
 
     def unpack file
@@ -74,30 +66,27 @@ module Shoperb
           name = entry_name.gsub(/\A#{Shoperb["handle"]}\//, "")
           extract_path = Utils.rel_path(Utils.base + name)
           Utils.mkdir File.dirname(extract_path)
-          Logger.notify "Extracting #{entry_name} to #{extract_path}" do
+          Logger.notify "Extracting #{entry_name}" do
             entry.extract(extract_path) { true }
           end
         }
       }
     ensure
-      if file && File.exists?(file)
-        file.close
-        file.unlink
-      end
+      Utils.rm_tempfile file
     end
 
     def clone_models
       Utils.mkdir(data_path = Utils.base + "data")
-      files = Dir["#{File.expand_path("../mounter/models/defaults", __FILE__)}/*"]
-      files.delete_if { |file| File.exists?(File.join(data_path, Pathname.new(file).basename)) }
-      Logger.notify Utils.cp_desc(["defaults"]) do
+      files = Pathname.glob("#{File.expand_path("../mounter/models/defaults", __FILE__)}/*")
+      files.delete_if { |file| File.exists?(File.join(data_path, file.basename)) }
+      Logger.notify "Copying default data" do
         FileUtils.cp files, data_path
       end if files.any?
     end
 
     def compile
       files(compilable: true) do |file|
-        case file
+        case file.to_s
           when /(#{Utils.base}\/.*).coffee/
             compile_coffeescript Utils.rel_path(file), Utils.rel_path($1)
           when /(#{Utils.base}\/.*).(sass|scss)/
@@ -110,26 +99,26 @@ module Shoperb
 
     def files compilable: false
       matchers(compilable: compilable).each do |matcher|
-        Dir[File.join(Utils.base, matcher)].each do |file|
+        Pathname.glob(Utils.base + matcher) do |file|
           yield(file)
         end
       end
     end
 
     def compile_coffeescript file, target
-      Logger.notify "Compiling #{file} to #{target}" do
+      Logger.notify "Compiling #{file}" do
         Utils.write_file(target) { CoffeeScript.compile(File.read(file)) }
       end
     end
 
     def compile_sass file, target, style
-      Logger.notify "Compiling #{file} to #{target}" do
+      Logger.notify "Compiling #{file}" do
         Utils.write_file(target) { Sass::Engine.new(File.read(file), syntax: style).render }
       end
     end
 
     def compile_haml file, target
-      Logger.notify "Compiling #{file} to #{target}" do
+      Logger.notify "Compiling #{file}" do
         Utils.write_file(target) { Haml::Engine.new(File.read(file)).render }
       end
     end

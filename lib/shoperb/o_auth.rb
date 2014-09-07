@@ -1,9 +1,5 @@
 OAuth2::Response.register_parser(:zip, ["application/zip"]) do |body|
-  Tempfile.new(["theme-",".zip"]).tap do |file|
-    file.write(body)
-    file.flush
-    file.open
-  end
+  Shoperb::Utils.mk_tempfile body, "theme-", ".zip"
 end
 
 OAuth2::Response.register_parser(:json, ["application/json"]) do |body|
@@ -18,9 +14,10 @@ module Shoperb
     def pull
       initialize
       atoken = access_token
-      response = Logger.notify "Downloading" do
-        atoken.get("themes/download")
+      response = Logger.notify "Downloading #{Shoperb["handle"]}" do
+        atoken.get(Pathname.new("themes/download").cleanpath.to_s)
       end
+
       Theme.unpack response.parsed
       Theme.clone_models
     end
@@ -30,11 +27,11 @@ module Shoperb
       file = Theme.pack
       theme = Faraday::UploadIO.new(file, "application/zip")
       atoken = access_token
-      Logger.notify "Uploading" do
-        atoken.post("themes/upload", body: { zip: theme })
+      Logger.notify "Uploading #{Shoperb["handle"]}" do
+        atoken.post(Pathname.new("themes/#{Shoperb["handle"]}/upload").cleanpath.to_s, body: { zip: theme })
       end
     ensure
-      FileUtils.rm_r(file) if file && File.exists?(file)
+      Utils.rm_tempfile file
     end
 
     def sync
@@ -103,7 +100,7 @@ module Shoperb
          AccessLog: [],
          Logger: WEBrick::Log::new("/dev/null", 7)
       end
-      sleep 2 while !have_token?
+      sleep(0.5) while !have_token?
       thread.kill
     end
 

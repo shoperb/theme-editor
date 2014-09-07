@@ -19,20 +19,27 @@ $ gem install shoperb-theme-editor
 
 ## Available commands
 
-### pull
+### clone
 Downloads your shops shoperb theme
+```bash
+$ shoperb clone <directory> [<handle>] [options]
+```
+
+### pull
+Updates your local shoperb theme
 ```bash
 $ shoperb pull [options]
 ```
 
 ### push
-Uploads your local shoperb theme to your shop
+Updates your remote shoperb theme
 ```bash
 $ shoperb push [options]
 ```
 
 ### mount
 Serves local as a shoperb theme file
+alias: serve
 ```bash
 $ shoperb mount [options]
 ```
@@ -41,12 +48,6 @@ $ shoperb mount [options]
 Initiates a shoperb theme template
 ```bash
 $ shoperb init <foundation,bootstrap,blank> [options]
-```
-
-### clean
-Removes configuration file
-```bash
-$ shoperb clean
 ```
 
 ### dummy_data

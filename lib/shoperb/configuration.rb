@@ -30,10 +30,22 @@ module Shoperb
 
     attr_accessor :file
 
-    def initialize options={}
-      self.file = Utils.base + ".shoperb"
-      FileUtils.mkdir_p(File.dirname(self.file))
+    def initialize options={}, *args
       super()
+
+      if args.any?
+        Utils.path = args[0]
+        self["handle"] = args[1]
+      end
+
+      self.file = Utils.base + ".shoperb"
+
+      begin
+        FileUtils.send(args.any? ? :mkdir : :mkdir_p, File.dirname(self.file))
+      rescue Errno::EEXIST
+        raise Error.new("Folder #{File.dirname(self.file)} already exists")
+      end
+
       merge!(conf)
       merge!(options)
       merge!(HARDCODED)
@@ -54,7 +66,8 @@ module Shoperb
       if question = QUESTION[name]
         default = DEFAULTS[name].presence
         Logger.info "#{question} #{"(Default is '#{default}') " if default}: "
-        gets.strip.presence || default
+        # $stdin.gets avoids problem with ARGV & gets
+        $stdin.gets.strip.presence || default
       end || default
     end
 
