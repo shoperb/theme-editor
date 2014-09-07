@@ -14,7 +14,7 @@ module Shoperb
 
           Model::Page.all.each do |page|
             app.get "/#{page.template}" do
-              render_any(page.template, params)
+              render_any("page.#{page.template}", params)
             end
           end
 
