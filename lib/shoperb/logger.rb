@@ -1,4 +1,5 @@
 require "colorize"
+require "io/console"
 
 module Shoperb
   module Logger
@@ -29,8 +30,10 @@ module Shoperb
     alias :success :debug
 
     def notify msg
+      rows, cols = IO.console.winsize
+      cols -= 1
       e, result = nil, nil
-      self.info      "          #{msg}"
+      self.info      "#{msg.ljust(cols)[0..cols]}".rstrip
       action_result = begin
         result = yield
       rescue Exception => e
@@ -40,9 +43,9 @@ module Shoperb
       end
       self.info "\r"
       if action_result
-        self.success "SUCCESS   #{msg}"
+        self.success "#{msg.ljust(cols)[0..cols-5]} [OK]"
       else
-        self.error   "ERROR     #{msg}"
+        self.error   "#{msg.ljust(cols)[0..cols-9]} [FAILED]"
       end
       self.info "\n"
       raise e if e
