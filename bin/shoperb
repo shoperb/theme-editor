@@ -26,7 +26,7 @@ Slop.parse ignore_case: true, help: true, strict: true do
     banner with_description("Usage: shoperb clone <directory> [<handle>] [options]")
     run do |options, args|
       Shoperb.with_configuration(options, *args) do
-        Shoperb::OAuth.pull
+        Shoperb::OAuth.clone_remote
       end
     end
   end

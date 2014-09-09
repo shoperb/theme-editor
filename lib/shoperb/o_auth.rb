@@ -11,11 +11,21 @@ module Shoperb
     extend self
     mattr_accessor :auth_code, :client, :token
 
+    def clone_remote
+      initialize
+      atoken = access_token
+      unless Shopern["handle"]
+        response = atoken.get(Pathname.new("themes").cleanpath.to_s).parsed
+        Configuration::QUESTION["handle"] = "Please choose a theme [#{response.map { |hash| hash["handle"] }.join(", ")}]"
+      end
+      pull
+    end
+
     def pull
       initialize
       atoken = access_token
       response = Logger.notify "Downloading #{Shoperb["handle"]}" do
-        atoken.get(Pathname.new("themes/download").cleanpath.to_s)
+        atoken.get(Pathname.new("themes/#{Shoperb["handle"]}/download").cleanpath.to_s)
       end
 
       Theme.unpack response.parsed
