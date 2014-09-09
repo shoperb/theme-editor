@@ -13,9 +13,8 @@ module Shoperb
 
     def clone_remote
       initialize
-      atoken = access_token
-      unless Shopern["handle"]
-        response = atoken.get(Pathname.new("themes").cleanpath.to_s).parsed
+      unless Shoperb["handle"]
+        response = access_token.get(Pathname.new("themes").cleanpath.to_s).parsed
         Configuration::QUESTION["handle"] = "Please choose a theme [#{response.map { |hash| hash["handle"] }.join(", ")}]"
       end
       pull
