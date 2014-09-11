@@ -23,8 +23,8 @@ module Shoperb
     def pull
       initialize
       atoken = access_token
-      response = Logger.notify "Downloading #{Shoperb["handle"]}" do
-        atoken.get(Pathname.new("themes/#{Shoperb["handle"]}/download").cleanpath.to_s)
+      response = Logger.notify "Downloading" do
+        atoken.get(Pathname.new("themes/download").cleanpath.to_s)
       end
 
       Theme.unpack response.parsed
