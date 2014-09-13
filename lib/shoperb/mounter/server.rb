@@ -21,12 +21,13 @@ module Shoperb
       enable :sessions
 
       register Sinatra::Flash
+      register Sinatra::RespondWith
       register Routes
       register Assets
 
       helpers do
-        def render_any template, locals={}
-          Model::Theme.instance.render(template, locals.reverse_merge!(default_locals(locals)), {server: self})
+        def render_any template, locals={}, registers={}
+          Model::Theme.instance.render(template, locals.reverse_merge!(default_locals(locals)), registers.merge(server: self))
         end
 
         def render_home locals={}

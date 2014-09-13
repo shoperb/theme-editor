@@ -25,6 +25,7 @@ autoload :Logger,             "logger"
 autoload :URI,                "uri"
 autoload :Mime,               "action_dispatch/http/mime_type"
 autoload :Slop,               "slop"
+Sinatra.autoload :RespondWith,"sinatra/respond_with"
 
 require "haml"
 

@@ -37,6 +37,24 @@ module Shoperb
             render_any :orders, orders: orders
           end
 
+          app.post "/cart/checkout" do
+            redirect "/"
+          end
+
+          app.post "/cart" do
+            respond_to do |f|
+              f.json { render_any :cart, params, layout: "" }
+              f.html { redirect "/cart" }
+            end
+          end
+
+          app.post "/cart/add" do
+            respond_to do |f|
+              f.json { render_any :cart, params, layout: "" }
+              f.html { redirect "/cart" }
+            end
+          end
+
           app.get "/cart" do
             render_any :cart
           end
