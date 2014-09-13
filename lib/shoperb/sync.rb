@@ -29,11 +29,11 @@ module Shoperb
     end
 
     def image hash, token
-      Utils.mkdir(dir = Utils.base + "assets" + "images")
+      Utils.mkdir(dir = Utils.base + "data" + "assets" + "images")
       hash["sizes"] = hash["sizes"].map do |size, url|
         next unless url
         filename = dir + "#{hash["name"]}_#{size}#{Pathname.new(url).extname.split("?")[0]}"
-        Utils.write_file(filename) { open(url).read }
+        Utils.write_file(filename) { open(url).read } unless File.exists?(filename)
         [size, filename.relative_path_from(dir).to_s]
       end.compact.to_h
       Replacer.new("images").replace(hash["name"], hash)
@@ -41,7 +41,18 @@ module Shoperb
 
     %w{products categories collections vendors}.each do |plural|
       define_method plural do |token|
-        token.get(plural).parsed.each { |hash| send(plural.singularize, hash, token) }
+        initial = token.get("#{plural}")
+        initial.parsed.each { |hash| send(plural.singularize, hash, token) }
+        total = initial.headers["x-total"].presence
+        limit = initial.headers["x-limit"].presence
+        if total && limit
+          page = 2
+          while limit.to_i * page < total.to_i
+            page = page + 1
+            response = token.get("#{plural}?page=#{page}")
+            response.parsed.each { |hash| send(plural.singularize, hash, token) }
+          end
+        end
       end
 
       define_method plural.singularize do |hash, token|

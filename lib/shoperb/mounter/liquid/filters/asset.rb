@@ -26,7 +26,7 @@ module Shoperb
           end
 
           def asset_url(asset)
-            "/#{@context.registers[:server].settings.assets_path}/#{asset}"
+            "/assets/#{asset}"
           end
 
         end
