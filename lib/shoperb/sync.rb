@@ -41,18 +41,12 @@ module Shoperb
 
     %w{products categories collections vendors}.each do |plural|
       define_method plural do |token|
-        initial = token.get("#{plural}")
-        initial.parsed.each { |hash| send(plural.singularize, hash, token) }
-        total = initial.headers["x-total"].presence
-        limit = initial.headers["x-limit"].presence
-        if total && limit
-          page = 2
-          while limit.to_i * page < total.to_i
-            page = page + 1
-            response = token.get("#{plural}?page=#{page}")
-            response.parsed.each { |hash| send(plural.singularize, hash, token) }
-          end
-        end
+        begin
+          page = (page || 0) + 1
+          response = token.get("#{plural}?page=#{page}")
+          items = response.parsed
+          items.each { |hash| send(plural.singularize, hash, token) }
+        end while (limit = response.headers["x-limit"].presence) && limit.to_i == items.count
       end
 
       define_method plural.singularize do |hash, token|
