@@ -40,7 +40,7 @@ module Shoperb
               else
                 raise Error.new("File not found: [#{file}, #{default_file}]")
               end
-              DelegateArray.new(result)
+              Drop::Delegate::Array.new(result)
             end
           end
         end

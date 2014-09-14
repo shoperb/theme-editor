@@ -9,7 +9,7 @@ module Shoperb
           include Model::Concerns::FileLoading
 
           def to_liquid
-            if klass = Mounter.const_get("Liquid::Drop::#{self.class.model_name.camelize}")
+            if klass = (Mounter::Drop.const_get(self.class.model_name.camelize))
               klass.new(self)
             end
           end
