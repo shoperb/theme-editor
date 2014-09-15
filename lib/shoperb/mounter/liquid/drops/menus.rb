@@ -2,7 +2,7 @@ module Shoperb
   module Mounter
     module Liquid
       module Drop
-        class Menus < Collection
+        class Menus < Enum
 
         end
       end

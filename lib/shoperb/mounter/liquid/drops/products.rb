@@ -2,7 +2,7 @@ module Shoperb
   module Mounter
     module Liquid
       module Drop
-        class Products < Collection
+        class Products < Enum
 
         end
       end

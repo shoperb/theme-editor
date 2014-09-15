@@ -2,7 +2,7 @@ module Shoperb
   module Mounter
     module Liquid
       module Drop
-        class Pages < Collection
+        class Pages < Enum
 
         end
       end

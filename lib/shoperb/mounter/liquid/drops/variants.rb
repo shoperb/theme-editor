@@ -2,7 +2,7 @@ module Shoperb
   module Mounter
     module Liquid
       module Drop
-        class Variants < Collection
+        class Variants < Enum
 
         end
       end

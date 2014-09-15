@@ -2,7 +2,7 @@ module Shoperb
   module Mounter
     module Liquid
       module Drop
-        class ProductCollection < Liquid::DelegateDrop
+        class ProductCollection < Collection
 
         end
       end

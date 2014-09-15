@@ -57,7 +57,7 @@ module Shoperb
             :params       => params,
             :url          => Liquid::Drop::Url::Get.new,
             :form_actions => Liquid::Drop::Url::Post.new,
-            :collections  => Liquid::Drop::ProductCollections.new
+            :collections  => Liquid::Drop::ProductCollections.new(Model::Collection.all)
           }
         end
 
