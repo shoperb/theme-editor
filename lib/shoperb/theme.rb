@@ -100,19 +100,20 @@ module Shoperb
       files(compilable: true) do |file|
         processed << case file.to_s
           when /(#{Utils.base}\/.*).coffee/
-            compile_coffeescript Utils.rel_path(file), Utils.rel_path($1)
-            Utils.rel_path($1)
+            compile_through_sprockets Utils.rel_path(file), Utils.rel_path($1)
           when /(#{Utils.base}\/.*).(sass|scss)/
-            compile_sass Utils.rel_path(file), Utils.rel_path($1)
-            Utils.rel_path($1)
+            compile_through_sprockets Utils.rel_path(file), Utils.rel_path($1)
           when /(#{Utils.base}\/.*).haml/
             compile_haml Utils.rel_path(file), Utils.rel_path($1)
-            Utils.rel_path($1)
         end
       end
       yield
     ensure
       FileUtils.rm processed
+    end
+
+    def check_path path
+      File.exists?(path) ? raise(Error.new("#{path} already exists")) : path
     end
 
     def files compilable: false, &block
@@ -121,21 +122,17 @@ module Shoperb
       end
     end
 
-    def compile_coffeescript file, target
+    def compile_through_sprockets file, target
       Logger.notify "Compiling #{file}" do
-        Utils.write_file(target) { sprockets[file.basename].to_s }
-      end
-    end
-
-    def compile_sass file, target
-      Logger.notify "Compiling #{file}" do
-        Utils.write_file(target) { sprockets[file.basename].to_s }
+        Utils.write_file(check_path(target)) { sprockets[file.basename].to_s }
+        target
       end
     end
 
     def compile_haml file, target
       Logger.notify "Compiling #{file}" do
-        Utils.write_file(target) { Haml::Engine.new(File.read(file)).render }
+        Utils.write_file(check_path(target)) { Haml::Engine.new(File.read(file)).render }
+        target
       end
     end
   end
