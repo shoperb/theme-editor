@@ -25,7 +25,7 @@ module Shoperb
 
     mattr_accessor :sprockets do
       Sprockets::Environment.new do |env|
-        env.instance_variable_set("@engines", env.engines.slice(".coffee", ".less", ".sass", "scss").freeze)
+        env.instance_variable_set("@engines", env.engines.slice(".coffee", ".less", ".sass", ".scss").freeze)
         env.append_path "assets/javascripts"
         env.append_path "assets/stylesheets"
       end
