@@ -3,8 +3,8 @@ module Shoperb
     extend self
 
     COMPILABLE = %w{
-      assets/javascripts/**/*.js.coffee
-      assets/stylesheets/**/*.css.{sass,scss}
+      assets/javascripts/application.js.coffee
+      assets/stylesheets/application.css.{sass,scss}
       templates/*.liquid.haml
       layouts/*.liquid.haml
     }.freeze
@@ -17,9 +17,19 @@ module Shoperb
       layouts/*.liquid
       assets/stylesheets/**/*.css
       templates/*.liquid
+      assets/javascripts/**/*.js.coffee
+      assets/stylesheets/**/*.css.{sass,scss}
+      templates/*.liquid.haml
+      layouts/*.liquid.haml
+    }).freeze
 
-    } + COMPILABLE).freeze
-
+    mattr_accessor :sprockets do
+      Sprockets::Environment.new do |env|
+        env.instance_variable_set("@engines", env.engines.slice(".coffee", ".less", ".sass", "scss").freeze)
+        env.append_path "assets/javascripts"
+        env.append_path "assets/stylesheets"
+      end
+    end
 
     AVAILABLE_TEMPLATES = ["blank", "bootstrap", "foundation"]
 
@@ -44,17 +54,18 @@ module Shoperb
     end
 
     def pack
-      compile
-      zip = Zip::OutputStream.write_buffer do |out|
-        files do |file|
-          filename = Utils.rel_path(file)
-          out.put_next_entry(zip_file_path = "#{handle.basename}/#{filename}")
-          Logger.notify "Packing #{filename}" do
-            out.write File.read(file)
+      compile do
+        zip = Zip::OutputStream.write_buffer do |out|
+          files do |file|
+            filename = Utils.rel_path(file)
+            out.put_next_entry(zip_file_path = "#{handle.basename}/#{filename}")
+            Logger.notify "Packing #{filename}" do
+              out.write File.read(file)
+            end
           end
         end
+        Utils.mk_tempfile zip.string, "#{handle.basename}-", ".zip"
       end
-      Utils.mk_tempfile zip.string, "#{handle.basename}-", ".zip"
     end
 
     def unpack file
@@ -85,16 +96,23 @@ module Shoperb
     end
 
     def compile
+      processed = []
       files(compilable: true) do |file|
-        case file.to_s
+        processed << case file.to_s
           when /(#{Utils.base}\/.*).coffee/
             compile_coffeescript Utils.rel_path(file), Utils.rel_path($1)
+            Utils.rel_path($1)
           when /(#{Utils.base}\/.*).(sass|scss)/
-            compile_sass Utils.rel_path(file), Utils.rel_path($1), $2
+            compile_sass Utils.rel_path(file), Utils.rel_path($1)
+            Utils.rel_path($1)
           when /(#{Utils.base}\/.*).haml/
             compile_haml Utils.rel_path(file), Utils.rel_path($1)
+            Utils.rel_path($1)
         end
       end
+      yield
+    ensure
+      FileUtils.rm processed
     end
 
     def files compilable: false, &block
@@ -105,13 +123,13 @@ module Shoperb
 
     def compile_coffeescript file, target
       Logger.notify "Compiling #{file}" do
-        Utils.write_file(target) { CoffeeScript.compile(File.read(file)) }
+        Utils.write_file(target) { sprockets[file.basename].to_s }
       end
     end
 
-    def compile_sass file, target, style
+    def compile_sass file, target
       Logger.notify "Compiling #{file}" do
-        Utils.write_file(target) { Sass::Engine.new(File.read(file), syntax: style).render }
+        Utils.write_file(target) { sprockets[file.basename].to_s }
       end
     end
 

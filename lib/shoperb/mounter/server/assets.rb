@@ -7,6 +7,7 @@ module Shoperb
         extend self
 
         def registered(app)
+          app.set :assets_precompile, %w(*.png *.jpg *.svg *.eot *.ttf *.woff)
           app.set :assets_prefix, %w(assets data/assets)
           app.register Sinatra::AssetPipeline
         end
