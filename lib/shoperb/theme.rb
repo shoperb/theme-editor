@@ -12,7 +12,7 @@ module Shoperb
     FILES = (%w{
       translations/*.json
       assets/fonts/*.{eot,woff,ttf}
-      assets/images/**/*.{png,jpg,jpeg,gif,swf,ico,svg,pdf}
+      assets/{images,icons}/**/*.{png,jpg,jpeg,gif,swf,ico,svg,pdf}
       assets/javascripts/**/*.js
       layouts/*.liquid
       assets/stylesheets/**/*.css
