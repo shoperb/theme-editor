@@ -3,6 +3,7 @@ module Shoperb
     module Model
       class Product < Abstract::Base
         has_and_belongs_to_many :collections
+        belongs_to :vendor
         belongs_to :category
         belongs_to :product_type
         has_many :variants
