@@ -12,6 +12,10 @@ module Shoperb
                 def #{options[:name] || relation}
                   DelegateArray.new(#{has_finder(relation, :select)})
                 end
+
+                def #{options[:name] || relation}?
+                  #{options[:name] || relation}.any?
+                end
               RUBY
             end
 
@@ -19,6 +23,10 @@ module Shoperb
               class_eval <<-RUBY, __FILE__, __LINE__ + 1
                 def #{options[:name] || relation}
                   #{has_finder(relation, :detect)}
+                end
+
+                def #{options[:name] || relation}?
+                  !!#{options[:name] || relation}
                 end
               RUBY
             end
@@ -28,6 +36,10 @@ module Shoperb
                 def #{options[:name] || relation}
                   DelegateArray.new(#{relation_klass(relation)}.all.select { |object| object.#{model_name}_#{finder.to_s.pluralize}.to_a.include?(self.#{finder}) })
                 end
+
+                def #{options[:name] || relation}?
+                  #{options[:name] || relation}.any?
+                end
               RUBY
             end
 
@@ -35,6 +47,10 @@ module Shoperb
               class_eval <<-RUBY, __FILE__, __LINE__ + 1
                 def #{options[:name] || relation}
                   #{polymorphic_relation_klass(relation, options)}.all.detect #{belongs_to_finder(relation)}
+                end
+
+                def #{options[:name] || relation}?
+                  !!#{options[:name] || relation}
                 end
               RUBY
             end

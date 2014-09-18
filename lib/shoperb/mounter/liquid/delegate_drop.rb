@@ -12,11 +12,7 @@ module Shoperb
         end
 
         def method_missing name, *args, &block
-          if name.to_s.ends_with?("?")
-            !!@record.send(name.to_s[0..-2], *args, &block)
-          else
-            @record.send(name, *args, &block)
-          end
+          @record.send(name, *args, &block)
         end
 
         def self.invokable?(method_name)

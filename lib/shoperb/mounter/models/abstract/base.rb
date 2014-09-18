@@ -23,6 +23,14 @@ module Shoperb
             true
           end
 
+          def method_missing name, *args, &block
+            if name.to_s.ends_with?("?")
+              !!send(name.to_s[0..-2], *args, &block)
+            else
+              super(name, *args, &block)
+            end
+          end
+
           def url
             "/#{self.class.model_name.pluralize}/#{super.presence || name}"
           end

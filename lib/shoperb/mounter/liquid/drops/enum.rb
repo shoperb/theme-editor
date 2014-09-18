@@ -11,7 +11,11 @@ module Shoperb
           end
 
           def method_missing name, *args, &block
-            @collection.send(name, *args, &block)
+            if name.to_s.ends_with?("?")
+              @collection.send(name.to_s[0..-2], *args, &block).any?
+            else
+              @collection.send(name, *args, &block)
+            end
           end
 
           def each

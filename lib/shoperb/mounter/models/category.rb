@@ -4,7 +4,7 @@ module Shoperb
       class Category < Abstract::Base
         has_many :products
         has_many :categories, name: :children
-        belongs_to :category, name: :parents
+        belongs_to :category, name: :parent
 
         def products_with_children
           products
