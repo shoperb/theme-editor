@@ -30,7 +30,7 @@ module Shoperb
         end
 
         def products_with_children
-          products | children.map(&:products_with_children).flatten
+          DelegateArray.new(products | children.map(&:products_with_children).flatten)
         end
       end
     end

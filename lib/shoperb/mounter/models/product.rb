@@ -15,7 +15,7 @@ module Shoperb
         end
 
         def others_in_category
-          category.products_with_children
+          DelegateArray.new(category.try(:products_with_children) || [])
         end
       end
     end
