@@ -25,9 +25,9 @@ module Shoperb
 
           def method_missing name, *args, &block
             if name.to_s.ends_with?("?")
-              !!send(name.to_s[0..-2], *args, &block)
+              !!self[name.to_s[0..-2]]
             else
-              super(name, *args, &block)
+              self[name]
             end
           end
 
