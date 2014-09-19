@@ -13,6 +13,10 @@ module Shoperb
         def image
           images.first
         end
+
+        def others_in_category
+          category.products_with_children
+        end
       end
     end
   end

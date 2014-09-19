@@ -30,7 +30,7 @@ module Shoperb
         end
 
         def products_with_children
-          products
+          products | children.map(&:products_with_children).flatten
         end
       end
     end
