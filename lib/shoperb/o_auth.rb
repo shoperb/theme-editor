@@ -37,7 +37,7 @@ module Shoperb
       theme = Faraday::UploadIO.new(file, "application/zip")
       atoken = access_token
       Logger.notify "Uploading #{Shoperb["handle"]}" do
-        atoken.post(Pathname.new("themes/#{Shoperb["handle"]}/upload").cleanpath.to_s, body: { zip: theme })
+        atoken.post(Pathname.new("themes/upload").cleanpath.to_s, body: { zip: theme })
       end
     ensure
       Utils.rm_tempfile file

@@ -1,3 +1,7 @@
+
+Sinatra.autoload :Flash, "sinatra/flash"
+Sinatra.autoload :RespondWith,"sinatra/respond_with"
+
 Tilt::Template.class_eval do
   def require_template_library(name)
     # Silence the warning
@@ -12,6 +16,7 @@ module Shoperb
       Shoperb.autoload_all self, "shoperb/mounter/server"
 
       set :root, Dir.pwd
+      set :environment, :development
 
       use ExceptionHandler
       register Renderer

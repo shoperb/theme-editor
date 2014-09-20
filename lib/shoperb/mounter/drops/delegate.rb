@@ -14,7 +14,7 @@ module Shoperb
         end
 
         def method_missing name, *args, &block
-          @record.send name, *args, &block
+          @record.send(name, *args, &block)
         end
 
         def self.invokable?(method_name)
