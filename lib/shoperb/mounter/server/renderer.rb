@@ -38,7 +38,7 @@ module Shoperb
 
         def self.registered app
 
-          Liquid::Template.error_mode = :lax
+          Liquid::Template.error_mode = :strict
 
           app.register Sinatra::RespondWith
           app.helpers Helpers

@@ -25,9 +25,7 @@ module Shoperb
             end
 
             app.get "/search" do
-              locals = {}
-              locals[:category] = Drop::Category.new(Model::Category.find(params[:categories])) if params[:categories].present?
-              respond :search, locals
+              respond :search
             end
 
           end

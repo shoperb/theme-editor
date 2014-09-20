@@ -14,7 +14,7 @@ module Shoperb
       set :root, Dir.pwd
 
       use ExceptionHandler
-      register Liquid
+      register Renderer
       register Routes
 
       helpers do

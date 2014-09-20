@@ -4,14 +4,18 @@ module Shoperb
       module Routes
         module Pages
 
-          def self.registered(app)
-
-            Model::Page.all.each do |page|
-              app.get "/#{page.template}" do
-                respond :"page.#{page.template}", page: page
-              end
+          class PageFinder
+            def match str
+              result = Model::Page.all.detect { |p| "/#{p.template}" == str }
+              Struct.new(:captures).new([result.template]) if !!result
             end
+          end
 
+          def self.registered(app)
+            app.get PageFinder.new do |template|
+              page = Model::Page.all.detect { |p| p.template == template }
+              respond :"page.#{template}", page: Drop::Page.new(page)
+            end
           end
         end
       end
