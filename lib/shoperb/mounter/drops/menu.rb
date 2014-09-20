@@ -1,10 +1,12 @@
 module Shoperb
   module Mounter
     module Drop
-      class Menus < Collection
+      class Menu < Delegate
+
         def links
-          Collection.new(Model::Link.all)
+          __to_drop__ Drop::Collection, :links
         end
+
       end
     end
   end

@@ -1,58 +1,38 @@
 module Shoperb
   module Mounter
     module Drop
-      class Collection < Delegate
+      class Collection < ::Liquid::Drop
 
         attr_reader :collection
 
         def initialize(collection = nil)
-          @collection = Delegate::Array.new(collection || [])
+          @collection = collection
+        end
+
+        def before_method(method)
+          collection.detect { |o| o.name == method.to_s } || method_missing(method)
         end
 
         def method_missing name, *args, &block
-          @collection.respond_to?(name) ? @collection.send(name, *args, &block) : super
+          collection.send(name)
         end
 
-        def each
-          limited.each do |item|
-            yield item.to_liquid
-          end
-        end
-
-        def [] name
-          @collection.detect { |object| object.send(:name) == name }
-        end
-
-        def first
-          collection.first.to_liquid
-        end
-
-        def last
-          collection.last.to_liquid
-        end
-
-        def to_a
-          limited.map { |o| o.to_liquid }
-        end
+        delegate :each, to: :collection
+        delegate :count, to: :collection
+        delegate :any?, to: :collection
+        delegate :many?, to: :collection
+        delegate :one?, to: :collection
+        delegate :empty?, to: :collection
+        delegate :first, to: :collection
+        delegate :last, to: :collection
 
         def inspect
           "<#{self.class.to_s} #{@collection.inspect} >"
         end
 
-        private
-
         def paginate(page, per_page)
-          self.class.new(collection.page(page).per(per_page))
+          self.class.new(@collection.take(per_page.to_i))
         end
-
-        def limit_value
-          (collection.respond_to?(:limit_value) && collection.limit_value) || 50
-        end
-
-        def limited
-          (collection.respond_to?(:limit) && collection.limit(limit_value)) || collection.slice(0..limit_value)
-        end
-
       end
     end
   end

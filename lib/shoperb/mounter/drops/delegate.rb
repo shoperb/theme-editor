@@ -31,6 +31,16 @@ module Shoperb
           true
         end
 
+        private
+
+        def __to_drop__ klass, method
+          klass.new(@record.send(method)) if @record.send(method)
+        end
+
+        def __shop__
+          @context && @context["shop"]
+        end
+
       end
     end
   end

@@ -37,10 +37,8 @@ module Shoperb
                 process_file get_objs(file)
               elsif File.exists?(default_file)
                 process_file get_objs(default_file)
-              else
-                raise Error.new("File not found: [#{file}, #{default_file}]")
               end
-              Drop::Delegate::Array.new(result)
+              Drop::Delegate::Array.new(result || [])
             end
           end
         end

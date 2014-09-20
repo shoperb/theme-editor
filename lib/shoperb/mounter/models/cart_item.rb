@@ -9,6 +9,7 @@ module Shoperb
         delegate :charge_taxes?,      :to => :variant
         delegate :require_shipping?,  :to => :variant
         delegate :product,            :to => :variant
+        delegate :product_type,       :to => :product
       end
     end
   end

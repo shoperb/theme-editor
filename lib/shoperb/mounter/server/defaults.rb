@@ -13,15 +13,15 @@ module Shoperb
               :meta         => Drop::Meta.new(locals.delete(:meta)),
               :categories   => Drop::Categories.new(Model::Category.all),
               :cart         => current_cart.to_liquid,
-              :menus        => Drop::Menus.new,
-              :pages        => Drop::Pages.new,
+              :menus        => Drop::Menus.new(Model::Menu.all),
+              :pages        => Drop::Pages.new(Model::Page.all),
               :search       => Drop::Search.new(params[:query]),
               :shop         => shop.to_liquid,
               :path         => request.path,
               :params       => params,
               :url          => Drop::Url::Get.new,
               :form_actions => Drop::Url::Post.new,
-              :collections  => Drop::ProductCollections.new
+              :collections  => Drop::ProductCollections.new(Model::Collection.all)
             }
           end
 
