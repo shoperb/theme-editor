@@ -10,7 +10,7 @@ module Shoperb
             def has_many relation, options={}
               class_eval <<-RUBY, __FILE__, __LINE__ + 1
                 def #{options[:name] || relation}
-                  DelegateArray.new(#{has_finder(relation, :select)})
+                  Drop::Delegate::Array.new(#{has_finder(relation, :select)})
                 end
 
                 def #{options[:name] || relation}?
@@ -34,7 +34,7 @@ module Shoperb
             def has_and_belongs_to_many relation, options={}
               class_eval <<-RUBY, __FILE__, __LINE__ + 1
                 def #{options[:name] || relation}
-                  DelegateArray.new(#{relation_klass(relation)}.all.select { |object| object.#{model_name}_#{finder.to_s.pluralize}.to_a.include?(self.#{finder}) })
+                  Drop::Delegate::Array.new(#{relation_klass(relation)}.all.select { |object| object.#{model_name}_#{finder.to_s.pluralize}.to_a.include?(self.#{finder}) })
                 end
 
                 def #{options[:name] || relation}?

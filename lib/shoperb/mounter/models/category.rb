@@ -5,7 +5,7 @@ module Shoperb
         has_many :products
 
         def children
-          DelegateArray.new(Category.all.select { |category| category.parent == self })
+          Category.all.select { |category| category.parent == self }
         end
 
         def children?
@@ -18,11 +18,11 @@ module Shoperb
 
         def parents
           current = self
-          DelegateArray.new.tap { |a| a << (current = current.parent) until current.parent.nil? }
+          [].tap { |a| a << (current = current.parent) until current.parent.nil? }
         end
 
-        def roots
-          DelegateArray.new(Category.all.select(&:root?))
+        def self.roots
+          Category.all.select(&:root?)
         end
 
         def root?
@@ -30,7 +30,7 @@ module Shoperb
         end
 
         def products_with_children
-          DelegateArray.new(products | children.map(&:products_with_children).flatten)
+          products | children.map(&:products_with_children).flatten
         end
       end
     end
