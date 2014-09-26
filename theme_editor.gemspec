@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "activesupport", "~> 4"
   gem.add_dependency "actionview", "~> 4"
   gem.add_dependency "actionpack", "~> 4"
-  gem.add_dependency "liquid"
+  gem.add_dependency "liquid", "3.0.0"
   gem.add_dependency "sprockets", "~> 2"
   gem.add_dependency "coffee-script", "~> 2"
   gem.add_dependency "sass", "~> 3"
@@ -30,7 +30,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency "oauth2", "~> 1"
   gem.add_dependency "rollbar", "~> 1"
   gem.add_dependency "launchy", "~> 2"
-  gem.add_dependency "sprockets", "~> 2"
   gem.add_dependency "rubyzip", "~> 1"
 
   gem.add_development_dependency "pry"
