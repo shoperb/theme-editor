@@ -26,8 +26,7 @@ module Shoperb
     mattr_accessor :sprockets do
       Sprockets::Environment.new do |env|
         env.instance_variable_set("@engines", env.engines.slice(".coffee", ".less", ".sass", ".scss").freeze)
-        env.append_path "assets/javascripts"
-        env.append_path "assets/stylesheets"
+        Dir["assets/**/*"].each(&env.method(:append_path))
       end
     end
 
@@ -112,10 +111,6 @@ module Shoperb
       FileUtils.rm processed
     end
 
-    def check_path path
-      File.exists?(path) ? raise(Error.new("#{path} already exists")) : path
-    end
-
     def files compilable: false, &block
       matchers(compilable: compilable).each do |matcher|
         Pathname.glob(Utils.base + matcher, &block)
@@ -124,14 +119,14 @@ module Shoperb
 
     def compile_through_sprockets file, target
       Logger.notify "Compiling #{file}" do
-        Utils.write_file(check_path(target)) { sprockets[file.basename].to_s }
+        Utils.write_file(target) { sprockets[file.basename].to_s }
         target
       end
     end
 
     def compile_haml file, target
       Logger.notify "Compiling #{file}" do
-        Utils.write_file(check_path(target)) { Haml::Engine.new(File.read(file)).render }
+        Utils.write_file(target) { Haml::Engine.new(File.read(file)).render }
         target
       end
     end
