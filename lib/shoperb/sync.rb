@@ -17,9 +17,9 @@ module Shoperb
         File.exists?(file) ? File.read(file).force_encoding("utf-8") : ""
       end
 
-      def replace name, hash
+      def replace name, hash, var = "name"
         content = YAML::load(current_content) || {}
-        (content[collection_name] || {}).delete_if { |i| i["name"] == name }
+        (content[collection_name] || {}).delete_if { |i| i[var] == name }
         yield(hash) if block_given?
         (content[collection_name] ||= []) << hash
         Utils.write_file file do
@@ -68,7 +68,7 @@ module Shoperb
     end
 
     def variant hash
-      Replacer.new("variants").replace(hash["name"], hash)
+      Replacer.new("variants").replace(hash["id"], hash, "id")
     end
 
     def product_attribute hash
@@ -112,7 +112,7 @@ module Shoperb
 
     def addresses
       clean_file "addresses"
-      plain_sync "addresses"
+      plain_sync "addresses", "id"
     end
 
     def currencies
@@ -155,7 +155,7 @@ module Shoperb
 
     def plain_sync plural, name="name"
       each_instance plural do |item_hash|
-        Replacer.new(plural.underscore).replace(item_hash[name], item_hash)
+        Replacer.new(plural.underscore).replace(item_hash[name], item_hash, name)
       end
     end
 
