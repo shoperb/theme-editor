@@ -133,6 +133,7 @@ module Shoperb
         menu_hash.delete("errors")
         Replacer.new("menus").replace(menu_hash["name"], menu_hash) do |attrs|
           each_instance "menus/#{attrs["id"]}/links" do |link_hash|
+            link_hash["menu_name"] = menu_hash["name"]
             Replacer.new("links").replace(link_hash["name"], link_hash)
           end
         end
