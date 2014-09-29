@@ -46,16 +46,13 @@ module Shoperb
     def sync
       initialize
       Sync.images
-      Sync.products
       Sync.categories
+      Sync.products
       Sync.collections
       Sync.vendors
       Sync.addresses
-      Sync.currencies
       Sync.pages
       Sync.shop
-      Sync.languages
-      Sync.product_types
       Sync.menus
       Sync.blog_posts
     end
