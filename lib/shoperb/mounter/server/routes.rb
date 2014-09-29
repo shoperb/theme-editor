@@ -52,6 +52,10 @@ module Shoperb
             respond [:home, :index, :frontpage]
           end
 
+          app.not_found do
+            respond :not_found
+          end
+
         end
 
       end
