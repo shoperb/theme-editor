@@ -6,7 +6,7 @@ module Shoperb
           extend ActiveSupport::Concern
 
           def inspect
-            "#{self.class.model_name}(#{self.id})"
+            "#{self.class.model_name}(#{self.to_h})"
           end
         end
       end
