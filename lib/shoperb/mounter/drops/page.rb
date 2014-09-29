@@ -4,7 +4,7 @@ module Shoperb
       class Page < Delegate
 
         def url
-          "/#{@record.template}"
+          "/pages/#{@record.permalink}"
         end
 
       end

@@ -44,7 +44,6 @@ module Shoperb
             respond template.to_sym, product: product, category: category, meta: product
           end
 
-
           app.get "/cart" do
             respond :cart
           end
