@@ -23,10 +23,6 @@ module Shoperb
           __to_drop__ Drop::Currency, :currency
         end
 
-        def account
-          __to_drop__ Drop::Account, :account
-        end
-
       end
     end
   end
