@@ -13,9 +13,9 @@ module Shoperb
           options = args_to_options(args)
 
           %{<div class="pagination">
-          #{pagination_link(paginate, "previous", options[:prev] || I18n.t("pagination.previous"))}
+          #{pagination_link(paginate, "previous", options[:prev] || Translate.t("pagination.previous"))}
           #{pagination_page_links(paginate)}
-          #{pagination_link(paginate, "next", options[:next] || I18n.t("pagination.next"))}
+          #{pagination_link(paginate, "next", options[:next] || Translate.t("pagination.next"))}
             </div>}
         end
 
