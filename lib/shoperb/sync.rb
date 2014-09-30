@@ -41,8 +41,8 @@ module Shoperb
         clean_file "variants"
         clean_file "attributes"
         each_instance "products" do |product_hash|
-          pt_id = product_hash.delete("product_type_id")
-          category_id = product_hash.delete("category_id")
+          pt_id = product_hash["product_type_id"]
+          category_id = product_hash["category_id"]
           product_hash["category_name"] = Mounter::Model::Category.all.detect { |ct| ct.to_h[:id] == category_id }.try(:name) if category_id
           product_hash["product_type_handle"] = Mounter::Model::ProductType.all.detect { |pt| pt.to_h[:id] == pt_id }.try(:handle) if pt_id
           Replacer.new("products").replace(product_hash["name"], product_hash) do |attrs|
