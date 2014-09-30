@@ -3,59 +3,87 @@ module Shoperb
   module Mounter
     class Server
       module Routes
-
         Shoperb.autoload_all self, "shoperb/mounter/server/routes"
 
+        mattr_accessor :app
+
+        class << self
+          delegate :register, to: :app
+          delegate :get, to: :app
+          delegate :not_found, to: :app
+        end
+
         def self.registered(app)
+          self.app = app
 
-          app.enable :sessions
+          register_modules
+          append_paths
 
-          app.register Assets
-          app.register Defaults
-          app.register Locale
-          app.register Pages
-          app.register Dummy
-          app.register Server::Renderer
-
-          app.get "/categories/:id" do
-            respond :category, category: Drop::Category.new(Model::Category.find(params[:id]))
-          end
-
-          app.get "/collections/:id" do
-            respond :collection, collection: Drop::Collection.new(Model::Collection.find(params[:id]))
-          end
-
-          app.get "/orders" do
-            respond :orders, orders: Drop::Delegate::Array.new(Model::Order.all)
-          end
-
-          app.get "/orders/:id" do
-            respond :order, order: Drop::Order.new(Model::Order.find(params[:id]))
-          end
-
-          app.get "/products" do
-            respond :products, products: Drop::Products.new(Model::Product.all)
-          end
-
-          app.get "/products/:id" do
-            product      = Drop::Product.new(Model::Product.find(params[:id]))
+          get "/products/:id" do
+            product      = Drop::Product.new(Model::Product.f(params[:id]))
             category     = product.category
             template     = product.template.presence || :product
             respond template.to_sym, product: product, category: category, meta: product
           end
 
-          app.get "/cart" do
+          get "/cart" do
             respond :cart
           end
 
-          app.get "/" do
+          get "/" do
             respond [:home, :index, :frontpage]
           end
 
-          app.not_found do
+          not_found do
             respond :not_found
           end
+        end
 
+        private
+
+        def self.register_modules
+          register Assets
+          register Defaults
+          register Locale
+          register Pages
+          register Dummy
+          register Server::Renderer
+        end
+
+        def self.append_paths
+          resource Model::Category do
+            Drop::Category.new(Model::Category.f(params[:id]))
+          end
+
+          resource Model::Collection do
+            Drop::Collection.new(Model::Collection.f(params[:id]))
+          end
+
+          resource Model::Order do
+            Drop::Order.new(Model::Order.f(params[:id]))
+          end
+
+          resources Model::Order do
+            Drop::Delegate::Array.new(Model::Order.all)
+          end
+
+          resources Model::Product do
+            Drop::Products.new(Model::Product.all)
+          end
+        end
+
+        def self.resource collection, &block
+          name = collection.to_s.demodulize.underscore
+          get "/#{name.pluralize}/:id" do
+            respond name, name => instance_exec(&block)
+          end
+        end
+
+        def self.resources collection, &block
+          name = collection.to_s.demodulize.underscore.pluralize
+          get "/#{name}" do
+            respond name, name => instance_exec(&block)
+          end
         end
 
       end
