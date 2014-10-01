@@ -10,7 +10,7 @@ module Shoperb
         end
 
         def before_method(method)
-          collection.detect { |o| o.name == method.to_s } || method_missing(method)
+          collection.detect { |o| o.send(o.class.finder) == method.to_s }
         end
 
         def method_missing name, *args, &block
