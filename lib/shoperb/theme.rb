@@ -18,7 +18,7 @@ module Shoperb
       assets/stylesheets/**/*.css
       templates/*.liquid
       assets/javascripts/**/*.js.coffee
-      assets/stylesheets/**/*.css.{sass,scss}
+      assets/stylesheets/**/*.{css.{sass,scss},sass,scss}
       templates/*.liquid.haml
       layouts/*.liquid.haml
     }).freeze
