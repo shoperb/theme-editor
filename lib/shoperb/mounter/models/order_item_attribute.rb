@@ -2,7 +2,7 @@ module Shoperb
   module Mounter
     module Model
       class OrderItemAttribute < Base
-        belongs_to :order_item
+        # todo: TODOREF2
       end
     end
   end

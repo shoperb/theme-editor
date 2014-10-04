@@ -30,6 +30,7 @@ autoload :ActiveHash,         "active_hash"
 autoload :ActiveYaml,         "active_hash"
 
 require "haml"
+require "pry"
 
 module Shoperb
   extend self

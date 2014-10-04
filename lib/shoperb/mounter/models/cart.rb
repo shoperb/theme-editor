@@ -2,7 +2,7 @@ module Shoperb
   module Mounter
     module Model
       class Cart < Base
-        has_many :cart_items, name: :items
+        # todo: TODOREF2
       end
     end
   end

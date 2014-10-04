@@ -2,7 +2,7 @@ module Shoperb
   module Mounter
     module Model
       class ProductAttribute < Base
-        belongs_to :product
+        # todo: TODOREF2
       end
     end
   end

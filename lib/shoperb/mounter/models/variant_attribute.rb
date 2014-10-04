@@ -2,7 +2,7 @@ module Shoperb
   module Mounter
     module Model
       class VariantAttribute < Base
-        belongs_to :variant
+        # todo: TODOREF2
       end
     end
   end

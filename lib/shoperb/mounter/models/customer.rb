@@ -2,8 +2,7 @@ module Shoperb
   module Mounter
     module Model
       class Customer < Base
-        has_many :orders
-        has_many :addresses
+        # todo: TODOREF2
       end
     end
   end

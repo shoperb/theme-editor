@@ -2,8 +2,7 @@ module Shoperb
   module Mounter
     module Model
       class Vendor < Base
-        has_many :products
-        belongs_to :address
+        # todo: TODOREF2
       end
     end
   end

@@ -22,16 +22,8 @@ module Shoperb
       process Mounter::Model::BlogPost
     end
 
-    def languages
-      process Mounter::Model::Language
-    end
-
     def addresses
       process Mounter::Model::Address
-    end
-
-    def currencies
-      process Mounter::Model::Currency
     end
 
     def images
@@ -50,14 +42,24 @@ module Shoperb
     end
 
     def menus
+      Mounter::Model::Link.delete_all
+      urls = []
       process Mounter::Model::Menu do |hash|
         menu = hash["menu"]
-        process Mounter::Model::Link, "menus/#{menu["id"]}/links" do |link|
-          assign_relation link, Mounter::Model::Menu
-          link
-        end
+        urls << "menus/#{menu["id"]}/links"
         menu
       end
+      links urls
+    end
+
+    def links urls
+      Mounter::Model::Link.assign(urls.map(&method(:fetch)).flatten(1).map do |link|
+        # todo: TODOREF1
+        # assign_relation link, Mounter::Model::Menu
+        link["menu_#{Mounter::Model::Menu.primary_key}"] = Mounter::Model::Menu.where(id: link["menu_id"]).first.try(Mounter::Model::Menu.primary_key)
+        # todo: TODOREF1 end
+        link
+      end)
     end
 
     def products
@@ -72,8 +74,8 @@ module Shoperb
     end
 
     def shop
-      currencies
-      languages
+      process Mounter::Model::Currency
+      process Mounter::Model::Language
       process Mounter::Model::Shop, "shop" do |shop|
         assign_relation shop, Mounter::Model::Currency
         assign_relation shop, Mounter::Model::Language
@@ -120,6 +122,7 @@ module Shoperb
       name = klass.to_s.demodulize.underscore
       id = attributes.delete("#{name}_id")
       attributes["#{name}_#{klass.primary_key}"] = klass.where(id: id).first.try(klass.primary_key) if id
+      attributes["#{name}_#{klass.primary_key}"] || (attributes["#{name}_id"] = id if id)
     end
 
     def threaded_download message, downloads

@@ -10,6 +10,7 @@ module Shoperb
         end
 
         has_many :products
+
       end
     end
   end
