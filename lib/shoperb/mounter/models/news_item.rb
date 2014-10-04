@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
     module Model
-      class NewsItem < Abstract::Base
+      class NewsItem < Base
       end
     end
   end

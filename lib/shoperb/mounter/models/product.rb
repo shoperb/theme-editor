@@ -1,8 +1,13 @@
 module Shoperb
   module Mounter
     module Model
-      class Product < Abstract::Base
-        has_and_belongs_to_many :collections
+      class Product < Base
+        fields :id, :name, :description, :has_options, :permalink, :slug, :state, :category_id, :vendor_id, :product_type_id, :translations, :template, :product_type_handle, :category_slug
+
+        def self.primary_key
+          :slug
+        end
+
         belongs_to :vendor
         belongs_to :category
         belongs_to :product_type

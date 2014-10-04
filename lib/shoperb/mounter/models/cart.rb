@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
     module Model
-      class Cart < Abstract::SingletonBase
+      class Cart < Base
         has_many :cart_items, name: :items
       end
     end

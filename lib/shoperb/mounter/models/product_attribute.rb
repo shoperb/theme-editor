@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
     module Model
-      class ProductAttribute < Abstract::Base
+      class ProductAttribute < Base
         belongs_to :product
       end
     end

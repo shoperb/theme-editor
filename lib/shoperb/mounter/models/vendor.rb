@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
     module Model
-      class Vendor < Abstract::Base
+      class Vendor < Base
         has_many :products
         belongs_to :address
       end

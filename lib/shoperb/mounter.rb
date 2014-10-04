@@ -14,17 +14,7 @@ module Shoperb
     Shoperb.autoload_all self, "shoperb/mounter"
 
     module Model
-
-      module Abstract
-        Shoperb.autoload_all self, "shoperb/mounter/models/abstract"
-      end
-
-      module Concerns
-        Shoperb.autoload_all self, "shoperb/mounter/models/concerns"
-      end
-
       Shoperb.autoload_all self, "shoperb/mounter/models"
-
     end
 
     module Drop

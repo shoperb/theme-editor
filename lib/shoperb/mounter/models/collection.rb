@@ -1,8 +1,12 @@
 module Shoperb
   module Mounter
     module Model
-      class Collection < Abstract::Base
-        has_and_belongs_to_many :products
+      class Collection < Base
+        fields :id, :name, :permalink, :slug, :translations
+
+        def self.primary_key
+          :slug
+        end
       end
     end
   end

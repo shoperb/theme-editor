@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
     module Model
-      class OrderItem < Abstract::Base
+      class OrderItem < Base
         belongs_to :order
         has_many :order_item_attributes
       end

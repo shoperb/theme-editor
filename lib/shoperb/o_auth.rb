@@ -45,16 +45,16 @@ module Shoperb
 
     def sync
       initialize
+      Sync.shop
       Sync.images
-      Sync.categories
       Sync.products
       Sync.collections
       Sync.vendors
       Sync.addresses
       Sync.pages
-      Sync.shop
       Sync.menus
       Sync.blog_posts
+      Mounter::Model::Base.save
     end
 
     def oauth_client

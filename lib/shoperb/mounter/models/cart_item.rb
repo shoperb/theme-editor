@@ -1,7 +1,7 @@
 module Shoperb
   module Mounter
     module Model
-      class CartItem < Abstract::Base
+      class CartItem < Base
         belongs_to :cart
         belongs_to :variant
         delegate :sku,                :to => :variant
