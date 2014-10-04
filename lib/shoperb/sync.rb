@@ -96,15 +96,10 @@ module Shoperb
           Logger.info "#{message} #{page.message(&counter)}\r" if page
           response = OAuth.access_token.get(path, &as_json(page: page.try(:next_page)))
           items = Array.wrap(response.parsed)
-          items.each &delete_shop_id
           records += items
         end while (page = Pagination.new(response).presence)
       end
       records
-    end
-
-    def delete_shop_id
-      ->(item) { item.delete("shop_id") }
     end
 
     def counter
