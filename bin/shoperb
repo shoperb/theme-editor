@@ -53,6 +53,17 @@ Slop.parse ignore_case: true, help: true, strict: true do
     end
   end
 
+  command "console" do
+    apply_global_opts
+    description "Irb in the context of theme generator"
+    banner with_description("Usage: shoperb console [options]")
+    run do |options, args|
+      Shoperb.with_configuration(options) do
+        Shoperb::Mounter::Model.console
+      end
+    end
+  end
+
   mount = ->(*vars) {
     apply_global_opts
     description "Serves local as a shoperb theme file"

@@ -14,11 +14,17 @@ module Shoperb
     Shoperb.autoload_all self, "shoperb/mounter"
 
     module Model
+
+      def self.console
+        binding.pry
+      end
+
       Shoperb.autoload_all self, "shoperb/mounter/models"
     end
 
     module Drop
 
+      # todo: TODOREF4
       Shoperb.autoload_all self, "shoperb/mounter/drops"
 
       class << self
@@ -27,6 +33,7 @@ module Shoperb
         end
         alias_method_chain :const_missing, :default
       end
+      # todo: TODOREF4 end
     end
 
     module Filter

@@ -33,5 +33,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency "launchy", "~> 2"
   gem.add_dependency "rubyzip", "~> 1"
 
-  gem.add_development_dependency "pry"
+  gem.add_dependency "pry"
 end
