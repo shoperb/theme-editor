@@ -3,6 +3,8 @@ module Shoperb
     module Drop
       class Base < ::Liquid::Drop
 
+        attr_reader :record
+
         def initialize(record)
           @record = record
         end
