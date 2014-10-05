@@ -42,24 +42,30 @@ module Shoperb
     end
 
     def menus
-      Mounter::Model::Link.delete_all
-      urls = []
       process Mounter::Model::Menu do |hash|
-        menu = hash["menu"]
-        urls << "menus/#{menu["id"]}/links"
-        menu
+        hash["menu"]
       end
-      links urls
     end
 
-    def links urls
-      Mounter::Model::Link.assign(urls.map(&method(:fetch)).flatten(1).map do |link|
+    def links
+      process Mounter::Model::Link do |link|
         # todo: TODOREF1
         # assign_relation link, Mounter::Model::Menu
         link["menu_#{Mounter::Model::Menu.primary_key}"] = Mounter::Model::Menu.where(id: link["menu_id"]).first.try(Mounter::Model::Menu.primary_key)
         # todo: TODOREF1 end
         link
-      end)
+      end
+    end
+
+    def variants
+      process Mounter::Model::Variant do |variant|
+        assign_relation variant, Mounter::Model::Product
+        variant
+      end
+      process Mounter::Model::VariantAttribute do |variant_attribute|
+        assign_relation variant_attribute, Mounter::Model::Variant
+        variant_attribute
+      end
     end
 
     def products
@@ -70,6 +76,15 @@ module Shoperb
         assign_relation product, Mounter::Model::ProductType
         product.delete("images")
         product
+      end
+      product_attributes
+      variants
+    end
+
+    def product_attributes
+      process Mounter::Model::ProductAttribute do |product_attribute|
+        assign_relation product_attribute, Mounter::Model::Product
+        product_attribute
       end
     end
 
