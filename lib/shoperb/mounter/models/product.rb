@@ -3,10 +3,14 @@ module Shoperb
     module Model
       class Product < Base
 
-        fields :name, :description, :has_options, :permalink, :slug, :state, :translations, :template
+        fields :name, :description, :has_options, :permalink, :slug, :state, :translations, :template, :collection_ids
 
         def self.primary_key
           :slug
+        end
+
+        def collections
+          Collection.all.select { |collection| collection_ids.to_a.include?(collection.attributes[:id]) }
         end
 
         belongs_to :product_type
