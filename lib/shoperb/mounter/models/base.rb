@@ -8,8 +8,14 @@ module Shoperb
 
         class << self
 
+          def inherited_with_default_fields model
+            inherited_without_default_fields model
+            model.fields :id
+          end
+          alias_method_chain :inherited, :default_fields
+
           def belongs_to_with_auto_key(association_id, options = {})
-            klass = parent.const_get(association_id.to_s.classify)
+            klass = options.has_key?(:class_name) ? options[:class_name].constantize : parent.const_get(association_id.to_s.classify)
             options.reverse_merge!(
               class_name: klass.to_s,
               foreign_key: "#{association_id}_#{klass.primary_key}",
@@ -20,7 +26,7 @@ module Shoperb
           alias_method_chain :belongs_to, :auto_key
 
           def has_many_with_auto_key(association_id, options = {})
-            klass = parent.const_get(association_id.to_s.classify)
+            klass = options.has_key?(:class_name) ? options[:class_name].constantize : parent.const_get(association_id.to_s.classify)
             options.reverse_merge!(
               class_name: klass.to_s,
               foreign_key: "#{to_s.demodulize.underscore}_#{primary_key}",

@@ -3,7 +3,7 @@ module Shoperb
     module Model
       class Collection < Base
 
-        fields :id, :name, :permalink, :slug, :translations
+        fields :name, :permalink, :slug, :translations
 
         def self.primary_key
           :slug

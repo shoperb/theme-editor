@@ -3,7 +3,7 @@ module Shoperb
     module Model
       class ProductType < Base
 
-        fields :id, :name, :handle, :translations
+        fields :name, :handle, :translations
 
         def self.primary_key
           :handle

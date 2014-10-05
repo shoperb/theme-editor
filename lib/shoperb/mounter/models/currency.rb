@@ -3,7 +3,7 @@ module Shoperb
     module Model
       class Currency < Base
 
-        fields :id, :name, :code, :symbol, :rate, :date
+        fields :name, :code, :symbol, :rate, :date
 
         def self.primary_key
           :code
