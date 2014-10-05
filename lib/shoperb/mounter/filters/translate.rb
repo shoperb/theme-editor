@@ -7,7 +7,7 @@ module Shoperb
 
         def translate(string)
           key = string.parameterize(".")
-          (all_translations[locale] || HashWithIndifferentAccess.new).fetch(key) { key }
+          (all_translations[locale || Model::Shop.instance.language_code] || HashWithIndifferentAccess.new).fetch(key) { key }
         end
 
         alias :t :translate
