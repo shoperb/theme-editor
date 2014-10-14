@@ -22,7 +22,7 @@ module Shoperb
 
           def process_file file, locals, registers
             file = Pathname.new(file)
-            result = File.read(file).force_encoding("UTF-8").gsub('\u00A0', " ")
+            result = File.read(file).force_encoding("UTF-8").gsub("\xC2\xA0", " ")
 
             while (ext = file.extname.gsub(".", "")).to_sym != settings.destination_format
               file = Pathname.new(file.to_s.gsub(".#{ext}", ""))
