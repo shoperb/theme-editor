@@ -20,7 +20,7 @@ module Shoperb
           append_paths
 
           get "/products/:id" do
-            product      = Drop::Product.new(Model::Product.f(params[:id]))
+            product      = Drop::Product.new(Model::Product.find(params[:id]))
             category     = product.category
             template     = product.template.presence || :product
             respond template.to_sym, product: product, category: category, meta: product
@@ -52,15 +52,15 @@ module Shoperb
 
         def self.append_paths
           resource Model::Category do
-            Drop::Category.new(Model::Category.f(params[:id]))
+            Drop::Category.new(Model::Category.find(params[:id]))
           end
 
           resource Model::Collection do
-            Drop::Collection.new(Model::Collection.f(params[:id]))
+            Drop::Collection.new(Model::Collection.find(params[:id]))
           end
 
           resource Model::Order do
-            Drop::Order.new(Model::Order.f(params[:id]))
+            Drop::Order.new(Model::Order.find(params[:id]))
           end
 
           resources Model::Order do
