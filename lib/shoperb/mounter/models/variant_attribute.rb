@@ -3,7 +3,7 @@ module Shoperb
     module Model
       class VariantAttribute < Base
 
-        fields :attribute_key_id, :value, :translations
+        fields :id, :attribute_key_id, :value, :translations
 
         belongs_to :variant
 

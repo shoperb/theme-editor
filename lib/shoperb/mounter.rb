@@ -23,17 +23,7 @@ module Shoperb
     end
 
     module Drop
-
-      # todo: TODOREF4
       Shoperb.autoload_all self, "shoperb/mounter/drops"
-
-      class << self
-        def const_missing_with_default *args
-          const_missing_without_default(*args) rescue Delegate
-        end
-        alias_method_chain :const_missing, :default
-      end
-      # todo: TODOREF4 end
     end
 
     module Filter

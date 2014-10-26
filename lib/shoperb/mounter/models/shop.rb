@@ -3,7 +3,7 @@ module Shoperb
     module Model
       class Shop < Base
 
-        fields :name, :domain, :email, :time_zone, :unit_system, :tax_included, :tax_shipping, :possible_languages
+        fields :id, :name, :domain, :email, :time_zone, :unit_system, :tax_included, :tax_shipping, :possible_languages
 
         def self.primary_key
           :domain

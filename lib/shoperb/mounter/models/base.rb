@@ -7,15 +7,8 @@ module Shoperb
         include ActiveHash::Associations
 
         class << self
-
-          def inherited_with_default_fields model
-            inherited_without_default_fields model
-            model.fields :id
-          end
-          alias_method_chain :inherited, :default_fields
-
           def belongs_to_with_auto_key(association_id, options = {})
-            klass = options.has_key?(:class_name) ? options[:class_name].constantize : parent.const_get(association_id.to_s.classify)
+            klass = klass_for(association_id, options)
             options.reverse_merge!(
               class_name: klass.to_s,
               foreign_key: "#{association_id}_#{klass.primary_key}",
@@ -26,7 +19,7 @@ module Shoperb
           alias_method_chain :belongs_to, :auto_key
 
           def has_many_with_auto_key(association_id, options = {})
-            klass = options.has_key?(:class_name) ? options[:class_name].constantize : parent.const_get(association_id.to_s.classify)
+            klass = klass_for(association_id, options)
             options.reverse_merge!(
               class_name: klass.to_s,
               foreign_key: "#{to_s.demodulize.underscore}_#{primary_key}",
@@ -43,6 +36,10 @@ module Shoperb
             [subclasses, [self]].detect(&:any?).each do |klass|
               Utils.write_file(klass.full_path) { klass.as_hash.to_yaml }
             end
+          end
+
+          def klass_for association_id, options
+            options.has_key?(:class_name) ? options[:class_name].constantize : parent.const_get(association_id.to_s.classify)
           end
 
           def load_file
@@ -79,7 +76,7 @@ module Shoperb
         end
 
         def id
-          self.class.primary_key == "id" ? super : send(self.class.primary_key)
+          self.class.primary_key.to_s == "id" ? super : send(self.class.primary_key)
         end
       end
     end

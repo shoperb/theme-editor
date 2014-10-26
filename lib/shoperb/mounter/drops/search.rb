@@ -1,10 +1,10 @@
 module Shoperb
   module Mounter
     module Drop
-      class Search < Delegate
+      class Search < Base
 
         def initialize(word = "")
-          @record = Model::Search.instance
+          @record = Model::Search.first
         end
 
         def paginate(page = 1, search_size = 25)

@@ -2,7 +2,19 @@ module Shoperb
   module Mounter
     module Model
       class Cart < Base
-        # todo: TODOREF2
+
+        def self.primary_key
+          :token
+        end
+
+        def items
+          CartItem.all
+        end
+
+        def total
+          items.sum(&:total)
+        end
+
       end
     end
   end

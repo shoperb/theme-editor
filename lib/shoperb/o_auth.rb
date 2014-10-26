@@ -45,9 +45,9 @@ module Shoperb
 
     def sync
       initialize
+      Sync.products
       Sync.shop
       Sync.images
-      Sync.products
       Sync.collections
       Sync.vendors
       Sync.addresses

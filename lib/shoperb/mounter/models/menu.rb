@@ -3,7 +3,7 @@ module Shoperb
     module Model
       class Menu < Base
 
-        fields :name, :handle, :editable, :translations
+        fields :id, :name, :handle, :editable, :translations
 
         def self.primary_key
           :handle

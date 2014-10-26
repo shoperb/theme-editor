@@ -3,7 +3,7 @@ module Shoperb
     module Model
       class Product < Base
 
-        fields :name, :description, :has_options, :permalink, :slug, :state, :translations, :template, :collection_ids
+        fields :id, :name, :description, :has_options, :permalink, :slug, :state, :translations, :template, :collection_ids
 
         def self.primary_key
           :slug
@@ -21,6 +21,24 @@ module Shoperb
         belongs_to :vendor
 
         belongs_to :category
+
+        has_many :variants
+
+        has_many :images
+
+        has_many :product_attributes
+
+        def image
+          images.first
+        end
+
+        def available?
+          variants.any? { |o| o.available? }
+        end
+
+        def minimum_active_price
+          variants.min { |a, b| a.active_price <=> b.active_price }.try(:active_price)
+        end
 
       end
     end

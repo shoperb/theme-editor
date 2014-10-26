@@ -27,18 +27,7 @@ module Shoperb
     end
 
     def images
-      FileUtils.mkdir_p(dir = Utils.base + "data" + "assets" + "images")
-      downloads = []
-      process Mounter::Model::Image do |image|
-        image["sizes"] = image["sizes"].map do |size, url|
-          next unless url
-          filename = dir + "#{Pathname.new(url).basename.to_s.split("?")[0]}"
-          (downloads << -> { Utils.write_file(filename) { open(url).read } }) unless File.exists?(filename)
-          [size, filename.relative_path_from(dir).to_s]
-        end.compact.to_h
-        image
-      end
-      threaded_download "Downloading images", downloads
+      Images.process
     end
 
     def menus
@@ -62,6 +51,7 @@ module Shoperb
         assign_relation variant, Mounter::Model::Product
         variant
       end
+      return
       process Mounter::Model::VariantAttribute do |variant_attribute|
         assign_relation variant_attribute, Mounter::Model::Variant
         variant_attribute
@@ -98,27 +88,29 @@ module Shoperb
       end
     end
 
-    private
-
     def process klass, path=klass.to_s.demodulize.tableize, &block
       klass.assign fetch(path).map(&(block || ->(i){i}))
     end
+
+    def counter
+      ->(from, to, total) { "(#{from} to #{to} of #{total})" }
+    end
+
+    private
 
     def fetch path, message="Syncing #{path}"
       records, response, page = [], nil, nil
       Logger.notify message do
         begin
           Logger.info "#{message} #{page.message(&counter)}\r" if page
-          response = OAuth.access_token.get(path, &as_json(page: page.try(:next_page)))
-          items = Array.wrap(response.parsed)
-          records += items
+          records += Array.wrap((response = get_response(path, page)).parsed)
         end while (page = Pagination.new(response).presence)
       end
       records
     end
 
-    def counter
-      ->(from, to, total) { "(#{from} to #{to} of #{total})" }
+    def get_response path, page
+      OAuth.access_token.get(path, &as_json(page: page.try(:next_page)))
     end
 
     def as_json(params={})
@@ -133,19 +125,6 @@ module Shoperb
       id = attributes.delete("#{name}_id")
       attributes["#{name}_#{klass.primary_key}"] = klass.where(id: id).first.try(klass.primary_key) if id
       attributes["#{name}_#{klass.primary_key}"] || (attributes["#{name}_id"] = id if id)
-    end
-
-    def threaded_download message, downloads
-      return unless downloads.any?
-      Logger.info message
-      Logger.notify message do
-        current, count = 0, 25
-        downloads.each_slice(count) do |dls|
-          current = current + count
-          Logger.info "#{message} #{counter[current - count, [current, downloads.count].min, downloads.count]}\r"
-          dls.map { |block| Thread.new(&block) }.map(&:join)
-        end
-      end
     end
 
   end

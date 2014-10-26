@@ -9,14 +9,22 @@ module Shoperb
           @record = record
         end
 
+        def inspect
+          "#{self.class.to_s}(#{record.id})"
+        end
+
         private
 
-        def default_url
-          "#{default_url_language}/#{self.class.filename}/#{self.record.to_param}"
+        def default_url id=self.record.to_param
+          "#{default_url_language}/#{self.record.class.filename}/#{id}"
         end
 
         def default_url_language
-          "/#{Filter::Translate.locale}" if Filter::Translate.locale && Filter::Translate.locale != Model::Shop.instance.language_code
+          "/#{Filter::Translate.locale}" if Filter::Translate.locale && Filter::Translate.locale != Model::Shop.first.language_code
+        end
+
+        def shop
+          Model::Shop.first
         end
 
       end

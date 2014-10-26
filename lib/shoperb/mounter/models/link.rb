@@ -3,7 +3,7 @@ module Shoperb
     module Model
       class Link < Base
 
-        fields :entity_id, :entity_type, :style, :name, :value, :handle, :position, :translations
+        fields :id, :entity_id, :entity_type, :style, :name, :value, :handle, :position, :translations
 
         # todo: TODOREF1
         # def self.primary_key

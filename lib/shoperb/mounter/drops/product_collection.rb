@@ -1,14 +1,26 @@
 module Shoperb
   module Mounter
     module Drop
-      class ProductCollection < Delegate
+      class ProductCollection < Base
+
+        def id
+          record.id
+        end
+
+        def name
+          record.name
+        end
+
+        def handle
+          record.permalink
+        end
 
         def url
-          "/collections/#{@record.name}"
+          default_url handle
         end
 
         def products
-          Drop::Products.new(@record.products)
+          Products.new(record.products)
         end
 
       end

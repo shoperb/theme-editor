@@ -3,7 +3,7 @@ module Shoperb
     module Model
       class Language < Base
 
-        fields :code, :name, :native, :active
+        fields :id, :code, :name, :native, :active
 
         def self.primary_key
           :code

@@ -1,22 +1,18 @@
 module Shoperb
   module Mounter
     module Drop
-      class Variant < Delegate
+      class Variant < Base
 
-        def options
-          record.variant_attributes.map(&:value)
+        def id
+          record.id
         end
 
-        def image
-          __to_drop__ Drop::Image, :image
+        def name
+          record.name
         end
 
-        def images
-          __to_drop__ Drop::Collection, :images
-        end
-
-        def attributes
-          __to_drop__ Drop::Collection, :variant_attributes
+        def price
+          record.price
         end
 
         def discount_price
@@ -43,12 +39,52 @@ module Shoperb
           record.active_price
         end
 
+        def available?
+          record.available?
+        end
+
+        def sku
+          record.sku
+        end
+
         def stock
           record.track_inventory? ? record.stock : nil
         end
 
+        def weight
+          record.weight
+        end
+
+        def width
+          record.width
+        end
+
+        def height
+          record.height
+        end
+
+        def depth
+          record.depth
+        end
+
+        def options
+          record.variant_attributes.map(&:value)
+        end
+
+        def image
+          Image.new(record.image) if record.image
+        end
+
+        def images
+          Collection.new(record.images.sorted)
+        end
+
+        def attributes
+          Collection.new(record.variant_attributes)
+        end
+
         def json
-          @record.to_h.merge(attributes: @record.variant_attributes.map(&:to_h)).to_json
+          record.to_h.merge(attributes: record.variant_attributes.map(&:to_h)).to_json
         end
 
       end

@@ -5,7 +5,7 @@ module Shoperb
 
         # todo: TODOREF2
 
-        fields :code
+        fields :id, :code
 
         def self.primary_key
           :code

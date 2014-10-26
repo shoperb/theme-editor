@@ -3,7 +3,7 @@ module Shoperb
     module Model
       class Category < Base
 
-        fields :parent_id, :state, :name, :permalink, :description, :lft, :rgt, :slug, :translations
+        fields :id, :parent_id, :state, :name, :permalink, :description, :lft, :rgt, :slug, :translations
         fields :level
 
         def self.primary_key

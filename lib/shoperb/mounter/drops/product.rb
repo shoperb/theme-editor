@@ -1,46 +1,97 @@
 module Shoperb
   module Mounter
     module Drop
-      class Product < Delegate
+      class Product < Base
+
+        def id
+          record.id
+        end
+
+        def name
+          record.name
+        end
+
+        def handle
+          record.slug
+        end
 
         def url
-          "/products/#{@record.name}"
+          default_url handle
+        end
+
+        def max_price
+          record.maximum_price
+        end
+
+        def min_price
+          record.minimum_price
+        end
+        alias :price :min_price
+
+        def min_discount_price
+          record.minimum_discount_price
+        end
+
+        def max_discount_price
+          record.maximum_discount_price
+        end
+
+        def min_active_price
+          record.minimum_active_price
+        end
+
+        def max_active_price
+          record.maximum_active_price
+        end
+
+        def available?
+          record.available?
+        end
+
+        def description
+          record.description
+        end
+
+        def options
+          record.product_attributes.map(&:value)
         end
 
         def category
-          __to_drop__ Drop::Category, :category
+          Category.new(record.category)
         end
 
         def vendor
-          __to_drop__ Drop::Vendor, :vendor
+          Vendor.new(record.vendor)
         end
 
         def type
-          __to_drop__ Drop::ProductType, :product_type
+          ProductType.new(record.product_type)
         end
 
         def variants
-          Drop::Variants.new(@record.variants)
+          Variants.new(record.variants)
         end
 
         def image
-          __to_drop__ Drop::Image, :image
+          Image.new(record.image) if record.image
         end
 
         def images
-          Drop::Collection.new(@record.images)
+          Collection.new(record.images)
         end
 
         def attributes
-          Drop::Collection.new @record.product_attributes
+          Collection.new(record.product_attributes)
         end
 
         def variant_properties
-          Drop::Collection.new(@record.variant_attributes)
+          Collection.new(record.variant_attributes)
         end
 
         def others_in_category
-          Drop::Products.new(@record.others_in_category)
+          return Products.new([]) unless record.category
+
+          Products.new(record.category.products_for_self_and_children)
         end
 
       end

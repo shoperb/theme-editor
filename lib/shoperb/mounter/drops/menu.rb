@@ -1,10 +1,22 @@
 module Shoperb
   module Mounter
     module Drop
-      class Menu < Delegate
+      class Menu < Base
+
+        def id
+          record.id
+        end
+
+        def name
+          record.name
+        end
+
+        def handle
+          record.handle
+        end
 
         def links
-          __to_drop__ Drop::Collection, :links
+          Collection.new(record.links)
         end
 
       end

@@ -24,11 +24,11 @@ module Shoperb
 
       helpers do
         def current_cart
-          Model::Cart.instance
+          Model::Cart.first
         end
 
         def shop
-          Model::Shop.instance
+          Model::Shop.first
         end
       end
     end

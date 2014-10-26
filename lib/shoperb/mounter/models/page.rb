@@ -3,7 +3,7 @@ module Shoperb
     module Model
       class Page < Base
 
-        fields :state, :name, :content, :permalink, :slug, :translations, :template
+        fields :id, :state, :name, :content, :permalink, :slug, :translations, :template
 
         def self.primary_key
           :slug
