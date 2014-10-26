@@ -9,11 +9,12 @@ module Shoperb
             registers = registers.reverse_merge({layout: "layout"})
             templates = [templates].flatten
             format = Sinatra::RespondWith::Format.new(self)
-            files = find_templates(templates)
-            if files.any?
-              result = process_file files[0], locals, registers
+            if (template = template_name(templates))
+              locals.merge!(template_name: template.to_s)
+              file = template_path(template)
+              result = process_file file, locals, registers
               unless (layout_name = registers[:layout].to_s).blank?
-                result = process_file(find_templates([layout_name], settings.layouts_directory)[0], locals.merge(content_for_layout: result), registers)
+                result = process_file(template_path(layout_name, settings.layouts_directory), locals.merge(content_for_layout: result), registers)
               end
               halt result
             end
@@ -22,7 +23,7 @@ module Shoperb
 
           def process_file file, locals, registers
             file = Pathname.new(file)
-            result = File.read(file)
+            result = File.read(file).force_encoding("UTF-8").gsub("\xC2\xA0", " ")
 
             while (ext = file.extname.gsub(".", "")).to_sym != settings.destination_format
               file = Pathname.new(file.to_s.gsub(".#{ext}", ""))
@@ -31,8 +32,14 @@ module Shoperb
             send(settings.destination_format, result, { scope: locals }, registers)
           end
 
-          def find_templates(names, base=settings.templates_directory)
-            Dir[base.to_s + "/" + "{#{names.join(",")}}" + ".#{settings.destination_format}" + "{#{settings.allowed_engines.map { |ext_name| ".#{ext_name}" }.join(",")},}"]
+          def template_path name, base=settings.templates_directory
+            Dir[base.to_s + "/" + name.to_s + ".#{settings.destination_format}" + "{#{settings.allowed_engines.map { |ext_name| ".#{ext_name}" }.join(",")},}"].first
+          end
+
+          def template_name names, base=settings.templates_directory
+            names.detect do |name|
+              Dir[base.to_s + "/" + name.to_s + ".#{settings.destination_format}" + "{#{settings.allowed_engines.map { |ext_name| ".#{ext_name}" }.join(",")},}"].any?
+            end
           end
         end
 
