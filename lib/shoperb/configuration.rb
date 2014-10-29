@@ -7,7 +7,8 @@ module Shoperb
       "oauth-password" => "Your shoperb shop username",
       "oauth-redirect-uri" => "Url shoperb will redirect to after granting access",
       "verbose" => "Enable verbose mode",
-      "port" => "Port you want your local shoperb theme instance to run at"
+      "port" => "Port you want your local shoperb theme instance to run at",
+      "server" => "Shoperb url & protocol for oauth to run against",
     }
 
     QUESTION = {
@@ -25,7 +26,11 @@ module Shoperb
     DEFAULTS = {
       "oauth-cache" => {}.with_indifferent_access,
       "port" => "4000",
-      "verbose" => false
+      "verbose" => false,
+      "server" => {
+        "url" => "shoperb.me",
+        "protocol" => "https"
+      }
     }.with_indifferent_access
 
     attr_accessor :file
