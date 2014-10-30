@@ -122,7 +122,7 @@ module Shoperb
 
     def assign_relation attributes, klass
       name = klass.to_s.demodulize.underscore
-      id = attributes.delete("#{name}_id")
+      id = attributes["#{name}_id"]
       attributes["#{name}_#{klass.primary_key}"] = klass.where(id: id).first.try(klass.primary_key) if id
       attributes["#{name}_#{klass.primary_key}"] || (attributes["#{name}_id"] = id if id)
     end

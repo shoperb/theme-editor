@@ -50,7 +50,7 @@ module Shoperb
         end
 
         def self_and_ancestors
-          self.class.all.select { |category| category.left <= left && category.right >= right }
+          self.class.all.select { |category| category.lft <= lft && category.rgt >= rgt }
         end
 
         def self_and_descendants

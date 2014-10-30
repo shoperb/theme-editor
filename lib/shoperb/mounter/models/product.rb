@@ -3,7 +3,7 @@ module Shoperb
     module Model
       class Product < Base
 
-        fields :id, :name, :description, :has_options, :permalink, :slug, :state, :translations, :template, :collection_ids
+        fields :id, :name, :description, :has_options, :permalink, :slug, :state, :translations, :template, :collection_ids, :category_id
 
         def self.primary_key
           :slug
