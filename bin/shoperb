@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require_relative "../liquid/lib/liquid"
+require_relative "../sprockets/lib/sprockets"
 require_relative "../lib/shoperb/editor"
 
 def apply_global_opts
