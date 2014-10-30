@@ -3,6 +3,10 @@ module Shoperb
     module Drop
       class Category < Delegate
 
+        def initialize(record)
+          @record = record || Model::Category.new
+        end
+
         def children
           __to_drop__ Drop::Categories, :children
         end
