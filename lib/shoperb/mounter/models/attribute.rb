@@ -1,7 +1,8 @@
 module Shoperb
   module Mounter
     module Model
-      class Attribute < Abstract::Base
+      class Attribute < Base
+        # todo: TODOREF2
       end
     end
   end

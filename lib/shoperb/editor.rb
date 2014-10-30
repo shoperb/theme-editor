@@ -26,8 +26,11 @@ autoload :URI,                "uri"
 autoload :Mime,               "action_dispatch/http/mime_type"
 autoload :Slop,               "slop"
 autoload :Sprockets,          "sprockets"
+autoload :ActiveHash,         "active_hash"
+autoload :ActiveYaml,         "active_hash"
 
 require "haml"
+require "pry"
 
 module Shoperb
   extend self

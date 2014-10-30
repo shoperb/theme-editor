@@ -2,9 +2,7 @@ module Shoperb
   module Mounter
     module Drop
       module Url
-        class Get< Delegate
-          def initialize
-          end
+        class Get< ::Liquid::Drop
 
           def method_missing(name, *args, &block)
             class_eval do
@@ -17,9 +15,7 @@ module Shoperb
           end
         end
 
-        class Post < Delegate
-          def initialize
-          end
+        class Post < ::Liquid::Drop
 
           def cart_add
             "/cart/add"

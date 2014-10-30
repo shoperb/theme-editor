@@ -1,8 +1,8 @@
 module Shoperb
   module Mounter
     module Model
-      class ProductAttribute < Abstract::Base
-        belongs_to :product
+      class ProductAttribute < Base
+        # todo: TODOREF2
       end
     end
   end

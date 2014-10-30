@@ -1,18 +1,22 @@
 module Shoperb
   module Mounter
     module Drop
-      class Meta < Delegate
+      class Meta < Base
+
+        def initialize(record)
+          @record = record if record.respond_to?(:has_meta_attributes?)
+        end
 
         def title
-          @record.try(:meta_title) || __shop__.meta_title
+          record.try(:meta_title).blank? ? shop.try(:meta_title) : record.meta_title
         end
 
         def description
-          @record.try(:meta_description) || __shop__.meta_description
+          record.try(:meta_description).blank? ? shop.try(:meta_description) : record.meta_description
         end
 
         def keywords
-          @record.try(:meta_keywords) || __shop__.meta_keywords
+          record.try(:meta_keywords).blank? ? shop.try(:meta_keywords) : record.meta_keywords
         end
 
       end

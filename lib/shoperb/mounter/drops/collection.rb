@@ -6,29 +6,69 @@ module Shoperb
         attr_reader :collection
 
         def initialize(collection = nil)
-          @collection = collection
+          @collection = collection || []
         end
 
         def before_method(method)
-          collection.detect { |o| o.send(o.class.finder) == method.to_s }
+          collection.detect { |o| o.try(handle_method.to_sym) == method.to_s }
         end
 
-        def method_missing name, *args, &block
-          collection.send(name)
+        def each
+          limited.each do |item|
+            yield item.to_liquid
+          end
         end
 
-        delegate :each, to: :collection
-        delegate :count, to: :collection
-        delegate :any?, to: :collection
-        delegate :many?, to: :collection
-        delegate :one?, to: :collection
-        delegate :empty?, to: :collection
-        delegate :first, to: :collection
-        delegate :last, to: :collection
+        def count
+          collection.count
+        end
+
+        def any?
+          collection.any?
+        end
+
+        def many?
+          collection.many?
+        end
+
+        def one?
+          collection.one?
+        end
+
+        def empty?
+          collection.empty?
+        end
+
+        def first
+          collection.first.to_liquid
+        end
+
+        def last
+          collection.last.to_liquid
+        end
+
+        def to_a
+          limited.map { |o| o.to_liquid }
+        end
 
         def inspect
           "<#{self.class.to_s} #{@collection.inspect} >"
         end
+
+        private
+
+        def limit_value
+          (collection.respond_to?(:limit_value) && collection.limit_value) || 50
+        end
+
+        def limited
+          (collection.respond_to?(:limit) && collection.limit(limit_value)) || collection.slice(0..limit_value)
+        end
+
+        def handle_method
+          :handle
+        end
+
 
         def paginate(page, per_page)
           self.class.new(@collection.take(per_page.to_i))

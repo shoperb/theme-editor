@@ -15,28 +15,15 @@ module Shoperb
 
     module Model
 
-      module Abstract
-        Shoperb.autoload_all self, "shoperb/mounter/models/abstract"
-      end
-
-      module Concerns
-        Shoperb.autoload_all self, "shoperb/mounter/models/concerns"
+      def self.console
+        binding.pry
       end
 
       Shoperb.autoload_all self, "shoperb/mounter/models"
-
     end
 
     module Drop
-
       Shoperb.autoload_all self, "shoperb/mounter/drops"
-
-      class << self
-        def const_missing_with_default *args
-          const_missing_without_default(*args) rescue Delegate
-        end
-        alias_method_chain :const_missing, :default
-      end
     end
 
     module Filter

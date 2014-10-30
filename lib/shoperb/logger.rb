@@ -30,26 +30,29 @@ module Shoperb
     alias :success :debug
 
     def notify msg
-      rows, cols = IO.console.winsize
-      cols -= 1
-      e, result = nil, nil
-      self.info      "#{msg.ljust(cols)[0..cols]}".rstrip
-      action_result = begin
-        result = yield
+      self.info      "#{fill(msg)}".rstrip
+      result = begin
+        self.info "\r"
+        yield
       rescue Exception => e
-        false
+        self.error   fill(msg, " [FAILED]")
       else
-        true
+        self.success fill(msg, " [OK]")
+      ensure
+        self.info "\n"
       end
-      self.info "\r"
-      if action_result
-        self.success "#{msg.ljust(cols)[0..cols-5]} [OK]"
-      else
-        self.error   "#{msg.ljust(cols)[0..cols-9]} [FAILED]"
-      end
-      self.info "\n"
       raise e if e
       result
+    end
+
+    def cols
+      @cols ||= begin
+        IO.console.winsize[1] - 1
+      end
+    end
+
+    def fill msg, ending=""
+      "#{msg.ljust(cols)[0..cols-ending.length]}#{ending}"
     end
 
   end

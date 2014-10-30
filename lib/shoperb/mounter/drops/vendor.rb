@@ -1,10 +1,18 @@
 module Shoperb
   module Mounter
     module Drop
-      class Vendor < Delegate
+      class Vendor < Base
 
         def initialize(record)
           @record = record || Model::Vendor.new({})
+        end
+
+        def id
+          record.id
+        end
+
+        def name
+          record.name
         end
 
       end

@@ -5,6 +5,10 @@ module Shoperb
         def roots
           Categories.new(Model::Category.roots)
         end
+
+        def handle_method
+          :permalink
+        end
       end
     end
   end

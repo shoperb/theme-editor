@@ -1,9 +1,8 @@
 module Shoperb
   module Mounter
     module Model
-      class OrderItem < Abstract::Base
-        belongs_to :order
-        has_many :order_item_attributes
+      class OrderItem < Base
+        # todo: TODOREF2
       end
     end
   end

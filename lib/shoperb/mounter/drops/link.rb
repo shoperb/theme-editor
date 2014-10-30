@@ -1,7 +1,11 @@
 module Shoperb
   module Mounter
     module Drop
-      class Link < Delegate
+      class Link < Base
+
+        def id
+          record.id
+        end
 
         def url
           case record.style
@@ -12,9 +16,31 @@ module Shoperb
             when "Collection"
               "javascript:void(0)"
             else
+              # TODO: Correct url from "else"
               record.value
           end
         end
+
+        def menu
+          record.menu
+        end
+
+        def name
+          record.name
+        end
+
+        def handle
+          record.handle
+        end
+
+        def object?
+          !record.entity.nil?
+        end
+
+        def object
+          record.entity
+        end
+
       end
     end
   end

@@ -26,11 +26,13 @@ Gem::Specification.new do |gem|
   gem.add_dependency "sass", "~> 3"
   gem.add_dependency "haml", "~> 4"
   gem.add_dependency "slop", "~> 3"
-  gem.add_dependency "colorize"
+  gem.add_dependency "active_hash", "~> 1"
+  gem.add_dependency "awesome_nested_set"
+  gem.add_dependency "colorize", "< 1"
   gem.add_dependency "oauth2", "~> 1"
   gem.add_dependency "rollbar", "~> 1"
   gem.add_dependency "launchy", "~> 2"
   gem.add_dependency "rubyzip", "~> 1"
 
-  gem.add_development_dependency "pry"
+  gem.add_dependency "pry"
 end

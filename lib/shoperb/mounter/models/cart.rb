@@ -1,8 +1,20 @@
 module Shoperb
   module Mounter
     module Model
-      class Cart < Abstract::SingletonBase
-        has_many :cart_items, name: :items
+      class Cart < Base
+
+        def self.primary_key
+          :token
+        end
+
+        def items
+          CartItem.all
+        end
+
+        def total
+          items.sum(&:total)
+        end
+
       end
     end
   end

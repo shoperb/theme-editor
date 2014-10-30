@@ -1,9 +1,8 @@
 module Shoperb
   module Mounter
     module Model
-      class Customer < Abstract::SingletonBase
-        has_many :orders
-        has_many :addresses
+      class Customer < Base
+        # todo: TODOREF2
       end
     end
   end

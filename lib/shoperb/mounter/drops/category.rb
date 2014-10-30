@@ -1,31 +1,95 @@
 module Shoperb
   module Mounter
     module Drop
-      class Category < Delegate
+      class Category < Base
+
+        attr_reader :record
 
         def initialize(record)
           @record = record || Model::Category.new
         end
 
-        def children
-          __to_drop__ Drop::Categories, :children
+        def id
+          record.id
+        end
+
+        def name
+          record.name
+        end
+
+        def handle
+          record.permalink
         end
 
         def parent
-          __to_drop__ Drop::Category, :parent
+          record.parent
         end
 
-        def parents
-          __to_drop__ Drop::Categories, :parents
+        def level
+          record.level
         end
 
-        def products_with_children
-          __to_drop__ Drop::Products, :products_with_children
+        def url
+          default_url
         end
 
         def root
-          __to_drop__ Drop::Category, :root
+          Category.new(record.root)
         end
+
+        def root?
+          record.root?
+        end
+
+        def descends_from(other)
+          record.descends_from(other)
+        end
+
+        def parents
+          Categories.new(record.ancestors)
+        end
+
+        def children
+          Categories.new(record.children)
+        end
+
+        def children?
+          record.children.any?
+        end
+
+        def products
+          Products.new(record.products)
+        end
+
+        def products_with_children
+          Products.new(record.products_for_self_and_children)
+        end
+
+        def to_s
+          "#<Category name: '#{record.name}'>"
+        end
+
+        def inspect
+          to_s
+        end
+
+        # todo: TODOREF5
+
+        # def current?
+        #   record == current
+        # end
+        #
+        # def open?
+        #   current && current.descends_from(record)
+        # end
+        #
+        # private
+        #
+        # def current
+        #   @current ||= @context.registers[:controller].instance_variable_get("@category")
+        # end
+
+        # todo: TODOREF5 end
 
       end
     end

@@ -1,7 +1,8 @@
 module Shoperb
   module Mounter
     module Model
-      class NewsItem < Abstract::Base
+      class NewsItem < Base
+        # todo: TODOREF2
       end
     end
   end
