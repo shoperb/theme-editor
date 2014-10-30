@@ -1,4 +1,7 @@
 require "active_support/all"
+require "rack"
+require "haml"
+require "pry"
 
 autoload :OpenStruct,         "ostruct"
 autoload :FileUtils,          "fileutils"
@@ -10,7 +13,6 @@ autoload :Time,               "time"
 autoload :OAuth2,             "oauth2"
 autoload :Faraday,            "faraday"
 autoload :Launchy,            "launchy"
-autoload :Rack,               "rack"
 autoload :I18n,               "i18n"
 autoload :CoffeeScript,       "coffee_script"
 autoload :Sass,               "sass"
@@ -25,12 +27,8 @@ autoload :Logger,             "logger"
 autoload :URI,                "uri"
 autoload :Mime,               "action_dispatch/http/mime_type"
 autoload :Slop,               "slop"
-autoload :Sprockets,          "sprockets"
 autoload :ActiveHash,         "active_hash"
 autoload :ActiveYaml,         "active_hash"
-
-require "haml"
-require "pry"
 
 module Shoperb
   extend self

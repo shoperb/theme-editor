@@ -84,7 +84,7 @@ module Shoperb
         end
 
         def json
-          record.to_h.merge(attributes: record.variant_attributes.map(&:to_h)).to_json
+          record.attributes.merge(attributes: record.variant_attributes.map(&:attributes)).to_json
         end
 
       end

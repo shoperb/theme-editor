@@ -2,5 +2,5 @@
   path = liquid
   url = https://github.com/Shopify/liquid.git
 [submodule "sprockets"]
-	path = sprockets
-	url = https://github.com/sstephenson/sprockets.git
+  path = sprockets
+  url = https://github.com/sstephenson/sprockets.git

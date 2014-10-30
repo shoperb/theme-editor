@@ -11,6 +11,18 @@ module Shoperb
         end
 
         belongs_to :product
+        has_many :variant_attributes
+
+        def name
+          "".tap do |name|
+            name << product.name
+            name << " - #{names.join(" / ")}" unless names.empty?
+          end
+        end
+
+        def names
+          variant_attributes.map(&:value)
+        end
 
         def available?(amount = 1)
           !track_inventory? || allow_backorder? || (stock > amount)
