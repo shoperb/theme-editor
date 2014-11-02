@@ -55,7 +55,7 @@ module Shoperb
 
       mattr_accessor :all do
         CustomSprockets.new(sass: sass_template, scss: scss_template) do |env|
-          env.append_path "assets"
+          %w(assets).each(&env.method(:append_path))
         end
       end
 
@@ -107,9 +107,7 @@ module Shoperb
 
       mattr_accessor :all do
         CustomSprockets.new(sass: sass_template, scss: scss_template) do |env|
-          %w(assets data/assets).each do |path|
-            env.append_path path
-          end
+          %w(assets data/assets).each(&env.method(:append_path))
         end
       end
     end

@@ -64,16 +64,31 @@ module Shoperb
     end
 
     def pack
-      fill_asset_cache do
-        zip = Zip::OutputStream.write_buffer do |out|
-          uploadable do |file|
-            out.put_next_entry(zip_file_path = handle + file)
-            Logger.notify "Packing #{file}" do
-              out.write file.read
-            end
+      zip = Zip::OutputStream.write_buffer do |out|
+        Pathname.glob("**/*") do |file|
+          case file.to_s
+            when /\A((layouts|templates)\/(.*\.liquid))(\.haml|)$/
+              write_to_zip(out, file)
+              write_to_zip(out, Utils.rel_path($1)) { Haml::Engine.new(file.read).render } if $4 == ".haml"
+            when /\Aassets\/(javascripts\/(.*\.js))(\.coffee|)$\z/, /\Aassets\/(stylesheets\/(.*\.css))(\.sass|\.scss|)$\z/
+              write_to_zip(out, file)
+              write_to_zip(out, Pathname.new("asset_cache") + $1) { CustomSprockets::Compile.all[file.relative_path_from(Pathname.new("assets"))].to_s }
+            when /\Aassets\/((images|icons)\/(.*\.(png|jpg|jpeg|gif|swf|ico|svg|pdf)))\z/, /\Aassets\/(fonts\/(.*\.(eot|woff|ttf)))\z/
+              write_to_zip(out, file)
+              write_to_zip(out, Pathname.new("asset_cache") + $1) { file.read }
+            when /\Atranslations\/*\.json$/
+              write_to_zip(out, file)
           end
         end
-        Utils.mk_tempfile zip.string, "#{handle.basename}-", ".zip"
+      end
+      Utils.mk_tempfile zip.string, "#{handle.basename}-", ".zip"
+    end
+
+    def write_to_zip out, file
+      out.put_next_entry(zip_file_path = handle + file)
+      content = block_given? ? yield : file.read
+      Logger.notify "Packing #{file}" do
+        out.write content
       end
     end
 
@@ -102,49 +117,6 @@ module Shoperb
       Logger.notify "Copying default data" do
         FileUtils.cp files, data_path
       end if files.any?
-    end
-
-    def fill_asset_cache
-      preprocessable do |file|
-        case file.to_s
-          when /\Aassets\/(javascripts\/(application\.js))(\.coffee|)$\z/, /\Aassets\/(stylesheets\/(application\.css))(\.sass|\.scss|)$\z/
-            FileUtils.mkdir_p((asset_cache + $1).dirname)
-            compile_through_sprockets file, asset_cache + $1
-          when /\Aassets\/(javascripts\/(?!(application\.js(\.coffee|)$)).*\.js(\.coffee|)$)\z/
-            FileUtils.mkdir_p((asset_cache + $1).dirname)
-            compile_through_sprockets file, asset_cache + $1
-          when /\A(layouts|templates)\/(.*\.liquid).haml/
-            compile_haml file, Utils.rel_path($1)
-          when /\A(assets\/((images|icons)\/(.*\.(png|jpg|jpeg|gif|swf|ico|svg|pdf))))\z/, /\A(assets\/(fonts\/(.*\.(eot|woff|ttf))))\z/
-            FileUtils.mkdir_p((asset_cache + $2).dirname)
-            FileUtils.cp $1, asset_cache + $2
-        end
-      end
-      yield
-    ensure
-      # FileUtils.rm_rf asset_cache
-    end
-
-    def asset_cache
-      Pathname.new("asset_cache").tap { |path| FileUtils.mkdir_p path }
-    end
-
-    def assets_dir
-      Pathname.new("assets").tap { |path| FileUtils.mkdir_p path }
-    end
-
-    def compile_through_sprockets file, target
-      Logger.notify "Compiling #{file}" do
-        Utils.write_file(target) { CustomSprockets::Compile.all[file.relative_path_from(Pathname.new("assets"))].to_s }
-        target
-      end
-    end
-
-    def compile_haml file, target
-      Logger.notify "Compiling #{file}" do
-        Utils.write_file(target) { Haml::Engine.new(File.read(file)).render }
-        target
-      end
     end
   end
 end
