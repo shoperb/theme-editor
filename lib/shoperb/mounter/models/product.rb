@@ -6,9 +6,17 @@ module Shoperb
         belongs_to :vendor
         belongs_to :category
         belongs_to :product_type
-        has_many :variants
+        #has_many :variants
         has_many :images
         has_many :product_attributes
+
+        def variants
+          Drop::Delegate::Array.new(Model::Variant.all.select { |object| object.product_permalink == self.permalink })
+        end
+
+        def variants?
+          variants.any?
+        end
 
         def image
           images.first
