@@ -5,6 +5,8 @@ module Shoperb
 
         Shoperb.autoload_all self, "shoperb/mounter/drops/delegate"
 
+        attr_reader :record
+
         def initialize(record)
           @record = record
         end
