@@ -67,29 +67,39 @@ module Shoperb
       zip = Zip::OutputStream.write_buffer do |out|
         Pathname.glob("**/*") do |file|
           case file.to_s
-            when /\A((layouts|templates)\/(.*\.liquid))(\.haml|)$/
-              write_to_zip(out, file)
-              write_to_zip(out, Utils.rel_path($1)) { Haml::Engine.new(file.read).render } if $4 == ".haml"
-            when /\Aassets\/(javascripts\/(.*\.js))(\.coffee|)$\z/, /\Aassets\/(stylesheets\/(.*\.css))(\.sass|\.scss|)$\z/
-              write_to_zip(out, file)
-              write_to_zip(out, Pathname.new("asset_cache") + $1) { CustomSprockets::Compile.all[file.relative_path_from(Pathname.new("assets"))].to_s }
-            when /\Aassets\/((images|icons)\/(.*\.(png|jpg|jpeg|gif|swf|ico|svg|pdf)))\z/, /\Aassets\/(fonts\/(.*\.(eot|woff|ttf)))\z/
-              write_to_zip(out, file)
-              write_to_zip(out, Pathname.new("asset_cache") + $1) { file.read }
-            when /\Atranslations\/*\.json$/
-              write_to_zip(out, file)
+            when /\A((layouts|templates)\/(.*\.liquid))$/,
+                 /\A(assets\/((images|icons)\/(.*\.(png|jpg|jpeg|gif|swf|ico|svg|pdf))))$\z/,
+                 /\A(assets\/(fonts\/(.*\.(eot|woff|ttf))))$\z/,
+                 /\A(assets\/(javascripts\/(.*\.js)))$\z/,
+                 /\A(assets\/(stylesheets\/(.*\.css)))$\z/,
+                 /\A(translations\/*\.json)$/
+              write_file(out, file)
+              write_symlink(out, file, Pathname.new("cache") + $1) # Use symlinks to save space
+            when /\A((layouts|templates)\/(.*\.liquid))\.haml$/
+              write_file(out, file)
+              write_file(out, Pathname.new("cache") + $1) { Haml::Engine.new(file.read).render }
+            when /\A(assets\/(javascripts\/(.*\.js)))\.coffee$\z/, /\A(assets\/(stylesheets\/(.*\.css)))(\.sass|\.scss)$\z/
+              write_file(out, file)
+              write_file(out, Pathname.new("cache") + $1) { CustomSprockets::Compile.all[file.relative_path_from(Pathname.new("assets"))].to_s }
           end
         end
       end
       Utils.mk_tempfile zip.string, "#{handle.basename}-", ".zip"
     end
 
-    def write_to_zip out, file
+    def write_file out, file
       out.put_next_entry(zip_file_path = handle + file)
       content = block_given? ? yield : file.read
       Logger.notify "Packing #{file}" do
         out.write content
       end
+    end
+
+    def write_symlink out, current, target
+      entry = out.put_next_entry(zip_file_path = handle + target)
+      entry.instance_variable_set("@ftype", :symlink)
+      entry.instance_variable_set("@filepath", target.to_s)
+      out.write(current.relative_path_from(target).to_s)
     end
 
     def unpack file
