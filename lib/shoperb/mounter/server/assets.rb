@@ -1,4 +1,4 @@
-Sinatra.autoload :AssetPipeline, "sinatra/asset_pipeline"
+Sprockets.autoload :Helpers, "sprockets-helpers"
 
 module Shoperb
   module Mounter
@@ -6,8 +6,12 @@ module Shoperb
       module Assets
 
         def self.registered(app)
-          app.set :assets_prefix, %w(assets data/assets)
-          app.register Sinatra::AssetPipeline
+          app.get "#{Sprockets::Helpers.prefix}/*" do |path|
+            env_sprockets = request.env.dup
+            env_sprockets['PATH_INFO'] = path
+            CustomSprockets::Serve.all.call(env_sprockets)
+          end
+
         end
 
       end

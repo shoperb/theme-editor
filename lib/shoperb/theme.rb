@@ -23,13 +23,6 @@ module Shoperb
       layouts/*.liquid.haml
     }).freeze
 
-    mattr_accessor :sprockets do
-      Sprockets::Environment.new do |env|
-        env.instance_variable_set("@engines", env.engines.slice(".coffee", ".less", ".sass", ".scss").freeze)
-        Dir["assets/**/*"].each(&env.method(:append_path))
-      end
-    end
-
     AVAILABLE_TEMPLATES = ["blank", "bootstrap", "foundation"]
 
 
@@ -98,11 +91,11 @@ module Shoperb
       processed = []
       files(compilable: true) do |file|
         processed << case file.to_s
-          when /(#{Utils.base}\/.*).coffee/
-            compile_through_sprockets Utils.rel_path(file), Utils.rel_path($1)
-          when /(#{Utils.base}\/.*).(sass|scss)/
-            compile_through_sprockets Utils.rel_path(file), Utils.rel_path($1)
-          when /(#{Utils.base}\/.*).haml/
+          when /(#{Utils.base}\/assets\/(javascripts\/application)\.js)\.coffee/
+            compile_through_sprockets Utils.rel_path(file), Utils.rel_path($1), $2
+          when /(#{Utils.base}\/assets\/(stylesheets\/application)\.css)\.(sass|scss)/
+            compile_through_sprockets Utils.rel_path(file), Utils.rel_path($1), $2
+          when /#{Utils.base}\/(layouts|templates)\/.*).haml/
             compile_haml Utils.rel_path(file), Utils.rel_path($1)
         end
       end
@@ -117,9 +110,10 @@ module Shoperb
       end
     end
 
-    def compile_through_sprockets file, target
+    def compile_through_sprockets file, target, ask
       Logger.notify "Compiling #{file}" do
-        Utils.write_file(target) { sprockets[file.basename].to_s }
+        result = CustomSprockets::Compile.all[ask].to_s
+        Utils.write_file(target) { result }
         target
       end
     end
