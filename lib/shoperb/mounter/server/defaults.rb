@@ -9,7 +9,7 @@ module Shoperb
           def default_locals locals={}
             set_pagination_defaults
             {
-              :errors       => Drop::Collection.new(flash[:errors]),
+              :errors       => Drop::Collection.new(flash[:errors] || params[:errors] || []),
               :meta         => Drop::Meta.new(locals.delete(:meta)),
               :categories   => Drop::Categories.new(Model::Category.all),
               :cart         => current_cart.to_liquid,
