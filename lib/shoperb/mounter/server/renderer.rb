@@ -1,3 +1,10 @@
+module Tilt
+  class LiquidTemplate
+    def evaluate scope, context, *args, &block
+      @engine.render(context)
+    end
+  end
+end
 module Shoperb
   module Mounter
     class Server
@@ -5,6 +12,13 @@ module Shoperb
 
         module Helpers
           def respond(templates, locals={}, registers={}, &block)
+            require "pry"
+            registers.reverse_merge!(
+              url_for: ->(*args) { ActionDispatch::Routing::UrlFor.method(:url_for)[*args] },
+              asset_url: ->(url, *args) { "/assets/#{url}" },
+              translate: Shoperb::Translate.method(:translate),
+              locale: Shoperb::Translate.locale
+            )
             locals = locals.reverse_merge(default_locals)
             registers = registers.reverse_merge({layout: "layout"})
             templates = [templates].flatten
@@ -29,17 +43,20 @@ module Shoperb
               file = Pathname.new(file.to_s.gsub(".#{ext}", ""))
               result = send(ext, result)
             end
-            send(settings.destination_format, result, { scope: locals }, registers)
+
+            send(settings.destination_format, result, locals: ::Liquid::Context.new({}, locals, registers))
           end
 
           def template_path name, base=settings.templates_directory
-            Dir[base.to_s + "/" + name.to_s + ".#{settings.destination_format}" + "{#{settings.allowed_engines.map { |ext_name| ".#{ext_name}" }.join(",")},}"].first
+            template_paths(name, base).first
           end
 
           def template_name names, base=settings.templates_directory
-            names.detect do |name|
-              Dir[base.to_s + "/" + name.to_s + ".#{settings.destination_format}" + "{#{settings.allowed_engines.map { |ext_name| ".#{ext_name}" }.join(",")},}"].any?
-            end
+            names.detect { |name| template_paths(name, base).any? }
+          end
+
+          def template_paths name, base=settings.templates_directory
+            Dir[base.to_s + "/" + name.to_s + ".#{settings.destination_format}" + "{#{settings.allowed_engines.map { |ext_name| ".#{ext_name}" }.join(",")},}"]
           end
         end
 

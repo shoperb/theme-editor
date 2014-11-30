@@ -25,6 +25,17 @@ module Shoperb
 
     AVAILABLE_TEMPLATES = ["blank", "bootstrap", "foundation"]
 
+    def asset_url
+      "/assets/"
+    end
+
+    mattr_accessor :updated_at do
+      Time.now
+    end
+
+    def translations
+
+    end
 
     def init name="blank"
       raise Error.new("No such template, possible options are 'blank', 'bootstrap', 'foundation'") unless AVAILABLE_TEMPLATES.include?(name)

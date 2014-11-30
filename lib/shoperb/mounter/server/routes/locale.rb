@@ -18,7 +18,7 @@ module Shoperb
           def self.registered(app)
             app.helpers Helpers
             app.before "*" do
-              Filter::Translate.locale = get_locale
+              Translate.locale = get_locale
             end
 
           end

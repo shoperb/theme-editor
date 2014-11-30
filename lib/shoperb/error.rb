@@ -23,7 +23,7 @@ module Shoperb
       Logger.error "#{display}\n"
       # Report all errors for now
       #unless Rollbar.configuration.exception_level_filters.has_key?(e.class.to_s)
-        ::Rollbar.report_exception(e)
+        # ::Rollbar.report_exception(e)
       #end
     end
 

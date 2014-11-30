@@ -11,16 +11,15 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.require_paths = ["lib", "liquid/lib", "sprockets/lib"]
+  gem.require_paths = ["lib", "shoperb_liquid/lib", "sprockets/lib"]
 
   gem.add_dependency "sinatra", "~> 1"
   gem.add_dependency "sinatra-contrib", "~> 1"
   gem.add_dependency "sinatra-flash"
   gem.add_dependency "sinatra-asset-pipeline"
   gem.add_dependency "activesupport", "~> 4"
-  gem.add_dependency "actionview", "~> 4"
   gem.add_dependency "actionpack", "~> 4"
-  gem.add_dependency "liquid", "3.0.0"
+  gem.add_dependency "shoperb-liquid", "0.0.1"
   gem.add_dependency "sprockets", "2.12.2"
   gem.add_dependency "coffee-script", "~> 2"
   gem.add_dependency "sass", "~> 3"

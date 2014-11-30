@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative "../liquid/lib/liquid"
+require_relative "../shoperb_liquid/lib/shoperb_liquid"
 require_relative "../sprockets/lib/sprockets"
 require_relative "../lib/shoperb/editor"
 
