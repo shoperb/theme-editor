@@ -1,0 +1,15 @@
+# -*- encoding: utf-8 -*-
+Gem::Specification.new do |gem|
+  gem.name    = "shoperb-theme-sprockets"
+  gem.version = "0.0.1"
+
+  gem.authors  = ["Rainer Sai"]
+  gem.email    = ["rainer.sai@perfectline.co"]
+  gem.summary  = %q{shoperb_liquid is a liquid for Shoperb}
+  gem.homepage = "http://www.shoperb.com"
+
+  gem.files         = `git ls-files`.split($/)
+  gem.require_paths = ["lib", "sprockets/lib"]
+
+  gem.add_dependency "sprockets", "2.12.2"
+end
