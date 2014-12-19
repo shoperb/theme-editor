@@ -2,7 +2,7 @@ module Shoperb module Theme module Editor
   module Mounter
     class Server
       module Routes
-        Editor.autoload_all self, "shoperb_theme_editor/mounter/server/routes"
+        Editor.autoload_all self, "mounter/server/routes"
 
         mattr_accessor :app
 
@@ -19,9 +19,9 @@ module Shoperb module Theme module Editor
           append_paths
 
           get "/products/:id" do
-            product      = Drop::Product.new(Model::Product.find(params[:id]))
+            product      = Drop::Product.new(record = Model::Product.find(params[:id]))
             category     = product.category
-            template     = product.template.presence || :product
+            template     = record.template.presence || :product
             respond template.to_sym, product: product, category: category, meta: product
           end
 
@@ -63,7 +63,7 @@ module Shoperb module Theme module Editor
           end
 
           resources Model::Order do
-            Drop::Delegate::Array.new(Model::Order.all)
+            Drop::Collection.new(Model::Order.all)
           end
 
           resources Model::Product do
@@ -74,7 +74,8 @@ module Shoperb module Theme module Editor
         def self.resource collection, &block
           name = collection.to_s.demodulize.underscore
           get "/#{name.pluralize}/:id" do
-            respond name, name => instance_exec(&block)
+            drop = instance_exec(&block)
+            respond name, name => drop, :meta => drop
           end
         end
 

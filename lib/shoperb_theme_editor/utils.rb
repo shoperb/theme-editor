@@ -3,11 +3,7 @@ module Shoperb module Theme module Editor
     extend self
 
     mattr_accessor :path do
-      Dir.pwd
-    end
-
-    def mkdir path
-      FileUtils.mkdir_p path
+      Pathname.new("")
     end
 
     def rel_path path

@@ -13,10 +13,14 @@ module Shoperb module Theme module Editor
         module Helpers
           def respond(templates, locals={}, registers={}, &block)
             registers.reverse_merge!(
-              url_for: ->(*args) { ActionDispatch::Routing::UrlFor.method(:url_for)[*args] },
+              url_for: ->(*args, **options) {
+                options = { only_path: true, params: options }
+                ActionDispatch::Http::URL.url_for(*args, **options)
+              },
               asset_url: ->(url, *args) { "/assets/#{url}" },
-              translate: Shoperb::Translate.method(:translate),
-              locale: Shoperb::Translate.locale
+              translate: Translations.method(:translate),
+              locale: Translations.locale,
+              shop: shop
             )
             locals = locals.reverse_merge(default_locals)
             registers = registers.reverse_merge({layout: "layout"})
@@ -43,8 +47,7 @@ module Shoperb module Theme module Editor
               result = send(ext, result)
             end
 
-            binding.pry
-            send(settings.destination_format, result, locals: ::Liquid::Context.new({}, locals, registers))
+            Shoperb::Theme::Liquid::Template.parse(result).render!(locals.stringify_keys!, :registers => registers)
           end
 
           def template_path name, base=settings.templates_directory

@@ -12,7 +12,7 @@ module Shoperb module Theme module Editor
   module Mounter
     class Server < Sinatra::Base
 
-      Editor.autoload_all self, "shoperb_theme_editor/mounter/server"
+      Editor.autoload_all self, "mounter/server"
 
       set :root, Dir.pwd
       set :environment, :development
@@ -23,11 +23,11 @@ module Shoperb module Theme module Editor
 
       helpers do
         def current_cart
-          Model::Cart.instance
+          Model::Cart.first
         end
 
         def shop
-          Model::Shop.instance
+          Model::Shop.first
         end
       end
     end

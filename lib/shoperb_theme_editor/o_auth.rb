@@ -45,16 +45,16 @@ module Shoperb module Theme module Editor
 
     def sync
       initialize
-      Sync.images
-      Sync.categories
       Sync.products
+      Sync.shop
+      Sync.images
       Sync.collections
       Sync.vendors
       Sync.addresses
       Sync.pages
-      Sync.shop
       Sync.menus
       Sync.blog_posts
+      Mounter::Model::Base.save
     end
 
     def oauth_client
@@ -126,7 +126,7 @@ module Shoperb module Theme module Editor
       raise exception
     end
 
-    Editor.autoload_all self, "shoperb_theme_editor/o_auth"
+    Editor.autoload_all self, "o_auth"
 
   end
 end end end

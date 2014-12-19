@@ -7,7 +7,7 @@ module Shoperb module Theme module Editor
           module Helpers
             def get_locale
               if request.path_info=~(/\A\/(#{shop.possible_languages.join("|")})(\/.*)?/)
-                request.path_info = $2 || "/"
+                request.path_info = $2 || ""
                 $1
               elsif shop.language_code
                 shop.language_code
@@ -18,7 +18,7 @@ module Shoperb module Theme module Editor
           def self.registered(app)
             app.helpers Helpers
             app.before "*" do
-              Translate.locale = get_locale
+              Translations.locale = get_locale
             end
 
           end
