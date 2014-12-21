@@ -2,6 +2,17 @@
 
 Shoperb Theme Editor is a ruby gem designed to simplify the creating and updateing of Shoperb themes.
 
+## Quick start
+```
+echo 'ruby-2.1' > .ruby-version
+echo 'shoperb-themes' > .ruby-gemset
+echo "source 'https://rubygems.org'" > Gemfile
+echo "gem 'shoperb-theme-editor', :git => 'git@code.perfectline.co:shoperb/theme-editor.git'" >> Gemfile
+echo "gem 'liquid', github: 'Shopify/liquid', :ref => 'f15d24509d0f429f56284da527e6186708a27725'" >> Gemfile
+
+bundle
+```
+
 ## Installation
 
 Add this line to your Gemfile:
