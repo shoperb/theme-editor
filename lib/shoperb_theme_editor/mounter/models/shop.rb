@@ -13,6 +13,10 @@ module Shoperb module Theme module Editor
           all.first
         end
 
+        def external_hostname
+          domain
+        end
+
         belongs_to :currency
         belongs_to :language
 

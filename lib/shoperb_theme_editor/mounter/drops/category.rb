@@ -73,23 +73,19 @@ module Shoperb module Theme module Editor
           to_s
         end
 
-        # todo: TODOREF5
+        def current?
+          record == current
+        end
 
-        # def current?
-        #   record == current
-        # end
-        #
-        # def open?
-        #   current && current.descends_from(record)
-        # end
-        #
-        # private
-        #
-        # def current
-        #   @current ||= @context.registers[:controller].instance_variable_get("@category")
-        # end
+        def open?
+          current && current.descends_from(record)
+        end
 
-        # todo: TODOREF5 end
+        private
+
+        def current
+          @context.registers[:category]
+        end
 
       end
     end

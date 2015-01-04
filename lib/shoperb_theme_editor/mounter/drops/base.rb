@@ -15,12 +15,12 @@ module Shoperb module Theme module Editor
 
         private
 
-        def default_url id=self.record.to_param
+        def default_url id=self.record.id
           "#{default_url_language}/#{self.record.class.filename}/#{id}"
         end
 
         def default_url_language
-          "/#{Filter::Translate.locale}" if Filter::Translate.locale && Filter::Translate.locale != Model::Shop.first.language_code
+          "/#{Translations.locale}" if Translations.locale && Translations.locale != Model::Shop.first.language_code
         end
 
         def shop

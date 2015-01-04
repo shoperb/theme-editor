@@ -3,11 +3,9 @@ autoload :ActionView, "action_view"
 autoload :Liquid, "liquid"
 
 # Context changes:
-# Url filter, use @context.registers[:url_for] proc instead of @context.registers[:controller].url_for
 # Asset filter, use @context.registers[:asset_url] proc instead of @context.registers[:theme].asset_url
 # Translate filter, use @context.registers[:translate] proc instead of @context.registers[:theme].translations.translate
 # Translate filter, use @context.registers[:locale] instead of ::Globalize.locale
-# Remove direct reference to CollectionDrop, Kaminari::PaginatableArray & ::I18n in Paginate tag somehow
 
 
 module Shoperb module Theme
@@ -28,23 +26,23 @@ module Shoperb module Theme
 
     class Template < ::Liquid::Template
       def self.parse(source, options = {})
-        if source.kind_of?(::Liquid::Template)
+        if source.kind_of?(self)
           source
         else
-          template = Template.new
+          template = new
           template.parse(source, options)
           template
         end
       end
     end
   end
-  Liquid::Template.register_filter Liquid::Filter::Url
-  Liquid::Template.register_filter Liquid::Filter::Datum
-  Liquid::Template.register_filter Liquid::Filter::Asset
-  Liquid::Template.register_filter Liquid::Filter::Html
-  Liquid::Template.register_filter Liquid::Filter::Translate
-  Liquid::Template.register_tag "layout", Liquid::Tag::Layout
-  Liquid::Template.register_tag "paginate", Liquid::Tag::Paginate
-  Liquid::Template.register_tag "form", Liquid::Tag::Form
+  ::Liquid::Template.register_filter Liquid::Filter::Url
+  ::Liquid::Template.register_filter Liquid::Filter::Datum
+  ::Liquid::Template.register_filter Liquid::Filter::Asset
+  ::Liquid::Template.register_filter Liquid::Filter::Html
+  ::Liquid::Template.register_filter Liquid::Filter::Translate
+  ::Liquid::Template.register_tag "layout", Liquid::Tag::Layout
+  ::Liquid::Template.register_tag "paginate", Liquid::Tag::Paginate
+  ::Liquid::Template.register_tag "form", Liquid::Tag::Form
 end end
 

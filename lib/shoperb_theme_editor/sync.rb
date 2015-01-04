@@ -38,10 +38,7 @@ module Shoperb module Theme module Editor
 
     def links
       process Mounter::Model::Link do |link|
-        # todo: TODOREF1
-        # assign_relation link, Mounter::Model::Menu
-        link["menu_#{Mounter::Model::Menu.primary_key}"] = Mounter::Model::Menu.where(id: link["menu_id"]).first.try(Mounter::Model::Menu.primary_key)
-        # todo: TODOREF1 end
+        assign_relation link, Mounter::Model::Menu
         link
       end
     end
@@ -89,7 +86,7 @@ module Shoperb module Theme module Editor
     end
 
     def process klass, path=klass.to_s.demodulize.tableize, &block
-      klass.assign fetch(path).uniq { |h| h["id"] }.map(&(block || ->(i){i}))
+      klass.assign fetch(path).map(&(block || ->(i){i})).uniq { |h| h[klass.primary_key.to_s] }
     end
 
     def counter
@@ -110,7 +107,7 @@ module Shoperb module Theme module Editor
     end
 
     def get_response path, page
-      OAuth.access_token.get(path, &as_json(page: page.try(:next_page)))
+      Api.access_token.get(path, &as_json(page: page.try(:next_page)))
     end
 
     def as_json(params={})

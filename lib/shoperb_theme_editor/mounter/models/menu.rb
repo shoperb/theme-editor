@@ -5,6 +5,8 @@ module Shoperb module Theme module Editor
 
         fields :id, :name, :handle, :editable, :translations
 
+        translates :name
+
         def self.primary_key
           :handle
         end

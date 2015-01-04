@@ -4,11 +4,21 @@ module Shoperb module Theme module Editor
       module Assets
 
         def self.registered(app)
-          return
-          app.get "/assets/*" do |path|
+          app.get "/system/assets/*" do |path|
             env_sprockets = request.env.dup
-            env_sprockets['PATH_INFO'] = path
-            Shoperb::Theme::Sprockets::Cached.call(env_sprockets)
+            env_sprockets['PATH_INFO'] = "#{path}"
+            Shoperb::Theme::Sprockets::Environment.new do |env|
+              env.append_path "assets"
+              env.append_path "data/assets/images"
+            end.call(env_sprockets)
+          end
+          app.get "/#{Model::Shop.first.domain}/images/*/*" do |id, filename|
+            env_sprockets = request.env.dup
+            env_sprockets['PATH_INFO'] = "images/#{filename}"
+            Model::Image.find id
+            Shoperb::Theme::Sprockets::Environment.new do |env|
+              env.append_path "data/assets"
+            end.call(env_sprockets)
           end
 
         end

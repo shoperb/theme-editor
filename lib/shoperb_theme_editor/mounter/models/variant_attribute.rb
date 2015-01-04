@@ -5,6 +5,8 @@ module Shoperb module Theme module Editor
 
         fields :id, :attribute_key_id, :value, :translations
 
+        translates :value
+
         belongs_to :variant
 
         # todo: TODOREF2

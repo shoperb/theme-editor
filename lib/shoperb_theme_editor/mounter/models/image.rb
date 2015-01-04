@@ -11,6 +11,14 @@ module Shoperb module Theme module Editor
         #   :name
         # end
         # todo: TODOREF2 end
+
+        def entity
+          Model.const_get(entity_type).all.detect { |obj| obj.attributes[:id] == entity_id }
+        end
+
+        def image_sizes
+          sizes.map { |name, url| OpenStruct.new(name: name, url: "/#{Shop.first.domain}/images/#{id}/#{url}") }
+        end
       end
     end
   end

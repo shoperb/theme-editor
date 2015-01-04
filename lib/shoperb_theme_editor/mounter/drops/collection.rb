@@ -71,7 +71,7 @@ module Shoperb module Theme module Editor
 
 
         def paginate(page, per_page)
-          self.class.new(@collection.take(per_page.to_i))
+          self.class.new(Kaminari::PaginatableArray.new(collection).page(page).per(per_page))
         end
       end
     end

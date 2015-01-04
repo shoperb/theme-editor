@@ -3,7 +3,9 @@ module Shoperb module Theme module Editor
     module Model
       class Collection < Base
 
-        fields :id, :name, :permalink, :slug, :translations, :product_ids
+        fields :id, :name, :permalink, :slug, :product_ids
+
+        translates :name
 
         def self.primary_key
           :slug
@@ -11,6 +13,10 @@ module Shoperb module Theme module Editor
 
         def products
           Product.all.select { |product| product_ids.to_a.include?(product.attributes[:id]) }
+        end
+
+        def to_liquid
+          Drop::ProductCollection.new(self)
         end
 
       end

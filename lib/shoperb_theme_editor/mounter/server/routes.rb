@@ -51,11 +51,11 @@ module Shoperb module Theme module Editor
 
         def self.append_paths
           resource Model::Category do
-            Drop::Category.new(Model::Category.find(params[:id]))
+            Drop::Category.new(request.env[:current_category] = Model::Category.find(params[:id]))
           end
 
           resource Model::Collection do
-            Drop::Collection.new(Model::Collection.find(params[:id]))
+            Model::Collection.find(params[:id])
           end
 
           resource Model::Order do

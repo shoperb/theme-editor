@@ -13,14 +13,17 @@ module Shoperb module Theme module Editor
         module Helpers
           def respond(templates, locals={}, registers={}, &block)
             registers.reverse_merge!(
-              url_for: ->(*args, **options) {
-                options = { only_path: true, params: options }
-                ActionDispatch::Http::URL.url_for(*args, **options)
+              replace_locale: ->(locale) {
+                request.fullpath.gsub(/\A(?=#{shop.possible_languages.map{|s|"/#{s}"}.join("|")}|)\/(.*)/, "/#{locale}/\\1")
               },
-              asset_url: ->(url, *args) { "/assets/#{url}" },
+              empty_collection: -> {
+                Drop::Collection.new(Kaminari::PaginatableArray.new)
+              },
+              asset_url: ->(url, *args) { "/system/assets/#{url}" },
               translate: Translations.method(:translate),
               locale: Translations.locale,
-              shop: shop
+              shop: shop,
+              category: request.env[:current_category]
             )
             locals = locals.reverse_merge(default_locals)
             registers = registers.reverse_merge({layout: "layout"})
@@ -47,7 +50,7 @@ module Shoperb module Theme module Editor
               result = send(ext, result)
             end
 
-            Shoperb::Theme::Liquid::Template.parse(result).render!(locals.stringify_keys!, :registers => registers)
+            Liquid::Template.parse(result).render!(locals.stringify_keys!, :registers => registers)
           end
 
           def template_path name, base=settings.templates_directory
@@ -72,7 +75,7 @@ module Shoperb module Theme module Editor
           app.set :templates_directory, Proc.new { File.join(root, "templates") }
           app.set :layouts_directory, Proc.new { File.join(root, "layouts") }
 
-          ::Liquid::Template.file_system = ::Liquid::LocalFileSystem.new(app.settings.templates_directory)
+          Liquid::Template.file_system = ::Liquid::LocalFileSystem.new(app.settings.templates_directory)
 
           app.set :destination_format, :liquid
           app.set :allowed_engines, [:haml]

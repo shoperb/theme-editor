@@ -29,10 +29,11 @@ module Shoperb module Theme module Editor
     alias :success :debug
 
     def notify msg
+      result = nil
       self.info      "#{fill(msg)}".rstrip
-      result = begin
+      begin
         self.info "\r"
-        yield
+        result = yield
       rescue Exception => e
         self.error   fill(msg, " [FAILED]")
       else

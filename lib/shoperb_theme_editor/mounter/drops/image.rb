@@ -18,6 +18,8 @@ module Shoperb module Theme module Editor
         def before_method(method, *args)
           if image = record.image_sizes.detect { |s| s.name == method.to_s }
             Image.new(image)
+            #else
+            #  self
           end
         end
 

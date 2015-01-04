@@ -9,16 +9,22 @@ module Shoperb module Theme module Editor
 
         def url
           case record.style
+            when "CUSTOM"
+              record.value
+            when "HOME"
+              "/"
+            when "SEARCH"
+              "/search"
             when "PRODUCTS"
               "/products"
-            when "Page"
-              record.entity.to_liquid.url
-            when "Collection"
-              "javascript:void(0)"
             else
-              # TODO: Correct url from "else"
-              record.value
+              object.to_liquid.url
           end
+        end
+
+        def index_action?
+          s = record.style.downcase
+          s == s.pluralize
         end
 
         def menu

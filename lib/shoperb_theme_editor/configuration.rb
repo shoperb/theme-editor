@@ -69,7 +69,6 @@ module Shoperb module Theme module Editor
     def ask name
       default = DEFAULTS[name].presence
       if question = QUESTION[name]
-        default = DEFAULTS[name].presence
         Logger.info "#{question} #{"(Default is '#{default}') " if default}: "
         # $stdin.gets avoids problem with ARGV & gets
         $stdin.gets.strip.presence || default

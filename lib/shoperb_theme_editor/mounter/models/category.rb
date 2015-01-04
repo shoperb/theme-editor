@@ -4,10 +4,15 @@ module Shoperb module Theme module Editor
       class Category < Base
 
         fields :id, :parent_id, :state, :name, :permalink, :description, :lft, :rgt, :slug, :translations
+        translates :name, :description
         fields :level
 
         def self.primary_key
-          :slug
+          :permalink
+        end
+
+        def handle
+          permalink
         end
 
         has_many :products
@@ -41,8 +46,8 @@ module Shoperb module Theme module Editor
         end
 
         def products_for_self_and_children
-          arr = self_and_descendants.map(&:slug)
-          Product.all.select { |product| arr.include?(product.category_slug) }
+          arr = self_and_descendants.map(&:id)
+          Product.all.select { |product| arr.include?(product.category_permalink) }
         end
 
         def descends_from(category)

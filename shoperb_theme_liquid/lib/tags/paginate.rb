@@ -10,7 +10,7 @@ module Shoperb module Theme module Liquid module Tag
         @per_page       = $2 ? $3.to_i : 20
 
         @attributes = { 'window_size' => 3 }
-        markup.scan(Liquid::TagAttributes){|key, value| @attributes[key] = value }
+        markup.scan(::Liquid::TagAttributes){|key, value| @attributes[key] = value }
       else
         raise ::Liquid::SyntaxError.new("Syntax Error in 'paginate' - Valid syntax: paginate <collection> by <number>")
       end
@@ -21,10 +21,6 @@ module Shoperb module Theme module Liquid module Tag
     def render(context)
       context.stack do
         collection = context[@collection_name]
-
-        # raise ::Liquid::ArgumentError.new("Cannot paginate array '#{@collection_name}'. Not found.") if collection.nil?
-        collection = CollectionDrop.new(Kaminari::PaginatableArray.new) if collection.nil?
-
         current   = context["current_page"] == 0 ? 1 : context["current_page"]
         scope     = collection.send(:paginate, current, @per_page)
         paginator = {
@@ -47,8 +43,8 @@ module Shoperb module Theme module Liquid module Tag
         has_prev_page = (paginator[:page] - 1) >= 1
         has_next_page = (paginator[:page] + 1) <= scope.collection.num_pages
 
-        paginator[:previous]  = link(::I18n.t('pagination.previous'), paginator[:page] - 1, path, other_params) if has_prev_page
-        paginator[:next]      = link(::I18n.t('pagination.next'),     paginator[:page] + 1, path, other_params) if has_next_page
+        paginator[:previous]  = link(context.registers[:translate][context.registers[:locale], 'pagination.previous'], paginator[:page] - 1, path, other_params) if has_prev_page
+        paginator[:next]      = link(context.registers[:translate][context.registers[:locale], 'pagination.next'],     paginator[:page] + 1, path, other_params) if has_next_page
 
         hellip_break = false
 
@@ -92,7 +88,7 @@ module Shoperb module Theme module Liquid module Tag
     end
 
     def link(title, page, path, other_params = {})
-      params = other_params.merge(page: page)
+      params = other_params.merge("page" => page)
       { 'title' => title, 'url' => path + "?#{params.to_query}", 'is_link' => true}
     end
 

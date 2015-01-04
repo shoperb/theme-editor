@@ -5,8 +5,14 @@ module Shoperb module Theme module Editor
 
         fields :id, :state, :name, :content, :permalink, :slug, :translations, :template
 
+        translates :name, :content
+
         def self.primary_key
           :slug
+        end
+
+        def handle
+          permalink
         end
 
       end

@@ -7,7 +7,7 @@ OAuth2::Response.register_parser(:json, ["application/json"]) do |body|
 end
 
 module Shoperb module Theme module Editor
-  module OAuth
+  module Api
     extend self
     mattr_accessor :auth_code, :client, :token
 
@@ -26,14 +26,12 @@ module Shoperb module Theme module Editor
       response = Logger.notify "Downloading" do
         atoken.get(Pathname.new("themes/download").cleanpath.to_s)
       end
-
-      Theme.unpack response.parsed
-      Theme.clone_models
+      Package.unzip response.parsed
     end
 
     def push
       initialize
-      file = Theme.pack
+      file = Package.zip
       theme = Faraday::UploadIO.new(file, "application/zip")
       atoken = access_token
       Logger.notify "Uploading #{Editor["handle"]}" do
@@ -53,6 +51,7 @@ module Shoperb module Theme module Editor
       Sync.addresses
       Sync.pages
       Sync.menus
+      Sync.links
       Sync.blog_posts
       Mounter::Model::Base.save
     end
@@ -126,7 +125,7 @@ module Shoperb module Theme module Editor
       raise exception
     end
 
-    Editor.autoload_all self, "o_auth"
+    Editor.autoload_all self, "api"
 
   end
 end end end

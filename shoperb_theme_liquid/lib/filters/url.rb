@@ -26,7 +26,7 @@ module Shoperb module Theme module Liquid module Filter
 
 
     def link_to_locale(text, locale)
-      link_to text, @context.registers[:url_for][locale: locale]
+      link_to text, @context.registers[:replace_locale][locale]
     end
 
     def link_to_root(text)

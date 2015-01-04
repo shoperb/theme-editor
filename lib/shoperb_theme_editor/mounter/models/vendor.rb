@@ -5,6 +5,8 @@ module Shoperb module Theme module Editor
 
         fields :id, :name, :code, :fax, :phone, :email, :website, :contact_name, :contact_phone, :contact_email, :note, :translations
 
+        translates :name
+
         def self.primary_key
           :code
         end

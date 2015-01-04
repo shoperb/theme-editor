@@ -5,18 +5,17 @@ module Shoperb module Theme module Editor
 
         fields :id, :entity_id, :entity_type, :style, :name, :value, :handle, :position, :translations
 
-        # todo: TODOREF1
-        # def self.primary_key
-        #   :handle
-        # end
-        # belongs_to :menu
+        translates :name, :description
 
-        fields :menu_id, :menu_handle
-
-        def menu
-          Menu.all.detect { |menu| menu.id == self.menu_handle }
+        def self.primary_key
+          :handle
         end
-        # todo: TODOREF1 end
+        belongs_to :menu
+
+        def entity
+          Model.const_get(entity_type).all.detect { |object| object.attributes[:id] == entity_id }
+        end
+
       end
     end
   end

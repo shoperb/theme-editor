@@ -5,6 +5,8 @@ module Shoperb module Theme module Editor
 
         fields :id, :name, :description, :has_options, :permalink, :slug, :state, :translations, :template, :collection_ids, :category_id
 
+        translates :name, :description
+
         def self.primary_key
           :slug
         end
@@ -20,13 +22,13 @@ module Shoperb module Theme module Editor
 
         belongs_to :vendor
 
-        belongs_to :category
-
         has_many :variants
 
-        has_many :images
-
         has_many :product_attributes
+
+        def images
+          Image.all.select { |image| image.entity == self }
+        end
 
         def image
           images.first

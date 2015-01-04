@@ -67,6 +67,19 @@ module Shoperb module Theme module Editor
           def multiple_files?
             false
           end
+
+          def primary_key
+            :id
+          end
+
+          def translates *args
+            fields :translations
+            args.each do |arg|
+              define_method arg do
+                (translations || {}).fetch("#{Translations.locale}.#{arg}", attributes[arg])
+              end
+            end
+          end
         end
 
         def to_liquid
