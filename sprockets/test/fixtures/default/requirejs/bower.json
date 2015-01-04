@@ -1,4 +1,0 @@
-{
-  "name": "requirejs",
-  "main": ["require.min.js", "require.js"]
-}

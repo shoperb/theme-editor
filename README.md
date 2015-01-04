@@ -2,17 +2,6 @@
 
 Shoperb Theme Editor is a ruby gem designed to simplify the creating and updateing of Shoperb themes.
 
-## Quick start
-```
-echo 'ruby-2.1' > .ruby-version
-echo 'shoperb-themes' > .ruby-gemset
-echo "source 'https://rubygems.org'" > Gemfile
-echo "gem 'shoperb-theme-editor', :git => 'git@code.perfectline.co:shoperb/theme-editor.git'" >> Gemfile
-echo "gem 'liquid', github: 'Shopify/liquid', :ref => 'f15d24509d0f429f56284da527e6186708a27725'" >> Gemfile
-
-bundle
-```
-
 ## Installation
 
 Add this line to your Gemfile:
@@ -55,20 +44,15 @@ alias: serve
 $ shoperb mount [options]
 ```
 
-### init
-Initiates a shoperb theme template
-```bash
-$ shoperb init <foundation,bootstrap,blank> [options]
-```
-
-### dummy_data
-Clones default dummy data to the theme (also done on pull and init). Won't overwrite already excisting data files.
-```bash
-$ shoperb dummy_data
-```
-
 ### sync
 Clones products, categories, images, collections & vendors from your shop.
 ```bash
 $ shoperb sync
 ```
+
+## TODOS
+* [TODOREF1: Link handle not unique](http://code.perfectline.co/search?search=TODOREF1&project_id=64&search_code=true)
+* [TODOREF2: Fields/primary_key/relations not set](http://code.perfectline.co/search?search=TODOREF2&project_id=64&search_code=true)
+* [TODOREF3: Search](http://code.perfectline.co/search?search=TODOREF3&project_id=64&search_code=true)
+* [TODOREF4: Remove delegate drops](http://code.perfectline.co/search?search=TODOREF4&project_id=64&search_code=true)
+* [TODOREF5: Get controller instance variables from drops](http://code.perfectline.co/search?search=TODOREF5&project_id=64&search_code=true)
