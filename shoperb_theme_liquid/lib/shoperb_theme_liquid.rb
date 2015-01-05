@@ -7,7 +7,6 @@ autoload :Liquid, "liquid"
 # Translate filter, use @context.registers[:translate] proc instead of @context.registers[:theme].translations.translate
 # Translate filter, use @context.registers[:locale] instead of ::Globalize.locale
 
-
 module Shoperb module Theme
   module Liquid
     def self.autoload_all mod, folder
@@ -45,4 +44,3 @@ module Shoperb module Theme
   ::Liquid::Template.register_tag "paginate", Liquid::Tag::Paginate
   ::Liquid::Template.register_tag "form", Liquid::Tag::Form
 end end
-

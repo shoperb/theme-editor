@@ -28,7 +28,9 @@ autoload :Mime,               "action_dispatch/http/mime_type"
 autoload :Slop,               "slop"
 autoload :ActiveHash,         "active_hash"
 autoload :ActiveYaml,         "active_hash"
+
 autoload :Kaminari,           "kaminari"
+Kaminari.autoload :PaginatableArray, "kaminari/models/array_extension"
 
 module Shoperb module Theme
   module Editor

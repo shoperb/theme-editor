@@ -10,8 +10,8 @@ module Shoperb module Theme module Liquid module Filter
 
       options = args_to_options(args)
 
-      previous_label  = options[:prev] || I18n.t('pagination.previous')
-      next_label      = options[:next] || I18n.t('pagination.next')
+      previous_label  = options[:prev] || @context.registers[:translate][@context.registers[:locale], 'pagination.previous']
+      next_label      = options[:next] || @context.registers[:translate][@context.registers[:locale], 'pagination.next']
 
       previous_link = (if paginate['previous'].blank?
         "<span class=\"disabled prev-page\">#{previous_label}</span>"

@@ -1,3 +1,5 @@
+require_relative "../../../../shoperb_theme_sprockets/lib/shoperb_theme_sprockets"
+
 module Shoperb module Theme module Editor
   module Mounter
     class Server

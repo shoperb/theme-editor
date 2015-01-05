@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-require_relative "../shoperb_theme_liquid/lib/shoperb_theme_liquid"
-require_relative "../shoperb_theme_sprockets/lib/shoperb_theme_sprockets"
 require_relative "../lib/shoperb_theme_editor"
 
 def apply_global_opts

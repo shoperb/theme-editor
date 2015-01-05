@@ -1,3 +1,5 @@
+require_relative "../../../shoperb_theme_liquid/lib/shoperb_theme_liquid"
+
 Sinatra.autoload :Flash, "sinatra/flash"
 Sinatra.autoload :RespondWith,"sinatra/respond_with"
 
