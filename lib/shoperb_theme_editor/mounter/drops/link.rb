@@ -17,7 +17,7 @@ module Shoperb module Theme module Editor
               "/search"
             when "PRODUCTS"
               "/products"
-            else
+            when object?
               object.to_liquid.url
           end
         end

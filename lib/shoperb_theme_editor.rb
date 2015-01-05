@@ -2,8 +2,6 @@ require "active_support/all"
 require "haml"
 require "rack"
 require "pry"
-require "kaminari"
-Kaminari::Hooks.init
 
 autoload :OpenStruct,         "ostruct"
 autoload :FileUtils,          "fileutils"
@@ -30,7 +28,7 @@ autoload :Mime,               "action_dispatch/http/mime_type"
 autoload :Slop,               "slop"
 autoload :ActiveHash,         "active_hash"
 autoload :ActiveYaml,         "active_hash"
-#autoload :Kaminari,           "kaminari"
+autoload :Kaminari,           "kaminari"
 
 module Shoperb module Theme
   module Editor

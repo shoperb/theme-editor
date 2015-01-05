@@ -13,7 +13,7 @@ module Shoperb module Theme module Editor
         belongs_to :menu
 
         def entity
-          Model.const_get(entity_type).all.detect { |object| object.attributes[:id] == entity_id }
+          Model.const_get(entity_type).all.detect { |object| object.attributes[:id] == entity_id } if entity_type && entity_id
         end
 
       end

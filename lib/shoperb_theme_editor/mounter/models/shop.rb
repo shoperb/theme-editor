@@ -13,6 +13,14 @@ module Shoperb module Theme module Editor
           all.first
         end
 
+        def metric?
+          unit_system == "METRIC"
+        end
+
+        def imperial?
+          unit_system == "IMPERIAL"
+        end
+
         def external_hostname
           domain
         end
