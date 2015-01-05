@@ -1,8 +1,0 @@
-*.rbc
-.bundle
-Gemfile.lock
-README.html
-doc
-docs
-pkg
-tmp

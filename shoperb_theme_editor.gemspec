@@ -24,7 +24,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "sass", "~> 3"
   gem.add_dependency "haml", "~> 4"
   gem.add_dependency "slop", "~> 3"
-  gem.add_dependency "kaminari", "~> 0.16"
+  gem.add_dependency "kaminari", "~> 0.15"
   gem.add_dependency "active_hash", "~> 1"
   gem.add_dependency "colorize"
   gem.add_dependency "oauth2", "~> 1"

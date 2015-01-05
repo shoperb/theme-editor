@@ -36,6 +36,16 @@ module Shoperb module Theme module Editor
           not_found do
             respond :not_found
           end
+
+          get "/blog" do
+            respond :blog_posts, posts: Drop::Collection.new(Kaminari::PaginatableArray.new(Model::BlogPost.all).page(params[:page]))
+          end
+
+          get "/blog/:id" do
+            post = Model::BlogPost.find(params[:id])
+            template = post.template.presence || :blog_post
+            respond template, post: post, meta: post
+          end
         end
 
         private

@@ -24,7 +24,7 @@ module Shoperb module Theme module Editor
         end
 
         def url
-          default_url handle
+          "#{default_url_language}/blog/#{id}"
         end
 
       end

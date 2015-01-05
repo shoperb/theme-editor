@@ -11,5 +11,5 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($/)
   gem.require_paths = ["lib", "sprockets/lib"]
 
-  gem.add_dependency "sprockets", "2.12.2"
+  gem.add_dependency "sprockets", "3.0.0.beta.6"
 end

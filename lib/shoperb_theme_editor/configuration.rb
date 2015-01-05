@@ -33,6 +33,14 @@ module Shoperb module Theme module Editor
       }
     }.with_indifferent_access
 
+    ASKS = {
+      "oauth-password" => -> {
+        $stdin.noecho(&:gets).tap do
+          puts ""
+        end
+      }
+    }.with_indifferent_access
+
     attr_accessor :file
 
     def initialize options={}, *args
@@ -71,7 +79,7 @@ module Shoperb module Theme module Editor
       if question = QUESTION[name]
         Logger.info "#{question} #{"(Default is '#{default}') " if default}: "
         # $stdin.gets avoids problem with ARGV & gets
-        $stdin.gets.strip.presence || default
+        ASKS.fetch(name, -> { $stdin.gets })[].strip.presence || default
       end || default
     end
 
