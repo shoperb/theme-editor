@@ -19,7 +19,7 @@ module Shoperb module Theme module Editor
               :shop         => shop.to_liquid,
               :path         => request.path,
               :params       => params,
-              :get_params   => request.env['rack.request.query_hash'] || binding.pry,
+              :get_params   => request.env['rack.request.query_hash'],
               :url          => Drop::Url::Get.new,
               :form_actions => Drop::Url::Post.new,
               :current_page => params["page"],
