@@ -35,13 +35,20 @@ module Shoperb module Theme
       end
     end
   end
+
+  ::Liquid::Template.tags.instance_variable_get("@cache").each do |name, klass|
+    Liquid::Template.register_tag name, klass
+  end
+
+  # TODO: filters can't be registered on shoperb-theme-liquid
   ::Liquid::Template.register_filter Liquid::Filter::Url
   ::Liquid::Template.register_filter Liquid::Filter::Datum
   ::Liquid::Template.register_filter Liquid::Filter::Asset
   ::Liquid::Template.register_filter Liquid::Filter::Html
   ::Liquid::Template.register_filter Liquid::Filter::Translate
-  ::Liquid::Template.register_tag "layout", Liquid::Tag::Layout
-  ::Liquid::Template.register_tag "paginate", Liquid::Tag::Paginate
-  ::Liquid::Template.register_tag "form", Liquid::Tag::Form
-  ::Liquid::Template.register_tag "include", Liquid::Tag::Include
+
+  Liquid::Template.register_tag "layout", Liquid::Tag::Layout
+  Liquid::Template.register_tag "paginate", Liquid::Tag::Paginate
+  Liquid::Template.register_tag "form", Liquid::Tag::Form
+  Liquid::Template.register_tag "include", Liquid::Tag::Include
 end end

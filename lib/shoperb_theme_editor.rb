@@ -39,7 +39,8 @@ module Shoperb module Theme
     delegate :[], :[]=, :reset, to: :config
 
     def with_configuration options, *args
-      self.config = Configuration.new(options.to_hash.compact, *args)
+      # TODO: Use compact instead of select when updating Rails to >= 4.1
+      self.config = Configuration.new(options.to_hash.select { |_, value| !value.nil? }, *args)
       begin
         yield
       rescue Exception => e
