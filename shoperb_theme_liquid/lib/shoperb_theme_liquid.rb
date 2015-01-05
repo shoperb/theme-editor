@@ -1,6 +1,6 @@
 require "active_support/all"
+require "liquid"
 autoload :ActionView, "action_view"
-autoload :Liquid, "liquid"
 
 # Context changes:
 # Asset filter, use @context.registers[:asset_url] proc instead of @context.registers[:theme].asset_url
@@ -43,4 +43,5 @@ module Shoperb module Theme
   ::Liquid::Template.register_tag "layout", Liquid::Tag::Layout
   ::Liquid::Template.register_tag "paginate", Liquid::Tag::Paginate
   ::Liquid::Template.register_tag "form", Liquid::Tag::Form
+  ::Liquid::Template.register_tag "include", Liquid::Tag::Include
 end end
