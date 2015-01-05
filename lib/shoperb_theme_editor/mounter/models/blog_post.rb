@@ -3,8 +3,14 @@ module Shoperb module Theme module Editor
     module Model
       class BlogPost < Base
 
+        fields :id, :name, :content, :published_at, :slug, :permalink, :template
+
         translates :name, :content
-        # todo: TODOREF2
+
+        def active?
+          published_at.nil? || published_at <= Time.now
+        end
+
       end
     end
   end

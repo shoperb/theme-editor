@@ -3,14 +3,16 @@ module Shoperb module Theme module Editor
     module Model
       class VariantAttribute < Base
 
-        fields :id, :attribute_key_id, :value, :translations
+        fields :id, :handle, :name, :value, :translations
 
         translates :value
 
+        def self.primary_key
+          :handle
+        end
+
         belongs_to :variant
 
-        # todo: TODOREF2
-        # nothing to use as primary_key besides id right now
       end
     end
   end

@@ -48,7 +48,9 @@ module Shoperb module Theme module Editor
         assign_relation variant, Mounter::Model::Product
         variant
       end
-      return
+    end
+
+    def variant_attributes
       process Mounter::Model::VariantAttribute do |variant_attribute|
         assign_relation variant_attribute, Mounter::Model::Variant
         variant_attribute
@@ -66,6 +68,7 @@ module Shoperb module Theme module Editor
       end
       product_attributes
       variants
+      variant_attributes
     end
 
     def product_attributes

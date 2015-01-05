@@ -17,8 +17,8 @@ module Shoperb module Theme module Editor
               "/search"
             when "PRODUCTS"
               "/products"
-            when object?
-              object.to_liquid.url
+            else
+              object.try(:to_liquid).try(:url)
           end
         end
 

@@ -23,7 +23,8 @@ module Shoperb module Theme module Editor
               translate: Translations.method(:translate),
               locale: Translations.locale,
               shop: shop,
-              category: request.env[:current_category]
+              category: request.env[:current_category],
+              request_forgery_protection_token: -> { %(<input type="hidden" name="" value="">) }
             )
             locals = locals.reverse_merge(default_locals)
             registers = registers.reverse_merge({layout: "layout"})
