@@ -2,9 +2,8 @@ module Shoperb module Theme module Editor
   module Utils
     extend self
 
-    mattr_accessor :path do
-      Pathname.new("")
-    end
+    mattr_accessor :path
+    self.path = Pathname.new("")
 
     def rel_path path
       path = Pathname.new(path) unless path.is_a?(Pathname)
@@ -16,7 +15,7 @@ module Shoperb module Theme module Editor
     end
 
     def base
-      Pathname.new(path)
+      Pathname.new(Pathname.new(""))
     end
 
     def write_file target

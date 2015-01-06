@@ -10,11 +10,10 @@ module Shoperb module Theme module Editor
       "ERROR" => { color: :red }
     }
 
-    mattr_accessor :logger do
-      ::Logger.new(STDOUT).tap do |log|
-        log.formatter = proc do |severity, datetime, progname, msg|
-          msg.colorize(LEVELS[severity])
-        end
+    mattr_accessor :logger
+    self.logger = ::Logger.new(STDOUT).tap do |log|
+      log.formatter = proc do |severity, datetime, progname, msg|
+        msg.colorize(LEVELS[severity])
       end
     end
 
