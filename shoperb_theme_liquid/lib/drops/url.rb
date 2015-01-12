@@ -2,15 +2,39 @@ module Shoperb module Theme module Liquid module Drop
   module Url
     class Get< ::Liquid::Drop
 
-      def method_missing(name, *args, &block)
-        class_eval do
-          url = "/#{name}"
-          define_method name do |*args, &block|
-            url
-          end
-        end
-        send(name, *args, &block)
+      def products
+        "/products"
       end
+
+
+      def cart
+        "/cart"
+      end
+
+
+      def login
+        "/login"
+      end
+
+
+      def logout
+        "/logout"
+      end
+
+
+      def recover
+        "/recover"
+      end
+
+      def reset
+        "/reset"
+      end
+
+
+      def orders
+        "/orders"
+      end
+
     end
 
     class Post < ::Liquid::Drop
