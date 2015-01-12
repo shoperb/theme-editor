@@ -20,7 +20,9 @@ module Shoperb module Theme module Editor
     HARDCODED = {
       "oauth-client-id" => "jsikb3aoa42w1qkybugvj3t3l6tef2y",
       "oauth-client-secret" => "np47hizd5b9v5749psdyklybt11ygr4",
-      "oauth-redirect-uri" => "http://localhost:4000/callback"
+      "oauth-redirect-uri" => "http://localhost:4000/callback",
+      "oauth-username" => nil,
+      "oauth-password" => nil,
     }.with_indifferent_access
 
     DEFAULTS = {

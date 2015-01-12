@@ -2,11 +2,6 @@ require "active_support/all"
 require "liquid"
 autoload :ActionView, "action_view"
 
-# Context changes:
-# Asset filter, use @context.registers[:asset_url] proc instead of @context.registers[:theme].asset_url
-# Translate filter, use @context.registers[:translate] proc instead of @context.registers[:theme].translations.translate
-# Translate filter, use @context.registers[:locale] instead of ::Globalize.locale
-
 module Shoperb module Theme
   module Liquid
     def self.autoload_all mod, folder
@@ -21,6 +16,10 @@ module Shoperb module Theme
 
     module Tag
       Liquid.autoload_all self, "tags"
+    end
+
+    module Drop
+      Liquid.autoload_all self, "drops"
     end
 
     class Template < ::Liquid::Template

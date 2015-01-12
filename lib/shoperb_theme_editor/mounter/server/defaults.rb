@@ -9,21 +9,21 @@ module Shoperb module Theme module Editor
           def default_locals locals={}
             set_pagination_defaults
             {
-              :errors       => Drop::Collection.new(flash[:errors] || params[:errors] || []),
-              :meta         => Drop::Meta.new(locals.delete(:meta)),
-              :categories   => Drop::Categories.new(Model::Category.all),
+              :errors       => Liquid::Drop::Collection.new(flash[:errors] || params[:errors] || []),
+              :meta         => Liquid::Drop::Meta.new(locals.delete(:meta)),
+              :categories   => Liquid::Drop::Categories.new(Model::Category.all),
               :cart         => current_cart.to_liquid,
-              :menus        => Drop::Menus.new(Model::Menu.all),
-              :pages        => Drop::Pages.new(Model::Page.all),
-              :search       => Drop::Search.new(params[:query]),
+              :menus        => Liquid::Drop::Menus.new(Model::Menu.all),
+              :pages        => Liquid::Drop::Pages.new(Model::Page.all),
+              :search       => Liquid::Drop::Search.new(params[:query]),
               :shop         => shop.to_liquid,
               :path         => request.path,
               :params       => params,
               :get_params   => request.env['rack.request.query_hash'],
-              :url          => Drop::Url::Get.new,
-              :form_actions => Drop::Url::Post.new,
+              :url          => Liquid::Drop::Url::Get.new,
+              :form_actions => Liquid::Drop::Url::Post.new,
               :current_page => params["page"],
-              :collections  => Drop::ProductCollections.new(Model::Collection.all)
+              :collections  => Liquid::Drop::ProductCollections.new(Model::Collection.all)
             }
           end
 

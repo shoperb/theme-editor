@@ -15,8 +15,10 @@ module Shoperb module Theme module Editor
           Product.all.select { |product| product_ids.to_a.include?(product.attributes[:id]) }
         end
 
-        def to_liquid
-          Drop::ProductCollection.new(self)
+        def to_liquid context=nil
+          Liquid::Drop::ProductCollection.new(self).tap do |drop|
+            drop.context = context if context
+          end
         end
 
       end

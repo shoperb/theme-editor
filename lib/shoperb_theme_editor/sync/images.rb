@@ -3,14 +3,11 @@ module Shoperb module Theme module Editor
     module Images
 
       extend self
+      mattr_accessor :queue
+      self.queue = []
 
-      mattr_accessor :queue do
-        []
-      end
-
-      mattr_accessor :dir do
-        Utils.base + "data" + "assets" + "images"
-      end
+      mattr_accessor :dir
+      self.dir = Utils.base + "data" + "assets" + "images"
 
       def process
         FileUtils.mkdir_p(dir)

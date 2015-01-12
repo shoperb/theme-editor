@@ -19,7 +19,7 @@ module Shoperb module Theme module Editor
           append_paths
 
           get "/products/:id" do
-            product      = Drop::Product.new(record = Model::Product.find(params[:id]))
+            product      = Liquid::Drop::Product.new(record = Model::Product.find(params[:id]))
             category     = product.category
             template     = record.template.presence || :product
             respond template.to_sym, product: product, category: category, meta: product
@@ -38,7 +38,7 @@ module Shoperb module Theme module Editor
           end
 
           get "/blog" do
-            respond :blog_posts, posts: Drop::Collection.new(Kaminari::PaginatableArray.new(Model::BlogPost.all).page(params[:page]))
+            respond :blog_posts, posts: Liquid::Drop::Collection.new(Kaminari::PaginatableArray.new(Model::BlogPost.all).page(params[:page]))
           end
 
           get "/blog/:id" do
@@ -61,7 +61,7 @@ module Shoperb module Theme module Editor
 
         def self.append_paths
           resource Model::Category do
-            Drop::Category.new(request.env[:current_category] = Model::Category.find(params[:id]))
+            Liquid::Drop::Category.new(request.env[:current_category] = Model::Category.find(params[:id]))
           end
 
           resource Model::Collection do
@@ -69,15 +69,15 @@ module Shoperb module Theme module Editor
           end
 
           resource Model::Order do
-            Drop::Order.new(Model::Order.find(params[:id]))
+            Liquid::Drop::Order.new(Model::Order.find(params[:id]))
           end
 
           resources Model::Order do
-            Drop::Collection.new(Model::Order.all)
+            Liquid::Drop::Collection.new(Model::Order.all)
           end
 
           resources Model::Product do
-            Drop::Products.new(Model::Product.all)
+            Liquid::Drop::Products.new(Model::Product.all)
           end
         end
 

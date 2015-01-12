@@ -82,9 +82,11 @@ module Shoperb module Theme module Editor
           end
         end
 
-        def to_liquid
-          if klass = (Mounter::Drop.const_get(self.class.to_s.demodulize))
-            klass.new(self)
+        def to_liquid context=nil
+          if klass = (Liquid::Drop.const_get(self.class.to_s.demodulize))
+            klass.new(self).tap do |drop|
+              drop.context = context if context
+            end
           end
         end
 

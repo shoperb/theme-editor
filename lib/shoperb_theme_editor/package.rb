@@ -5,10 +5,9 @@ module Shoperb module Theme module Editor
 
     extend self
 
-    mattr_accessor :sprockets do
-      Shoperb::Theme::Sprockets::Environment.new do |env|
-        env.append_path "assets"
-      end
+    mattr_accessor :sprockets
+    self.sprockets = Shoperb::Theme::Sprockets::Environment.new do |env|
+      env.append_path "assets"
     end
 
     def unzip file
