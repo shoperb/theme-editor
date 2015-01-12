@@ -13,7 +13,7 @@ module Shoperb module Theme module Editor
         # todo: TODOREF2 end
 
         def self.image_size instance, name, url
-          Struct.new("ImageSize", :name, :url) do |klass|
+          Struct.new(:name, :url) do |klass|
             def klass.method_missing name, *args, &block
               instance.send(name, *args, &block)
             end
