@@ -15,7 +15,9 @@ module Shoperb module Theme module Liquid module Drop
 
     def before_method(method, *args)
       if image = record.image_sizes.detect { |s| s.name == method.to_s }
-        image.to_liquid(@context)
+        Image.new(image).tap do |drop|
+          drop.context = @context if @context
+        end
         #else
         #  self
       end

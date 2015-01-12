@@ -12,12 +12,20 @@ module Shoperb module Theme module Editor
         # end
         # todo: TODOREF2 end
 
+        def self.image_size instance, name, url
+          Struct.new("ImageSize", :name, :url) do |klass|
+            def klass.method_missing name, *args, &block
+              instance.send(name, *args, &block)
+            end
+          end.new(name, url)
+        end
+
         def entity
           Model.const_get(entity_type).all.detect { |obj| obj.attributes[:id] == entity_id }
         end
 
         def image_sizes
-          sizes.map { |name, url| OpenStruct.new(name: name, url: "/#{Shop.first.domain}/images/#{id}/#{url}") }
+          sizes.map { |name, url| self.class.image_size(self, name, "/#{Shop.first.domain}/images/#{id}/#{url}")}
         end
       end
     end
