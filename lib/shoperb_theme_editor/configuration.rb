@@ -48,11 +48,6 @@ module Shoperb module Theme module Editor
     def initialize options={}, *args
       super()
 
-      if args.any?
-        Utils.path = args[0]
-        self["handle"] = args[1]
-      end
-
       self.file = Utils.base + ".shoperb"
 
       begin

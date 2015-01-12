@@ -57,7 +57,7 @@ module Shoperb module Theme module Editor
     private
 
     def handle
-      Pathname.new(Editor["handle"] ? Pathname.new(".." + Editor["handle"]) : Utils.base)
+      Pathname.new(Editor["handle"])
     end
 
     def write_file out, file
