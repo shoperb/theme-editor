@@ -32,6 +32,18 @@ module Shoperb module Theme module Editor
       zip = Zip::OutputStream.write_buffer do |out|
         Pathname.glob("**/*") do |file|
           case file.to_s
+            when /\A(assets\/(stylesheets\/(application\.(css(|\.sass|\.scss)|sass|scss))))\z/
+              compiled = sprockets[$2].to_s
+              filename = "#{$1.gsub(".#{$4}", "")}.css"
+              write_file(out, Pathname.new("cache") + filename) { compiled }
+              write_file(out, Pathname.new(filename)) { compiled }
+              write_file(out, file)
+            when /\A(assets\/(javascripts\/(application\.(js|coffee|js\.coffee))))\z/
+              compiled = sprockets[$2].to_s
+              filename = "#{$1.gsub(".#{$4}", "")}.js"
+              write_file(out, Pathname.new("cache") + filename) { compiled }
+              write_file(out, Pathname.new(filename)) { compiled }
+              write_file(out, file)
             when /\A((layouts|templates)\/(.*\.liquid))\z/,
               /\A(assets\/((images|icons)\/(.*\.(png|jpg|jpeg|gif|swf|ico|svg|pdf))))\z/,
               /\A(assets\/(fonts\/(.*\.(eot|woff|ttf))))\z/,
@@ -43,11 +55,8 @@ module Shoperb module Theme module Editor
             when /\A((layouts|templates)\/(.*\.liquid))\.haml\z/
               write_file(out, file)
               write_file(out, Pathname.new("cache") + $1) { Haml::Engine.new(file.read).render }
-            when /\A(assets\/(javascripts\/(.*\.js)))\.coffee\z/, /\A(assets\/(stylesheets\/(.*\.css)))(\.sass|\.scss)\z/
-              compiled = sprockets[$2].to_s
+            when /\A(assets\/(javascripts\/(.*\.(js|coffee|js\.coffee))))\z/, /\A(assets\/(stylesheets\/(.*\.(css(|\.sass|\.scss)|sass|scss))))\z/
               write_file(out, file)
-              write_file(out, $1) { compiled }
-              write_file(out, Pathname.new("cache") + $1) { compiled }
           end
         end
       end
