@@ -35,15 +35,15 @@ module Shoperb module Theme module Editor
             when /\A(assets\/(stylesheets\/(application\.(css(|\.sass|\.scss)|sass|scss))))\z/
               compiled = sprockets[$2.dup].to_s
               filename = "#{$1.dup.gsub(".#{$4.dup}", "")}.css"
+              write_file(out, file)
               write_file(out, Pathname.new("cache") + filename) { compiled }
               write_file(out, Pathname.new(filename)) { compiled }
-              write_file(out, file)
             when /\A(assets\/(javascripts\/(application\.(js|coffee|js\.coffee))))\z/
               compiled = sprockets[$2.dup].to_s
               filename = "#{$1.dup.gsub(".#{$4.dup}", "")}.js"
+              write_file(out, file)
               write_file(out, Pathname.new("cache") + filename) { compiled }
               write_file(out, Pathname.new(filename)) { compiled }
-              write_file(out, file)
             when /\A((layouts|templates)\/(.*\.liquid))\z/,
               /\A(assets\/((images|icons)\/(.*\.(png|jpg|jpeg|gif|swf|ico|svg|pdf))))\z/,
               /\A(assets\/(fonts\/(.*\.(eot|woff|ttf))))\z/,
