@@ -20,11 +20,7 @@ module Shoperb module Theme module Editor
       display += " => #{e.message}" if e.message.presence
       puts e.backtrace
       Logger.error "#{display}\n"
-      puts e.backtrace
-      # Report all errors for now
-      #unless Rollbar.configuration.exception_level_filters.has_key?(e.class.to_s)
-        # ::Rollbar.report_exception(e)
-      #end
+      ::Rollbar.report_exception(e)
     end
   end
 end end end

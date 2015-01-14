@@ -6,7 +6,7 @@ module Shoperb module Theme module Editor
     extend self
 
     mattr_accessor :sprockets
-    self.sprockets = Shoperb::Theme::Sprockets::Environment.new do |env|
+    self.sprockets = Shoperb::Theme::Sprockets::Environment.new(domain: Editor["oauth-site"], theme: Editor["handle"]) do |env|
       env.append_path "assets"
     end
 
@@ -33,14 +33,14 @@ module Shoperb module Theme module Editor
         Pathname.glob("**/*") do |file|
           case file.to_s
             when /\A(assets\/(stylesheets\/(application\.(css(|\.sass|\.scss)|sass|scss))))\z/
-              compiled = sprockets[$2].to_s
-              filename = "#{$1.gsub(".#{$4}", "")}.css"
+              compiled = sprockets[$2.dup].to_s
+              filename = "#{$1.dup.gsub(".#{$4.dup}", "")}.css"
               write_file(out, Pathname.new("cache") + filename) { compiled }
               write_file(out, Pathname.new(filename)) { compiled }
               write_file(out, file)
             when /\A(assets\/(javascripts\/(application\.(js|coffee|js\.coffee))))\z/
-              compiled = sprockets[$2].to_s
-              filename = "#{$1.gsub(".#{$4}", "")}.js"
+              compiled = sprockets[$2.dup].to_s
+              filename = "#{$1.dup.gsub(".#{$4.dup}", "")}.js"
               write_file(out, Pathname.new("cache") + filename) { compiled }
               write_file(out, Pathname.new(filename)) { compiled }
               write_file(out, file)
@@ -51,10 +51,10 @@ module Shoperb module Theme module Editor
               /\A(assets\/(stylesheets\/(.*\.css)))\z/,
               /\A(translations\/*\.json)\z/
               write_file(out, file)
-              write_symlink(out, file, Pathname.new("cache") + $1) # Use symlinks to save space
+              write_symlink(out, file, Pathname.new("cache") + $1.dup) # Use symlinks to save space
             when /\A((layouts|templates)\/(.*\.liquid))\.haml\z/
               write_file(out, file)
-              write_file(out, Pathname.new("cache") + $1) { Haml::Engine.new(file.read).render }
+              write_file(out, Pathname.new("cache") + $1.dup) { Haml::Engine.new(file.read).render }
             when /\A(assets\/(javascripts\/(.*\.(js|coffee|js\.coffee))))\z/, /\A(assets\/(stylesheets\/(.*\.(css(|\.sass|\.scss)|sass|scss))))\z/
               write_file(out, file)
           end

@@ -14,7 +14,8 @@ module Shoperb module Theme module Editor
     QUESTION = {
       "oauth-site" => "Insert Shoperb domain",
       "oauth-username" => "Insert Shoperb username",
-      "oauth-password" => "Insert Shoperb password"
+      "oauth-password" => "Insert Shoperb password",
+      "handle" => "Insert theme handle"
     }.with_indifferent_access
 
     HARDCODED = {
