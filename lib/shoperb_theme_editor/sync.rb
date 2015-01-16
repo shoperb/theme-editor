@@ -51,7 +51,6 @@ module Shoperb module Theme module Editor
     end
 
     def variant_attributes
-      return
       process Mounter::Model::VariantAttribute do |variant_attribute|
         assign_relation variant_attribute, Mounter::Model::Variant
         variant_attribute
@@ -90,7 +89,10 @@ module Shoperb module Theme module Editor
     end
 
     def process klass, path=klass.to_s.demodulize.tableize, &block
-      klass.assign fetch(path).map(&(block || ->(i){i})).uniq { |h| h[klass.primary_key.to_s] }
+      result = fetch(path).map(&(block || ->(i){i}))
+      uniq = result.uniq { |h| h[klass.primary_key.to_s] }
+      Logger.info "Received #{result.count} #{path.pluralize(result.count)}, kept #{uniq.count}.\n" if Editor["verbose"]
+      klass.assign uniq
     end
 
     def counter
