@@ -18,7 +18,7 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def default_url_language
-      "/#{@context.registers[:locale]}" if @context.registers[:locale] && @context.registers[:locale] != shop.language_code
+      "/#{@context.registers[:locale]}" if @context.registers[:locale].present? && @context.registers[:locale] != shop.language_code
     end
 
     def shop

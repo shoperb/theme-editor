@@ -51,9 +51,12 @@ module Shoperb module Theme
     end
 
     def autoload_all mod, folder
-      Gem.find_files(Pathname.new("shoperb_theme_editor/#{folder}/*.rb").cleanpath.to_s).each { |path|
+      Gem.find_files(
+        Pathname.new("shoperb_theme_editor/#{folder}/*.rb").cleanpath.to_s
+      ).each { |path|
         name = Pathname.new(path).basename(".rb")
-        mod.autoload :"#{name.to_s.sub(/.*\./, '').camelize}", Pathname.new("shoperb_theme_editor/#{folder}/#{name}").cleanpath.to_s
+        mod.autoload :"#{name.to_s.sub(/.*\./, '').camelize}",
+          Pathname.new("shoperb_theme_editor/#{folder}/#{name}").cleanpath.to_s
       }
     end
 
