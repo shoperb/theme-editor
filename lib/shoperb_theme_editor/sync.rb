@@ -89,7 +89,7 @@ module Shoperb module Theme module Editor
     end
 
     def process klass, path=klass.to_s.demodulize.tableize, &block
-      result = fetch(path).map(&(block || ->(i){i}))
+      result = fetch(path).map(&(block || ->(this){this}))
       uniq = result.uniq { |h| h[klass.primary_key.to_s] }
       Logger.info "Received #{result.count} #{path.pluralize(result.count)}, kept #{uniq.count}.\n" if Editor["verbose"]
       klass.assign uniq
@@ -126,8 +126,9 @@ module Shoperb module Theme module Editor
     def assign_relation attributes, klass
       name = klass.to_s.demodulize.underscore
       id = attributes["#{name}_id"]
-      attributes["#{name}_#{klass.primary_key}"] = klass.where(id: id).first.try(klass.primary_key) if id
-      attributes["#{name}_#{klass.primary_key}"] || (attributes["#{name}_id"] = id if id)
+      primary_key = klass.primary_key
+      attributes["#{name}_#{primary_key}"] = klass.where(id: id).first.try(primary_key) if id
+      attributes["#{name}_#{primary_key}"] || (attributes["#{name}_id"] = id if id)
     end
 
   end

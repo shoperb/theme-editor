@@ -31,39 +31,43 @@ module Shoperb module Theme module Editor
     def zip
       zip = Zip::OutputStream.write_buffer do |out|
         Pathname.glob("**/*") do |file|
-          case file.to_s
-            when /\A(assets\/(stylesheets\/(application\.(css(|\.sass|\.scss)|sass|scss))))\z/
-              compiled = sprockets[$2.dup].to_s
-              filename = "#{$1.dup.gsub(".#{$4.dup}", "")}.css"
-              write_file(out, file)
-              write_file(out, Pathname.new("cache") + filename) { compiled }
-              write_file(out, Pathname.new(filename)) { compiled }
-            when /\A(assets\/(javascripts\/(application\.(js|coffee|js\.coffee))))\z/
-              compiled = sprockets[$2.dup].to_s
-              filename = "#{$1.dup.gsub(".#{$4.dup}", "")}.js"
-              write_file(out, file)
-              write_file(out, Pathname.new("cache") + filename) { compiled }
-              write_file(out, Pathname.new(filename)) { compiled }
-            when /\A((layouts|templates)\/(.*\.liquid))\z/,
-              /\A(assets\/((images|icons)\/(.*\.(png|jpg|jpeg|gif|swf|ico|svg|pdf))))\z/,
-              /\A(assets\/(fonts\/(.*\.(eot|woff|ttf))))\z/,
-              /\A(assets\/(javascripts\/(.*\.js)))\z/,
-              /\A(assets\/(stylesheets\/(.*\.css)))\z/,
-              /\A(translations\/*\.json)\z/
-              write_file(out, file)
-              write_symlink(out, file, Pathname.new("cache") + $1.dup) # Use symlinks to save space
-            when /\A((layouts|templates)\/(.*\.liquid))\.haml\z/
-              write_file(out, file)
-              write_file(out, Pathname.new("cache") + $1.dup) { Haml::Engine.new(file.read).render }
-            when /\A(assets\/(javascripts\/(.*\.(js|coffee|js\.coffee))))\z/, /\A(assets\/(stylesheets\/(.*\.(css(|\.sass|\.scss)|sass|scss))))\z/
-              write_file(out, file)
-          end
+          pack_file file, out
         end
       end
       Utils.mk_tempfile zip.string, "#{handle.basename}-", ".zip"
     end
 
     private
+
+    def pack_file file, out
+      case file.to_s
+        when /\A(assets\/(stylesheets\/(application\.(css(|\.sass|\.scss)|sass|scss))))\z/
+          pack_compilable file, out, "css"
+        when /\A(assets\/(javascripts\/(application\.(js|coffee|js\.coffee))))\z/
+          pack_compilable file, out, "js"
+        when /\A((layouts|templates)\/(.*\.liquid))\z/,
+          /\A(assets\/((images|icons)\/(.*\.(png|jpg|jpeg|gif|swf|ico|svg|pdf))))\z/,
+          /\A(assets\/(fonts\/(.*\.(eot|woff|ttf))))\z/,
+          /\A(assets\/(javascripts\/(.*\.js)))\z/,
+          /\A(assets\/(stylesheets\/(.*\.css)))\z/,
+          /\A(translations\/*\.json)\z/
+          write_file(out, file)
+          write_symlink(out, file, Pathname.new("cache") + $1.dup) # Use symlinks to save space
+        when /\A((layouts|templates)\/(.*\.liquid))\.haml\z/
+          write_file(out, file)
+          write_file(out, Pathname.new("cache") + $1.dup) { Haml::Engine.new(file.read).render }
+        when /\A(assets\/(javascripts\/(.*\.(js|coffee|js\.coffee))))\z/, /\A(assets\/(stylesheets\/(.*\.(css(|\.sass|\.scss)|sass|scss))))\z/
+          write_file(out, file)
+      end
+    end
+
+    def pack_compilable file, out, type
+      compiled = sprockets[$2.dup].to_s
+      filename = "#{$1.dup.gsub(".#{$4.dup}", "")}.#{type}"
+      write_file(out, file)
+      write_file(out, Pathname.new("cache") + filename) { compiled }
+      write_file(out, Pathname.new(filename)) { compiled }
+    end
 
     def handle
       Pathname.new(Editor["handle"])

@@ -43,8 +43,8 @@ module Shoperb module Theme module Liquid module Tag
         has_prev_page = (paginator[:page] - 1) >= 1
         has_next_page = (paginator[:page] + 1) <= scope.collection.num_pages
 
-        paginator[:previous]  = link(context.registers[:translate][context.registers[:locale], 'pagination.previous'], paginator[:page] - 1, path, other_params) if has_prev_page
-        paginator[:next]      = link(context.registers[:translate][context.registers[:locale], 'pagination.next'],     paginator[:page] + 1, path, other_params) if has_next_page
+        paginator[:previous]  = paginator_link(context, paginator[:page] - 1, path, other_params, "previous") if has_prev_page
+        paginator[:next]      = paginator_link(context, paginator[:page] + 1, path, other_params, "next") if has_next_page
 
         hellip_break = false
 
@@ -78,6 +78,10 @@ module Shoperb module Theme module Liquid module Tag
     end
 
     private
+
+    def paginator_link context, page, path, other_params, type
+      link(context.registers[:translate][context.registers[:locale], "pagination.#{type}"], page, path, other_params)
+    end
 
     def window_size
       @attributes['window_size']

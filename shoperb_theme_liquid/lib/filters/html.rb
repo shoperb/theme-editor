@@ -12,12 +12,7 @@ module Shoperb module Theme module Liquid module Filter
 
       previous_label  = options[:prev] || @context.registers[:translate][@context.registers[:locale], 'pagination.previous']
       next_label      = options[:next] || @context.registers[:translate][@context.registers[:locale], 'pagination.next']
-
-      previous_link = (if paginate['previous'].blank?
-        "<span class=\"disabled prev-page\">#{previous_label}</span>"
-      else
-        "<a href=\"#{paginate['previous']['url']}\" class=\"prev-page\">#{previous_label}</a>"
-      end)
+      previous_link   = link("previous", previous_label, paginate)
 
       links = ""
       paginate['parts'].each do |part|
@@ -30,11 +25,7 @@ module Shoperb module Theme module Liquid module Filter
         end)
       end
 
-      next_link = (if paginate['next'].blank?
-        "<span class=\"disabled next-page\">#{next_label}</span>"
-      else
-        "<a href=\"#{paginate['next']['url']}\" class=\"next-page\">#{next_label}</a>"
-      end)
+      next_link   = link("next", next_label, paginate)
 
       %{<div class="pagination">
         #{previous_link}
@@ -44,6 +35,14 @@ module Shoperb module Theme module Liquid module Filter
     end
 
     private
+
+    def link type, label, paginate
+      if paginate[type].blank?
+        "<span class=\"disabled prev-page\">#{label}</span>"
+      else
+        "<a href=\"#{paginate[type]['url']}\" class=\"prev-page\">#{label}</a>"
+      end
+    end
 
     def args_to_options(*args)
       options = {}

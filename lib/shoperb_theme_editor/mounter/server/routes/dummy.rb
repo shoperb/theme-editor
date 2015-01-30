@@ -10,19 +10,17 @@ module Shoperb module Theme module Editor
               redirect "/cart"
             end
 
-            app.post "/cart" do
+            cart_response = -> {
               respond_to do |f|
                 f.json { respond :cart, params, layout: "" }
                 f.html { redirect "/cart" }
               end
-            end
+            }
 
-            app.post "/cart/add" do
-              respond_to do |f|
-                f.json { respond :cart, params, layout: "" }
-                f.html { redirect "/cart" }
-              end
-            end
+
+            app.post "/cart", &cart_response
+
+            app.post "/cart/add", &cart_response
 
             app.get "/search" do
               respond :search

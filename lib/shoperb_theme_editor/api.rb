@@ -12,7 +12,7 @@ module Shoperb module Theme module Editor
     mattr_accessor :auth_code, :client, :token
 
     def clone_remote
-      initialize
+      prepare
       unless Editor["handle"]
         response = access_token.get(Pathname.new("themes").cleanpath.to_s).parsed
         Configuration::QUESTION["handle"] = "Please choose a theme [#{response.map { |hash| hash["handle"] }.join(", ")}]"
@@ -21,7 +21,7 @@ module Shoperb module Theme module Editor
     end
 
     def pull
-      initialize
+      prepare
       atoken = access_token
       response = Logger.notify "Downloading" do
         atoken.get(Pathname.new("themes/download").cleanpath.to_s)
@@ -30,7 +30,7 @@ module Shoperb module Theme module Editor
     end
 
     def push
-      initialize
+      prepare
       file = Package.zip
       theme = Faraday::UploadIO.new(file, "application/zip")
       atoken = access_token
@@ -42,7 +42,7 @@ module Shoperb module Theme module Editor
     end
 
     def sync
-      initialize
+      prepare
       Sync.products
       Sync.shop
       Sync.images
@@ -72,7 +72,7 @@ module Shoperb module Theme module Editor
       end
     end
 
-    def initialize
+    def prepare
       oauth_client
       Logger.notify "Asking for permission" do
         start_server(authorize_url)
@@ -93,8 +93,8 @@ module Shoperb module Theme module Editor
 
     def access_token
       OAuth2::AccessToken.new(oauth_client, get_token.token) if have_token?
-    rescue OAuth2::Error => e
-      handle_oauth_error e
+    rescue OAuth2::Error => oauth_error
+      handle_oauth_error oauth_error
     end
 
     def have_token?
