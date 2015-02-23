@@ -42,9 +42,9 @@ module Shoperb module Theme module Editor
     def pack_file file, out
       case file.to_s
         when /\A(assets\/(stylesheets\/(application\.(css(|\.sass|\.scss)|sass|scss))))\z/
-          pack_compilable file, out, "css"
+          pack_compilable $~, file, out, "css"
         when /\A(assets\/(javascripts\/(application\.(js|coffee|js\.coffee))))\z/
-          pack_compilable file, out, "js"
+          pack_compilable $~, file, out, "js"
         when /\A((layouts|templates)\/(.*\.liquid))\z/,
           /\A(assets\/((images|icons)\/(.*\.(png|jpg|jpeg|gif|swf|ico|svg|pdf))))\z/,
           /\A(assets\/(fonts\/(.*\.(eot|woff|ttf))))\z/,
@@ -61,9 +61,9 @@ module Shoperb module Theme module Editor
       end
     end
 
-    def pack_compilable file, out, type
-      compiled = sprockets[$2.dup].to_s
-      filename = "#{$1.dup.gsub(".#{$4.dup}", "")}.#{type}"
+    def pack_compilable matchdata, file, out, type
+      compiled = sprockets[matchdata[2]].to_s
+      filename = "#{matchdata[1].gsub(".#{matchdata[4]}", "")}.#{type}"
       write_file(out, file)
       write_file(out, Pathname.new("cache") + filename) { compiled }
       write_file(out, Pathname.new(filename)) { compiled }
