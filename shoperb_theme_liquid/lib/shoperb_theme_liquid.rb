@@ -46,3 +46,9 @@ module Shoperb module Theme
   ::Liquid::Template.register_tag "form", Liquid::Tag::Form
   ::Liquid::Template.register_tag "include", Liquid::Tag::Include
 end end
+
+class Array
+  def to_liquid
+    Shoperb::Theme::Liquid::Drop::Array.new(self)
+  end
+end
