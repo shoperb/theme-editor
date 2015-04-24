@@ -23,6 +23,7 @@ module Shoperb module Theme module Editor
               :url          => Liquid::Drop::Url::Get.new,
               :form_actions => Liquid::Drop::Url::Post.new,
               :current_page => params["page"],
+              :customer     => Liquid::Drop::Customer.new(current_customer)
               :collections  => Liquid::Drop::ProductCollections.new(Model::Collection.all)
             }
           end

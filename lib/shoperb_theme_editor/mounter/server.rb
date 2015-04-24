@@ -31,6 +31,10 @@ module Shoperb module Theme module Editor
         def shop
           Model::Shop.first
         end
+
+        def current_customer
+          Model::Customer.first
+        end
       end
     end
   end

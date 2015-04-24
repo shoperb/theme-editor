@@ -39,5 +39,9 @@ module Shoperb module Theme module Liquid module Drop
       end
     end
 
+    def discount_pct
+      record.discount_pct
+    end
+
   end
 end end end end
