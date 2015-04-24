@@ -33,6 +33,26 @@ module Shoperb module Theme module Editor
             respond [:home, :index, :frontpage]
           end
 
+          get "/login" do
+            respond :login
+          end
+
+          get "/signup" do
+            respond :signup
+          end
+
+          get "/recover" do
+            respond :password_request
+          end
+
+          get "/reset" do
+            respond :password_change
+          end
+
+          get "/reset/:token" do
+            respond :password_change
+          end
+
           not_found do
             respond :not_found
           end
