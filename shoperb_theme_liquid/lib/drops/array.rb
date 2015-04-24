@@ -10,3 +10,9 @@ module Shoperb module Theme module Liquid module Drop
     end
   end
 end end end end
+
+class Array
+  def to_liquid
+    Shoperb::Theme::Liquid::Drop::Array.new(self)
+  end
+end
