@@ -33,7 +33,13 @@ module Shoperb module Theme module Editor
       end
 
       def enqueue_download url, filename
-        (queue << -> { Utils.write_file(filename) { open(url).read } }) unless File.exists?(filename)
+        (queue << -> {
+          begin
+            Utils.write_file(filename) { open(url).read }
+          rescue Exception => e
+            Logger.error("#{e.message} (#{url} => #{filename})")
+          end
+        }) unless File.exists?(filename)
       end
 
       def threaded_download message
