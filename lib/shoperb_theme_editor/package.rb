@@ -34,6 +34,7 @@ module Shoperb module Theme module Editor
           pack_file file, out
         end
       end
+      Utils.write_file("debug.zip") { zip.string } if Editor["verbose"]
       Utils.mk_tempfile zip.string, "#{handle.basename}-", ".zip"
     end
 
