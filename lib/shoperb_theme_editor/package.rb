@@ -51,7 +51,7 @@ module Shoperb module Theme module Editor
           /\A(assets\/(fonts\/(.*\.(eot|woff|ttf))))\z/,
           /\A(assets\/(javascripts\/(.*\.js)))\z/,
           /\A(assets\/(stylesheets\/(.*\.css)))\z/,
-          /\A(translations\/*\.json)\z/
+          /\A(translations\/.*\.json)\z/
           write_file(out, file)
           write_symlink(out, file, Pathname.new("cache") + $1.dup) # Use symlinks to save space
         when /\A((layouts|templates)\/(.*\.liquid))\.haml\z/
