@@ -84,7 +84,7 @@ module Shoperb module Theme module Liquid module Filter
     def date(value, formatting)
       return unless value
       
-      date = Date.today if value.eql?("now") 
+      value = Date.today if value.eql?("now") 
       date = value.kind_of?(String) ? Date.parse(value) : value
       I18n.l(date, :format => formatting)
     end
