@@ -42,9 +42,9 @@ module Shoperb module Theme module Editor
 
     def pack_file file, out
       case file.to_s
-        when /\A(assets\/(stylesheets\/(application\.(css(|\.sass|\.scss)|sass|scss))))\z/
+        when /\A(assets\/(stylesheets\/((?:#{Editor["compile"]["css"].join("|")})\.(css(|\.sass|\.scss)|sass|scss))))\z/
           pack_compilable $~, file, out, "css"
-        when /\A(assets\/(javascripts\/(application\.(js|coffee|js\.coffee))))\z/
+        when /\A(assets\/(javascripts\/((?:#{Editor["compile"]["js"].join("|")})\.(js|coffee|js\.coffee))))\z/
           pack_compilable $~, file, out, "js"
         when /\A((layouts|templates)\/(.*\.liquid))\z/,
           /\A(assets\/((images|icons)\/(.*\.(png|jpg|jpeg|gif|swf|ico|svg|pdf))))\z/,

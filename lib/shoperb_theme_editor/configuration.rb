@@ -28,6 +28,10 @@ module Shoperb module Theme module Editor
 
     DEFAULTS = {
       "oauth-cache" => {}.with_indifferent_access,
+      "compile" => {
+        js: ["application"],
+        css: ["application"]
+      }.with_indifferent_access,
       "port" => "4000",
       "verbose" => false,
       "server" => {
