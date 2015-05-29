@@ -48,7 +48,7 @@ module Shoperb module Theme module Editor
           pack_compilable $~, file, out, "js"
         when /\A((layouts|templates)\/(.*\.liquid))\z/,
           /\A(assets\/((images|icons)\/(.*\.(png|jpg|jpeg|gif|swf|ico|svg|pdf))))\z/,
-          /\A(assets\/(fonts\/(.*\.(eot|woff|ttf))))\z/,
+          /\A(assets\/(fonts\/(.*\.(eot|woff|ttf|woff2))))\z/,
           /\A(assets\/(javascripts\/(.*\.js)))\z/,
           /\A(assets\/(stylesheets\/(.*\.css)))\z/,
           /\A(translations\/.*\.json)\z/
