@@ -58,8 +58,8 @@ Slop.parse ignore_case: true, help: true, strict: true do
     description "Irb in the context of theme generator"
     banner with_description("Usage: shoperb console [options]")
     run do |options, args|
-      Shoperb.with_configuration(options) do
-        Shoperb::Mounter::Model.console
+      Shoperb::Theme::Editor.with_configuration(options) do
+        Shoperb::Theme::Editor::Mounter::Model.console
       end
     end
   end
