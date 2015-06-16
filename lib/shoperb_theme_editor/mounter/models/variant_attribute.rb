@@ -8,7 +8,7 @@ module Shoperb module Theme module Editor
         translates :value
 
         def self.primary_key
-          :handle
+          "id"
         end
 
         belongs_to :variant
