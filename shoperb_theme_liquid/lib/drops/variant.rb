@@ -86,7 +86,13 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def json
-      record.attributes.merge(attributes: record.variant_attributes.map(&:attributes)).to_json
+      record.attributes.merge(
+        attributes: record.variant_attributes.map(&:attributes),
+        current_price: current_price,
+        has_discount: discount?,
+        discount_price: discount_price,
+        stock: stock
+      ).to_json
     end
 
   end

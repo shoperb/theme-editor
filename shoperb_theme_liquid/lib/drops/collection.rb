@@ -38,11 +38,11 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def first
-      collection.first.to_liquid(@context)
+      collection.first.try(:to_liquid, @context)
     end
 
     def last
-      collection.last.to_liquid(@context)
+      collection.last.try(:to_liquid, @context)
     end
 
     def to_a
