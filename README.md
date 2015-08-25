@@ -3,19 +3,24 @@
 Shoperb Theme Editor is a ruby gem designed to simplify the creating and updateing of Shoperb themes.
 
 ## Installation
-
-Add this line to your Gemfile:
+Create Gemfile:
 ```ruby
-gem 'shoperb-theme-editor'
+source "https://rubygems.org"
+gem "shoperb-theme-editor", github: "shoperb/theme-editor"
 ```
 And then execute:
 ```bash
 $ bundle
 ```
-Or install it yourself as:
-```bash
-$ gem install shoperb-theme-editor
-```
+
+## Usage
+#### Execute `shoperb pull'
+This downloads the necessary theme files for the theme to run locally.
+#### Execute `shoperb sync'
+This makes your local theme get the same data your regular shop would have.
+#### Execute `shoperb serve'
+This runs the local theme.
+#### Open http://localhost:4000 in browser
 
 ## Available commands
 
@@ -37,11 +42,11 @@ Updates your remote shoperb theme
 $ shoperb push [options]
 ```
 
-### mount
+### serve
 Serves local as a shoperb theme file
-alias: serve
+alias: mount
 ```bash
-$ shoperb mount [options]
+$ shoperb serve [options]
 ```
 
 ### sync
