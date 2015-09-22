@@ -7,7 +7,7 @@ module Shoperb module Theme module Editor
     }
 
     def self.[] key
-      REPLACEMENTS[key].detect { |k,v| k =~ RUBY_PLATFORM }[1]
+      (REPLACEMENTS[key].detect { |k,v| k =~ RUBY_PLATFORM } || [])[1] || key
     end
   end
 end end end

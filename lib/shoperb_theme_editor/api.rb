@@ -11,15 +11,6 @@ module Shoperb module Theme module Editor
     extend self
     mattr_accessor :auth_code, :client, :token
 
-    def clone_remote
-      prepare
-      unless Editor["handle"]
-        response = access_token.get(Pathname.new("themes").cleanpath.to_s).parsed
-        Configuration::QUESTION["handle"] = "Please choose a theme [#{response.map { |hash| hash["handle"] }.join(", ")}]"
-      end
-      pull
-    end
-
     def pull
       prepare
       atoken = access_token

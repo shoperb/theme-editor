@@ -14,11 +14,11 @@ $ bundle
 ```
 
 ## Usage
-#### Execute `shoperb pull'
+#### Execute `bundle exec shoperb pull'
 This downloads the necessary theme files for the theme to run locally.
-#### Execute `shoperb sync'
+#### Execute `bundle exec shoperb sync'
 This makes your local theme get the same data your regular shop would have.
-#### Execute `shoperb serve'
+#### Execute `bundle exec shoperb serve'
 This runs the local theme.
 #### Open http://localhost:4000 in browser
 
@@ -27,32 +27,32 @@ This runs the local theme.
 ### clone
 Downloads your shops shoperb theme
 ```bash
-$ shoperb clone <directory> [<handle>] [options]
+$ bundle exec shoperb clone <directory> [<handle>] [options]
 ```
 
 ### pull
 Updates your local shoperb theme
 ```bash
-$ shoperb pull [options]
+$ bundle exec shoperb pull [options]
 ```
 
 ### push
 Updates your remote shoperb theme
 ```bash
-$ shoperb push [options]
+$ bundle exec shoperb push [options]
 ```
 
 ### serve
 Serves local as a shoperb theme file
 alias: mount
 ```bash
-$ shoperb serve [options]
+$ bundle exec shoperb serve [options]
 ```
 
 ### sync
 Clones products, categories, images, collections & vendors from your shop.
 ```bash
-$ shoperb sync
+$ bundle exec shoperb sync
 ```
 
 ## TODOS

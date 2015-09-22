@@ -5,9 +5,12 @@ module Shoperb module Theme module Editor
 
     extend self
 
-    mattr_accessor :sprockets
-    self.sprockets = Shoperb::Theme::Sprockets::Environment.new(domain: Editor["oauth-site"], theme: Editor["handle"]) do |env|
-      env.append_path "assets"
+    def self.sprockets
+      @@sprockets_env ||= begin
+        Shoperb::Theme::Sprockets::Environment.new(domain: Editor["oauth-site"], theme: Editor["handle"]) do |env|
+          env.append_path "assets"
+        end
+      end
     end
 
     def unzip file
