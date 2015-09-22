@@ -116,7 +116,7 @@ module Shoperb module Theme module Editor
           Port: Editor["port"],
           StartCallback: -> { Launchy.open url },
           AccessLog: [],
-          Logger: WEBrick::Log::new("/dev/null", 7)
+          Logger: WEBrick::Log::new(Os["/dev/null"], 7)
       end
       sleep(0.5) while !have_token?
       thread.kill

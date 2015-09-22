@@ -20,7 +20,7 @@ module Shoperb module Theme module Editor
       Rack::Handler::WEBrick.run(Server.new,
         Port: Editor[:port],
         AccessLog: [],
-        Logger: WEBrick::Log::new("/dev/null", 7),
+        Logger: WEBrick::Log::new(Os["/dev/null"], 7),
         StartCallback: -> { Logger.success "Server started\n" }
       )
     end
