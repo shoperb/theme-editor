@@ -16,6 +16,7 @@ function install_rvm {
 which rvm || install_rvm
 rvm use 2.2.1
 echo "2.2.1" > .ruby-version
-echo "source \"https://rubygems.org\"\ngem \"shoperb-theme-editor\", github: \"shoperb/theme-editor\"" > Gemfile
+echo "source \"https://rubygems.org\"" > Gemfile
+echo "gem \"shoperb-theme-editor\", github: \"shoperb/theme-editor\"" >> Gemfile
 gem install bundler
 bundle
