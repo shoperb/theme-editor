@@ -11,15 +11,6 @@ module Shoperb module Theme module Editor
     extend self
     mattr_accessor :auth_code, :client, :token
 
-    def clone_remote
-      prepare
-      unless Editor["handle"]
-        response = access_token.get(Pathname.new("themes").cleanpath.to_s).parsed
-        Configuration::QUESTION["handle"] = "Please choose a theme [#{response.map { |hash| hash["handle"] }.join(", ")}]"
-      end
-      pull
-    end
-
     def pull
       prepare
       atoken = access_token
@@ -84,7 +75,7 @@ module Shoperb module Theme module Editor
     end
 
     def authorize_url
-      oauth_client.auth_code.authorize_url(redirect_uri: Editor["oauth-redirect-uri"], scope: "admin")
+      oauth_client.auth_code.authorize_url(redirect_uri: Editor["oauth-redirect-uri"], scope: "admin", response_type: "code_and_token")
     end
 
     def get_authented_token(code)
@@ -92,7 +83,12 @@ module Shoperb module Theme module Editor
     end
 
     def access_token
-      OAuth2::AccessToken.new(oauth_client, get_token.token) if have_token?
+      if have_token?
+        cache = Editor["oauth-cache"]
+        OAuth2::AccessToken.new(oauth_client, cache["access_token"], refresh_token: cache["refresh_token"])
+      else
+        OAuth2::AccessToken.new(oauth_client, get_token.token)
+      end
     rescue OAuth2::Error => oauth_error
       handle_oauth_error oauth_error
     end
@@ -111,7 +107,7 @@ module Shoperb module Theme module Editor
           Port: Editor["port"],
           StartCallback: -> { Launchy.open url },
           AccessLog: [],
-          Logger: WEBrick::Log::new("/dev/null", 7)
+          Logger: WEBrick::Log::new(Os["/dev/null"], 7)
       end
       sleep(0.5) while !have_token?
       thread.kill
