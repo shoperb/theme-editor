@@ -13,10 +13,7 @@ module Shoperb module Theme module Editor
 
     def pull
       prepare
-      atoken = access_token
-      response = Logger.notify "Downloading" do
-        atoken.get(Pathname.new("themes/download").cleanpath.to_s)
-      end
+      response = request Pathname.new("themes/download").cleanpath.to_s, method: :get, notify: -> { "Downloading" }
       Package.unzip response.parsed
     end
 
@@ -24,10 +21,7 @@ module Shoperb module Theme module Editor
       prepare
       file = Package.zip
       theme = Faraday::UploadIO.new(file, "application/zip")
-      atoken = access_token
-      Logger.notify "Uploading #{Editor["handle"]}" do
-        atoken.post(Pathname.new("themes/upload").cleanpath.to_s, body: { zip: theme })
-      end
+      request Pathname.new("themes/upload").cleanpath.to_s, method: :post, notify: -> { "Uploading #{Editor["handle"]}" }, body: { zip: theme }
     ensure
       Utils.rm_tempfile file
     end
@@ -68,6 +62,28 @@ module Shoperb module Theme module Editor
       Logger.notify "Asking for permission" do
         start_server(authorize_url)
       end unless have_token?
+    end
+
+    def request url, notify: false, method:, **options, &block
+      response = get_response(url, notify: notify, method: method, **options, &block)
+
+      if /\/admin\/authenticate$/ =~ response.response.env.url.to_s
+        Editor.reset("oauth-cache")
+        get_response(url, notify: notify, method: method, **options, &block)
+      else
+        response
+      end
+    end
+
+    def get_response url, notify: false, method:, **options, &block
+      if notify
+        atoken = access_token
+        Logger.notify notify[] do
+          atoken.send(method, url, **options, &block)
+        end
+      else
+        access_token.send(method, url, **options, &block)
+      end
     end
 
     def get_token
