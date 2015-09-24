@@ -113,7 +113,7 @@ module Shoperb module Theme module Editor
     end
 
     def get_response path, page
-      Api.access_token.get(path, &as_json(page: page.try(:next_page)))
+      Api.request path, method: :get, &as_json(page: page.try(:next_page))
     end
 
     def as_json(params={})
