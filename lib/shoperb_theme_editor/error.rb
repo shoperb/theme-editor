@@ -7,7 +7,7 @@ Rollbar.configure do |config|
     "Liquid::ArgumentError" => "warning",
     "OAuth2::Error" => "warning"
   )
-  config.default_logger = lambda { Logger.new(Os["/dev/null"]) }
+  config.default_logger = lambda { Logger.new(Shoperb::Theme::Editor::Os["/dev/null"]) }
   config.use_async = true
   config.async_handler = Proc.new { |payload|
     Thread.new { Rollbar.process_payload(payload) }
