@@ -13,6 +13,15 @@ module Shoperb module Theme module Editor
       end
     end
 
+    def unzip_exceptions
+      folder = { "js" => "javascripts", "css" => "stylesheets" }
+      (Editor["compile"] || {}).map do |k,v|
+        v.map do |value|
+          "assets/#{folder[k]}/#{value}.#{k}"
+        end
+      end.flatten
+    end
+
     def unzip file
       Zip::File.open(file.path) { |zip_file|
         raise Error.new("Downloaded file is empty") unless zip_file.entries.any?
@@ -21,6 +30,7 @@ module Shoperb module Theme module Editor
           entry_name = Pathname.new(entry.name).cleanpath.to_s
           name = entry_name.gsub(/\A#{Editor["handle"]}\//, "")
           extract_path = Utils.base + name
+          next if unzip_exceptions.include?(extract_path.to_s)
           FileUtils.mkdir_p extract_path.dirname
           Logger.notify "Extracting #{entry_name}" do
             entry.extract(extract_path) { true }
