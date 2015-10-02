@@ -68,7 +68,10 @@ module Shoperb module Theme module Editor
 
     def save
       Logger.notify "Saving configuration to #{file.basename}" do
-        Utils.write_file(file) { JSON.pretty_generate(self.except(*HARDCODED.keys).as_json) }
+        Utils.write_file(file) {
+          require "active_support/json/encoding"
+          JSON.pretty_generate(self.except(*HARDCODED.keys).as_json)
+        }
       end
     end
 
