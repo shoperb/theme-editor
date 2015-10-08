@@ -33,7 +33,7 @@ module Shoperb module Theme module Editor
           end
 
           def save
-            [subclasses, [self]].detect(&:any?).each do |klass|
+            [subclasses, [self]].each do |klass|
               Utils.write_file(klass.full_path) { klass.as_hash.to_yaml }
             end
           end
