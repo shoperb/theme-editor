@@ -14,7 +14,7 @@ module Shoperb module Theme module Editor
           def self.serve
             ->(id) {
               page = Model::Page.all.detect { |p| p.permalink == id }
-              respond page.template.to_sym, page: Liquid::Drop::Page.new(page)
+              respond (page.template.try(:to_sym) || :page), page: Liquid::Drop::Page.new(page)
             }
           end
 
