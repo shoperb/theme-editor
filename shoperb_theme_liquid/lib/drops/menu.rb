@@ -20,7 +20,7 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def root_links
-      Collection.new(record.links.detect { |link| link.parent_id == nil }).tap do |drop|
+      Collection.new(record.links.select { |link| link.parent_id == nil }).tap do |drop|
         drop.context = @context
       end
     end
