@@ -87,7 +87,8 @@ module Shoperb module Theme module Editor
     end
 
     def get_token
-      oauth_client.password.get_token(Editor["oauth-username"], Editor["oauth-password"], scope: "admin")
+      cache = Editor["oauth-cache"]
+      OAuth2::AccessToken.new(oauth_client, cache["access_token"], refresh_token: cache["refresh_token"])
     end
 
     def authorize_url
@@ -100,10 +101,10 @@ module Shoperb module Theme module Editor
 
     def access_token
       if have_token?
-        cache = Editor["oauth-cache"]
-        OAuth2::AccessToken.new(oauth_client, cache["access_token"], refresh_token: cache["refresh_token"])
+        get_token
       else
-        OAuth2::AccessToken.new(oauth_client, get_token.token)
+        prepare
+        get_token
       end
     rescue OAuth2::Error => oauth_error
       handle_oauth_error oauth_error
