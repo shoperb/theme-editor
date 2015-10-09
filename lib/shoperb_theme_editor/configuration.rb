@@ -3,8 +3,6 @@ module Shoperb module Theme module Editor
 
     OPTIONS = {
       "oauth-site" => "Your shoperb shop domain",
-      "oauth-username" => "Your shoperb shop username",
-      "oauth-password" => "Your shoperb shop username",
       "oauth-redirect-uri" => "Url shoperb will redirect to after granting access",
       "verbose" => "Enable verbose mode",
       "port" => "Port you want your local shoperb theme instance to run at",
@@ -13,17 +11,13 @@ module Shoperb module Theme module Editor
 
     QUESTION = {
       "oauth-site" => "Insert Shoperb domain",
-      "oauth-username" => "Insert Shoperb username",
-      "oauth-password" => "Insert Shoperb password",
       "handle" => "Insert theme handle"
     }.with_indifferent_access
 
     HARDCODED = {
       "oauth-client-id" => "jsikb3aoa42w1qkybugvj3t3l6tef2y",
       "oauth-client-secret" => "np47hizd5b9v5749psdyklybt11ygr4",
-      "oauth-redirect-uri" => "http://localhost:4000/callback",
-      "oauth-username" => nil,
-      "oauth-password" => nil,
+      "oauth-redirect-uri" => "http://localhost:4000/callback"
     }.with_indifferent_access
 
     DEFAULTS = {
