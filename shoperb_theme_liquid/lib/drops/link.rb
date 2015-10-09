@@ -43,6 +43,20 @@ module Shoperb module Theme module Liquid module Drop
       record.handle
     end
 
+    def parent
+      record.parent.try(:to_liquid, @context)
+    end
+
+    def children
+      Collection.new(record.children).tap do |drop|
+        drop.context = @context
+      end
+    end
+
+    def children?
+      record.children.any?
+    end
+
     def object?
       !record.entity.nil?
     end
