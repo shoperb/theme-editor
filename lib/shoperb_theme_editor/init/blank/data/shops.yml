@@ -1,0 +1,7 @@
+---
+- id: 1
+  name: MyStore
+  unit_system: METRIC
+  possible_languages: []
+  currency_code: EUR
+  language_code: et
