@@ -90,4 +90,15 @@ Slop.parse ignore_case: true, help: true, strict: true do
     end
   end
 
+  command "init" do
+    apply_global_opts
+    description "Initializes a new theme"
+    banner with_description("Usage: shoperb init <template> <handle> [options]")
+    run do |options, args|
+      Shoperb::Theme::Editor.with_configuration(options) do
+        Shoperb::Theme::Editor::Init.new(args[0], args[1] || "default")
+      end
+    end
+  end
+
 end
