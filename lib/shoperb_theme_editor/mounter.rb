@@ -18,7 +18,7 @@ module Shoperb module Theme module Editor
 
     def self.start
       Rack::Handler::WEBrick.run(Server.new,
-        Port: Editor[:port],
+        Port: Editor["port"],
         AccessLog: [],
         Logger: WEBrick::Log::new(Os["/dev/null"], 7),
         StartCallback: -> { Logger.success "Server started\n" }
