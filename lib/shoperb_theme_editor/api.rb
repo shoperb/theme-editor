@@ -119,7 +119,6 @@ module Shoperb module Theme module Editor
     end
 
     def start_server url
-      Thread.abort_on_exception = true
       thread = Thread.new do
         Rack::Handler::WEBrick.run Server.new,
           Port: Editor["port"],
@@ -127,6 +126,7 @@ module Shoperb module Theme module Editor
           AccessLog: [],
           Logger: WEBrick::Log::new(Os["/dev/null"], 7)
       end
+      thread.abort_on_exception = true
       sleep(0.5) while !have_token?
       thread.kill
     end
