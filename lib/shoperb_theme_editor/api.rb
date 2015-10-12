@@ -119,6 +119,7 @@ module Shoperb module Theme module Editor
     end
 
     def start_server url
+      Thread.abort_on_exception = true
       thread = Thread.new do
         Rack::Handler::WEBrick.run Server.new,
           Port: Editor["port"],
