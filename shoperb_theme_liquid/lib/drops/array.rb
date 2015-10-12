@@ -8,11 +8,15 @@ module Shoperb module Theme module Liquid module Drop
     def include?(other)
       collection.include?(other)
     end
+
+    def inspect
+      collection.inspect
+    end
   end
 end end end end
 
 class Array
-  def to_liquid
+  def to_liquid *args
     Shoperb::Theme::Liquid::Drop::Array.new(self)
   end
 end

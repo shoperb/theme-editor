@@ -22,6 +22,8 @@ module Shoperb module Theme
       Liquid.autoload_all self, "drops"
     end
 
+    Drop::Array
+
     class Template < ::Liquid::Template
       def self.parse(source, options = {})
         if source.kind_of?(self)
