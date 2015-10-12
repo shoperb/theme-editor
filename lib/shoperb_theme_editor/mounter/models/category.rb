@@ -34,7 +34,7 @@ module Shoperb module Theme module Editor
         end
 
         def root
-          ancestors.last
+          ancestors.last || self
         end
 
         def root?
