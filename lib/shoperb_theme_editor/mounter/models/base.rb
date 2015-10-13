@@ -28,6 +28,16 @@ module Shoperb module Theme module Editor
           end
           alias_method_chain :has_many, :auto_key
 
+          def has_one_with_auto_key(association_id, options = {})
+            klass = klass_for(association_id, options)
+            options.reverse_merge!(
+              class_name: klass.to_s,
+              foreign_key: "#{to_s.demodulize.underscore}_#{primary_key}",
+            )
+            has_one_without_auto_key(association_id, options)
+          end
+          alias_method_chain :has_one, :auto_key
+
           def load_path(path)
             File.exists?(path) ? YAML.load_file(path) : []
           end

@@ -53,8 +53,12 @@ module Shoperb module Theme module Liquid module Drop
       record.notes
     end
 
+    def shipping_method
+      record.shipping_method.try(:to_liquid, @context)
+    end
+
     def payment_method
-      record.payment_method.to_liquid
+      record.payment_method.try(:to_liquid, @context)
     end
 
     def payment_method_name
