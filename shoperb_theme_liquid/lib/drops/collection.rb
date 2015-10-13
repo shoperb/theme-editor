@@ -13,10 +13,10 @@ module Shoperb module Theme module Liquid module Drop
 
     def each
       limited.each do |item|
-        case item.method(:to_liquid).arity
+        case arity = item.method(:to_liquid).arity
           when 0
             yield item.to_liquid
-          when 1
+          else
             yield item.to_liquid(@context)
         end
       end
