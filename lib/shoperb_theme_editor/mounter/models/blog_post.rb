@@ -15,6 +15,10 @@ module Shoperb module Theme module Editor
           published_at.nil? || published_at <= Time.now
         end
 
+        def self.active
+          all.select(&:active?)
+        end
+
       end
     end
   end
