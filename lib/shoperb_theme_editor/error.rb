@@ -5,6 +5,7 @@ Rollbar.configure do |config|
     "Shoperb::Theme::Editor::Error" => "warning",
     "Liquid::SyntaxError" => "warning",
     "Liquid::ArgumentError" => "warning",
+    "Liquid::FileSystemError" => "warning",
     "OAuth2::Error" => "warning"
   )
   config.default_logger = lambda { Logger.new(Shoperb::Theme::Editor::Os["/dev/null"]) }
