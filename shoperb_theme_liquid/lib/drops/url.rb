@@ -35,6 +35,24 @@ module Shoperb module Theme module Liquid module Drop
         "/orders"
       end
 
+      def current_url
+        controller.request.url
+      end
+
+      def current_path
+        controller.request.path
+      end
+
+      def current_host
+        controller.request.host
+      end
+
+      private
+
+      def controller
+        @context.registers[:controller]
+      end
+
     end
 
     class Post < ::Liquid::Drop
