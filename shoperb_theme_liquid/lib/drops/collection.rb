@@ -26,6 +26,10 @@ module Shoperb module Theme module Liquid module Drop
       collection.count
     end
 
+    def size
+      collection.size
+    end
+
     def any?
       collection.any?
     end
