@@ -19,6 +19,7 @@ module Shoperb module Theme module Editor
               empty_collection: -> {
                 Drop::Collection.new(Kaminari::PaginatableArray.new)
               },
+              controller: self,
               asset_url: ->(url, *args) { "/system/assets/#{url}" },
               translate: Translations.method(:translate),
               locale: Translations.locale,
