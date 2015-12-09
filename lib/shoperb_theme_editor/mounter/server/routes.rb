@@ -75,7 +75,8 @@ module Shoperb module Theme module Editor
           register Defaults
           register Locale
           register Pages
-          register Dummy
+          register Cart
+          register Search
           register Server::Renderer
         end
 

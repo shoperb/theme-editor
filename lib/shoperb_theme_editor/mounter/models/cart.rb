@@ -3,6 +3,8 @@ module Shoperb module Theme module Editor
     module Model
       class Cart < Base
 
+        fields :token
+
         def self.primary_key
           :token
         end

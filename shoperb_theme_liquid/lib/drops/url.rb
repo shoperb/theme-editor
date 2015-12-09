@@ -6,6 +6,9 @@ module Shoperb module Theme module Liquid module Drop
         "/products"
       end
 
+      def blog
+        "/blog"
+      end
 
       def cart
         "/cart"

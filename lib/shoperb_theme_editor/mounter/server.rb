@@ -25,7 +25,7 @@ module Shoperb module Theme module Editor
 
       helpers do
         def current_cart
-          Model::Cart.first
+          Model::Cart.first || Model::Cart.new
         end
 
         def shop
