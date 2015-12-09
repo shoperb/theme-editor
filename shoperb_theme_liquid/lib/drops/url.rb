@@ -2,42 +2,6 @@ module Shoperb module Theme module Liquid module Drop
   module Url
     class Get< ::Liquid::Drop
 
-      def products
-        "/products"
-      end
-
-      def blog
-        "/blog"
-      end
-
-      def cart
-        "/cart"
-      end
-
-
-      def login
-        "/login"
-      end
-
-
-      def logout
-        "/logout"
-      end
-
-
-      def recover
-        "/recover"
-      end
-
-      def reset
-        "/reset"
-      end
-
-
-      def orders
-        "/orders"
-      end
-
       def current_url
         controller.request.url
       end
@@ -51,6 +15,10 @@ module Shoperb module Theme module Liquid module Drop
       end
 
       private
+
+      def method_missing name, *args, &block
+        "/#{name}"
+      end
 
       def controller
         @context.registers[:controller]
