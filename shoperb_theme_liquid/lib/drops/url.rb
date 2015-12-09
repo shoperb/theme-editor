@@ -2,6 +2,10 @@ module Shoperb module Theme module Liquid module Drop
   module Url
     class Get< ::Liquid::Drop
 
+      def self.invokable?(method_name)
+        true
+      end
+
       def current_url
         controller.request.url
       end
