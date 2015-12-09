@@ -8,7 +8,7 @@ module Shoperb module Theme module Editor
         belongs_to :variant
 
         def self.primary_key
-          :name
+          :id
         end
 
         delegate :product, to: :variant

@@ -6,7 +6,8 @@ Rollbar.configure do |config|
     "Liquid::SyntaxError" => "warning",
     "Liquid::ArgumentError" => "warning",
     "Liquid::FileSystemError" => "warning",
-    "OAuth2::Error" => "warning"
+    "OAuth2::Error" => "warning",
+    "ActiveHash::RecordNotFound" => "warning"
   )
   config.default_logger = lambda { Logger.new(Shoperb::Theme::Editor::Os["/dev/null"]) }
   config.use_async = true
