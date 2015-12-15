@@ -3,7 +3,7 @@ module Shoperb module Theme module Editor
     module Model
       class BlogPost < Base
 
-        fields :id, :name, :content, :published_at, :slug, :permalink, :template
+        fields :id, :name, :content, :published_at, :slug, :permalink, :template, :handle
 
         translates :name, :content
 
