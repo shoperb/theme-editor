@@ -59,7 +59,7 @@ module Shoperb module Theme module Editor
           pack_compilable $~, file, out, "css"
         when /\A(assets\/(javascripts\/((?:#{Editor["compile"]["js"].join("|")})\.(js|coffee|js\.coffee))))\z/
           pack_compilable $~, file, out, "js"
-        when /\A((layouts|templates)\/(.*\.liquid))\z/,
+        when /\A((layouts|templates|emails)\/(.*\.liquid))\z/,
           /\A(assets\/((images|icons)\/(.*\.(png|jpg|jpeg|gif|swf|ico|svg|pdf))))\z/,
           /\A(assets\/(fonts\/(.*\.(eot|woff|ttf|woff2))))\z/,
           /\A(assets\/(javascripts\/(.*\.js)))\z/,

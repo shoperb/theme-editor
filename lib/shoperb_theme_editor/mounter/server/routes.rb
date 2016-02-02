@@ -66,6 +66,25 @@ module Shoperb module Theme module Editor
             template = post.template.presence || :blog_post
             respond template, post: post, meta: post
           end
+
+          get "/emails/:template" do
+            entities = {}
+            order = if params[:order_id]
+              Model::Order.find(params[:order_id])
+            else
+              Model::Order.first
+            end
+            entities.merge(order: Liquid::Drop::Order.new(order))
+            customer = if order
+              order.customer
+            elsif params[:customer_id]
+              Model::Customer.find(params[:order_id])
+            else
+              Model::Customer.last
+            end
+            entities.merge(customer: Liquid::Drop::Customer.new(customer))
+            respond_email params[:template], entities
+          end
         end
 
         private
