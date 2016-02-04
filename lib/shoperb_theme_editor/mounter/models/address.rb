@@ -16,6 +16,10 @@ module Shoperb module Theme module Editor
         belongs_to :country
         belongs_to :state
 
+        def state_name
+          state.name
+        end
+
         def full_name
           [first_name.presence, last_name.presence].reject(&:blank?).join(" ")
         end

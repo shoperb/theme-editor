@@ -5,14 +5,10 @@ module Shoperb module Theme module Editor
 
         # todo: TODOREF2
 
-        fields :id, :code
+        fields :id, :code, :localized_name
 
         def self.primary_key
           :code
-        end
-
-        def localized_name
-          Filter::Translate.t("countries.#{code.downcase}")
         end
 
       end
