@@ -27,6 +27,7 @@ module Shoperb module Theme module Editor
 
         belongs_to :currency
         belongs_to :language
+        belongs_to :address
 
       end
     end
