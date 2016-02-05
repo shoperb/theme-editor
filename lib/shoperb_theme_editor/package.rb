@@ -30,7 +30,7 @@ module Shoperb module Theme module Editor
           entry_name = Pathname.new(entry.name).cleanpath.to_s
           name = entry_name.gsub(/\A#{Editor["handle"]}\//, "")
           extract_path = Utils.base + name
-          next if unzip_exceptions.include?(extract_path.to_s)
+          # next if unzip_exceptions.include?(extract_path.to_s)
           FileUtils.mkdir_p extract_path.dirname
           Logger.notify "Extracting #{entry_name}" do
             entry.extract(extract_path) { true }
