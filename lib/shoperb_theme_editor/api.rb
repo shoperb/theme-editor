@@ -21,7 +21,7 @@ module Shoperb module Theme module Editor
       prepare
       file = Package.zip
       theme = Faraday::UploadIO.new(file, "application/zip")
-      request Pathname.new("themes/upload/#{Editor["handle"]}").cleanpath.to_s, method: :post, notify: -> { "Uploading #{Editor["handle"]}" }, body: { zip: theme }
+      request Pathname.new("themes/#{Editor["handle"]}/upload").cleanpath.to_s, method: :post, notify: -> { "Uploading #{Editor["handle"]}" }, body: { zip: theme }
     ensure
       Utils.rm_tempfile file
     end
