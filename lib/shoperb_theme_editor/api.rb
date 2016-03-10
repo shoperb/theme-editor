@@ -13,7 +13,9 @@ module Shoperb module Theme module Editor
 
     def pull
       prepare
-      response = request Pathname.new("themes/download").cleanpath.to_s, method: :get, notify: -> { "Downloading" }
+      response = request Pathname.new("themes/download").cleanpath.to_s, method: :get, notify: -> { "Downloading" } do |faraday|
+        faraday.options.timeout = 120
+      end
       Package.unzip response.parsed
     end
 
@@ -21,7 +23,9 @@ module Shoperb module Theme module Editor
       prepare
       file = Package.zip
       theme = Faraday::UploadIO.new(file, "application/zip")
-      request Pathname.new("themes/#{Editor["handle"]}/upload").cleanpath.to_s, method: :post, notify: -> { "Uploading #{Editor["handle"]}" }, body: { zip: theme }
+      request Pathname.new("themes/#{Editor["handle"]}/upload").cleanpath.to_s, method: :post, notify: -> { "Uploading #{Editor["handle"]}" }, body: { zip: theme } do |faraday|
+        faraday.options.timeout = 120
+      end
     ensure
       Utils.rm_tempfile file
     end
@@ -53,7 +57,7 @@ module Shoperb module Theme module Editor
       ) do |faraday|
         faraday.request  :multipart
         faraday.request  :url_encoded
-        faraday.adapter  :net_http
+        faraday.adapter  :patron
       end
     end
 
