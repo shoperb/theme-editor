@@ -1,7 +1,7 @@
 module Shoperb module Theme module Liquid module Drop
   class Categories < Collection
     def roots
-      Categories.new(model(Category).roots).tap do |drop|
+      Categories.new(model(Category).active_roots).tap do |drop|
         drop.context = @context
       end
     end

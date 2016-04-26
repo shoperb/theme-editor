@@ -29,8 +29,16 @@ module Shoperb module Theme module Editor
           self_and_ancestors - [self]
         end
 
+        def self.sorted
+          all.sort_by { |root| root.lft }
+        end
+
         def self.roots
-          all.select(&:root?)
+          sorted.select(&:root?)
+        end
+
+        def self.active_roots
+          roots.select(&:active?)
         end
 
         def root
@@ -39,6 +47,10 @@ module Shoperb module Theme module Editor
 
         def root?
           parent_id.nil?
+        end
+
+        def active?
+          state == "active"
         end
 
         def products_with_children
