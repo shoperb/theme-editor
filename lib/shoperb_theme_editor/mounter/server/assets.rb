@@ -6,6 +6,16 @@ module Shoperb module Theme module Editor
       module Assets
 
         def self.registered(app)
+          raise Error.new("Shop model required") unless Model::Shop.first
+
+          app.get "/system/assets/#{Model::Shop.first.domain}/#{Editor["handle"]}/*" do |path|
+            env_sprockets = request.env.dup
+            env_sprockets['PATH_INFO'] = path
+            Shoperb::Theme::Sprockets::Environment.new do |env|
+              env.append_path "assets"
+            end.call(env_sprockets)
+          end
+
           app.get "/system/assets/*" do |path|
             env_sprockets = request.env.dup
             env_sprockets['PATH_INFO'] = path
@@ -13,7 +23,7 @@ module Shoperb module Theme module Editor
               env.append_path "assets"
             end.call(env_sprockets)
           end
-          raise Error.new("Shop model required") unless Model::Shop.first
+
           app.get "/#{Model::Shop.first.domain}/images/*/*" do |id, filename|
             env_sprockets = request.env.dup
             env_sprockets['PATH_INFO'] = "images/#{filename}"
