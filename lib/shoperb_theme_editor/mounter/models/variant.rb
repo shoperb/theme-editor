@@ -25,7 +25,7 @@ module Shoperb module Theme module Editor
         end
 
         def available?(amount = 1)
-          !track_inventory? || allow_backorder? || (stock >= amount)
+          !track_inventory? || allow_backorder? || (!stock || stock >= amount)
         end
 
         def active_price
