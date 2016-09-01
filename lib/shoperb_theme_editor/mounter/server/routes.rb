@@ -49,6 +49,10 @@ module Shoperb module Theme module Editor
             respond :password_change
           end
 
+          get "/account" do
+            respond :account
+          end
+
           get "/reset/:token" do
             respond :password_change
           end
