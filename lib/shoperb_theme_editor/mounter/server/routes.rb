@@ -112,6 +112,10 @@ module Shoperb module Theme module Editor
             Model::Collection.find(params[:id])
           end
 
+          resources Model::Collection do
+            Liquid::Drop::Collection.new(Model::Collection.all)
+          end
+
           resource Model::Order do
             Liquid::Drop::Order.new(Model::Order.find(params[:id]))
           end
