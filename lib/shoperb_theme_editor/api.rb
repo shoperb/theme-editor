@@ -20,12 +20,12 @@ module Shoperb module Theme module Editor
     end
 
     def push
-      prepare
+      # prepare
       file = Package.zip
       theme = Faraday::UploadIO.new(file, "application/zip")
-      request Pathname.new("themes/#{Editor["handle"]}/upload").cleanpath.to_s, method: :post, notify: -> { "Uploading #{Editor["handle"]}" }, body: { zip: theme } do |faraday|
-        faraday.options.timeout = 120
-      end
+      # request Pathname.new("themes/#{Editor.handle}/upload").cleanpath.to_s, method: :post, notify: -> { "Uploading #{Editor.handle}" }, body: { zip: theme } do |faraday|
+      #   faraday.options.timeout = 120
+      # end
     ensure
       Utils.rm_tempfile file
     end

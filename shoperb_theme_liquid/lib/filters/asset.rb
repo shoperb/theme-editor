@@ -21,6 +21,10 @@ module Shoperb module Theme module Liquid module Filter
       tag :img, { :alt => h(alt), :src => url, :title => h(title)}
     end
 
+    def style_tag(data, id = nil)
+      content_tag :style, data, type: 'text/css', id: id
+    end
+
     def asset_url(asset)
       @context.registers[:asset_url][asset]
     end
