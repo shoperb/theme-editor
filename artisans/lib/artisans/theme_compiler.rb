@@ -51,7 +51,7 @@ module Artisans
 
     def compile_without_ext
       compile.each_with_object({}) do |(type, files), collection|
-        collection[type] = files.map{ |f| File.basename(f, '.*') }
+        collection[type] = files.map{ |f| Pathname.new(f).sub_ext('') }
       end
     end
 
