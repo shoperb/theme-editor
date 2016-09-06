@@ -19,7 +19,7 @@ module Shoperb module Theme module Editor
     end
 
     def blog_posts
-      process Mounter::Model::BlogPost
+      process Mounter::Model::BlogPost, "blog-posts"
     end
 
     def addresses
