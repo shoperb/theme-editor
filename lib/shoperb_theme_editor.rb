@@ -62,12 +62,16 @@ module Shoperb module Theme
 
     autoload_all self, "/"
 
-    def handle
-      spec["handle"]
+    def handle content=local_spec_content
+      spec(content)["handle"]
     end
 
-    def spec
-      JSON.parse(File.read(Utils.base + "config/spec.json"))
+    def spec content=local_spec_content
+      JSON.parse(content)
+    end
+
+    def local_spec_content
+      File.read(Utils.base + "config/spec.json")
     end
 
     def theme_settings

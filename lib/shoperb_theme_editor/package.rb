@@ -8,12 +8,14 @@ module Shoperb module Theme module Editor
 
     def unzip file
       Zip::File.open(file.path) { |zip_file|
+        spec = zip_file.glob("*/config/spec.json").first
+        zip_handle = Editor.handle(zip_file.read(spec))
         zip_file.each { |entry|
           entry_name = Pathname.new(entry.name).cleanpath.to_s
-          name = entry_name.gsub(/\A#{Editor.handle}\//, "")
+          name = entry_name.gsub(/\A#{zip_handle}\//, "")
           extract_path = Utils.base + name
           FileUtils.mkdir_p extract_path.dirname
-          Logger.notify "Extracting #{entry_name}" do
+          Logger.notify "Extracting #{name}" do
             entry.extract(extract_path) { true }
           end
         }
@@ -45,8 +47,12 @@ module Shoperb module Theme module Editor
     def write_file out, file
       out.put_next_entry(zip_file_path = handle + file)
       content = block_given? ? yield : file.read
-      Logger.notify "Packing #{file}" do
+      if file.to_s[0..6] == "sources"
         out.write content
+      else
+        Logger.notify "Packing #{file}" do
+          out.write content
+        end
       end
     end
 
@@ -54,7 +60,9 @@ module Shoperb module Theme module Editor
       entry = out.put_next_entry(zip_file_path = handle + current)
       entry.instance_variable_set("@ftype", :symlink)
       entry.instance_variable_set("@filepath", target.to_s)
-      out.write((handle + target).relative_path_from(handle + current).to_s[3..-1])
+      Logger.notify "Packing #{current}" do
+        out.write((handle + target).relative_path_from(handle + current).to_s[3..-1])
+      end
     end
 
     def handle
