@@ -24,7 +24,7 @@ module Shoperb module Theme module Editor
             env_sprockets = request.env.dup
             env_sprockets['PATH_INFO'] = "images/#{filename}"
             Model::Image.find id
-            Shoperb::Theme::Sprockets::Environment.new do |env|
+            ::Sprockets::Environment.new do |env|
               env.append_path "data/assets"
             end.call(env_sprockets)
           end
