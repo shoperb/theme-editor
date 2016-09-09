@@ -30,6 +30,14 @@ module Shoperb module Theme module Editor
       Utils.rm_tempfile file
     end
 
+    def zip
+      zip_name = "#{Editor.handle}.zip"
+      file = Package.zip
+      Logger.notify "Writing #{zip_name}" do
+        Utils.write_file(zip_name) { file.read }
+      end
+    end
+
     def sync
       prepare
       Sync.products
