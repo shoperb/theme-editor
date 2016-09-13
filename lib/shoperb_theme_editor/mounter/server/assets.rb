@@ -6,7 +6,7 @@ module Shoperb module Theme module Editor
       module Assets
 
         def self.asset_wrapper app, root
-          compiler = Editor.compiler(root, domain: Model::Shop.first.domain, theme: Editor.handle)
+          compiler = Editor.compiler(root, domain: Editor["oauth-site"], theme: Editor.handle)
           app.get "#{root}*" do |path|
             env_sprockets = request.env.dup
             env_sprockets['PATH_INFO'] = path
@@ -15,12 +15,10 @@ module Shoperb module Theme module Editor
         end
 
         def self.registered(app)
-          raise Error.new("Shop model required") unless Model::Shop.first
-
-          asset_wrapper app, "/system/assets/#{Model::Shop.first.domain}/#{Editor.handle}/"
+          asset_wrapper app, "/system/assets/#{Editor["oauth-site"]}/#{Editor.handle}/"
           asset_wrapper app, "/system/assets/"
 
-          app.get "/#{Model::Shop.first.domain}/images/*/*" do |id, filename|
+          app.get "/#{Editor["oauth-site"]}/images/*/*" do |id, filename|
             env_sprockets = request.env.dup
             env_sprockets['PATH_INFO'] = "images/#{filename}"
             Model::Image.find id

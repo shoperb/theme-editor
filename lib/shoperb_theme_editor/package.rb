@@ -26,8 +26,8 @@ module Shoperb module Theme module Editor
 
     def zip
       compiler = Editor.compiler(
-        "/system/assets/#{Mounter::Model::Shop.first.domain}/#{Editor.handle}/",
-        domain: Mounter::Model::Shop.first.domain,
+        "/system/assets/#{Editor["oauth-site"]}/#{Editor.handle}/",
+        domain: Editor["oauth-site"],
         theme: Editor.handle
       )
       zip = Zip::OutputStream.write_buffer do |out|
