@@ -112,6 +112,10 @@ module Shoperb module Theme module Editor
             Model::Collection.find(params[:id])
           end
 
+          resources Model::Collection do
+            Liquid::Drop::Collection.new(Model::Collection.all)
+          end
+
           resource Model::Order do
             Liquid::Drop::Order.new(Model::Order.find(params[:id]))
           end
@@ -136,6 +140,7 @@ module Shoperb module Theme module Editor
         def self.resources collection, &block
           name = collection.to_s.demodulize.underscore.pluralize
           get "/#{name}" do
+            binding.pry
             respond name, name => instance_exec(&block)
           end
         end
