@@ -140,7 +140,6 @@ module Shoperb module Theme module Editor
         def self.resources collection, &block
           name = collection.to_s.demodulize.underscore.pluralize
           get "/#{name}" do
-            binding.pry
             respond name, name => instance_exec(&block)
           end
         end
