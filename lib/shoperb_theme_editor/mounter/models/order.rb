@@ -20,7 +20,7 @@ module Shoperb module Theme module Editor
         end
 
         def items
-          OrderItem.all.select { |item| item.attributes[:order_id] == self.id }
+          OrderItem.all.select { |item| item.attributes[:order_number] == self.id }
         end
 
         belongs_to :payment_method
