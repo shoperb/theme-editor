@@ -14,6 +14,17 @@ module Shoperb module Theme module Editor
       process Mounter::Model::Collection
     end
 
+    def countries
+      process Mounter::Model::Country
+    end
+
+    def states
+      process Mounter::Model::State do |state|
+        assign_relation state, Mounter::Model::Country
+        state
+      end
+    end
+
     def pages
       process Mounter::Model::Page
     end
@@ -23,7 +34,11 @@ module Shoperb module Theme module Editor
     end
 
     def addresses
-      process Mounter::Model::Address
+      process Mounter::Model::Address do |address|
+        assign_relation address, Mounter::Model::State
+        assign_relation address, Mounter::Model::Country
+        address
+      end
     end
 
     def images

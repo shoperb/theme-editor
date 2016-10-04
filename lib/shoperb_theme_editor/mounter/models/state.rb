@@ -2,7 +2,11 @@ module Shoperb module Theme module Editor
   module Mounter
     module Model
       class State < Base
-        # todo: TODOREF2
+        fields :id, :country_id, :name, :code
+
+        def self.primary_key
+          :code
+        end
       end
     end
   end
