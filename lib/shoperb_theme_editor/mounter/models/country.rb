@@ -3,9 +3,7 @@ module Shoperb module Theme module Editor
     module Model
       class Country < Base
 
-        # todo: TODOREF2
-
-        fields :id, :code, :localized_name
+        fields :id, :code, :name, :iso3, :numeric, :eu, :na, :region_name_key, :abstract, :localized_name
 
         def self.primary_key
           :code

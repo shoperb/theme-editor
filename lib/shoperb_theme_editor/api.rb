@@ -37,9 +37,11 @@ module Shoperb module Theme module Editor
       Sync.images
       Sync.collections
       Sync.vendors
-      Sync.addresses
       Sync.pages
       Sync.menus
+      Sync.countries
+      Sync.states
+      Sync.addresses
       Sync.links
       Sync.blog_posts
       Mounter::Model::Base.save
