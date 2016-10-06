@@ -21,6 +21,14 @@ module Shoperb module Theme module Liquid module Drop
       record.published_at
     end
 
+    def next
+      record.next.try(:to_liquid, @context)
+    end
+
+    def prev
+      record.prev.try(:to_liquid, @context)
+    end
+
     def url
       "#{default_url_language}/blog/#{id}"
     end
