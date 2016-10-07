@@ -1,5 +1,5 @@
 module Shoperb module Theme module Liquid module Drop
-  class AssetsSettings < Settings
+  class AssetSettings < Settings
 
     private
 
