@@ -92,7 +92,7 @@ module Shoperb module Theme
       Artisans::ThemeCompiler.new(
         Utils.base,
         asset_url,
-        drops: { settings: Shoperb::Theme::Liquid::Drop::Settings.new(theme_settings) },
+        drops: { settings: Shoperb::Theme::Liquid::Drop::AssetSettings.new(theme_settings) },
         compile: spec["compile"],
         **options
       )
