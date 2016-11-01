@@ -1,4 +1,4 @@
-require_relative "../../../../artisans/lib/artisans"
+require 'artisans'
 
 module Shoperb module Theme module Editor
   module Mounter
