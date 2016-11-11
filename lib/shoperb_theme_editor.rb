@@ -71,7 +71,28 @@ module Shoperb module Theme
     end
 
     def local_spec_content
-      File.read(Utils.base + "config/spec.json")
+      @local_spec_content ||= begin
+        if File.exists?(path = Utils.base + "config/spec.json")
+          File.read(path)
+        else
+          new_spec_content
+        end
+      end
+    end
+
+    # if spec is missing (for old themes)
+    def new_spec_content
+      content = JSON.parse(File.read(path = Utils.base + '.shoperb'))
+      spec_content = {
+        handle: content['handle'],
+        compile: {
+          stylesheets: content['compile']['css'].map{ |r| r + '.css' },
+          javascripts: content['compile']['js'].map{ |r| r + '.js' }
+        }
+      }.to_json
+      Dir.mkdir 'config' unless File.exists?('config')
+      File.open('config/spec.json', 'w') {|f| f.write(spec_content) }
+      spec_content
     end
 
     def theme_settings
