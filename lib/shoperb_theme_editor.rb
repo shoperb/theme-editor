@@ -61,5 +61,41 @@ module Shoperb module Theme
     end
 
     autoload_all self, "/"
+
+    def handle content=local_spec_content
+      spec(content)["handle"]
+    end
+
+    def spec content=local_spec_content
+      JSON.parse(content)
+    end
+
+    def local_spec_content
+      File.read(Utils.base + "config/spec.json")
+    end
+
+    def theme_settings
+      presets = []
+
+      Pathname.glob(Utils.base + "presets/*.json") do |path|
+        content = File.read(path)
+        data = JSON.parse(content)
+
+        presets.push([nil, data["settings"]]) if data["default"]
+        presets.push([data["name_key"], data["settings"]])
+      end
+
+      presets.to_h[Editor["preset"]] || {}
+    end
+
+    def compiler asset_url, **options
+      Artisans::ThemeCompiler.new(
+        Utils.base,
+        asset_url,
+        drops: { settings: Shoperb::Theme::Liquid::Drop::AssetSettings.new(theme_settings) },
+        compile: spec["compile"],
+        **options
+      )
+    end
   end
 end end

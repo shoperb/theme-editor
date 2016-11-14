@@ -11,7 +11,6 @@ module Shoperb module Theme module Editor
       raise Error.new(
         "No such template, possible options are #{self.class.available_templates.map(&:inspect).to_sentence}"
       ) unless self.class.available_templates.include?(template)
-      Editor["handle"] = handle
       Logger.notify "Copying #{template.inspect} template" do
         FileUtils.cp_r("#{File.expand_path("../init/#{template}", __FILE__)}/.", Utils.base + ".")
       end

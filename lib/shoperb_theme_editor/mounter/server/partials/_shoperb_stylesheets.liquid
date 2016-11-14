@@ -1,0 +1,3 @@
+{% for style in stylesheets %}
+  {{ style | stylesheet_path | asset_url | stylesheet_tag }}
+{% endfor %}

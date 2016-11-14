@@ -2,7 +2,7 @@ module Shoperb module Theme module Liquid module Drop
   class Order < Base
 
     def name
-      "#" + record.number
+      "##{record.number}"
     end
 
     def number

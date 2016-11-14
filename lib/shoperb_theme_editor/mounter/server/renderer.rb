@@ -26,7 +26,8 @@ module Shoperb module Theme module Editor
               shop: shop,
               category: request.env[:current_category],
               request_forgery_protection_token: -> { %(<input type="hidden" name="" value="">) },
-              models: Model
+              models: Model,
+              default_partials: Pathname.new(__FILE__) + "../partials"
             )
             locals = locals.reverse_merge(default_locals)
             registers = registers.reverse_merge({layout: "layout"})

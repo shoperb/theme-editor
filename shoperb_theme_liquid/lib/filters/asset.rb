@@ -1,6 +1,7 @@
 module Shoperb module Theme module Liquid module Filter
   module Asset
-    include ActionView::Helpers::TagHelper
+    #include ActionView::Helpers::TagHelper
+    include ActionView::Helpers::AssetTagHelper
 
     def stylesheet_tag(url, media = :screen)
       tag :link, { :rel => "stylesheet", :type => Mime::CSS, :media => media, :href => url }
@@ -19,6 +20,10 @@ module Shoperb module Theme module Liquid module Filter
 
     def image_tag(url, alt = nil, title = nil)
       tag :img, { :alt => h(alt), :src => url, :title => h(title)}
+    end
+
+    def style_tag(data, id = nil)
+      content_tag :style, data, type: 'text/css', id: id
     end
 
     def asset_url(asset)

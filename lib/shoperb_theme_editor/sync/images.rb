@@ -12,8 +12,10 @@ module Shoperb module Theme module Editor
       def process
         FileUtils.mkdir_p(dir)
         Sync.process Mounter::Model::Image do |image|
-          process_sizes(image)
-          image
+          if image["entity_id"]
+            process_sizes(image)
+            image
+          end
         end
         threaded_download "Downloading images"
       end

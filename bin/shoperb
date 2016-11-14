@@ -54,6 +54,17 @@ Slop.parse ignore_case: true, help: true, strict: true do
     end
   end
 
+  command "zip" do
+    apply_global_opts
+    description "Zips up your local shoperb theme"
+    banner with_description("Usage: shoperb zip [options]")
+    run do |options, args|
+      Shoperb::Theme::Editor.with_configuration(options) do
+        Shoperb::Theme::Editor::Api.zip
+      end
+    end
+  end
+
   command "console" do
     apply_global_opts
     description "Irb in the context of theme generator"

@@ -26,7 +26,10 @@ module Shoperb module Theme module Editor
               :current_page => params["page"],
               :customer     => Liquid::Drop::Customer.new(current_customer),
               :account      => Liquid::Drop::Customer.new(current_customer),
-              :collections  => Liquid::Drop::ProductCollections.new(Model::Collection.all)
+              :collections  => Liquid::Drop::ProductCollections.new(Model::Collection.all),
+              :settings     => Liquid::Drop::Settings.new(Editor.theme_settings),
+              :preview      => params[:theme_id].present?,
+              :edit_preview => params[:iframe_uuid].present?
             }
           end
 

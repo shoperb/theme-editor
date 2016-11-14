@@ -43,5 +43,37 @@ module Shoperb module Theme module Liquid module Drop
       record.discount_pct
     end
 
+    def orders
+      Collection.new(record.orders).tap do |drop|
+        drop.context = @context
+      end
+    end
+
+    def logged_in?
+      record.try(:id).present?
+    end
+
+    def recommended_products
+      Products.new(record.recommended_products).tap do |drop|
+        drop.context = @context
+      end
+    end
+
+    def company?
+      record.company?
+    end
+
+    def personal?
+      !record.company?
+    end
+
+    def company_name
+      record.company_name
+    end
+
+    def vat_number
+      record.vat_number
+    end
+
   end
 end end end end

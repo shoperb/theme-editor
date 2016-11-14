@@ -14,16 +14,31 @@ module Shoperb module Theme module Editor
       process Mounter::Model::Collection
     end
 
+    def countries
+      process Mounter::Model::Country
+    end
+
+    def states
+      process Mounter::Model::State do |state|
+        assign_relation state, Mounter::Model::Country
+        state
+      end
+    end
+
     def pages
       process Mounter::Model::Page
     end
 
     def blog_posts
-      process Mounter::Model::BlogPost
+      process Mounter::Model::BlogPost, "blog-posts"
     end
 
     def addresses
-      process Mounter::Model::Address
+      process Mounter::Model::Address do |address|
+        assign_relation address, Mounter::Model::State
+        assign_relation address, Mounter::Model::Country
+        address
+      end
     end
 
     def images
@@ -89,7 +104,7 @@ module Shoperb module Theme module Editor
     end
 
     def process klass, path=klass.to_s.demodulize.tableize, &block
-      result = fetch(path).map(&(block || ->(this){this}))
+      result = fetch(path).map(&(block || ->(this){this})).compact
       uniq = result.uniq { |h| h[klass.primary_key.to_s] }
       Logger.info "Received #{result.count} #{path.pluralize(result.count)}, kept #{uniq.count}.\n" if Editor["verbose"]
       klass.assign uniq

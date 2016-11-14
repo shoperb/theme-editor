@@ -23,11 +23,19 @@ module Shoperb module Theme module Editor
       prepare
       file = Package.zip
       theme = Faraday::UploadIO.new(file, "application/zip")
-      request Pathname.new("themes/#{Editor["handle"]}/upload").cleanpath.to_s, method: :post, notify: -> { "Uploading #{Editor["handle"]}" }, body: { zip: theme } do |faraday|
+      request Pathname.new("themes/#{Editor.handle}/upload").cleanpath.to_s, method: :post, notify: -> { "Uploading #{Editor.handle}" }, body: { zip: theme } do |faraday|
         faraday.options.timeout = 120
       end
     ensure
       Utils.rm_tempfile file
+    end
+
+    def zip
+      zip_name = "#{Editor.handle}.zip"
+      file = Package.zip
+      Logger.notify "Writing #{zip_name}" do
+        Utils.write_file(zip_name) { file.read }
+      end
     end
 
     def sync
@@ -37,9 +45,11 @@ module Shoperb module Theme module Editor
       Sync.images
       Sync.collections
       Sync.vendors
-      Sync.addresses
       Sync.pages
       Sync.menus
+      Sync.countries
+      Sync.states
+      Sync.addresses
       Sync.links
       Sync.blog_posts
       Mounter::Model::Base.save
