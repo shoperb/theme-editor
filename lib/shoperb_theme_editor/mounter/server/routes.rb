@@ -9,6 +9,10 @@ module Shoperb module Theme module Editor
         class << self
           delegate :register, to: :app
           delegate :get, to: :app
+          delegate :post, to: :app
+          delegate :patch, to: :app
+          delegate :put, to: :app
+          delegate :delete, to: :app
           delegate :not_found, to: :app
         end
 
