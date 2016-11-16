@@ -64,5 +64,13 @@ module Shoperb module Theme module Liquid module Drop
     def country
       record.country_name
     end
+
+    def url
+      if record.owner_type == "Customer"
+        default_url id
+      else
+        default_index_url
+      end
+    end
   end
 end end end end
