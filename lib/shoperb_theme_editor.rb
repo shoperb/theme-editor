@@ -111,7 +111,7 @@ module Shoperb module Theme
 
     def compiler asset_url, **options
       Artisans::ThemeCompiler.new(
-        Utils.base,
+        File.expand_path(Utils.base),
         asset_url,
         drops: { settings: Shoperb::Theme::Liquid::Drop::AssetSettings.new(theme_settings) },
         compile: spec["compile"]
