@@ -15,7 +15,7 @@ module Shoperb module Theme module Editor
         end
 
         def addresses
-          check = { owner_type: "Address", owner_id: attributes[:id] }.with_indifferent_access
+          check = { owner_type: "Customer", owner_id: attributes[:id] }.with_indifferent_access
           Address.all.select { |address|
             address.attributes.slice(:owner_type, :owner_id).with_indifferent_access == check
           }
