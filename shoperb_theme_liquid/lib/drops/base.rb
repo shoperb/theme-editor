@@ -14,7 +14,11 @@ module Shoperb module Theme module Liquid module Drop
     private
 
     def default_url id=self.record.id
-      "#{default_url_language}/#{self.record.class.filename}/#{id}"
+      "#{default_index_url}/#{id}"
+    end
+
+    def default_index_url
+      "#{default_url_language}/#{self.record.class.filename}"
     end
 
     def default_url_language
