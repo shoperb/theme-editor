@@ -18,6 +18,10 @@ module Shoperb module Theme module Liquid module Drop
         controller.request.host
       end
 
+      def new_address
+        "/addresses/new"
+      end
+
       private
 
       def method_missing name, *args, &block
@@ -50,6 +54,18 @@ module Shoperb module Theme module Liquid module Drop
 
       def auth_input
         ""
+      end
+
+      def password_request
+        "/recover"
+      end
+
+      def password_change
+        "/reset"
+      end
+
+      def address_create
+        "/addresses"
       end
     end
   end

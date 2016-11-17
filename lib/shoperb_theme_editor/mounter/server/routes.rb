@@ -9,6 +9,10 @@ module Shoperb module Theme module Editor
         class << self
           delegate :register, to: :app
           delegate :get, to: :app
+          delegate :post, to: :app
+          delegate :patch, to: :app
+          delegate :put, to: :app
+          delegate :delete, to: :app
           delegate :not_found, to: :app
         end
 
@@ -71,6 +75,26 @@ module Shoperb module Theme module Editor
             respond template, post: post, meta: post
           end
 
+          get "/addresses/new" do
+            respond :address, address: Liquid::Drop::Address.new(Model::Address.new)
+          end
+
+          post "/addresses" do
+            respond :address, address: Liquid::Drop::Address.new(Model::Address.new(params[:address]))
+          end
+
+          patch "/addresses/:id" do
+            respond :address, address: Liquid::Drop::Address.new(current_customer.addresses.detect { |address| address.id.to_s == params[:id].to_s })
+          end
+
+          put "/addresses/:id" do
+            respond :address, address: Liquid::Drop::Address.new(current_customer.addresses.detect { |address| address.id.to_s == params[:id].to_s })
+          end
+
+          delete "/addresses/:id" do
+            redirect_to "/addresses"
+          end
+
           get "/emails/:template" do
             entities = {}
             order = if params[:order_id]
@@ -126,6 +150,14 @@ module Shoperb module Theme module Editor
 
           resources Model::Product do
             Liquid::Drop::Products.new(Model::Product.all)
+          end
+
+          resources Model::Address do
+            Liquid::Drop::Collection.new(current_customer.addresses)
+          end
+
+          resource Model::Address do
+            Liquid::Drop::Address.new(current_customer.addresses.detect { |address| address.id.to_s == params[:id].to_s })
           end
         end
 
