@@ -26,7 +26,7 @@ Slop.parse ignore_case: true, help: true, strict: true do
     banner with_description("Usage: shoperb clone <directory> [<handle>] [options]")
     run do |options, args|
       Shoperb::Theme::Editor.with_configuration(options, *args) do
-        Shoperb::Theme::Editor::Api.pull
+        Shoperb::Theme::Editor::Api.pull *args
         Shoperb::Theme::Editor::Api.sync
       end
     end
@@ -38,7 +38,7 @@ Slop.parse ignore_case: true, help: true, strict: true do
     banner with_description("Usage: shoperb pull [options]")
     run do |options, args|
       Shoperb::Theme::Editor.with_configuration(options) do
-        Shoperb::Theme::Editor::Api.pull
+        Shoperb::Theme::Editor::Api.pull *args
       end
     end
   end

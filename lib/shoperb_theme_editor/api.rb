@@ -11,9 +11,9 @@ module Shoperb module Theme module Editor
     extend self
     mattr_accessor :auth_code, :client, :token
 
-    def pull
+    def pull handle=nil, *args
       prepare
-      response = request Pathname.new("themes/download").cleanpath.to_s, method: :get, notify: -> { "Downloading" } do |faraday|
+      response = request Pathname.new("themes/download/#{handle}").cleanpath.to_s, method: :get, notify: -> { "Downloading" } do |faraday|
         faraday.options.timeout = 120
       end
       Package.unzip response.parsed
