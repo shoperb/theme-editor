@@ -13,7 +13,7 @@ module Shoperb module Theme module Editor
 
     def pull handle=nil, *args
       prepare
-      response = request Pathname.new("themes/download/#{handle}").cleanpath.to_s, method: :get, notify: -> { "Downloading" } do |faraday|
+      response = request Pathname.new(["themes", handle, "download"].compact.join("/")).cleanpath.to_s, method: :get, notify: -> { "Downloading" } do |faraday|
         faraday.options.timeout = 120
       end
       Package.unzip response.parsed
