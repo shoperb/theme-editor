@@ -21,7 +21,9 @@ module Shoperb module Theme module Editor
         end
 
         def entity
-          Model.const_get(entity_type).all.detect { |obj| obj.attributes[:id] == entity_id }
+          (Model.const_get(entity_type, false) rescue nil).try { |klass|
+            klass.all.detect { |obj| obj.attributes[:id] == entity_id }
+          }
         end
 
         def image_sizes
