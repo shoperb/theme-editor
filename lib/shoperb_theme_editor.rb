@@ -100,7 +100,7 @@ module Shoperb module Theme
 
       Pathname.glob(Utils.base + "presets/*.json") do |path|
         content = File.read(path)
-        data = JSON.parse(content)
+        data = JSON.parse(content) rescue { "settings" => { } }
 
         presets.push([nil, data["settings"]]) if data["default"]
         presets.push([data["name_key"], data["settings"]])
