@@ -17,6 +17,7 @@ module Shoperb module Theme module Editor
               :pages        => Liquid::Drop::Pages.new(Model::Page.all),
               :search       => Liquid::Drop::Search.new(params[:query]),
               :blog_posts   => Liquid::Drop::Collection.new(Model::BlogPost.active),
+              :countries    => Liquid::Drop::Collection.new(Model::Country.all),
               :shop         => shop.to_liquid,
               :path         => request.path,
               :params       => params,
