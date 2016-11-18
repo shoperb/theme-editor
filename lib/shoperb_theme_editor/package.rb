@@ -9,7 +9,11 @@ module Shoperb module Theme module Editor
     def unzip file
       Zip::File.open(file.path) { |zip_file|
         spec = zip_file.glob("*/config/spec.json").first
-        zip_handle = Editor.handle(zip_file.read(spec))
+        if spec
+          zip_handle = Editor.handle(zip_file.read(spec))
+        else
+          zip_handle = Editor["handle"] = zip_file.entries.first.name.split("/").first
+        end
         zip_file.each { |entry|
           entry_name = Pathname.new(entry.name).cleanpath.to_s
           name = entry_name.gsub(/\A#{zip_handle}\//, "")
