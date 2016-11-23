@@ -14,7 +14,11 @@ module Shoperb module Theme module Editor
         else
           zip_handle = Editor["handle"] = zip_file.entries.first.name.split("/").first
         end
-        zip_file.each { |entry|
+
+        zip_files = zip_file.glob('**/*').map{|f| f.to_s.gsub(/^#{zip_handle}\//, '') }
+        files_to_remove = Dir[Utils.base.join('**', '*.*')] - zip_files
+
+        zip_file.each do |entry|
           entry_name = Pathname.new(entry.name).cleanpath.to_s
           name = entry_name.gsub(/\A#{zip_handle}\//, "")
           extract_path = Utils.base + name
@@ -22,7 +26,8 @@ module Shoperb module Theme module Editor
           Logger.notify "Extracting #{name}" do
             entry.extract(extract_path) { true }
           end
-        }
+        end
+        files_to_remove.each { |f| File.delete(f) }
       }
     ensure
       Utils.rm_tempfile file
