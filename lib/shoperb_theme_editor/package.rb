@@ -15,8 +15,11 @@ module Shoperb module Theme module Editor
           zip_handle = Editor["handle"] = zip_file.entries.first.name.split("/").first
         end
 
-        zip_files = zip_file.glob('**/*').map{|f| f.to_s.gsub(/^#{zip_handle}\//, '') }
-        files_to_remove = Dir[Utils.base.join('**', '*.*')] - zip_files
+        # remove old files, which are not present in theme zip anymore
+        # but only from folders, mentioned in zip
+        zip_files   = zip_file.entries.map{|f| f.to_s.gsub(/^#{zip_handle}\//, '') }
+        zip_folders = zip_files.map{|f| f.split('/')[0] }.uniq
+        files_to_remove = Dir.glob("{#{zip_folders.join(',')}}/**/*.*") - zip_files
 
         zip_file.each do |entry|
           entry_name = Pathname.new(entry.name).cleanpath.to_s
