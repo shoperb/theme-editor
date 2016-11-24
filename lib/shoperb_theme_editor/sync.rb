@@ -33,6 +33,10 @@ module Shoperb module Theme module Editor
       process Mounter::Model::BlogPost, "blog-posts"
     end
 
+    def media_files
+      process Mounter::Model::MediaFile
+    end
+
     def addresses
       process Mounter::Model::Address do |address|
         assign_relation address, Mounter::Model::State

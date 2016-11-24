@@ -35,6 +35,7 @@ module Shoperb module Theme module Editor
       Sync.products
       Sync.shop
       Sync.images
+      Sync.media_files
       Sync.collections
       Sync.vendors
       Sync.pages
