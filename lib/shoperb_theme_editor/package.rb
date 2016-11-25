@@ -9,12 +9,19 @@ module Shoperb module Theme module Editor
     def unzip file
       Zip::File.open(file.path) { |zip_file|
         spec = zip_file.glob("*/config/spec.json").first
-        if spec
-          zip_handle = Editor.handle(zip_file.read(spec))
+        if spec && (spec_content = zip_file.read(spec).presence)
+          zip_handle = Editor.handle(spec_content)
         else
           zip_handle = Editor["handle"] = zip_file.entries.first.name.split("/").first
         end
-        zip_file.each { |entry|
+
+        # remove old files, which are not present in theme zip anymore
+        # but only from folders, mentioned in zip
+        zip_files   = zip_file.entries.map{|f| f.to_s.gsub(/^#{zip_handle}\//, '') }
+        zip_folders = zip_files.map{|f| f.split('/')[0] }.uniq
+        files_to_remove = Dir.glob("{#{zip_folders.join(',')}}/**/*.*") - zip_files
+
+        zip_file.each do |entry|
           entry_name = Pathname.new(entry.name).cleanpath.to_s
           name = entry_name.gsub(/\A#{zip_handle}\//, "")
           extract_path = Utils.base + name
@@ -22,7 +29,8 @@ module Shoperb module Theme module Editor
           Logger.notify "Extracting #{name}" do
             entry.extract(extract_path) { true }
           end
-        }
+        end
+        files_to_remove.each { |f| File.delete(f) }
       }
     ensure
       Utils.rm_tempfile file
