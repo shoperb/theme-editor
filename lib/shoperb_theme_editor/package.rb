@@ -37,7 +37,7 @@ module Shoperb module Theme module Editor
     end
 
     def zip
-      compiler = Editor.compiler("/system/assets/#{Editor["oauth-site"]}/#{Editor.handle}/")
+      compiler = Editor.compiler("/system/assets/#{Editor["oauth-site"]}/#{Editor.handle}/", digests: true)
 
       zip = Zip::OutputStream.write_buffer do |out|
         compiler.compiled_files do |path, content, type: :file|

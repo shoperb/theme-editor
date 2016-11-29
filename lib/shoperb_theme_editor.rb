@@ -109,13 +109,31 @@ module Shoperb module Theme
       presets.to_h[Editor["preset"]] || {}
     end
 
-    def compiler asset_url, **options
+
+    def compiler asset_url, digests: true, **options
       Artisans::ThemeCompiler.new(
         File.expand_path(Utils.base),
         asset_url,
         drops: { settings: Shoperb::Theme::Liquid::Drop::AssetSettings.new(theme_settings) },
-        compile: spec["compile"]
+        compile: spec["compile"],
+        file_reader: DefaultFileReader.new(digests: digests)
       )
+    end
+
+    class DefaultFileReader
+      def initialize(digests: true)
+        @digests = digests
+      end
+
+      def read(file)
+        File.read(file) if File.file?(file)
+      end
+
+      def find_digest(path)
+        if @digests
+          Digest::MD5.hexdigest(File.read(path)) if File.exists?(path)
+        end
+      end
     end
   end
 end end

@@ -6,7 +6,7 @@ module Shoperb module Theme module Editor
       module Assets
 
         def self.asset_wrapper app, root
-          compiler = Editor.compiler(root, domain: Editor["oauth-site"], theme: Editor.handle)
+          compiler = Editor.compiler(root, domain: Editor["oauth-site"], theme: Editor.handle, digests: false)
           app.get "#{root}*" do |path|
             env_sprockets = request.env.dup
             env_sprockets['PATH_INFO'] = path
