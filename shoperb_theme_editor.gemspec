@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "activesupport", "4.0.8"
   gem.add_dependency "actionpack", "4.0.8"
   gem.add_dependency "shoperb-theme-liquid", "0.0.3"
-  gem.add_dependency "artisans", "1.0.2"
+  gem.add_dependency "artisans", "1.0.3"
   gem.add_dependency "coffee-script", "~> 2"
   gem.add_dependency "sass", "~> 3"
   gem.add_dependency "haml", "~> 4"
