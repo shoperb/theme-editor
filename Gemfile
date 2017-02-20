@@ -2,4 +2,4 @@ source "https://rubygems.org"
 
 gemspec
 
-gem 'artisans', '~> 1.0.3', :git => 'git@code.perfectline.co:shoperb/artisans.git'
+gem 'artisans', '~> 1.0.4', :git => 'git@code.perfectline.co:shoperb/artisans.git'
