@@ -3,13 +3,13 @@ module Shoperb module Theme module Editor
     module Model
       class Product < Base
 
-        fields :id, :name, :description, :has_options, :permalink, :slug, :state, :translations, :template, :collection_ids, :category_id, :minimum_price, :maximum_price,
+        fields :id, :name, :description, :has_options, :permalink, :handle, :state, :translations, :template, :collection_ids, :category_id, :minimum_price, :maximum_price,
 :minimum_discount_price, :maximum_discount_price, :minimum_active_price, :maximum_active_price
 
         translates :name, :description
 
         def self.primary_key
-          :slug
+          :handle
         end
 
         def collections
