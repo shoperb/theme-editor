@@ -10,7 +10,7 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def handle
-      record.slug
+      record.handle
     end
 
     def url
