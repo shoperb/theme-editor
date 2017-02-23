@@ -130,9 +130,7 @@ module Shoperb module Theme
       end
 
       def find_digest(path)
-        if @digests
-          Digest::MD5.hexdigest(File.read(path)) if File.exists?(path)
-        end
+        @digests && File.exists?(path) ? Digest::MD5.hexdigest(File.read(path)) : ''
       end
     end
   end
