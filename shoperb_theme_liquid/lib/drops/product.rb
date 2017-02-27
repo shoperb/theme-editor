@@ -72,6 +72,10 @@ module Shoperb module Theme module Liquid module Drop
       end
     end
 
+    def available_variants
+      Variants.new( record.variants.select{|v| v.id.in?(variants.to_a.select(&:available?).map(&:id)) })
+    end
+
     def image
       record.image.try(:to_liquid, @context)
     end
