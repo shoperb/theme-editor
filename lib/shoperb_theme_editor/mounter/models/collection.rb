@@ -3,12 +3,12 @@ module Shoperb module Theme module Editor
     module Model
       class Collection < Base
 
-        fields :id, :name, :permalink, :slug, :product_ids
+        fields :id, :name, :permalink, :handle, :product_ids
 
         translates :name
 
         def self.primary_key
-          :slug
+          :handle
         end
 
         def products
