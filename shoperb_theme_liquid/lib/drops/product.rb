@@ -18,28 +18,28 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def max_price
-      record.maximum_price
+      record.maximum_price.to_f
     end
 
     def min_price
-      record.minimum_price
+      record.minimum_price.to_f
     end
     alias :price :min_price
 
     def min_discount_price
-      record.minimum_discount_price
+      record.minimum_discount_price.try(:to_f)
     end
 
     def max_discount_price
-      record.maximum_discount_price
+      record.maximum_discount_price.try(:to_f)
     end
 
     def min_active_price
-      record.minimum_active_price
+      record.minimum_active_price.to_f
     end
 
     def max_active_price
-      record.maximum_active_price
+      record.maximum_active_price.to_f
     end
 
     def available?
