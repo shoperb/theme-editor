@@ -18,11 +18,11 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def max_price
-      record.maximum_price.to_f
+      record.maximum_price.try(:to_f)
     end
 
     def min_price
-      record.minimum_price.to_f
+      record.minimum_price.try(:to_f)
     end
     alias :price :min_price
 
