@@ -30,7 +30,7 @@ module Shoperb module Theme module Editor
     end
 
     def blog_posts
-      process Mounter::Model::BlogPost, "blog-posts"
+      process Mounter::Model::BlogPost
     end
 
     def media_files
@@ -77,7 +77,7 @@ module Shoperb module Theme module Editor
     end
 
     def products
-      process Mounter::Model::ProductType, "product-types"
+      process Mounter::Model::ProductType
       process Mounter::Model::Category
       process Mounter::Model::Product do |product|
         assign_relation product, Mounter::Model::Category
@@ -108,7 +108,7 @@ module Shoperb module Theme module Editor
     end
 
     def process klass, path=klass.to_s.demodulize.tableize, &block
-      result = fetch(path).map(&(block || ->(this){this})).compact
+      result = fetch("api/v1/#{path}").map(&(block || ->(this){this})).compact
       uniq = result.uniq { |h| h[klass.primary_key.to_s] }
       Logger.info "Received #{result.count} #{path.pluralize(result.count)}, kept #{uniq.count}.\n" if Editor["verbose"]
       klass.assign uniq
@@ -138,6 +138,7 @@ module Shoperb module Theme module Editor
     def as_json(params={})
       ->(req) {
         req.headers["Accept"] = "application/json"
+        req.headers['CURRENT_SHOP'] = Editor["oauth-site"]
         req.params = params
       }
     end

@@ -13,8 +13,9 @@ module Shoperb module Theme module Editor
 
     def pull handle=nil, *args
       prepare
-      response = request Pathname.new(["themes", handle, "download"].compact.join("/")).cleanpath.to_s, method: :get, notify: -> { "Downloading" } do |faraday|
+      response = request Pathname.new(["api", "v1", "themes", handle, "download"].compact.join("/")).cleanpath.to_s, method: :get, notify: -> { "Downloading" } do |faraday|
         faraday.options.timeout = 120
+        faraday.headers['CURRENT_SHOP'] = Editor["oauth-site"]
       end
       Package.unzip response.parsed
     end
@@ -23,8 +24,9 @@ module Shoperb module Theme module Editor
       prepare
       file = Package.zip
       theme = Faraday::UploadIO.new(file, "application/zip")
-      request Pathname.new("themes/#{Editor.handle}/upload").cleanpath.to_s, method: :post, notify: -> { "Uploading #{Editor.handle}" }, body: { zip: theme } do |faraday|
+      request Pathname.new("api/v1/themes/#{Editor.handle}/upload").cleanpath.to_s, method: :patch, notify: -> { "Uploading #{Editor.handle}" }, body: { zip: theme } do |faraday|
         faraday.options.timeout = 120
+        faraday.headers['CURRENT_SHOP'] = Editor["oauth-site"]
       end
     ensure
       Utils.rm_tempfile file
@@ -62,9 +64,9 @@ module Shoperb module Theme module Editor
       @client = OAuth2::Client.new(
         Editor["oauth-client-id"],
         Editor["oauth-client-secret"],
-        site: "#{Editor["server"]["protocol"]}://#{Editor["oauth-site"]}.#{Editor["server"]["url"]}/admin",
-        token_url: "oauth/token",
-        authorize_url: "oauth/authorize"
+        site: "#{Editor["server"]["protocol"]}://manage.#{Editor["server"]["url"]}",
+        token_url: "/api/v1/oauth/token",
+        authorize_url: "oauth/authorize?domain=#{Editor["oauth-site"]}"
       ) do |faraday|
         faraday.request  :multipart
         faraday.request  :url_encoded
@@ -111,7 +113,7 @@ module Shoperb module Theme module Editor
     end
 
     def get_authented_token(code)
-      oauth_client.auth_code.get_token(code, redirect_uri: Editor["oauth-redirect-uri"], scope: "admin")
+      oauth_client.auth_code.get_token(code, redirect_uri: Editor["oauth-redirect-uri"], scope: "admin", headers: { 'CURRENT_SHOP' => Editor["oauth-site"] })
     end
 
     def access_token
