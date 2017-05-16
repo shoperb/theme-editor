@@ -15,7 +15,7 @@ module Shoperb module Theme module Editor
       prepare
       response = request Pathname.new(["api", "v1", "themes", handle, "download"].compact.join("/")).cleanpath.to_s, method: :get, notify: -> { "Downloading" } do |faraday|
         faraday.options.timeout = 120
-        faraday.headers['CURRENT_SHOP'] = Editor["oauth-site"]
+        faraday.headers['Current-Shop'] = Editor["oauth-site"]
       end
       Package.unzip response.parsed
     end
@@ -26,7 +26,7 @@ module Shoperb module Theme module Editor
       theme = Faraday::UploadIO.new(file, "application/zip")
       request Pathname.new("api/v1/themes/#{Editor.handle}/upload").cleanpath.to_s, method: :patch, notify: -> { "Uploading #{Editor.handle}" }, body: { zip: theme } do |faraday|
         faraday.options.timeout = 120
-        faraday.headers['CURRENT_SHOP'] = Editor["oauth-site"]
+        faraday.headers['Current-Shop'] = Editor["oauth-site"]
       end
     ensure
       Utils.rm_tempfile file
@@ -65,7 +65,7 @@ module Shoperb module Theme module Editor
         Editor["oauth-client-id"],
         Editor["oauth-client-secret"],
         site: "https://manage.#{Editor["server"]["url"]}",
-        token_url: "#{Editor["server"]["protocol"]}://#{Editor["oauth-site"]}.shoperb.me/api/v1/oauth/token",
+        token_url: "/api/v1/oauth/token",
         authorize_url: "oauth/authorize?domain=#{Editor["oauth-site"]}"
       ) do |faraday|
         faraday.request  :multipart
@@ -113,7 +113,7 @@ module Shoperb module Theme module Editor
     end
 
     def get_authented_token(code)
-      oauth_client.auth_code.get_token(code, redirect_uri: Editor["oauth-redirect-uri"], scope: "admin", headers: { 'CURRENT_SHOP' => Editor["oauth-site"] })
+      oauth_client.auth_code.get_token(code, redirect_uri: Editor["oauth-redirect-uri"], scope: "admin", headers: { 'Current-Shop' => Editor["oauth-site"] })
     end
 
     def access_token

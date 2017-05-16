@@ -138,7 +138,7 @@ module Shoperb module Theme module Editor
     def as_json(params={})
       ->(req) {
         req.headers["Accept"] = "application/json"
-        req.headers['CURRENT_SHOP'] = Editor["oauth-site"]
+        req.headers['Current-Shop'] = Editor["oauth-site"]
         req.params = params
       }
     end
