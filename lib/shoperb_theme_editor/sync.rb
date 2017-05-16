@@ -139,6 +139,7 @@ module Shoperb module Theme module Editor
       ->(req) {
         req.headers["Accept"] = "application/json"
         req.headers['Current-Shop'] = Editor["oauth-site"]
+        req.options.timeout = 120
         req.params = params
       }
     end
