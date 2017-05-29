@@ -29,6 +29,7 @@ module Shoperb module Theme module Liquid module Filter
     end
 
     def asset_url(asset)
+      asset = asset.gsub(/^\//, '')
       @context.registers[:asset_url][asset]
     end
 
