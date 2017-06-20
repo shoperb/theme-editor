@@ -1,6 +1,14 @@
 module Shoperb module Theme module Liquid module Tag
   class Include < ::Liquid::Include
+
+    protected
+
+    def default_file_system(context)
+      context.registers[:templates_file_system]
+    end
+
     private
+
     def load_cached_partial(context)
       cached_partials = context.registers[:cached_partials] || {}
       template_name = context[@template_name]
@@ -8,6 +16,7 @@ module Shoperb module Theme module Liquid module Tag
       if cached = cached_partials[template_name]
         return cached
       end
+
       source = read_template_from_file_system(context)
       partial = Liquid::Template.parse(source, pass_options)
       cached_partials[template_name] = partial
@@ -15,8 +24,9 @@ module Shoperb module Theme module Liquid module Tag
       partial
     end
 
+
     def read_template_from_file_system(context)
-      file_system = context.registers[:file_system] || Liquid::Template.file_system
+      file_system = context.registers[:file_system] || default_file_system(context)
       template_path = context[@template_name]
       begin
         read_file_from_file_system(file_system, template_path, context)

@@ -27,7 +27,9 @@ module Shoperb module Theme module Editor
               category: request.env[:current_category],
               request_forgery_protection_token: -> { %(<input type="hidden" name="" value="">) },
               models: Model,
-              default_partials: Pathname.new(__FILE__) + "../partials"
+              default_partials: Pathname.new(__FILE__) + "../partials",
+              sections_file_reader: sections_file_reader(settings),
+              templates_file_system: templates_file_reader(settings)
             )
             locals = locals.reverse_merge(default_locals)
             registers = registers.reverse_merge({layout: "layout"})
@@ -72,6 +74,14 @@ module Shoperb module Theme module Editor
           def template_paths name, base=settings.templates_directory
             Dir[base.to_s + "/" + name.to_s + ".#{settings.destination_format}" + "{#{settings.allowed_engines.map { |ext_name| ".#{ext_name}" }.join(",")},}"]
           end
+
+          def sections_file_reader(settings)
+            ::Liquid::LocalFileSystem.new(settings.sections_directory)
+          end
+
+          def templates_file_reader(settings)
+            ::Liquid::LocalFileSystem.new(settings.templates_directory)
+          end
         end
 
         def self.registered app
@@ -83,6 +93,7 @@ module Shoperb module Theme module Editor
           app.set :templates_directory, Proc.new { File.join(root, "templates") }
           app.set :layouts_directory, Proc.new { File.join(root, "layouts") }
           app.set :emails_directory, Proc.new { File.join(root, "emails") }
+          app.set :sections_directory, Proc.new { File.join(root, "sections") }
 
           Liquid::Template.file_system = ::Liquid::LocalFileSystem.new(app.settings.templates_directory)
 
