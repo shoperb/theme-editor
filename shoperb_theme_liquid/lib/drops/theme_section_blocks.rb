@@ -7,7 +7,7 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def each
-      order.each do |id|
+      @order.each do |id|
         yield ThemeSection.new(id, collection[id])
       end
     end
