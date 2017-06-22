@@ -48,7 +48,6 @@ module Shoperb module Theme
   ::Liquid::Template.register_tag "form",     Liquid::Tag::Form
   ::Liquid::Template.register_tag "include",  Liquid::Tag::Include
   ::Liquid::Template.register_tag "section",  Liquid::Tag::Section
-  ::Liquid::Template.register_tag "schema",   Liquid::Tag::Schema
 end end
 
 

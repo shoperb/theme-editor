@@ -3,10 +3,10 @@ module Shoperb module Theme module Liquid module Tag
 
     def render(context)
       context.stack do
-        section = ::Shoperb::Theme::Editor::Mounter::Model::Section.new(handle: @template_name)
-        context['section'] = section.to_liquid(context)
-        super # reading/saving schema
-        super # with settings derived from schema defaults
+        section_data = Shoperb::Theme::Editor.settings_data[@template_name] # TODO check template name
+        context['section'] = Drop::ThemeSection.new(@template_name, section_data)
+
+        super
       end
     end
 
@@ -18,4 +18,3 @@ module Shoperb module Theme module Liquid module Tag
 
   end
 end end end end
-

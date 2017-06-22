@@ -28,15 +28,18 @@ module Shoperb module Theme module Editor
               request_forgery_protection_token: -> { %(<input type="hidden" name="" value="">) },
               models: Model,
               default_partials: Pathname.new(__FILE__) + "../partials",
-              sections_file_reader: sections_file_reader(settings),
-              templates_file_system: templates_file_reader(settings)
+              sections_file_reader: sections_file_reader,
+              templates_file_system: templates_file_reader
             )
             locals = locals.reverse_merge(default_locals)
+
             registers = registers.reverse_merge({layout: "layout"})
             templates = [templates].flatten
             format = Sinatra::RespondWith::Format.new(self)
             if (template = template_name(templates, dir))
               locals.merge!(template_name: template.to_s)
+              locals[:content_for_template] = content_for_template(template.to_s, locals, registers)
+
               file = template_path(template, dir)
               result = process_file file, locals, registers
               unless (layout_name = registers[:layout].to_s).blank?
@@ -45,6 +48,20 @@ module Shoperb module Theme module Editor
               halt result
             end
             format.finish(&block)
+          end
+
+          def content_for_template(template, locals, registers)
+            settings_data = Shoperb::Theme::Editor.settings_data
+            return nil unless settings_data && settings_data["content_for_#{template}"]
+
+            section_ids = settings_data["content_for_#{template}"]
+
+            section_ids.map do |id|
+              data = settings_data['sections'][id]
+              file = template_path(data['type'], settings.sections_directory)
+              section_drop = Shoperb::Theme::Liquid::Drop::ThemeSection.new(id, data)
+              process_file(file, locals.merge(section: section_drop), registers)
+            end.join(' ')
           end
 
           def respond_email(templates, locals={}, registers={}, &block)
@@ -75,11 +92,11 @@ module Shoperb module Theme module Editor
             Dir[base.to_s + "/" + name.to_s + ".#{settings.destination_format}" + "{#{settings.allowed_engines.map { |ext_name| ".#{ext_name}" }.join(",")},}"]
           end
 
-          def sections_file_reader(settings)
-            ::Liquid::LocalFileSystem.new(settings.sections_directory)
+          def sections_file_reader
+            ::Liquid::LocalFileSystem.new(settings.sections_directory, "%s.liquid")
           end
 
-          def templates_file_reader(settings)
+          def templates_file_reader
             ::Liquid::LocalFileSystem.new(settings.templates_directory)
           end
         end

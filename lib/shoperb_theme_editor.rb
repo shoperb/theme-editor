@@ -70,6 +70,10 @@ module Shoperb module Theme
       JSON.parse(content)
     end
 
+    def settings_data
+      JSON.parse(File.read('config/settings_data.json'))
+    end
+
     def local_spec_content
       @local_spec_content ||= begin
         if File.exists?(path = Utils.base + "config/spec.json")
@@ -95,20 +99,24 @@ module Shoperb module Theme
       spec_content
     end
 
+    # general theme settings (styles)
     def theme_settings
-      presets = []
+      settings_data['general'].presence || presets[Editor["preset"]] || {}
+    end
+
+    def presets
+      res = []
 
       Pathname.glob(Utils.base + "presets/*.json") do |path|
         content = File.read(path)
         data = JSON.parse(content) rescue { "settings" => { } }
 
-        presets.push([nil, data["settings"]]) if data["default"]
-        presets.push([data["name_key"], data["settings"]])
+        res.push([nil, data["settings"]]) if data["default"]
+        res.push([data["name_key"], data["settings"]])
       end
 
-      presets.to_h[Editor["preset"]] || {}
+      res.to_h
     end
-
 
     def compiler asset_url, digests: true, **options
       Artisans::ThemeCompiler.new(
