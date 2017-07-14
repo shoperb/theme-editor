@@ -6,7 +6,7 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def name
-      record.name
+      record.name || record.product.name
     end
 
     def price
