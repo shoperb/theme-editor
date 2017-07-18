@@ -19,5 +19,10 @@ module Shoperb module Theme module Liquid module Drop
     def settings
       ThemeSectionSettings.new(record['settings'], record['translations'])
     end
+
+    # for blocks
+    def type
+      record['type']
+    end
   end
 end end end end
