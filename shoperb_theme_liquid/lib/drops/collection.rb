@@ -58,6 +58,10 @@ module Shoperb module Theme module Liquid module Drop
       limited.map { |o| o.to_liquid(@context) }
     end
 
+    def image
+      record.image.try(:to_liquid, @context)
+    end
+
     private
 
     def limit_value
