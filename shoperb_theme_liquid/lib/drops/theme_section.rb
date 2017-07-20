@@ -16,6 +16,10 @@ module Shoperb module Theme module Liquid module Drop
       ThemeSectionBlocks.new(record['blocks'], record['block_order'])
     end
 
+    def block_order
+      record['block_order']
+    end
+
     def settings
       ThemeSectionSettings.new(record['settings'], record['translations'])
     end
