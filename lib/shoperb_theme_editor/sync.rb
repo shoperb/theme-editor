@@ -50,9 +50,7 @@ module Shoperb module Theme module Editor
     end
 
     def menus
-      process Mounter::Model::Menu do |hash|
-        hash["menu"]
-      end
+      process Mounter::Model::Menu
     end
 
     def links
