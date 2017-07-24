@@ -3,8 +3,10 @@ module Shoperb module Theme module Liquid module Tag
 
     def render(context)
       context.stack do
-        section_data = Shoperb::Theme::Editor.settings_data[@template_name] # TODO check template name
-        context['section'] = Drop::ThemeSection.new(@template_name, section_data)
+        section_id = context[@template_name]
+        section_data = Shoperb::Theme::Editor.settings_data['sections'][section_id]
+
+        context['section'] = Drop::ThemeSection.new(section_id, section_data)
 
         super
       end
