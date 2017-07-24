@@ -43,7 +43,7 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def available?
-      record.available?
+      variants.to_a.any?(&:available?)
     end
 
     def description
