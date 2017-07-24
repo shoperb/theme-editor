@@ -3,9 +3,14 @@ module Shoperb module Theme module Editor
     module Model
       class VariantAttribute < Base
 
-        fields :id, :handle, :name, :value, :translations
+        fields :id, :value, :translations, :attribute_key
 
         translates :value
+
+        def initialize(*args)
+          super(*args)
+          @attributes[:name] = name
+        end
 
         def self.primary_key
           "id"
@@ -13,6 +18,9 @@ module Shoperb module Theme module Editor
 
         belongs_to :variant
 
+        def name
+          attribute_key['name']
+        end
       end
     end
   end
