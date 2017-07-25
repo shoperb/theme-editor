@@ -31,6 +31,10 @@ module Shoperb module Theme module Liquid module Drop
       s == s.pluralize
     end
 
+    def style
+      record.style
+    end
+
     def menu
       record.menu
     end
