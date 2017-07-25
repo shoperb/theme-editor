@@ -15,6 +15,8 @@ module Shoperb module Theme module Liquid module Drop
           "/search"
         when "PRODUCTS"
           "/products"
+        when "Collections"
+          "/collections"
         when "BlogPosts"
           if object?
             object.try(:to_liquid, @context).try(:url)
