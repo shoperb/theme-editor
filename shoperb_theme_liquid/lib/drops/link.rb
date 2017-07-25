@@ -32,7 +32,7 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def style
-      record.style
+      record.style.try(:underscore)
     end
 
     def menu
