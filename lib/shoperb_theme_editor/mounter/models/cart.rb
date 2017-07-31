@@ -17,6 +17,14 @@ module Shoperb module Theme module Editor
           items.sum(&:total)
         end
 
+        def weight
+          items.sum(&:weight)
+        end
+
+        def require_shipping?
+          items.any?(&:require_shipping?)
+        end
+
       end
     end
   end
