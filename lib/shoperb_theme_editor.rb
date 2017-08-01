@@ -71,7 +71,18 @@ module Shoperb module Theme
     end
 
     def settings_data
-      JSON.parse(File.read('config/settings_data.json'))
+      unless File.exists?('config/settings_data.json')
+        if File.exists?('presets/default.json')
+          File.open('config/settings_data.json', 'w') do |f|
+            settings = JSON.parse(File.read('presets/default.json'))['settings']
+            f.write JSON.pretty_generate({ general: settings })
+          end
+        end
+      end
+
+      if File.exists?('config/settings_data.json')
+        JSON.parse(File.read('config/settings_data.json'))
+      end
     end
 
     def local_spec_content
@@ -101,7 +112,7 @@ module Shoperb module Theme
 
     # general theme settings (styles)
     def theme_settings
-      settings_data['general'].presence || presets[Editor["preset"]] || {}
+      (settings_data ? settings_data['general'].presence : nil) || {}
     end
 
     def presets
