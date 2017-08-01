@@ -13,6 +13,7 @@ module Shoperb module Theme module Editor
 
         delegate :product, to: :variant
         delegate :sku, to: :variant
+        delegate :require_shipping?,  :to => :variant
 
         def cart
           Cart.first
