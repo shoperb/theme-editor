@@ -6,7 +6,7 @@ module Shoperb module Theme module Editor
         fields :id, :name, :code, :symbol, :rate, :date
 
         def self.primary_key
-          :code
+          :id
         end
 
       end

@@ -3,7 +3,7 @@ module Shoperb module Theme module Editor
     module Model
       class Category < Base
 
-        fields :id, :parent_id, :state, :name, :permalink, :description, :lft, :rgt, :slug, :translations
+        fields :id, :parent_id, :state, :name, :permalink, :description, :lft, :rgt, :handle, :translations
         translates :name, :description
         fields :level
 

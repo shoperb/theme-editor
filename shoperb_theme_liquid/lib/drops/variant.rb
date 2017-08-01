@@ -10,11 +10,11 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def price
-      record.price
+      record.price.to_f
     end
 
     def discount_price
-      record.price_discount
+      record.price_discount.try(:to_f)
     end
 
     def discount?
@@ -34,7 +34,7 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def current_price
-      record.active_price
+      record.active_price.to_f
     end
 
     def available?

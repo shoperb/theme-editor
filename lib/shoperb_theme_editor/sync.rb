@@ -37,6 +37,10 @@ module Shoperb module Theme module Editor
       process Mounter::Model::MediaFile
     end
 
+    def media_files
+      process Mounter::Model::MediaFile
+    end
+
     def addresses
       process Mounter::Model::Address do |address|
         assign_relation address, Mounter::Model::State
@@ -50,9 +54,7 @@ module Shoperb module Theme module Editor
     end
 
     def menus
-      process Mounter::Model::Menu do |hash|
-        hash["menu"]
-      end
+      process Mounter::Model::Menu
     end
 
     def links
@@ -77,7 +79,7 @@ module Shoperb module Theme module Editor
     end
 
     def products
-      process Mounter::Model::ProductType, "product-types"
+      process Mounter::Model::ProductType
       process Mounter::Model::Category
       process Mounter::Model::Product do |product|
         assign_relation product, Mounter::Model::Category
@@ -108,7 +110,7 @@ module Shoperb module Theme module Editor
     end
 
     def process klass, path=klass.to_s.demodulize.tableize, &block
-      result = fetch(path).map(&(block || ->(this){this})).compact
+      result = fetch("api/v1/#{path}").map(&(block || ->(this){this})).compact
       uniq = result.uniq { |h| h[klass.primary_key.to_s] }
       Logger.info "Received #{result.count} #{path.pluralize(result.count)}, kept #{uniq.count}.\n" if Editor["verbose"]
       klass.assign uniq
@@ -138,6 +140,8 @@ module Shoperb module Theme module Editor
     def as_json(params={})
       ->(req) {
         req.headers["Accept"] = "application/json"
+        req.headers['Current-Shop'] = Editor["oauth-site"]
+        req.options.timeout = 120
         req.params = params
       }
     end
@@ -146,7 +150,10 @@ module Shoperb module Theme module Editor
       name = klass.to_s.demodulize.underscore
       id = attributes["#{name}_id"]
       primary_key = klass.primary_key
-      attributes["#{name}_#{primary_key}"] = klass.where(id: id).first.try(primary_key) if id
+      # attributes["#{name}_#{primary_key}"] = klass.where(id: id).first.try(primary_key) if id
+
+      # apparently where(id: id) still queries not by ID, but by primary key, so:
+      attributes["#{name}_#{primary_key}"] = klass.all.detect { |record| record[:id] == id }.try(primary_key)
       attributes["#{name}_#{primary_key}"] || (attributes["#{name}_id"] = id if id)
     end
 

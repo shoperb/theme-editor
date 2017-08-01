@@ -20,7 +20,7 @@ module Shoperb module Theme module Editor
     def self.report e
       display = "\r#{e.class.name}"
       display += " => #{e.message}" if e.message.presence
-      puts e.backtrace.reverse
+      puts e.backtrace#.reverse
       Logger.error "#{display}\n"
       ::Rollbar.report_exception(e)
     end

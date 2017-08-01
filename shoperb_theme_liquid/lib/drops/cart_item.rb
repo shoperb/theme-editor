@@ -26,15 +26,15 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def price
-      record.variant.price
+      record.variant.price.to_f
     end
 
     def discount_price
-      record.variant.price_discount
+      record.variant.price_discount.try(:to_f)
     end
 
     def active_price
-      record.variant.active_price
+      record.variant.active_price.to_f
     end
 
     def discount?

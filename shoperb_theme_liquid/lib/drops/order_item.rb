@@ -45,22 +45,22 @@ module Shoperb module Theme module Liquid module Drop
 
 
     def subtotal
-      record.total_without_taxes
+      record.total_without_taxes.to_f
     end
 
 
     def total
-      record.total_wout_correlation
+      record.total_wout_correlation.to_f
     end
 
 
     def total_weight
-      record.total_weight
+      record.total_weight.to_f
     end
 
 
     def total_taxes
-      record.total_taxes
+      record.total_taxes.to_f
     end
 
 

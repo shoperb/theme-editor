@@ -7,11 +7,11 @@ module Shoperb module Theme module Editor
       "verbose" => "Enable verbose mode",
       "port" => "Port you want your local shoperb theme instance to run at",
       "server" => "Shoperb url & protocol for oauth to run against",
+      "preset" => "Theme preset to use",
     }
 
     QUESTION = {
-      "oauth-site" => "Insert Shoperb domain",
-      "handle" => "Insert theme handle"
+      "oauth-site" => "Insert Shoperb domain"
     }.with_indifferent_access
 
     HARDCODED = {
@@ -22,16 +22,13 @@ module Shoperb module Theme module Editor
 
     DEFAULTS = {
       "oauth-cache" => {}.with_indifferent_access,
-      "compile" => {
-        js: ["application"],
-        css: ["application"]
-      }.with_indifferent_access,
       "port" => "4000",
       "verbose" => false,
       "server" => {
         "url" => "shoperb.me",
         "protocol" => "https"
-      }
+      },
+      "preset" => nil
     }.with_indifferent_access
 
     ASKS = {
@@ -70,7 +67,7 @@ module Shoperb module Theme module Editor
     end
 
     def [] name
-      super(name).presence || (self[name] = ask(name))
+      has_key?(name) ? super(name) : (self[name] = ask(name))
     end
 
     def ask name

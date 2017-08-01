@@ -27,7 +27,7 @@ module Shoperb module Theme module Editor
         end
 
         def image_sizes
-          sizes.map { |name, url| self.class.image_size(self, name, "/#{Shop.first.domain}/images/#{id}/#{url}")}
+          sizes.map { |name, url| self.class.image_size(self, name, "/#{Editor["oauth-site"]}/images/#{id}/#{url}")}
         end
       end
     end

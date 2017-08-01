@@ -3,8 +3,7 @@ module Shoperb module Theme module Editor
     module Model
       class BlogPost < Base
 
-        fields :id, :name, :content, :published_at, :slug, :permalink, :template, :handle, :next_id, :prev_id
-
+        fields :id, :name, :content, :published_at, :permalink, :template, :handle, :next_id, :prev_id
         translates :name, :content
 
         def self.primary_key

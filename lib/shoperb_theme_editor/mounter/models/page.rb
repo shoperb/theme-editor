@@ -3,12 +3,12 @@ module Shoperb module Theme module Editor
     module Model
       class Page < Base
 
-        fields :id, :state, :name, :content, :permalink, :slug, :translations, :template
+        fields :id, :state, :name, :content, :permalink, :handle, :translations, :template
 
         translates :name, :content
 
         def self.primary_key
-          :slug
+          :handle
         end
 
         def handle

@@ -15,6 +15,8 @@ module Shoperb module Theme module Liquid module Drop
           "/search"
         when "PRODUCTS"
           "/products"
+        when "Collections"
+          "/collections"
         when "BlogPosts"
           if object?
             object.try(:to_liquid, @context).try(:url)
@@ -29,6 +31,10 @@ module Shoperb module Theme module Liquid module Drop
     def index_action?
       s = record.style.downcase
       s == s.pluralize
+    end
+
+    def style
+      record.style.try(:underscore)
     end
 
     def menu

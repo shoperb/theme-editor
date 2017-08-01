@@ -3,7 +3,10 @@ module Shoperb module Theme module Editor
     module Model
       class Variant < Base
 
-        fields :id, :sku, :stock, :weight, :width, :height, :depth, :price, :price_original, :price_discount, :discount_start, :discount_end, :allow_backorder, :track_inventory, :charge_taxes, :require_shipping, :position
+        fields :id, :sku, :warehouse_stock, :weight, :width, :height, :depth, :price,
+               :price_original, :price_discount, :discount_start, :discount_end,
+               :allow_backorder, :track_inventory, :charge_taxes, :require_shipping,
+               :digital, :url, :position, :stock_amounts
 
         # TODO: Make sku actually unique so it can be used as a primary key.
         def self.primary_key
@@ -27,6 +30,8 @@ module Shoperb module Theme module Editor
         def available?(amount = 1)
           !track_inventory? || allow_backorder? || (!stock || stock >= amount)
         end
+
+        alias_attribute :stock, :warehouse_stock
 
         def active_price
           discount_active? ? price_discount : price

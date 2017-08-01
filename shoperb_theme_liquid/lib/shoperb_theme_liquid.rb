@@ -43,8 +43,11 @@ module Shoperb module Theme
   ::Liquid::Template.register_filter Liquid::Filter::Html
   ::Liquid::Template.register_filter Liquid::Filter::Translate
 
-  ::Liquid::Template.register_tag "layout", Liquid::Tag::Layout
+  ::Liquid::Template.register_tag "layout",   Liquid::Tag::Layout
   ::Liquid::Template.register_tag "paginate", Liquid::Tag::Paginate
-  ::Liquid::Template.register_tag "form", Liquid::Tag::Form
-  ::Liquid::Template.register_tag "include", Liquid::Tag::Include
+  ::Liquid::Template.register_tag "form",     Liquid::Tag::Form
+  ::Liquid::Template.register_tag "include",  Liquid::Tag::Include
+  ::Liquid::Template.register_tag "section",  Liquid::Tag::Section
 end end
+
+

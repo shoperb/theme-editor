@@ -11,6 +11,8 @@ module Shoperb module Theme module Editor
                 $1
               elsif shop.language_code
                 shop.language_code
+              else
+                shop.possible_languages.first
               end
             end
           end

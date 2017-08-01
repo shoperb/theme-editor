@@ -10,7 +10,7 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def handle
-      record.slug
+      record.handle
     end
 
     def url
@@ -18,28 +18,28 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def max_price
-      record.maximum_price
+      record.maximum_price.try(:to_f)
     end
 
     def min_price
-      record.minimum_price
+      record.minimum_price.try(:to_f)
     end
     alias :price :min_price
 
     def min_discount_price
-      record.minimum_discount_price
+      record.minimum_discount_price.try(:to_f)
     end
 
     def max_discount_price
-      record.maximum_discount_price
+      record.maximum_discount_price.try(:to_f)
     end
 
     def min_active_price
-      record.minimum_active_price
+      record.minimum_active_price.to_f
     end
 
     def max_active_price
-      record.maximum_active_price
+      record.maximum_active_price.to_f
     end
 
     def available?
@@ -70,6 +70,10 @@ module Shoperb module Theme module Liquid module Drop
       Variants.new(record.variants).tap do |drop|
         drop.context = @context
       end
+    end
+
+    def available_variants
+      Variants.new( record.variants.select{|v| v.id.in?(variants.to_a.select(&:available?).map(&:id)) })
     end
 
     def image
