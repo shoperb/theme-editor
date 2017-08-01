@@ -30,7 +30,7 @@ module Shoperb module Theme module Editor
     end
 
     def blog_posts
-      process Mounter::Model::BlogPost, "blog-posts"
+      process Mounter::Model::BlogPost
     end
 
     def media_files
