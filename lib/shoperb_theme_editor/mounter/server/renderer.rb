@@ -53,6 +53,8 @@ module Shoperb module Theme module Editor
             templates = [templates].flatten
             if (template = template_name(templates, dir))
               locals.merge!(template_name: template.to_s)
+              locals[:content_for_template] = content_for_template(template.to_s, locals, registers)
+
               file = template_path(template, dir)
               result = process_file(file, locals, registers)
               unless (layout_name = registers[:layout].to_s).blank?
