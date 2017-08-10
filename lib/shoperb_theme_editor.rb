@@ -133,7 +133,7 @@ module Shoperb module Theme
       Artisans::ThemeCompiler.new(
         File.expand_path(Utils.base),
         asset_url,
-        drops: { settings: Shoperb::Theme::Liquid::Drop::AssetSettings.new(theme_settings) },
+        settings: theme_settings,
         compile: spec["compile"],
         file_reader: DefaultFileReader.new(digests: digests)
       )
