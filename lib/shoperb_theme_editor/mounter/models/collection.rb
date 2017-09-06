@@ -3,7 +3,7 @@ module Shoperb module Theme module Editor
     module Model
       class Collection < Base
 
-        fields :id, :name, :permalink, :handle, :product_ids
+        fields :id, :name, :permalink, :handle, :product_ids, :image_id
 
         translates :name
 
