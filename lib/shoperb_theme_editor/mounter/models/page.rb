@@ -10,11 +10,6 @@ module Shoperb module Theme module Editor
         def self.primary_key
           :handle
         end
-
-        def handle
-          permalink
-        end
-
       end
     end
   end

@@ -23,7 +23,7 @@ module Shoperb module Theme module Editor
           append_paths
 
           get "/products/:id" do
-            product      = Liquid::Drop::Product.new(record = Model::Product.find(params[:id]))
+            product      = Liquid::Drop::Product.new(record = Model::Product.find_by(permalink: params[:id]))
             category     = product.category
             template     = record.template.presence || :product
             respond template.to_sym, product: product, category: category, meta: product
@@ -70,7 +70,7 @@ module Shoperb module Theme module Editor
           end
 
           get "/blog/:id" do
-            post = Model::BlogPost.find(params[:id])
+            post = Model::BlogPost.find_by(permalink: params[:id])
             template = post.template.presence || :blog_post
             respond template, post: post, meta: post
           end
@@ -129,11 +129,11 @@ module Shoperb module Theme module Editor
 
         def self.append_paths
           resource Model::Category do
-            Liquid::Drop::Category.new(request.env[:current_category] = Model::Category.find(params[:id]))
+            Liquid::Drop::Category.new(request.env[:current_category] = Model::Category.find_by(permalink: params[:id]))
           end
 
           resource Model::Collection do
-            Model::Collection.find(params[:id])
+            Model::Collection.find_by(permalink: params[:id])
           end
 
           resources Model::Collection do

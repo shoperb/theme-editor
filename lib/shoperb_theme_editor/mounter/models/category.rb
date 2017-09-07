@@ -8,11 +8,7 @@ module Shoperb module Theme module Editor
         fields :level
 
         def self.primary_key
-          :permalink
-        end
-
-        def handle
-          permalink
+          :handle
         end
 
         has_many :products
@@ -59,7 +55,7 @@ module Shoperb module Theme module Editor
 
         def products_for_self_and_children
           arr = self_and_descendants.map(&:id)
-          Product.all.select { |product| arr.include?(product.category_permalink) }
+          Product.all.select { |product| arr.include?(product.category_handle) }
         end
 
         def descends_from(category)
