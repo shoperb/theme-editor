@@ -3,6 +3,8 @@ require "haml"
 require "rack"
 require "pry"
 
+require_relative 'shoperb_theme_editor/ext'
+
 autoload :OpenStruct,         "ostruct"
 autoload :FileUtils,          "fileutils"
 autoload :Zip,                "zip"
