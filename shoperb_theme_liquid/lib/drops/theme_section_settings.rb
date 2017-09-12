@@ -28,7 +28,7 @@ module Shoperb module Theme module Liquid module Drop
     private
 
     def current_locale
-      I18n.locale.to_s
+      @context.registers[:locale]
     end
   end
 end end end end
