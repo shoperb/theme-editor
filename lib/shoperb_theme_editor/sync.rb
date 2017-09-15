@@ -109,6 +109,15 @@ module Shoperb module Theme module Editor
       end
     end
 
+    def settings_data
+      data = get_response "api/v1/themes/#{Editor.handle}/settings_data", 1 rescue return
+
+      if data.body.presence
+        data = JSON.parse(data.body)
+        File.write('config/settings_data.json', JSON.pretty_generate(data))
+      end
+    end
+
     def process klass, path=klass.to_s.demodulize.tableize, &block
       result = fetch("api/v1/#{path}").map(&(block || ->(this){this})).compact
       uniq = result.uniq { |h| h[klass.primary_key.to_s] }

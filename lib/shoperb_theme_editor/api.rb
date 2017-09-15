@@ -55,6 +55,7 @@ module Shoperb module Theme module Editor
       Sync.addresses
       Sync.links
       Sync.blog_posts
+      Sync.settings_data
       Mounter::Model::Base.save
     end
 
