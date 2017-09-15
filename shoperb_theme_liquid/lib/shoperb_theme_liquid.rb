@@ -42,6 +42,7 @@ module Shoperb module Theme
   ::Liquid::Template.register_filter Liquid::Filter::Asset
   ::Liquid::Template.register_filter Liquid::Filter::Html
   ::Liquid::Template.register_filter Liquid::Filter::Translate
+  ::Liquid::Template.register_filter Liquid::Filter::Theme
 
   ::Liquid::Template.register_tag "layout",   Liquid::Tag::Layout
   ::Liquid::Template.register_tag "paginate", Liquid::Tag::Paginate

@@ -1,5 +1,9 @@
 module Shoperb module Theme module Liquid module Filter
-  module ThemeStyles
+  module Theme
+
+    def image_size(image, size)
+      (image[size].try(:url) if image) || image
+    end
 
     def customize(asset_path, settings_drop)
       compiler(settings).compiled_source(cleaned_file_path)
