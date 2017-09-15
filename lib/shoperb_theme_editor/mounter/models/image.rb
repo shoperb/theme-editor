@@ -3,7 +3,8 @@ module Shoperb module Theme module Editor
     module Model
       class Image < Base
 
-        fields :id, :entity_id, :entity_type, :name, :sizes, :url
+        fields :id, :entity_id, :entity_type, :name, :sizes,
+               :url, :original_width, :original_height
 
         # todo: TODOREF2
         # nothing to use as primary_key besides id right now
