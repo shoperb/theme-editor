@@ -39,7 +39,7 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def images
-      @images ||= Image.where(id: image_ids)
+      @images ||= model(Image).where(id: image_ids)
     end
 
     def image_ids
