@@ -5,8 +5,8 @@ module Shoperb module Theme module Liquid module Drop
 
     def initialize(section)
       @section = section
-      @settings = section.settings || {}
-      @translations = section.translations || {}
+      @settings = section['settings'] || {}
+      @translations = section['translations'] || {}
 
       @settings.each do |key, value|
         define_singleton_method key do
