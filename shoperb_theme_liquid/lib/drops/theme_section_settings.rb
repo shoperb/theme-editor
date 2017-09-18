@@ -1,5 +1,5 @@
 module Shoperb module Theme module Liquid module Drop
-  class ThemeSectionSettings < Base
+  class ThemeSectionSettings < ThemeSettings
 
     attr_reader :section
 
@@ -8,46 +8,17 @@ module Shoperb module Theme module Liquid module Drop
       @settings = section['settings'] || {}
       @translations = section['translations'] || {}
 
-      @settings.each do |key, value|
-        define_singleton_method key do
-          if image = image_object(key)
-            ThemeSectionImage.new(image)
-          else
-            (@translations[current_locale] || {})[key] || value
-          end
-        end
-      end
+      super(@settings)
     end
 
-    def self.invokable?(method_name)
-      true
-    end
+    protected
 
-    def method_missing *args
-      nil
+    def format_value(key, value)
+      (@translations[current_locale] || {})[key] || value
     end
-
-    private
 
     def current_locale
-      @context.registers[:locale]
-    end
-
-    def image_object(handle)
-      image = section_images[handle]
-      images.detect { |i| i.id == image['id'] } if image
-    end
-
-    def images
-      @images ||= model(Image).where(id: image_ids)
-    end
-
-    def image_ids
-      section_images.values.map{ |i| i['id'] }
-    end
-
-    def section_images
-      section['images'] || {}
+      I18n.locale.to_s
     end
   end
 end end end end
