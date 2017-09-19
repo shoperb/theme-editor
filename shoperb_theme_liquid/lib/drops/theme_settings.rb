@@ -9,7 +9,7 @@ module Shoperb module Theme module Liquid module Drop
       @settings.each do |key, value|
         define_singleton_method key do
           if image = image_object(key)
-            ThemeSectionImageDrop.new(image)
+            ThemeSectionImage.new(image)
           else
             format_value(key, value)
           end
