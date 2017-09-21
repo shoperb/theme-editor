@@ -23,5 +23,9 @@ module Shoperb module Theme module Liquid module Drop
       end
     end
 
+    def image
+      record.image.try(:to_liquid, @context)
+    end
+
   end
 end end end end
