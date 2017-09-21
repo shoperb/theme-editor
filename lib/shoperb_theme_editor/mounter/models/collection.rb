@@ -15,6 +15,14 @@ module Shoperb module Theme module Editor
           Product.all.select { |product| product_ids.to_a.include?(product.attributes[:id]) }
         end
 
+        def images
+          Image.all.select { |image| image.entity == self }
+        end
+
+        def image
+          images.first
+        end
+
         def to_liquid context=nil
           Liquid::Drop::ProductCollection.new(self).tap do |drop|
             drop.context = context if context
