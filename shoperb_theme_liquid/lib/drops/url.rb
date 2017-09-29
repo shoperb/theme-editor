@@ -45,7 +45,7 @@ module Shoperb module Theme module Liquid module Drop
       end
 
       def cart_update
-        "/cart"
+        "/cart/update"
       end
 
       def new_login
