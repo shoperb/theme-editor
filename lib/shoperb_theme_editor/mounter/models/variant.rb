@@ -45,6 +45,13 @@ module Shoperb module Theme module Editor
           discount_start.present? && discount_end.present?
         end
 
+        def images
+          Image.all.select { |image| image.entity == self }
+        end
+
+        def image
+          images.first
+        end
       end
     end
   end

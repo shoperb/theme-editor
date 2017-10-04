@@ -74,7 +74,7 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def images
-      Collection.new(record.images.sorted).tap do |drop|
+      Collection.new(record.images).tap do |drop|
         drop.context = @context
       end
     end
