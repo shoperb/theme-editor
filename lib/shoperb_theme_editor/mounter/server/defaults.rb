@@ -11,10 +11,10 @@ module Shoperb module Theme module Editor
             {
               :errors       => Liquid::Drop::Collection.new(flash[:errors] || params[:errors] || []),
               :meta         => Liquid::Drop::Meta.new(locals.delete(:meta)),
-              :categories   => Liquid::Drop::Categories.new(Model::Category.all),
+              :categories   => Liquid::Drop::Categories.new(Model::Category.active),
               :cart         => current_cart.to_liquid,
               :menus        => Liquid::Drop::Menus.new(Model::Menu.all),
-              :pages        => Liquid::Drop::Pages.new(Model::Page.all),
+              :pages        => Liquid::Drop::Pages.new(Model::Page.active),
               :search       => Liquid::Drop::Search.new(params[:query]),
               :blog_posts   => Liquid::Drop::Collection.new(Model::BlogPost.active),
               :media_files  => Liquid::Drop::Collection.new(Model::MediaFile.all),
@@ -29,7 +29,7 @@ module Shoperb module Theme module Editor
               :customer     => Liquid::Drop::Customer.new(current_customer),
               :account      => Liquid::Drop::Customer.new(current_customer),
               :collections  => Liquid::Drop::ProductCollections.new(Model::Collection.all),
-              :products     => Liquid::Drop::Products.new(Model::Product.all),
+              :products     => Liquid::Drop::Products.new(Model::Product.active),
               :settings     => Liquid::Drop::ThemeSettings.new(Editor.theme_settings),
               :preview      => params[:theme_id].present?,
               :edit_preview => params[:iframe_uuid].present?

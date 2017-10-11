@@ -66,7 +66,7 @@ module Shoperb module Theme module Editor
           end
 
           get "/blog" do
-            respond :blog_posts, posts: Liquid::Drop::Collection.new(Kaminari::PaginatableArray.new(Model::BlogPost.all).page(params[:page]))
+            respond :blog_posts, posts: Liquid::Drop::Collection.new(Kaminari::PaginatableArray.new(Model::BlogPost.active).page(params[:page]))
           end
 
           get "/blog/:id" do
@@ -149,7 +149,7 @@ module Shoperb module Theme module Editor
           end
 
           resources Model::Product do
-            Liquid::Drop::Products.new(Model::Product.all)
+            Liquid::Drop::Products.new(Model::Product.active)
           end
 
           resources Model::Address do

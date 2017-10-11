@@ -23,7 +23,7 @@ module Shoperb module Theme module Editor
 
         def recommended_products
           possible = attributes.fetch(:recommended_products_ids, []).map(&:to_s)
-          Product.all.select { |product| possible.include?(product.attributes[:id].to_s) }
+          Product.active.select { |product| possible.include?(product.attributes[:id].to_s) }
         end
       end
     end

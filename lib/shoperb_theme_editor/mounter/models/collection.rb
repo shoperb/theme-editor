@@ -12,7 +12,7 @@ module Shoperb module Theme module Editor
         end
 
         def products
-          Product.all.select { |product| product_ids.to_a.include?(product.attributes[:id]) }
+          Product.active.select { |product| product_ids.to_a.include?(product.attributes[:id]) }
         end
 
         def images

@@ -21,7 +21,14 @@ module Shoperb module Theme module Editor
         end
 
         def entity
-          Model.const_get(entity_type).all.detect { |object| object.attributes[:id] == entity_id } if entity_type && entity_id
+          return unless entity_type && entity_id
+          klass = Model.const_get(entity_type)
+          scope = if klass.respond_to?(:active)
+            klass.active
+          else
+            klass.all
+          end
+          scope.detect { |object| object.attributes[:id] == entity_id }
         end
 
       end

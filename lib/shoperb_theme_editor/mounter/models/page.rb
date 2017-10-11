@@ -10,6 +10,14 @@ module Shoperb module Theme module Editor
         def self.primary_key
           :handle
         end
+
+        def self.active
+          all.select(&:active?)
+        end
+
+        def active?
+          state == "active"
+        end
       end
     end
   end

@@ -14,11 +14,11 @@ module Shoperb module Theme module Editor
         has_many :products
 
         def parent
-          Category.all.detect { |parent| parent.attributes[:id] == self.parent_id }
+          Category.active.detect { |parent| parent.attributes[:id] == self.parent_id }
         end
 
         def children
-          Category.all.select { |child| child.parent_id == attributes[:id] }
+          Category.active.select { |child| child.parent_id == attributes[:id] }
         end
 
         def ancestors
@@ -45,6 +45,10 @@ module Shoperb module Theme module Editor
           parent_id.nil?
         end
 
+        def self.active
+          all.select(&:active?)
+        end
+
         def active?
           state == "active"
         end
@@ -55,7 +59,7 @@ module Shoperb module Theme module Editor
 
         def products_for_self_and_children
           arr = self_and_descendants.map(&:id)
-          Product.all.select { |product| arr.include?(product.category_handle) }
+          Product.active.select { |product| arr.include?(product.category_handle) }
         end
 
         def descends_from(category)
@@ -63,11 +67,11 @@ module Shoperb module Theme module Editor
         end
 
         def self_and_ancestors
-          self.class.all.select { |category| category.lft <= lft && category.rgt >= rgt }
+          self.class.active.select { |category| category.lft <= lft && category.rgt >= rgt }
         end
 
         def self_and_descendants
-          [self] | Category.all.select { |category| category.ancestors.include?(self) }
+          [self] | Category.active.select { |category| category.ancestors.include?(self) }
         end
 
       end

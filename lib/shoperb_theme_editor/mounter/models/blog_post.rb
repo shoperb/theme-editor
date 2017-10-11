@@ -19,11 +19,11 @@ module Shoperb module Theme module Editor
         end
 
         def next
-          BlogPost.all.detect { |post| post.attributes[:id] == self.next_id }
+          BlogPost.active.detect { |post| post.attributes[:id] == self.next_id }
         end
 
         def prev
-          BlogPost.all.detect { |post| post.attributes[:id] == self.prev_id }
+          BlogPost.active.detect { |post| post.attributes[:id] == self.prev_id }
         end
 
       end

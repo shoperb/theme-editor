@@ -12,6 +12,14 @@ module Shoperb module Theme module Editor
           :handle
         end
 
+        def self.active
+          all.select(&:active?)
+        end
+
+        def active?
+          state == "active"
+        end
+
         def collections
           Collection.all.select { |collection| collection_ids.to_a.include?(collection.attributes[:id]) }
         end
