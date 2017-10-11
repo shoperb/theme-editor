@@ -3,15 +3,15 @@ module Shoperb module Theme module Editor
     Pagination = Struct.new("Pagination", :response) do
 
       def total
-        get "x-total"
+        pagination["total"]
       end
 
       def limit
-        get "x-limit"
+        pagination["limit"]
       end
 
       def offset
-        get "x-offset"
+        pagination["offset"]
       end
 
       def to
@@ -27,7 +27,7 @@ module Shoperb module Theme module Editor
       end
 
       def present?
-        response && total && offset && limit && next_page <= last_page
+        response && header && total && offset && limit && next_page <= last_page
       end
 
       def last_page
@@ -40,8 +40,12 @@ module Shoperb module Theme module Editor
 
       private
 
-      def get name
-        response.headers[name].to_i if response.headers.has_key?(name)
+      def pagination
+        JSON.parse(header)
+      end
+
+      def header
+        response.headers["x-pagination"]
       end
     end
   end
