@@ -8,15 +8,6 @@ module Shoperb module Theme module Liquid module Drop
     def order_by_sku
       collection.sort_by(&:sku)
     end
-
-    private
-
-    def collection
-      if @collection.empty?
-        @collection = model(Variant).all
-      end
-      @collection
-    end
   end
 end end end end
 
