@@ -9,6 +9,13 @@ Guides could be found  [here](https://www.ruby-lang.org/en/documentation/install
 Note: we don't support ruby 2.5 yet.
 
 ### Setup project
+#### First option: in one line
+Copy-paste given command in console:
+```
+echo -e "source \"https://rubygems.org\"\ngem \"shoperb-theme-editor\", github: \"shoperb/theme-editor\"\n" > Gemfile && bundle
+```
+
+#### Second option: in steps
 Create Gemfile:
 ```ruby
 source "https://rubygems.org"
