@@ -21,7 +21,9 @@ module Shoperb module Theme module Editor
         Port: Editor["port"],
         AccessLog: [],
         Logger: WEBrick::Log::new(Os["/dev/null"], 7),
-        StartCallback: -> { Logger.success "Server started\n" }
+        StartCallback: -> { 
+           Logger.success "Server started\nBrowse http://0.0.0.0:#{Editor["port"]}\n" 
+        }
       )
     end
 
