@@ -3,6 +3,12 @@
 Shoperb Theme Editor is a ruby gem designed to simplify the creating and updateing of Shoperb themes.
 
 ## Installation
+### Install ruby
+Guides could be found  [here](https://www.ruby-lang.org/en/documentation/installation/).
+
+Note: we don't support ruby 2.5 yet.
+
+### Setup project
 Create Gemfile:
 ```ruby
 source "https://rubygems.org"
