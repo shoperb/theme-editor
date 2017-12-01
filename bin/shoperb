@@ -47,9 +47,11 @@ Slop.parse ignore_case: true, help: true, strict: true do
     apply_global_opts
     description "Updates your remote shoperb theme"
     banner with_description("Usage: shoperb push [options]")
+    on :r, :reset, 'Reset all (with settings data)'
+
     run do |options, args|
       Shoperb::Theme::Editor.with_configuration(options) do
-        Shoperb::Theme::Editor::Api.push
+        Shoperb::Theme::Editor::Api.push **options
       end
     end
   end

@@ -20,11 +20,12 @@ module Shoperb module Theme module Editor
       Package.unzip response.parsed
     end
 
-    def push
+    def push **args
       prepare
       file = Package.zip
+
       theme = Faraday::UploadIO.new(file, "application/zip")
-      request Pathname.new("api/v1/themes/#{Editor.handle}/upload").cleanpath.to_s, method: :patch, notify: -> { "Uploading #{Editor.handle}" }, body: { zip: theme } do |faraday|
+      request Pathname.new("api/v1/themes/#{Editor.handle}/upload").cleanpath.to_s, method: :patch, notify: -> { "Uploading #{Editor.handle}" }, body: { zip: theme, reset: args[:reset] } do |faraday|
         faraday.options.timeout = 120
         faraday.headers['Current-Shop'] = Editor["oauth-site"]
       end
