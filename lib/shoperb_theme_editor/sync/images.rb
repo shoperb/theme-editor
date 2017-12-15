@@ -56,7 +56,7 @@ module Shoperb module Theme module Editor
         return unless queue.any?
         Logger.info message
         Logger.notify message do
-          current, count = 0, 20
+          current, count = 0, 10
           queue.each_slice(count) do |dls|
             current = current + count
             Logger.info "#{message} #{Sync.counter[current - count, [current, queue.count].min, queue.count]}\r"
