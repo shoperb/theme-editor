@@ -37,7 +37,15 @@ module Shoperb module Theme module Editor
       def enqueue_download url, filename
         (queue << -> {
           begin
-            Utils.write_file(filename) { open(url).read }
+            Utils.write_file(filename) do
+              begin
+                Timeout::timeout(10) do
+                  open(url).read
+                end
+              rescue Timeout::Error => e
+                retry
+              end
+            end
           rescue Exception => e
             Logger.error("#{e.message} (#{url} => #{filename})")
           end
