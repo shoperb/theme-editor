@@ -21,6 +21,10 @@ module Shoperb module Theme module Editor
         def name
           attribute_key['name']
         end
+
+        def handle
+          attribute_key['handle']
+        end
       end
     end
   end

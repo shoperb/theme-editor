@@ -86,13 +86,28 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def json
-      record.attributes.merge(
-        attributes: record.variant_attributes.map(&:attributes),
+      {
+        id: record.id,
+        sku: record.sku,
+        weight: record.weight,
+        width: record.width,
+        height: record.height,
+        depth: record.depth,
+        price: record.price,
+        name: record.name,
         current_price: current_price,
-        has_discount: discount?,
+        has_discounts: discount?,
         discount_price: discount_price,
-        stock: stock
-      ).to_json
+        stock: stock,
+        attributes: record.variant_attributes.map { |variant_attribute|
+          {
+            id: variant_attribute.id,
+            name: variant_attribute.name,
+            value: variant_attribute.value,
+            handle: variant_attribute.handle
+          }
+        }
+      }.to_json
     end
 
   end
