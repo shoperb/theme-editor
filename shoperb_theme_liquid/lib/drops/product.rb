@@ -103,7 +103,7 @@ module Shoperb module Theme module Liquid module Drop
         drop.context = @context
       end unless record.category
 
-      Products.new(record.category.products_for_self_and_children).tap do |drop|
+      Products.new(record.category.products_for_self_and_children - [record]).tap do |drop|
         drop.context = @context
       end
     end
