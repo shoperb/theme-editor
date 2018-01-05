@@ -9,7 +9,7 @@ module Shoperb module Theme module Editor
         translates :name, :description
 
         def self.primary_key
-          :handle
+          :permalink
         end
 
         def self.active
