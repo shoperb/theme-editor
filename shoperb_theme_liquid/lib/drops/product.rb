@@ -14,7 +14,7 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def url
-      default_url handle
+      default_url
     end
 
     def max_price
