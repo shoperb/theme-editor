@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |gem|
   gem.name    = "shoperb-theme-liquid"
-  gem.version = "0.0.3"
+  gem.version = "0.0.4"
 
   gem.authors  = ["Rainer Sai"]
   gem.email    = ["rainer.sai@perfectline.co"]
@@ -14,6 +14,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib", "liquid/lib"]
 
   gem.add_dependency "liquid", "3.0.0"
-  gem.add_dependency "activesupport", "4.0.8"
-  gem.add_dependency "actionpack", "4.0.8"
+  gem.add_dependency "activesupport", "4.2.10"
+  gem.add_dependency "actionpack", "4.2.10"
 end

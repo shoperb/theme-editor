@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |gem|
   gem.name    = "shoperb-theme-editor"
-  gem.version = "0.7.0"
+  gem.version = "0.7.1"
 
   gem.authors  = ["Rainer Sai"]
   gem.email    = ["rainer.sai@perfectline.co"]
@@ -16,9 +16,9 @@ Gem::Specification.new do |gem|
   gem.add_dependency "sinatra", "~> 1"
   gem.add_dependency "sinatra-contrib", "~> 1"
   gem.add_dependency "sinatra-flash"
-  gem.add_dependency "activesupport", "4.0.8"
-  gem.add_dependency "actionpack", "4.0.8"
-  gem.add_dependency "shoperb-theme-liquid", "0.0.3"
+  gem.add_dependency "activesupport", "4.2.10"
+  gem.add_dependency "actionpack", "4.2.10"
+  gem.add_dependency "shoperb-theme-liquid", "0.0.4"
   gem.add_dependency "artisans", "~> 2.0"
   gem.add_dependency "coffee-script", "~> 2"
   gem.add_dependency "sass", "~> 3"
