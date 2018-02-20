@@ -21,5 +21,17 @@ module Shoperb module Theme module Liquid module Drop
       record.payment_method.instructions
     end
 
+    def bank_account
+      record.payment_method.bank_account
+    end
+
+    def bank_name
+      record.payment_method.bank_name
+    end
+
+    def bic_swift_code
+      record.payment_method.bic_swift_code
+    end
+
   end
 end end end end
