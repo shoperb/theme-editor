@@ -41,6 +41,10 @@ module Shoperb module Theme module Liquid module Drop
       record.require_taxation?
     end
 
+    def taxation_percentage
+      record.taxation_percentage
+    end
+
     def created_at
       record.created_at
     end
