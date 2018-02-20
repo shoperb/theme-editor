@@ -25,9 +25,12 @@ module Shoperb module Theme module Editor
           domain
         end
 
+        def address
+          Model::Address.all.detect { |address| address.owner_type == "Shop" && address.owner_id == attributes[:id] }
+        end
+
         belongs_to :currency
         belongs_to :language
-        belongs_to :address
 
       end
     end

@@ -10,7 +10,7 @@ module Shoperb module Theme module Editor
         belongs_to :state
 
         def state_name
-          state.name
+          state.try(:name)
         end
 
         def full_name

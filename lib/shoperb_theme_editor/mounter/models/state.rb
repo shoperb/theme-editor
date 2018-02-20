@@ -7,6 +7,8 @@ module Shoperb module Theme module Editor
         def self.primary_key
           :code
         end
+
+        belongs_to :country
       end
     end
   end
