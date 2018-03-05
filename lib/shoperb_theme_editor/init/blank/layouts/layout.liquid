@@ -1,10 +1,21 @@
 <!doctype html>
 <html>
-  <head>
-    {{ "stylesheets/application.css" | asset_url | stylesheet_tag }}
-    {{ "javascripts/application.js" | asset_url | javascript_tag }}
-  </head>
-  <body>
-    {{ content_for_layout }}
-  </body>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta charset="utf-8" />
+  <meta name="description" content="{{ shop.meta_description }}" />
+  <meta name="keywords" content="{{ shop.meta_keywords }}" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>{{ title }}</title>
+
+  {% include 'shoperb_stylesheets', stylesheets: 'application.css' | split: '|' %}
+</head>
+
+<body class="{{ template_name | replace: '_', '-' }}">
+  {{ content_for_layout }}
+
+  {{ "javascripts/application.js" | asset_url | javascript_tag }}
+</body>
+
 </html>

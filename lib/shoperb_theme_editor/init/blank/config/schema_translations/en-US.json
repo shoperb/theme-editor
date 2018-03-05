@@ -1,0 +1,13 @@
+{
+  "en-US": {
+    "presets": {
+      "starter": "Starter"
+    },
+    "categories": {
+      "colors": "Colors",
+      "text_styles": "Text Styles",
+      "fav_icon": "Favicon",
+      "settings": "Settings"
+    }
+  }
+}

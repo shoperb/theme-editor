@@ -1,0 +1,19 @@
+{
+  "handle": "blank",
+  "name": "Blank Theme",
+  "author": "Shoperb",
+  "year": "2018",
+  "version": "0.0.1",
+  "description": "Blank theme structure for building a new theme",
+  "customizable_pages": [
+    "index"
+  ],
+  "compile": {
+    "stylesheets": [
+      "application.css"
+    ],
+    "javascripts": [
+      "application.js"
+    ]
+  }
+}
