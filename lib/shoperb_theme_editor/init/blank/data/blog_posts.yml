@@ -1,0 +1,40 @@
+---
+- id: 2232
+  name: Test Post
+  content: "<p>Pellentesque habitant morbi tristique senectus et netus et malesuada
+    fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget,
+    tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+    mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper
+    pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet,
+    wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci,
+    sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis.
+    Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue,
+    eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt
+    quis, accumsan porttitor, facilisis luctus, metus</p>"
+  permalink: test
+  handle: test
+  state: active
+  translations:
+    en:
+      name: Test Post
+      content: "<p>Pellentesque habitant morbi tristique senectus et netus et malesuada
+        fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies
+        eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
+        Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet
+        est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed,
+        commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt
+        condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec
+        non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id
+        cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.
+        Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis
+        luctus, metus</p>"
+    ru:
+      name: Тестовая новость
+      content: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Test post
+      content: |-
+        <p>Mis on Lorem Ipsum?</p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>

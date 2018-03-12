@@ -1,7 +1,15 @@
 ---
-- id: 1
-  name: MyStore
+- id: 123
+  name: vasya-petrovich
+  domain: vasya-petrovich
+  email: jemesega@klipschx12.com
+  time_zone: Etc/UTC
   unit_system: METRIC
-  possible_languages: []
-  currency_code: EUR
-  language_code: et
+  tax_included: false
+  tax_shipping: false
+  possible_languages:
+  - en
+  - ru
+  - et
+  currency_id: 239
+  language_code: en

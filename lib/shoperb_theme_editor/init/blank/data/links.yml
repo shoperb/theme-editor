@@ -1,0 +1,159 @@
+---
+- id: 1150
+  entity_id: 834
+  entity_type: Page
+  style: Page
+  name: Terms and conditions
+  handle: terms-and-conditions
+  position: 1
+  translations:
+    en:
+      name: Terms and conditions
+    ru:
+      name: Условия использования
+    et:
+      name: Tingimused
+  menu_handle: footer
+- id: 621
+  style: HOME
+  name: Home
+  handle: home
+  position: 1
+  translations:
+    en:
+      name: Home
+    ru:
+      name: Главная
+    et:
+      name: Koduleht
+  menu_handle: header
+- id: 1143
+  style: PRODUCTS
+  name: Products
+  handle: products
+  position: 2
+  translations:
+    en:
+      name: Products
+    ru:
+      name: Товары
+    et:
+      name: Tooted
+  menu_handle: header
+- id: 1151
+  entity_id: 836
+  entity_type: Page
+  style: Page
+  name: Return policy
+  handle: return-policy
+  position: 2
+  translations:
+    en:
+      name: Return policy
+    ru:
+      name: Политика возврата
+    et:
+      name: Tagastamisreeglid
+  menu_handle: footer
+- id: 1144
+  style: Collections
+  name: All collections
+  handle: all-collections
+  position: 3
+  translations:
+    en:
+      name: All collections
+    ru:
+      name: Коллекции
+    et:
+      name: Kollektsioonid
+  menu_handle: header
+- id: 1152
+  entity_id: 835
+  entity_type: Page
+  style: Page
+  name: Privacy Policy
+  handle: privacy-policy
+  position: 3
+  translations:
+    en:
+      name: Privacy Policy
+    ru:
+      name: Политика конфединциальности
+    et:
+      name: Privaatsuspoliikika
+  menu_handle: footer
+- id: 1145
+  style: BlogPosts
+  name: Blog
+  handle: blog
+  position: 4
+  translations:
+    en:
+      name: Blog
+    ru:
+      name: Новости
+    et:
+      name: Uudised
+  menu_handle: header
+- id: 1146
+  style: Blank
+  name: Our best
+  handle: our-best
+  position: 5
+  translations:
+    en:
+      name: Our best
+    ru:
+      name: Наши бестселлеры
+    et:
+      name: Meie parim
+  menu_handle: header
+- id: 1147
+  entity_id: 12809
+  parent_id: 1146
+  entity_type: Product
+  style: Product
+  name: Dress
+  handle: dress
+  position: 6
+  translations:
+    en:
+      name: Dress
+    ru:
+      name: Платье
+    et:
+      name: Kleit
+  menu_handle: header
+- id: 1148
+  entity_id: 12816
+  parent_id: 1146
+  entity_type: Product
+  style: Product
+  name: Glasses
+  handle: glasses
+  position: 7
+  translations:
+    en:
+      name: Glasses
+    ru:
+      name: Очки
+    et:
+      name: Prillid
+  menu_handle: header
+- id: 1149
+  entity_id: 12812
+  parent_id: 1146
+  entity_type: Product
+  style: Product
+  name: Shirt
+  handle: shirt
+  position: 8
+  translations:
+    en:
+      name: Shirt
+    ru:
+      name: Рубашка
+    et:
+      name: Särk
+  menu_handle: header

@@ -1,0 +1,13 @@
+---
+- id: 8492
+  number: '0001'
+  token: 9b9a03ae2b30be0bf3cbbfbc7ecaf0128492
+  total: '590.0'
+  subtotal: '590.0'
+  total_shipping: '0.0'
+  total_taxes: '0.0'
+  created_at: '2018-03-12T16:05:25.111+02:00'
+  state: new
+  payment_method_id: 9417
+  customer_id: 10337
+  currency_id: 239

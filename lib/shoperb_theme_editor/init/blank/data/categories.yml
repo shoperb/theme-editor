@@ -1,0 +1,147 @@
+---
+- id: 1024
+  parent_id: 1022
+  state: active
+  name: Sneakers
+  permalink: shoes/sneakers
+  description: ''
+  lft: 1578
+  rgt: 1579
+  handle: sneakers
+  translations:
+    en:
+      name: Sneakers
+      description: ''
+    ru:
+      name: Кроссовки
+      description: ''
+    et:
+      name: Tossid
+      description: ''
+- id: 1023
+  parent_id: 1022
+  state: active
+  name: High heels
+  permalink: shoes/high-heels
+  description: ''
+  lft: 1576
+  rgt: 1577
+  handle: high-heels
+  translations:
+    en:
+      name: High heels
+      description: ''
+    ru:
+      name: Высокие каблуки
+      description: ''
+    et:
+      name: Kontasd
+      description: ''
+- id: 1022
+  state: active
+  name: Shoes
+  permalink: shoes
+  description: ''
+  lft: 1575
+  rgt: 1580
+  handle: shoes
+  translations:
+    en:
+      name: Shoes
+      description: ''
+    ru:
+      name: Обувь
+      description: ''
+    et:
+      name: Kingad
+      description: ''
+- id: 1021
+  state: active
+  name: Dresses
+  permalink: dresses
+  description: ''
+  lft: 1573
+  rgt: 1574
+  handle: dresses
+  translations:
+    en:
+      name: Dresses
+      description: ''
+    ru:
+      name: Платья
+      description: ''
+    et:
+      name: Kleidid
+      description: ''
+- id: 1020
+  state: active
+  name: Shirts
+  permalink: shirts
+  description: ''
+  lft: 1571
+  rgt: 1572
+  handle: shirts
+  translations:
+    en:
+      name: Shirts
+      description: ''
+    ru:
+      name: Рубашки
+      description: ''
+    et:
+      name: Särgid
+      description: ''
+- id: 1019
+  state: active
+  name: Glasses
+  permalink: glasses
+  description: ''
+  lft: 1569
+  rgt: 1570
+  handle: glasses
+  translations:
+    en:
+      name: Glasses
+      description: ''
+    ru:
+      name: Очки
+      description: ''
+    et:
+      name: Prillid
+      description: ''
+- id: 692
+  state: active
+  name: Test category
+  permalink: test
+  description: "<p>Pellentesque habitant morbi tristique senectus et netus et malesuada
+    fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget,
+    tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+    mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper
+    pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet,
+    wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci,
+    sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis.
+    Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue,
+    eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt
+    quis, accumsan porttitor, facilisis luctus, metus</p>"
+  lft: 1061
+  rgt: 1062
+  translations:
+    en:
+      name: Test category
+      description: "<p>Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae,
+        ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
+        semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque
+        sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum
+        sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt
+        condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec
+        non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id
+        cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.
+        Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis
+        luctus, metus</p>"
+    ru:
+      name: Тестовая категория
+      description: ''
+    et:
+      name: Test kategooria
+      description: ''

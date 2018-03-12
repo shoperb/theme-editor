@@ -67,7 +67,7 @@ module Shoperb module Theme module Liquid module Drop
     end
 
     def variants
-      Variants.new(record.variants).tap do |drop|
+      @variants ||= Variants.new(record.variants).tap do |drop|
         drop.context = @context
       end
     end

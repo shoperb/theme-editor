@@ -1,0 +1,36 @@
+---
+- id: 2130
+  name: Ray ban
+  website: ''
+  translations:
+    en.name: Ray ban
+    en.description: ''
+    en.display_name:
+- id: 2129
+  name: Zara
+  website: http://zara.com
+  translations:
+    en.name: Zara
+    en.description: ''
+    en.display_name:
+- id: 2128
+  name: Paco Rabanne
+  website: http://paco-rabanne.com
+  translations:
+    en.name: Paco Rabanne
+    en.description: ''
+    en.display_name:
+- id: 2127
+  name: Adidas
+  website: http://adidas.com
+  translations:
+    en.name: Adidas
+    en.description: ''
+    en.display_name:
+- id: 2126
+  name: Nike
+  website: http://nike.com
+  translations:
+    en.name: Nike
+    en.description: ''
+    en.display_name:

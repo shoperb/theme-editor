@@ -1,0 +1,27 @@
+---
+- id: 194
+  name: Clothes
+  handle: clothes
+  translations:
+    en:
+      name: Clothes
+      description: ''
+    ru:
+      name: Одежда
+      description: ''
+    et:
+      name: Riided
+      description: ''
+- id: 193
+  name: Shoes
+  handle: shoes
+  translations:
+    en:
+      name: Shoes
+      description: ''
+    ru:
+      name: Обувь
+      description: ''
+    et:
+      name: Kingad
+      description: ''

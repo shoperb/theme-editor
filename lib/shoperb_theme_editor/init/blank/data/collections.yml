@@ -1,0 +1,42 @@
+---
+- id: 418
+  name: Summer
+  permalink: summer
+  handle: summer
+  product_ids:
+  - 12813
+  - 12814
+  - 12815
+  - 12816
+  image_id: 25387
+  translations:
+    en:
+      name: Summer
+      description: ''
+    ru:
+      name: Лето
+      description: ''
+    et:
+      name: Suvi
+      description: ''
+- id: 225
+  name: Featured Products
+  permalink: featured-products
+  handle: featured-products
+  product_ids:
+  - 12807
+  - 12812
+  - 12816
+  - 12803
+  - 12804
+  image_id: 25337
+  translations:
+    en:
+      name: Featured Products
+      description: ''
+    ru:
+      name: Бестселлеры
+      description: ''
+    et:
+      name: Featured Products
+      description: 
