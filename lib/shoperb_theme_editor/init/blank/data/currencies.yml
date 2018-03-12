@@ -1,0 +1,161 @@
+---
+- id: 258
+  name: Australian Dollar
+  code: AUD
+  symbol: A$
+  rate: '1.5105'
+  date: '2010-03-01'
+- id: 259
+  name: Brazilian Real
+  code: BRL
+  rate: '2.4471'
+  date: '2010-03-01'
+- id: 242
+  name: Bulgarian Lev
+  code: BGN
+  rate: '1.9558'
+  date: '2010-03-01'
+- id: 260
+  name: Canadian Dollar
+  code: CAD
+  rate: '1.4266'
+  date: '2010-03-01'
+- id: 261
+  name: Chinese Yuan Renminbi
+  code: CNY
+  rate: '9.2326'
+  date: '2010-03-01'
+- id: 255
+  name: Croatian Kuna
+  code: HRK
+  rate: '7.2568'
+  date: '2010-03-01'
+- id: 243
+  name: Czech Koruny
+  code: CZK
+  rate: '25.933'
+  date: '2010-03-01'
+- id: 244
+  name: Danish Kroner
+  code: DKK
+  rate: '7.4427'
+  date: '2010-03-01'
+- id: 239
+  name: Euro
+  code: EUR
+  symbol: "€"
+  rate: '1.0'
+  date: '2010-03-01'
+- id: 262
+  name: Honk Kong Dollar
+  code: HKD
+  rate: '10.5007'
+  date: '2010-03-01'
+- id: 247
+  name: Hungarian Forint
+  code: HUF
+  rate: '269.45'
+  date: '2010-03-01'
+- id: 264
+  name: Indian Rupee
+  code: INR
+  rate: '62.411'
+  date: '2010-03-01'
+- id: 263
+  name: Indonesian Rupiah
+  code: IDR
+  rate: '12519.7'
+  date: '2010-03-01'
+- id: 241
+  name: Japanese Yen
+  code: JPY
+  symbol: "¥"
+  rate: '120.67'
+  date: '2010-03-01'
+- id: 267
+  name: Malaysian Ringgit
+  code: MYR
+  rate: '4.5775'
+  date: '2010-03-01'
+- id: 266
+  name: Mexican Peso
+  code: MXN
+  rate: '17.2478'
+  date: '2010-03-01'
+- id: 268
+  name: New Zealand Dollar
+  code: NZD
+  rate: '1.9442'
+  date: '2010-03-01'
+- id: 254
+  name: Norwegian Kroner
+  code: NOK
+  rate: '8.057'
+  date: '2010-03-01'
+- id: 269
+  name: Philippine Peso
+  code: PHP
+  rate: '62.379'
+  date: '2010-03-01'
+- id: 250
+  name: Polish Zlotych
+  code: PLN
+  rate: '3.94'
+  date: '2010-03-01'
+- id: 251
+  name: Romanian Lei
+  code: RON
+  rate: '4.111'
+  date: '2010-03-01'
+- id: 256
+  name: Russian Rubles
+  code: RUB
+  rate: '40.5471'
+  date: '2010-03-01'
+- id: 270
+  name: Singapore Dollar
+  code: SGD
+  rate: '1.9026'
+  date: '2010-03-01'
+- id: 272
+  name: South African Rand
+  code: ZAR
+  rate: '10.3907'
+  date: '2010-03-01'
+- id: 265
+  name: South Korean Won
+  code: KRW
+  rate: '1562.24'
+  date: '2010-03-01'
+- id: 252
+  name: Swedish Kronor
+  code: SEK
+  rate: '9.7649'
+  date: '2010-03-01'
+- id: 253
+  name: Swiss Francs
+  code: CHF
+  rate: '1.4644'
+  date: '2010-03-01'
+- id: 271
+  name: Thai Baht
+  code: THB
+  rate: '44.474'
+  date: '2010-03-01'
+- id: 257
+  name: Turkish New Lira
+  code: TRY
+  rate: '2.0879'
+  date: '2010-03-01'
+- id: 246
+  name: United Kingdom Pound
+  code: GBP
+  symbol: "£"
+  rate: '0.9067'
+  date: '2010-03-01'
+- id: 240
+  name: United States Dollar
+  code: USD
+  symbol: "$"
+  rate: '1.3525'
+  date: '2010-03-01'

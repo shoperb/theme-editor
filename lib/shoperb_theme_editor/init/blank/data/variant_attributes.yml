@@ -1,0 +1,2301 @@
+---
+- id: 33715
+  value: blue
+  translations:
+    en:
+      value: blue
+    ru:
+      value: синий
+    et:
+      value: sinine
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33360
+  name: Color
+- id: 33714
+  value: yellow
+  translations:
+    en:
+      value: yellow
+    ru:
+      value: делтый
+    et:
+      value: kollane
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33359
+  name: Color
+- id: 33713
+  value: red
+  translations:
+    en:
+      value: red
+    ru:
+      value: красный\
+    et:
+      value: punane
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33358
+  name: Color
+- id: 33712
+  value: pink
+  translations:
+    en:
+      value: pink
+    ru:
+      value: розовый
+    et:
+      value: roosa
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33357
+  name: Color
+- id: 33711
+  value: green
+  translations:
+    en:
+      value: green
+    ru:
+      value: зеленый
+    et:
+      value: rojeline
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33356
+  name: Color
+- id: 33710
+  value: blue
+  translations:
+    en:
+      value: blue
+    ru:
+      value: синий
+    et:
+      value: sinine
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33355
+  name: Color
+- id: 33709
+  value: black
+  translations:
+    en:
+      value: black
+    ru:
+      value: черынй
+    et:
+      value: must
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33354
+  name: Color
+- id: 33708
+  value: green
+  translations:
+    en:
+      value: green
+    ru:
+      value: зеленый
+    et:
+      value: rojeline
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33353
+  name: Color
+- id: 33707
+  value: blue
+  translations:
+    en:
+      value: blue
+    ru:
+      value: синий
+    et:
+      value: sinine
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33352
+  name: Color
+- id: 33706
+  value: XL
+  translations:
+    en:
+      value: XL
+    ru:
+      value: XL
+    et:
+      value: XL
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33351
+  name: Size
+- id: 33705
+  value: L
+  translations:
+    en:
+      value: L
+    ru:
+      value: L
+    et:
+      value: L
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33350
+  name: Size
+- id: 33704
+  value: M
+  translations:
+    en:
+      value: M
+    ru:
+      value: M
+    et:
+      value: M
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33349
+  name: Size
+- id: 33703
+  value: S
+  translations:
+    en:
+      value: S
+    ru:
+      value: S
+    et:
+      value: S
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33348
+  name: Size
+- id: 33702
+  value: '40'
+  translations:
+    en:
+      value: '40'
+    ru:
+      value: ''
+    et:
+      value: '40'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33347
+  name: Size
+- id: 33701
+  value: model2
+  translations:
+    en:
+      value: model2
+    ru:
+      value: модель 2
+    et:
+      value: muudel2
+  attribute_key:
+    translations:
+      en:
+        name: Model
+      ru:
+        name: Модель
+      et:
+        name: Muudel
+    id: 253
+    name: Model
+    handle: model
+    creator_type: AttributeTemplate
+  variant_id: 33347
+  name: Model
+- id: 33700
+  value: '39'
+  translations:
+    en:
+      value: '39'
+    ru:
+      value: '39'
+    et:
+      value: '39'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33346
+  name: Size
+- id: 33699
+  value: model2
+  translations:
+    en:
+      value: model2
+    ru:
+      value: модель 2
+    et:
+      value: muudel2
+  attribute_key:
+    translations:
+      en:
+        name: Model
+      ru:
+        name: Модель
+      et:
+        name: Muudel
+    id: 253
+    name: Model
+    handle: model
+    creator_type: AttributeTemplate
+  variant_id: 33346
+  name: Model
+- id: 33698
+  value: '38'
+  translations:
+    en:
+      value: '38'
+    ru:
+      value: '38'
+    et:
+      value: '38'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33345
+  name: Size
+- id: 33697
+  value: model2
+  translations:
+    en:
+      value: model2
+    ru:
+      value: модель 2
+    et:
+      value: muudel2
+  attribute_key:
+    translations:
+      en:
+        name: Model
+      ru:
+        name: Модель
+      et:
+        name: Muudel
+    id: 253
+    name: Model
+    handle: model
+    creator_type: AttributeTemplate
+  variant_id: 33345
+  name: Model
+- id: 33696
+  value: '40'
+  translations:
+    en:
+      value: '40'
+    ru:
+      value: ''
+    et:
+      value: '40'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33344
+  name: Size
+- id: 33695
+  value: model1
+  translations:
+    en:
+      value: model1
+    ru:
+      value: модель 1
+    et:
+      value: muudel1
+  attribute_key:
+    translations:
+      en:
+        name: Model
+      ru:
+        name: Модель
+      et:
+        name: Muudel
+    id: 253
+    name: Model
+    handle: model
+    creator_type: AttributeTemplate
+  variant_id: 33344
+  name: Model
+- id: 33694
+  value: '39'
+  translations:
+    en:
+      value: '39'
+    ru:
+      value: '39'
+    et:
+      value: '39'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33343
+  name: Size
+- id: 33693
+  value: model1
+  translations:
+    en:
+      value: model1
+    ru:
+      value: модель 1
+    et:
+      value: muudel1
+  attribute_key:
+    translations:
+      en:
+        name: Model
+      ru:
+        name: Модель
+      et:
+        name: Muudel
+    id: 253
+    name: Model
+    handle: model
+    creator_type: AttributeTemplate
+  variant_id: 33343
+  name: Model
+- id: 33692
+  value: '38'
+  translations:
+    en:
+      value: '38'
+    ru:
+      value: '38'
+    et:
+      value: '38'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33342
+  name: Size
+- id: 33691
+  value: model1
+  translations:
+    en:
+      value: model1
+    ru:
+      value: модель 1
+    et:
+      value: muudel1
+  attribute_key:
+    translations:
+      en:
+        name: Model
+      ru:
+        name: Модель
+      et:
+        name: Muudel
+    id: 253
+    name: Model
+    handle: model
+    creator_type: AttributeTemplate
+  variant_id: 33342
+  name: Model
+- id: 33690
+  value: gold
+  translations:
+    en:
+      value: gold
+    ru:
+      value: золотой
+    et:
+      value: kuld
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33341
+  name: Color
+- id: 33689
+  value: M
+  translations:
+    en:
+      value: M
+    ru:
+      value: M
+    et:
+      value: M
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33341
+  name: Size
+- id: 33688
+  value: silver
+  translations:
+    en:
+      value: silver
+    ru:
+      value: серебряный
+    et:
+      value: hõbe
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33340
+  name: Color
+- id: 33687
+  value: M
+  translations:
+    en:
+      value: M
+    ru:
+      value: M
+    et:
+      value: M
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33340
+  name: Size
+- id: 33686
+  value: gold
+  translations:
+    en:
+      value: gold
+    ru:
+      value: золотой
+    et:
+      value: kuld
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33339
+  name: Color
+- id: 33685
+  value: S
+  translations:
+    en:
+      value: S
+    ru:
+      value: S
+    et:
+      value: S
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33339
+  name: Size
+- id: 33684
+  value: silver
+  translations:
+    en:
+      value: silver
+    ru:
+      value: серебряный
+    et:
+      value: hõbe
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33338
+  name: Color
+- id: 33683
+  value: S
+  translations:
+    en:
+      value: S
+    ru:
+      value: S
+    et:
+      value: S
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33338
+  name: Size
+- id: 33682
+  value: gold
+  translations:
+    en:
+      value: gold
+    ru:
+      value: золотой
+    et:
+      value: kuld
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33337
+  name: Color
+- id: 33681
+  value: X
+  translations:
+    en:
+      value: X
+    ru:
+      value: X
+    et:
+      value: X
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33337
+  name: Size
+- id: 33680
+  value: silver
+  translations:
+    en:
+      value: silver
+    ru:
+      value: серебряный
+    et:
+      value: hõbe
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33336
+  name: Color
+- id: 33679
+  value: X
+  translations:
+    en:
+      value: X
+    ru:
+      value: X
+    et:
+      value: X
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33336
+  name: Size
+- id: 33678
+  value: m
+  translations:
+    en:
+      value: m
+    ru:
+      value: m
+    et:
+      value: m
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33335
+  name: Size
+- id: 33677
+  value: gold
+  translations:
+    en:
+      value: gold
+    ru:
+      value: золотой
+    et:
+      value: kuld
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33335
+  name: Color
+- id: 33676
+  value: s
+  translations:
+    en:
+      value: s
+    ru:
+      value: s
+    et:
+      value: s
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33334
+  name: Size
+- id: 33675
+  value: gold
+  translations:
+    en:
+      value: gold
+    ru:
+      value: золотой
+    et:
+      value: kuld
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33334
+  name: Color
+- id: 33674
+  value: xs
+  translations:
+    en:
+      value: xs
+    ru:
+      value: xs
+    et:
+      value: xs
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33333
+  name: Size
+- id: 33673
+  value: gold
+  translations:
+    en:
+      value: gold
+    ru:
+      value: золотой
+    et:
+      value: kuld
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33333
+  name: Color
+- id: 33672
+  value: m
+  translations:
+    en:
+      value: m
+    ru:
+      value: m
+    et:
+      value: m
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33332
+  name: Size
+- id: 33671
+  value: silver
+  translations:
+    en:
+      value: silver
+    ru:
+      value: серебряный
+    et:
+      value: hõbe
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33332
+  name: Color
+- id: 33670
+  value: s
+  translations:
+    en:
+      value: s
+    ru:
+      value: s
+    et:
+      value: s
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33331
+  name: Size
+- id: 33669
+  value: silver
+  translations:
+    en:
+      value: silver
+    ru:
+      value: серебряный
+    et:
+      value: hõbe
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33331
+  name: Color
+- id: 33668
+  value: xs
+  translations:
+    en:
+      value: xs
+    ru:
+      value: xs
+    et:
+      value: xs
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33330
+  name: Size
+- id: 33667
+  value: silver
+  translations:
+    en:
+      value: silver
+    ru:
+      value: серебряный
+    et:
+      value: hõbe
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33330
+  name: Color
+- id: 33666
+  value: L
+  translations:
+    en:
+      value: L
+    ru:
+      value: L
+    et:
+      value: L
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33329
+  name: Size
+- id: 33665
+  value: silver
+  translations:
+    en:
+      value: silver
+    ru:
+      value: серебряный
+    et:
+      value: hõbe
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33329
+  name: Color
+- id: 33664
+  value: M
+  translations:
+    en:
+      value: M
+    ru:
+      value: M
+    et:
+      value: M
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33328
+  name: Size
+- id: 33663
+  value: silver
+  translations:
+    en:
+      value: silver
+    ru:
+      value: серебряный
+    et:
+      value: hõbe
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33328
+  name: Color
+- id: 33662
+  value: X
+  translations:
+    en:
+      value: X
+    ru:
+      value: X
+    et:
+      value: X
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33327
+  name: Size
+- id: 33661
+  value: silver
+  translations:
+    en:
+      value: silver
+    ru:
+      value: серебряный
+    et:
+      value: hõbe
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33327
+  name: Color
+- id: 33660
+  value: L
+  translations:
+    en:
+      value: L
+    ru:
+      value: L
+    et:
+      value: L
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33326
+  name: Size
+- id: 33659
+  value: gold
+  translations:
+    en:
+      value: gold
+    ru:
+      value: золотой
+    et:
+      value: kuld
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33326
+  name: Color
+- id: 33658
+  value: M
+  translations:
+    en:
+      value: M
+    ru:
+      value: M
+    et:
+      value: M
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33325
+  name: Size
+- id: 33657
+  value: gold
+  translations:
+    en:
+      value: gold
+    ru:
+      value: золотой
+    et:
+      value: kuld
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33325
+  name: Color
+- id: 33656
+  value: X
+  translations:
+    en:
+      value: X
+    ru:
+      value: X
+    et:
+      value: X
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33324
+  name: Size
+- id: 33655
+  value: gold
+  translations:
+    en:
+      value: gold
+    ru:
+      value: золотой
+    et:
+      value: kuld
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33324
+  name: Color
+- id: 33654
+  value: L
+  translations:
+    en:
+      value: L
+    ru:
+      value: L
+    et:
+      value: L
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33323
+  name: Size
+- id: 33653
+  value: M
+  translations:
+    en:
+      value: M
+    ru:
+      value: M
+    et:
+      value: M
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33322
+  name: Size
+- id: 33652
+  value: X
+  translations:
+    en:
+      value: X
+    ru:
+      value: X
+    et:
+      value: X
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33321
+  name: Size
+- id: 33651
+  value: '40'
+  translations:
+    en:
+      value: '40'
+    ru:
+      value: ''
+    et:
+      value: '40'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33320
+  name: Size
+- id: 33650
+  value: brown
+  translations:
+    en:
+      value: brown
+    ru:
+      value: коричневый
+    et:
+      value: pruun
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33320
+  name: Color
+- id: 33649
+  value: '39'
+  translations:
+    en:
+      value: '39'
+    ru:
+      value: '39'
+    et:
+      value: '39'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33319
+  name: Size
+- id: 33648
+  value: brown
+  translations:
+    en:
+      value: brown
+    ru:
+      value: коричневый
+    et:
+      value: pruun
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33319
+  name: Color
+- id: 33647
+  value: '38'
+  translations:
+    en:
+      value: '38'
+    ru:
+      value: '38'
+    et:
+      value: '38'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33318
+  name: Size
+- id: 33646
+  value: brown
+  translations:
+    en:
+      value: brown
+    ru:
+      value: коричневый
+    et:
+      value: pruun
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33318
+  name: Color
+- id: 33645
+  value: '40'
+  translations:
+    en:
+      value: '40'
+    ru:
+      value: ''
+    et:
+      value: '40'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33317
+  name: Size
+- id: 33644
+  value: black
+  translations:
+    en:
+      value: black
+    ru:
+      value: черынй
+    et:
+      value: must
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33317
+  name: Color
+- id: 33643
+  value: '39'
+  translations:
+    en:
+      value: '39'
+    ru:
+      value: '39'
+    et:
+      value: '39'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33316
+  name: Size
+- id: 33642
+  value: black
+  translations:
+    en:
+      value: black
+    ru:
+      value: черынй
+    et:
+      value: must
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33316
+  name: Color
+- id: 33641
+  value: '38'
+  translations:
+    en:
+      value: '38'
+    ru:
+      value: '38'
+    et:
+      value: '38'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33315
+  name: Size
+- id: 33640
+  value: black
+  translations:
+    en:
+      value: black
+    ru:
+      value: черынй
+    et:
+      value: must
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33315
+  name: Color
+- id: 33639
+  value: '40'
+  translations:
+    en:
+      value: '40'
+    ru:
+      value: ''
+    et:
+      value: '40'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33314
+  name: Size
+- id: 33638
+  value: black
+  translations:
+    en:
+      value: black
+    ru:
+      value: черынй
+    et:
+      value: must
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33314
+  name: Color
+- id: 33637
+  value: '38'
+  translations:
+    en:
+      value: '38'
+    ru:
+      value: '38'
+    et:
+      value: '38'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33313
+  name: Size
+- id: 33636
+  value: black
+  translations:
+    en:
+      value: black
+    ru:
+      value: черынй
+    et:
+      value: must
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33313
+  name: Color
+- id: 33635
+  value: '40'
+  translations:
+    en:
+      value: '40'
+    ru:
+      value: ''
+    et:
+      value: '40'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33312
+  name: Size
+- id: 33634
+  value: brown
+  translations:
+    en:
+      value: brown
+    ru:
+      value: коричневый
+    et:
+      value: pruun
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33312
+  name: Color
+- id: 33633
+  value: '38'
+  translations:
+    en:
+      value: '38'
+    ru:
+      value: '38'
+    et:
+      value: '38'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33311
+  name: Size
+- id: 33632
+  value: brown
+  translations:
+    en:
+      value: brown
+    ru:
+      value: коричневый
+    et:
+      value: pruun
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33311
+  name: Color
+- id: 33631
+  value: L
+  translations:
+    en:
+      value: L
+    ru:
+      value: L
+    et:
+      value: L
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33310
+  name: Size
+- id: 33630
+  value: M
+  translations:
+    en:
+      value: M
+    ru:
+      value: M
+    et:
+      value: M
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33309
+  name: Size
+- id: 33629
+  value: S
+  translations:
+    en:
+      value: S
+    ru:
+      value: S
+    et:
+      value: S
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33308
+  name: Size
+- id: 33628
+  value: l
+  translations:
+    en:
+      value: l
+    ru:
+      value: l
+    et:
+      value: l
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33307
+  name: Size
+- id: 33627
+  value: m
+  translations:
+    en:
+      value: m
+    ru:
+      value: m
+    et:
+      value: m
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33306
+  name: Size
+- id: 33626
+  value: s
+  translations:
+    en:
+      value: s
+    ru:
+      value: s
+    et:
+      value: s
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33305
+  name: Size
+- id: 33625
+  value: '40'
+  translations:
+    en:
+      value: '40'
+    ru:
+      value: ''
+    et:
+      value: '40'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33304
+  name: Size
+- id: 33624
+  value: '38'
+  translations:
+    en:
+      value: '38'
+    ru:
+      value: '38'
+    et:
+      value: '38'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33303
+  name: Size
+- id: 33623
+  value: '36'
+  translations:
+    en:
+      value: '36'
+    ru:
+      value: '36'
+    et:
+      value: '36'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33302
+  name: Size
+- id: 33622
+  value: '39'
+  translations:
+    en:
+      value: '39'
+    ru:
+      value: '39'
+    et:
+      value: '39'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33301
+  name: Size
+- id: 33621
+  value: not leather
+  translations:
+    en:
+      value: not leather
+    ru:
+      value: не-кожаный)
+    et:
+      value: mitte nahk
+  attribute_key:
+    translations:
+      en:
+        name: Material
+      ru:
+        name: Материал
+      et:
+        name: Materjal
+    id: 252
+    name: Material
+    handle: material
+    creator_type: AttributeTemplate
+  variant_id: 33301
+  name: Material
+- id: 33620
+  value: blue
+  translations:
+    en:
+      value: blue
+    ru:
+      value: синий
+    et:
+      value: sinine
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33301
+  name: Color
+- id: 33619
+  value: '38'
+  translations:
+    en:
+      value: '38'
+    ru:
+      value: '38'
+    et:
+      value: '38'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33300
+  name: Size
+- id: 33618
+  value: not leather
+  translations:
+    en:
+      value: not leather
+    ru:
+      value: не-кожаный)
+    et:
+      value: mitte nahk
+  attribute_key:
+    translations:
+      en:
+        name: Material
+      ru:
+        name: Материал
+      et:
+        name: Materjal
+    id: 252
+    name: Material
+    handle: material
+    creator_type: AttributeTemplate
+  variant_id: 33300
+  name: Material
+- id: 33617
+  value: blue
+  translations:
+    en:
+      value: blue
+    ru:
+      value: синий
+    et:
+      value: sinine
+  attribute_key:
+    translations:
+      en:
+        name: Color
+      ru:
+        name: Цвет
+      et:
+        name: Värv
+    id: 250
+    name: Color
+    handle: color
+    creator_type: AttributeTemplate
+  variant_id: 33300
+  name: Color
+- id: 33616
+  value: '37'
+  translations:
+    en:
+      value: '37'
+    ru:
+      value: '37'
+    et:
+      value: '37'
+  attribute_key:
+    translations:
+      en:
+        name: Size
+      ru:
+        name: Размер
+      et:
+        name: Suurus
+    id: 251
+    name: Size
+    handle: size
+    creator_type: AttributeTemplate
+  variant_id: 33299
+  name: Size

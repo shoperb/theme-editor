@@ -1,0 +1,21 @@
+---
+- id: 212
+  name: Footer
+  handle: footer
+  translations:
+    en:
+      name: Footer
+    ru:
+      name: Футер
+    et:
+      name: Jalus
+- id: 211
+  name: Header
+  handle: header
+  translations:
+    en:
+      name: Header
+    ru:
+      name: Шапка
+    et:
+      name: Päis

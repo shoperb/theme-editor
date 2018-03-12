@@ -1,0 +1,1359 @@
+---
+- id: 33361
+  warehouse_stock: 0
+  price: '200.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: glasses-4
+- id: 33357
+  warehouse_stock: 0
+  price: '170.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: glasses-3
+- id: 33355
+  warehouse_stock: 0
+  price: '150.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: glasses-2
+- id: 33352
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: glasses-1
+- id: 33348
+  warehouse_stock: 0
+  price: '80.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: shirt-2
+- id: 33342
+  warehouse_stock: 0
+  price: '65.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: shirt-1
+- id: 33336
+  warehouse_stock: 0
+  price: '310.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-7
+- id: 33330
+  warehouse_stock: 0
+  price: '300.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-6
+- id: 33324
+  warehouse_stock: 0
+  price: '250.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-5
+- id: 33321
+  sku: '2341234'
+  warehouse_stock: 0
+  price: '200.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-4
+- id: 33315
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: heels-2
+- id: 33311
+  sku: '345'
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: heels-1
+- id: 33308
+  sku: '345'
+  warehouse_stock: 0
+  weight: '200.0'
+  price: '85.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-3
+- id: 33305
+  warehouse_stock: 0
+  price: '70.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-2
+- id: 33302
+  sku: wqer
+  warehouse_stock: 0
+  price: '60.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-1
+- id: 33284
+  sku: '3245'
+  warehouse_stock: 0
+  weight: '300.0'
+  price: '150.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-3
+- id: 33281
+  warehouse_stock: 0
+  price: '120.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-2
+- id: 33275
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-1
+- id: 33272
+  sku: '1234'
+  warehouse_stock: 0
+  weight: '300.0'
+  price: '110.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-4
+- id: 33260
+  sku: '345234'
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-3
+- id: 33245
+  sku: '3245'
+  warehouse_stock: 0
+  price: '60.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-2
+- id: 33244
+  warehouse_stock: 0
+  price: '50.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-1
+- id: 23562
+  sku: test-001
+  warehouse_stock: 5
+  price: '24.99'
+  allow_backorder: false
+  track_inventory: true
+  charge_taxes: true
+  digital: false
+  position: 1
+  stock_amounts:
+  - amount: 5
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: test
+- id: 33358
+  warehouse_stock: 0
+  price: '170.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: glasses-3
+- id: 33356
+  warehouse_stock: 0
+  price: '150.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: glasses-2
+- id: 33353
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: glasses-1
+- id: 33349
+  warehouse_stock: 0
+  price: '80.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: shirt-2
+- id: 33343
+  warehouse_stock: 0
+  price: '65.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: shirt-1
+- id: 33337
+  warehouse_stock: 0
+  price: '310.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-7
+- id: 33331
+  warehouse_stock: 0
+  price: '300.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-6
+- id: 33325
+  warehouse_stock: 0
+  price: '250.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-5
+- id: 33322
+  sku: '2341234'
+  warehouse_stock: 0
+  price: '200.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-4
+- id: 33316
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: heels-2
+- id: 33312
+  sku: '345'
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: heels-1
+- id: 33309
+  sku: '345'
+  warehouse_stock: 0
+  weight: '200.0'
+  price: '85.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-3
+- id: 33306
+  warehouse_stock: 0
+  price: '70.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-2
+- id: 33303
+  sku: wqer
+  warehouse_stock: 0
+  price: '60.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-1
+- id: 33285
+  sku: '3245'
+  warehouse_stock: 0
+  weight: '300.0'
+  price: '150.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-3
+- id: 33282
+  warehouse_stock: 0
+  price: '120.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-2
+- id: 33276
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-1
+- id: 33273
+  sku: '1234'
+  warehouse_stock: 0
+  weight: '300.0'
+  price: '110.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-4
+- id: 33261
+  sku: '345234'
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-3
+- id: 33246
+  sku: '3245'
+  warehouse_stock: 0
+  price: '60.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 2
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-2
+- id: 33359
+  warehouse_stock: 0
+  price: '170.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: glasses-3
+- id: 33354
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: glasses-1
+- id: 33350
+  warehouse_stock: 0
+  price: '80.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: shirt-2
+- id: 33344
+  warehouse_stock: 0
+  price: '65.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: shirt-1
+- id: 33338
+  warehouse_stock: 0
+  price: '310.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-7
+- id: 33332
+  warehouse_stock: 0
+  price: '300.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-6
+- id: 33326
+  warehouse_stock: 0
+  price: '250.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-5
+- id: 33323
+  sku: '2341234'
+  warehouse_stock: 0
+  price: '200.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-4
+- id: 33317
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: heels-2
+- id: 33313
+  sku: '345'
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: heels-1
+- id: 33310
+  sku: '345'
+  warehouse_stock: 0
+  weight: '200.0'
+  price: '85.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-3
+- id: 33307
+  warehouse_stock: 0
+  price: '70.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-2
+- id: 33304
+  sku: wqer
+  warehouse_stock: 0
+  price: '60.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-1
+- id: 33286
+  sku: '3245'
+  warehouse_stock: 0
+  weight: '300.0'
+  price: '150.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-3
+- id: 33283
+  warehouse_stock: 0
+  price: '120.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-2
+- id: 33277
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-1
+- id: 33274
+  sku: '1234'
+  warehouse_stock: 0
+  weight: '300.0'
+  price: '110.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-4
+- id: 33262
+  sku: '345234'
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-3
+- id: 33247
+  sku: '3245'
+  warehouse_stock: 0
+  price: '60.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 3
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-2
+- id: 33360
+  warehouse_stock: 0
+  price: '170.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 4
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: glasses-3
+- id: 33351
+  warehouse_stock: 0
+  price: '80.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 4
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: shirt-2
+- id: 33345
+  warehouse_stock: 0
+  price: '65.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 4
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: shirt-1
+- id: 33339
+  warehouse_stock: 0
+  price: '310.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 4
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-7
+- id: 33333
+  warehouse_stock: 0
+  price: '300.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 4
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-6
+- id: 33327
+  warehouse_stock: 0
+  price: '250.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 4
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-5
+- id: 33318
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 4
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: heels-2
+- id: 33314
+  sku: '345'
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 4
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: heels-1
+- id: 33287
+  sku: '3245'
+  warehouse_stock: 0
+  weight: '300.0'
+  price: '150.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 4
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-3
+- id: 33278
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 4
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-1
+- id: 33263
+  sku: '345234'
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 4
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-3
+- id: 33248
+  sku: '3245'
+  warehouse_stock: 0
+  price: '60.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 4
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-2
+- id: 33346
+  warehouse_stock: 0
+  price: '65.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 5
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: shirt-1
+- id: 33340
+  warehouse_stock: 0
+  price: '310.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 5
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-7
+- id: 33334
+  warehouse_stock: 0
+  price: '300.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 5
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-6
+- id: 33328
+  warehouse_stock: 0
+  price: '250.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 5
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-5
+- id: 33319
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 5
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: heels-2
+- id: 33288
+  sku: '3245'
+  warehouse_stock: 0
+  weight: '300.0'
+  price: '150.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 5
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-3
+- id: 33279
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 5
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-1
+- id: 33264
+  sku: '345234'
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 5
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-3
+- id: 33249
+  sku: '3245'
+  warehouse_stock: 0
+  price: '60.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 5
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-2
+- id: 33347
+  warehouse_stock: 0
+  price: '65.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 6
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: shirt-1
+- id: 33341
+  warehouse_stock: 0
+  price: '310.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 6
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-7
+- id: 33335
+  warehouse_stock: 0
+  price: '300.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 6
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-6
+- id: 33329
+  warehouse_stock: 0
+  price: '250.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 6
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: dress-5
+- id: 33320
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 6
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: heels-2
+- id: 33289
+  sku: '3245'
+  warehouse_stock: 0
+  weight: '300.0'
+  price: '150.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 6
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-3
+- id: 33280
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 6
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-1
+- id: 33265
+  sku: '345234'
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 6
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-3
+- id: 33250
+  sku: '3245'
+  warehouse_stock: 0
+  price: '60.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 6
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-2
+- id: 33290
+  sku: '3245'
+  warehouse_stock: 0
+  weight: '300.0'
+  price: '150.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 7
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-3
+- id: 33266
+  sku: '345234'
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 7
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-3
+- id: 33251
+  sku: '3245'
+  warehouse_stock: 0
+  price: '60.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 7
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-2
+- id: 33291
+  sku: '3245'
+  warehouse_stock: 0
+  weight: '300.0'
+  price: '150.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 8
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-3
+- id: 33267
+  sku: '345234'
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 8
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-3
+- id: 33252
+  sku: '3245'
+  warehouse_stock: 0
+  price: '60.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 8
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-2
+- id: 33292
+  sku: '3245'
+  warehouse_stock: 0
+  weight: '300.0'
+  price: '150.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 9
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: adidas-3
+- id: 33268
+  sku: '345234'
+  warehouse_stock: 0
+  price: '100.0'
+  allow_backorder: false
+  track_inventory: false
+  charge_taxes: true
+  digital: false
+  position: 9
+  stock_amounts:
+  - amount: 0
+    warehouse: '90'
+    name: Main warehouse
+  product_handle: nike-sneakers-3

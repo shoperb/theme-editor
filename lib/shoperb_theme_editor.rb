@@ -103,8 +103,8 @@ module Shoperb module Theme
       spec_content = {
         handle: content['handle'],
         compile: {
-          stylesheets: content['compile']['css'].map{ |r| r + '.css' },
-          javascripts: content['compile']['js'].map{ |r| r + '.js' }
+          stylesheets: ['application.css'],
+          javascripts: ['application.js']
         }
       }.to_json
       Dir.mkdir 'config' unless File.exists?('config')

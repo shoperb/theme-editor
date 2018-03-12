@@ -2,7 +2,7 @@ module Shoperb module Theme module Liquid module Drop
   class Products < Collection
 
     def before_method(method, *args)
-      if method.match(/order_by_(.*)_(asc|desc)/i)
+      if method.to_s.match(/order_by_(.*)_(asc|desc)/i)
         collection and self
       else
         super(method)

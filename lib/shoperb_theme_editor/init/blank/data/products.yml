@@ -1,0 +1,801 @@
+---
+- id: 12816
+  name: Glasses 4
+  description: ''
+  permalink: glasses-4
+  handle: glasses-4
+  state: active
+  translations:
+    en:
+      name: Glasses 4
+      description: ''
+    ru:
+      name: Очки 4
+      description: ''
+    et:
+      name: Prillid 4
+      description: |-
+        <p>Mis on Lorem Ipsum?</p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p><p></p>
+  category_id: 1019
+  minimum_active_price: '200.0'
+  product_type_handle: clothes
+  category_handle: glasses
+- id: 12815
+  name: Glasses 3
+  description: ''
+  permalink: glasses-3
+  handle: glasses-3
+  state: active
+  translations:
+    en:
+      name: Glasses 3
+      description: ''
+    ru:
+      name: Очки 2
+      description: ''
+    et:
+      name: Prillid 3
+      description: |-
+        <p>Mis on Lorem Ipsum?<br></p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 1019
+  minimum_active_price: '170.0'
+  product_type_handle: clothes
+  category_handle: glasses
+- id: 12814
+  name: Glasses 2
+  description: ''
+  permalink: glasses-2
+  handle: glasses-2
+  state: active
+  translations:
+    en:
+      name: Glasses 2
+      description: ''
+    ru:
+      name: Очки 3
+      description: ''
+    et:
+      name: Prillid 2
+      description: |-
+        <p>Mis on Lorem Ipsum?<br></p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 1019
+  minimum_active_price: '150.0'
+  product_type_handle: clothes
+  category_handle: glasses
+- id: 12813
+  name: Glasses 1
+  description: ''
+  permalink: glasses-1
+  handle: glasses-1
+  state: active
+  translations:
+    en:
+      name: Glasses 1
+      description: ''
+    ru:
+      name: Очки 1
+      description: ''
+    et:
+      name: Prillid 1
+      description: |-
+        <p>Mis on Lorem Ipsum?<br></p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 1019
+  minimum_active_price: '100.0'
+  product_type_handle: clothes
+  category_handle: glasses
+- id: 12812
+  name: Shirt 2
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: shirt-2
+  handle: shirt-2
+  state: active
+  translations:
+    en:
+      name: Shirt 2
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Рубашка 2
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Särk 2
+      description: |-
+        <p>Mis on Lorem Ipsum?</p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 1020
+  minimum_active_price: '80.0'
+  product_type_handle: clothes
+  category_handle: shirts
+- id: 12811
+  name: Shirt 1
+  description: "<p>Lorem Ipsum is simply dummy text of the printing and typesetting
+    industry. Lorem Ipsum has been the industry's standard dummy text ever since the
+    1500s, when an unknown printer took a galley of type and scrambled it to make
+    a type specimen book. It has survived not only five centuries, but also the leap
+    into electronic typesetting, remaining essentially unchanged. It was popularised
+    in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+    and more recently with desktop publishing software like Aldus PageMaker including
+    versions of Lorem Ipsum.</p>"
+  permalink: shirt-1
+  handle: shirt-1
+  state: active
+  translations:
+    en:
+      name: Shirt 1
+      description: "<p>Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever since
+        the 1500s, when an unknown printer took a galley of type and scrambled it
+        to make a type specimen book. It has survived not only five centuries, but
+        also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Рубашка 1
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Särk 1
+      description: |-
+        <p>Mis on Lorem Ipsum?</p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 1020
+  minimum_active_price: '65.0'
+  product_type_handle: clothes
+  category_handle: shirts
+- id: 12810
+  name: Dress 7
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: dress-7
+  handle: dress-7
+  state: active
+  translations:
+    en:
+      name: Dress 7
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Платье 7
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Kleit 7
+      description: |-
+        <p>Mis on Lorem Ipsum?</p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 1021
+  minimum_active_price: '279.0'
+  product_type_handle: clothes
+  category_handle: dresses
+- id: 12809
+  name: Dress 6
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: dress-6
+  handle: dress-6
+  state: active
+  translations:
+    en:
+      name: Dress 6
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Платье 6
+      description: |-
+        <p><strong></strong>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Kleit 6
+      description: |-
+        <p>Mis on Lorem Ipsum?</p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 1021
+  minimum_active_price: '270.0'
+  product_type_handle: clothes
+  category_handle: dresses
+- id: 12808
+  name: Dress 5
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: dress-5
+  handle: dress-5
+  state: active
+  translations:
+    en:
+      name: Dress 5
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Платье 5
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p><p></p>
+    et:
+      name: Kleit 5
+      description: |-
+        <p>Mis on Lorem Ipsum?<br></p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 1021
+  minimum_active_price: '225.0'
+  product_type_handle: clothes
+  category_handle: dresses
+- id: 12807
+  name: Dress 4
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: dress-4
+  handle: dress-4
+  state: active
+  translations:
+    en:
+      name: Dress 4
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Платье 4
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Kleit 4
+      description: |-
+        <p>Mis on Lorem Ipsum?</p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p><p></p>
+  category_id: 1021
+  minimum_active_price: '180.0'
+  product_type_handle: clothes
+  category_handle: dresses
+- id: 12806
+  name: Heels 2
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: heels-2
+  handle: heels-2
+  state: active
+  translations:
+    en:
+      name: Heels 2
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Каблуки 2
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Kontsad
+      description: |-
+        <p>Mis on Lorem Ipsum?</p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p><p></p>
+  category_id: 1023
+  minimum_active_price: '100.0'
+  product_type_handle: shoes
+  category_handle: high-heels
+- id: 12805
+  name: Heels 1
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: heels-1
+  handle: heels-1
+  state: active
+  translations:
+    en:
+      name: Heels 1
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Каблуки 1
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Kontsad 2
+      description: |-
+        <p>Mis on Lorem Ipsum?</p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p><p></p>
+  category_id: 1023
+  minimum_active_price: '100.0'
+  product_type_handle: shoes
+  category_handle: high-heels
+- id: 12804
+  name: Dress 3
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: dress-3
+  handle: dress-3
+  state: active
+  translations:
+    en:
+      name: Dress 3
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Платье 3
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Kleit 3
+      description: |-
+        <p>Mis on Lorem Ipsum?<br></p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 1021
+  minimum_active_price: '76.5'
+  product_type_handle: clothes
+  category_handle: dresses
+- id: 12803
+  name: Dress 2
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: dress-2
+  handle: dress-2
+  state: active
+  translations:
+    en:
+      name: Dress 2
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Платье 2
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Kleit 2
+      description: |-
+        <p>Mis on Lorem Ipsum?</p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 1021
+  minimum_active_price: '63.0'
+  product_type_handle: clothes
+  category_handle: dresses
+- id: 12802
+  name: Dress 1
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: dress-1
+  handle: dress-1
+  state: active
+  translations:
+    en:
+      name: Dress 1
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Платье 1
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Kleit 1
+      description: |-
+        <p>Mis on Lorem Ipsum?</p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 1021
+  minimum_active_price: '54.0'
+  product_type_handle: clothes
+  category_handle: dresses
+- id: 12801
+  name: Adidas 3
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: adidas-3
+  handle: adidas-3
+  state: active
+  translations:
+    en:
+      name: Adidas 3
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Адидас 3
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Adidas 3
+      description: |-
+        <p>Mis on Lorem Ipsum?</p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 1024
+  minimum_active_price: '150.0'
+  product_type_handle: shoes
+  category_handle: sneakers
+- id: 12800
+  name: Adidas 2
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: adidas-2
+  handle: adidas-2
+  state: active
+  translations:
+    en:
+      name: Adidas 2
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Адидас 2
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Adidas 2
+      description: |-
+        <p>Mis on Lorem Ipsum?<br></p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 1024
+  minimum_active_price: '120.0'
+  product_type_handle: shoes
+  category_handle: sneakers
+- id: 12799
+  name: ADIDAS 1
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: adidas-1
+  handle: adidas-1
+  state: active
+  translations:
+    en:
+      name: ADIDAS 1
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Адидас 1
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Adidas 1
+      description: |-
+        <p>Mis on Lorem Ipsum?<br></p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+        <p></p>
+  category_id: 1024
+  minimum_active_price: '100.0'
+  product_type_handle: shoes
+  category_handle: sneakers
+- id: 12798
+  name: Nike sneakers 4
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: nike-sneakers-4
+  handle: nike-sneakers-4
+  state: active
+  translations:
+    en:
+      name: Nike sneakers 4
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Найк 4
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Nike tossid 4
+      description: |-
+        <p>Mis on Lorem Ipsum?<br></p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 1024
+  minimum_active_price: '110.0'
+  product_type_handle: shoes
+  category_handle: sneakers
+- id: 12797
+  name: Nike sneakers 3
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: nike-sneakers-3
+  handle: nike-sneakers-3
+  state: active
+  translations:
+    en:
+      name: Nike sneakers 3
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Найк 3
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Nike tossid 3
+      description: |-
+        <p>Mis on Lorem Ipsum?</p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p><p></p>
+  category_id: 1024
+  minimum_active_price: '100.0'
+  product_type_handle: shoes
+  category_handle: sneakers
+- id: 12796
+  name: Nike sneakers 2
+  description: ''
+  permalink: nike-sneakers-2
+  handle: nike-sneakers-2
+  state: active
+  translations:
+    en:
+      name: Nike sneakers 2
+      description: ''
+    ru:
+      name: Найк 2
+      description: ''
+    et:
+      name: Nike tossid 2
+      description: |-
+        <p>Mis on Lorem Ipsum?</p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p><p></p>
+  category_id: 1024
+  minimum_active_price: '60.0'
+  product_type_handle: shoes
+  category_handle: sneakers
+- id: 12795
+  name: Nike sneakers 1
+  description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled
+    it to make a type specimen book. It has survived not only five centuries, but
+    also the leap into electronic typesetting, remaining essentially unchanged. It
+    was popularised in the 1960s with the release of Letraset sheets containing Lorem
+    Ipsum passages, and more recently with desktop publishing software like Aldus
+    PageMaker including versions of Lorem Ipsum.</p>"
+  permalink: nike-sneakers-1
+  handle: nike-sneakers-1
+  state: active
+  translations:
+    en:
+      name: Nike sneakers 1
+      description: "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+        text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries,
+        but also the leap into electronic typesetting, remaining essentially unchanged.
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like
+        Aldus PageMaker including versions of Lorem Ipsum.</p>"
+    ru:
+      name: Найк 1
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Nike tossid 1
+      description: |-
+        <p>Mis on Lorem Ipsum?<br></p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 1024
+  minimum_active_price: '50.0'
+  product_type_handle: 
+  category_handle: sneakers
+- id: 9756
+  name: Test Product
+  description: "<p>Pellentesque habitant morbi tristique senectus et netus et malesuada
+    fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget,
+    tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+    mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper
+    pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet,
+    wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci,
+    sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis.
+    Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue,
+    eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt
+    quis, accumsan porttitor, facilisis luctus, metus</p>"
+  permalink: test
+  handle: test
+  state: active
+  translations:
+    en:
+      name: Test Product
+      description: "<p>Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae,
+        ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
+        semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque
+        sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum
+        sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt
+        condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec
+        non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id
+        cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.
+        Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis
+        luctus, metus</p>"
+    ru:
+      name: Тестовый продукт
+      description: |-
+        <p>Лорем ипсум долор сит амет, фацилис диспутатиони ат сед, ид пер пурто новум елояуентиам. Вел уллум популо инцидеринт ид, цу вим иллум толлит постеа, меа ут симул елеифенд адиписцинг. Ан мел новум десеруиссе, нец ид поссе сингулис. Ех детрацто луцилиус дуо. Ин ест ноструд сцрибентур аппеллантур.</p>
+        <p>Ин нихил аперири хас. Те алияуип демоцритум цонтентионес вис, не меа алии сумо фугит. Ад вим ерат татион еверти. Усу нострум ехплицари цу, ид яуо одио бруте пхаедрум. Персеяуерис сусципиантур про не, либер пхаедрум хис ид. Не дицант персецути ест, перфецто тациматес оцурререт ан ест, сеа ат еррем цоммодо персиус.</p>
+    et:
+      name: Test toode
+      description: |-
+        <p>Mis on Lorem Ipsum?</p>
+        <p><strong>Lorem Ipsum</strong> on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega, ja hiljuti tekstiredaktoritega nagu Aldus PageMaker, mis sisaldavad erinevaid Lorem Ipsumi versioone.</p>
+  category_id: 692
+  minimum_active_price: '24.99'
+  product_type_handle: 
+  category_handle: 
