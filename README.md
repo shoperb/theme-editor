@@ -12,7 +12,7 @@ Note: we don't support ruby 2.5 yet.
 #### First option: in one line
 Copy-paste given command in console:
 ```
-echo -e "source \"https://rubygems.org\"\ngem \"shoperb-theme-editor\", github: \"shoperb/theme-editor\"\ngem 'artisans', '~> 2.0', :git => 'git@code.perfectline.co:shoperb/artisans.git'\n" > Gemfile && bundle
+echo -e "source \"https://rubygems.org\"\ngem \"shoperb-theme-editor\", github: \"shoperb/theme-editor\"\ngem 'artisans', '~> 2.0', :git => 'git@github.com:shoperb/artisans.git'\n" > Gemfile && bundle
 ```
 
 #### Second option: in steps
@@ -20,7 +20,7 @@ Create Gemfile:
 ```ruby
 source "https://rubygems.org"
 gem "shoperb-theme-editor", github: "shoperb/theme-editor"
-gem "artisans", "~> 2.0",  git: "git@code.perfectline.co:shoperb/artisans.git"
+gem "artisans", "~> 2.0",  git: "git@github.com:shoperb/artisans.git"
 ```
 And then execute:
 ```bash
