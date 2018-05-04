@@ -65,6 +65,15 @@ module Shoperb module Theme module Editor
             respond :not_found
           end
 
+          get "/brands" do
+            respond :brands
+          end
+
+          get "/brands/:id" do
+            drop = Liquid::Drop::Vendor.new(Model::Vendor.find(params[:id]))
+            respond :brand, vendor: drop, brand: drop, meta: drop
+          end
+
           get "/blog" do
             respond :blog_posts, posts: Liquid::Drop::Collection.new(Kaminari::PaginatableArray.new(Model::BlogPost.active).page(params[:page]))
           end

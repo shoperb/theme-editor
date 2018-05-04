@@ -3,12 +3,22 @@ module Shoperb module Theme module Editor
     module Model
       class Vendor < Base
 
-        fields :id, :name, :code, :fax, :phone, :email, :website, :contact_name, :contact_phone, :contact_email, :note, :translations
+        fields :id, :handle, :name, :description, :code, :fax, :phone, :email, :website, :contact_name, :contact_phone, :contact_email, :translations
 
-        translates :name
+        translates :name, :description, :display_name
 
-        def self.primary_key
-          :code
+        has_many :products
+
+        def images
+          Image.all.select { |image| image.entity == self }
+        end
+
+        def image
+          images.first
+        end
+
+        def address
+          Address.all.detect { |address| address.owner == self }
         end
 
       end
