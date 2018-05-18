@@ -8,7 +8,7 @@ module Shoperb module Theme module Editor
         translates :name
 
         def self.primary_key
-          :code
+          :handle
         end
 
       end
