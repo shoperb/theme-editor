@@ -13,7 +13,7 @@ module Shoperb module Theme module Editor
           "id"
         end
 
-        belongs_to :product
+        has_many :products
         has_many :variant_attributes
 
         def name

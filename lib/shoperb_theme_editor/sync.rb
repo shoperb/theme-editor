@@ -87,6 +87,7 @@ module Shoperb module Theme module Editor
       process Mounter::Model::Product do |product|
         assign_relation product, Mounter::Model::Category
         assign_relation product, Mounter::Model::ProductType
+        assign_relation product, Mounter::Model::Vendor
         product.delete("images")
         product
       end
