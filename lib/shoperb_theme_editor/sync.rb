@@ -7,7 +7,10 @@ module Shoperb module Theme module Editor
     Editor.autoload_all self, "sync"
 
     def vendors
-      process Mounter::Model::Vendor
+      process Mounter::Model::Vendor do |vendor|
+        vendor.delete("image")
+        vendor
+      end
     end
 
     def collections

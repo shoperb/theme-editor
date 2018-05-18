@@ -33,6 +33,12 @@ module Shoperb module Theme module Editor
           country.localized_name
         end
 
+        def owner
+          (Model.const_get(owner_type, false) rescue nil).try { |klass|
+            klass.all.detect { |obj| obj.attributes[:id] == owner_id }
+          }
+        end
+
       end
     end
   end
