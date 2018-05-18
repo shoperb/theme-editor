@@ -41,8 +41,15 @@ module Shoperb module Theme module Editor
       end
     end
 
-    def sync
+    def sync resource = nil
       prepare
+
+      if resource
+        Sync.send(resource)
+        Mounter::Model::Base.save
+        return
+      end
+
       Sync.products
       Sync.shop
       Sync.images
