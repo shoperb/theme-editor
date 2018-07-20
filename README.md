@@ -12,13 +12,15 @@ Note: we don't support ruby 2.5 yet.
 #### First option: in one line
 Copy-paste given command in console:
 ```
-echo -e "source \"https://rubygems.org\"\ngem \"shoperb_liquid\", github: \"git@github.com:shoperb/shoperb-liquid.git\"\ngem 'artisans', '~> 2.0', :git => 'git@github.com:shoperb/artisans.git'\n" > Gemfile && bundle
+echo -e "source \"https://rubygems.org\"\ngem \"shoperb-theme-editor\", :git => \"git@github.com:shoperb/theme-editor.git\"\ngem \"shoperb_liquid\", github: \"git@github.com:shoperb/shoperb-liquid.git\"\ngem 'artisans', '~> 2.0', :git => 'git@github.com:shoperb/artisans.git'\n" > Gemfile && bundle
 ```
 
 #### Second option: in steps
 Create Gemfile:
 ```ruby
 source "https://rubygems.org"
+
+gem "shoperb-theme-editor", :git => 'git@github.com:shoperb/theme-editor.git'
 gem 'shoperb_liquid',  :git => 'git@github.com:shoperb/shoperb-liquid.git'
 gem "artisans", "~> 2.0",  git: "git@github.com:shoperb/artisans.git"
 ```
