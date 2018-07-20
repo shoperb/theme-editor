@@ -1,5 +1,4 @@
 require 'artisans'
-require_relative "../../shoperb_theme_liquid/lib/shoperb_theme_liquid"
 
 module Shoperb module Theme module Editor
   module Package

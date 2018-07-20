@@ -3,7 +3,9 @@ module Shoperb module Theme module Editor
     module Model
       class Vendor < Base
 
-        fields :id, :handle, :name, :description, :code, :fax, :phone, :email, :website, :contact_name, :contact_phone, :contact_email, :translations
+        fields :id, :handle, :name, :description, :code, :fax, :phone,
+          :email, :website, :contact_name, :contact_phone, :contact_email,
+          :translations
 
         translates :name, :description, :display_name
 
@@ -12,6 +14,10 @@ module Shoperb module Theme module Editor
         end
 
         has_many :products
+
+        def self.not_empty
+          all.select { |c| c.products.size > 0 }
+        end
 
         def images
           Image.all.select { |image| image.entity == self }

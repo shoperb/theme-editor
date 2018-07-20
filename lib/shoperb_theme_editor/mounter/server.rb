@@ -1,5 +1,3 @@
-require_relative "../../../shoperb_theme_liquid/lib/shoperb_theme_liquid"
-
 Sinatra.autoload :Flash, "sinatra/flash"
 Sinatra.autoload :RespondWith,"sinatra/respond_with"
 
@@ -29,11 +27,22 @@ module Shoperb module Theme module Editor
         end
 
         def shop
-          Model::Shop.first
+          Model::Shop.first || raise(StandardError.new("No data has been synced."))
         end
 
         def current_customer
           Model::Customer.first
+        end
+
+        def current_settings
+          Editor.theme_settings
+        end
+
+        # so far in liquid it's used to replace locale only
+        # theme setting link, but we will skip it for now.
+        # just minimum required implementation.
+        def url_for(locale: nil, **args)
+          request.fullpath.gsub(/\A(?=#{shop.possible_languages.map{|s|"/#{s}"}.join("|")}|)\/(.*)/, "/#{locale}/\\1") if locale
         end
       end
     end

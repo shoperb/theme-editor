@@ -14,7 +14,9 @@ module Shoperb module Theme module Editor
           def respond(templates, locals={}, registers={}, dir=settings.templates_directory, &block)
             result = template_result(templates, locals, registers, dir)
             format = Sinatra::RespondWith::Format.new(self)
+
             halt result if result
+
             format.finish(&block)
           end
 
@@ -27,7 +29,7 @@ module Shoperb module Theme module Editor
             section_ids.map do |id|
               data = settings_data['sections'][id]
               file = template_path(data['type'], settings.sections_directory)
-              section_drop = Shoperb::Theme::Liquid::Drop::ThemeSection.new(id, data)
+              section_drop = ShoperbLiquid::ThemeSectionDrop.new(id, data)
               process_file(file, locals.merge(section: section_drop), registers)
             end.join(' ')
           end
@@ -51,7 +53,7 @@ module Shoperb module Theme module Editor
           def template_result(templates, locals={}, registers={}, dir=settings.templates_directory)
             locals, registers = registers_and_locals(locals, registers)
             templates = [templates].flatten
-            if (template = template_name(templates, dir))
+            if (template = @template = template_name(templates, dir))
               locals.merge!(template_name: template.to_s)
               locals[:content_for_template] = content_for_template(template.to_s, locals, registers)
 
@@ -63,22 +65,15 @@ module Shoperb module Theme module Editor
               result
             end
           end
+          attr_reader :template
 
           def registers_and_locals locals={}, registers={}
             registers.reverse_merge!(
-              replace_locale: ->(locale) { request.fullpath.gsub(/\A(?=#{shop.possible_languages.map{|s|"/#{s}"}.join("|")}|)\/(.*)/, "/#{locale}/\\1") },
-              empty_collection: -> { Drop::Collection.new(Kaminari::PaginatableArray.new) },
               controller: self,
-              asset_url: ->(url, *args) { "/system/assets/#{url}" },
-              translate: Translations.method(:translate),
               locale: Translations.locale,
               shop: shop,
-              category: request.env[:current_category],
-              request_forgery_protection_token: -> { %(<input type="hidden" name="" value="">) },
-              models: Model,
-              default_partials: Pathname.new(__FILE__) + "../partials",
-              sections_file_reader: sections_file_reader,
-              templates_file_system: templates_file_reader
+              theme: Mounter::Model::Theme.new,
+              request_forgery_protection_token: -> { %(<input type="hidden" name="" value="">) }
             )
 
             [
@@ -98,33 +93,70 @@ module Shoperb module Theme module Editor
           def template_paths name, base=settings.templates_directory
             Dir[base.to_s + "/" + name.to_s + ".#{settings.destination_format}" + "{#{settings.allowed_engines.map { |ext_name| ".#{ext_name}" }.join(",")},}"]
           end
-
-          def sections_file_reader
-            ::Liquid::LocalFileSystem.new(settings.sections_directory, "%s.liquid")
-          end
-
-          def templates_file_reader
-            ::Liquid::LocalFileSystem.new(settings.templates_directory)
-          end
         end
 
         def self.registered app
-
-          Liquid::Template.error_mode = :strict
-
           app.register Sinatra::RespondWith
           app.helpers Helpers
           app.set :templates_directory, Proc.new { File.join(root, "templates") }
+          app.set :sections_directory, Proc.new { File.join(root, "sections") }
           app.set :layouts_directory, Proc.new { File.join(root, "layouts") }
           app.set :emails_directory, Proc.new { File.join(root, "emails") }
-          app.set :sections_directory, Proc.new { File.join(root, "sections") }
-
-          Liquid::Template.file_system = ::Liquid::LocalFileSystem.new(app.settings.templates_directory)
 
           app.set :destination_format, :liquid
           app.set :allowed_engines, [:haml]
+
+          ShoperbLiquid.configure do |config|
+            config.translator = Translations
+            config.environment = :theme_development
+            config.models_namespace = Mounter::Model
+            config.routes = Mounter::Server::RoutesHelper
+            config.file_system = FileReader.new
+            config.error_mode = :strict
+          end
         end
 
+        class FileReader
+          def read_template_file(path)
+            templates_file_reader.read_template_file(path) rescue
+              shared_templates_reader.read_template_file(path)
+          end
+
+          def read_section_file(path)
+            sections_file_reader.read_template_file(path)
+          end
+
+          def read_asset_file(path)
+            assets_file_reader.read_template_file(path)
+          end
+
+          def absolute_asset_path(path)
+            path = path.gsub(/^\//, '')
+            "/system/assets/#{path}"
+          end
+
+          private
+
+          def sections_file_reader
+            ::Liquid::LocalFileSystem.new(File.join(root, "sections"), "%s.liquid")
+          end
+
+          def templates_file_reader
+            ::Liquid::LocalFileSystem.new(File.join(root, "templates"))
+          end
+
+          def shared_templates_reader
+            ::Liquid::LocalFileSystem.new(Pathname.new(__FILE__).join("../partials"), "_%s.liquid")
+          end
+
+          def assets_file_reader
+            ::Liquid::LocalFileSystem.new(File.join(root, "assets"))
+          end
+
+          def root
+            Dir.pwd
+          end
+        end
       end
     end
   end

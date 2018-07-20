@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.require_paths = ["lib", "shoperb_theme_liquid/lib"]
+  gem.require_paths = ["lib"]
 
   gem.add_dependency "sinatra", "~> 1"
   gem.add_dependency "sinatra-contrib", "~> 1"
@@ -19,14 +19,13 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "activesupport", "4.2.10"
   gem.add_dependency "actionpack", "4.2.10"
-  gem.add_dependency "shoperb-theme-liquid", "0.0.4"
+  gem.add_dependency "shoperb_liquid"
   gem.add_dependency "artisans", "~> 2"
 
   gem.add_dependency "coffee-script", "~> 2"
   gem.add_dependency "sass", "~> 3"
   gem.add_dependency "haml", "~> 4"
   gem.add_dependency "slop", "~> 3"
-  gem.add_dependency "kaminari", "~> 0.15"
   gem.add_dependency "patron"
   gem.add_dependency "active_hash", "~> 1"
   gem.add_dependency "colorize"

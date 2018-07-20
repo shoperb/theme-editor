@@ -23,7 +23,7 @@ module Shoperb module Theme module Editor
           append_paths
 
           get "/products/:id" do
-            product      = Liquid::Drop::Product.new(record = Model::Product.find_by(permalink: params[:id]))
+            product      = ShoperbLiquid::ProductDrop.new(record = Model::Product.find_by(permalink: params[:id]))
             category     = product.category
             template     = record.template.presence || :product
             respond template.to_sym, product: product, category: category, meta: product
@@ -70,12 +70,12 @@ module Shoperb module Theme module Editor
           end
 
           get "/brands/:id" do
-            drop = Liquid::Drop::Vendor.new(Model::Vendor.find(params[:id]))
+            drop = ShoperbLiquid::VendorDrop.new(Model::Vendor.find(params[:id]))
             respond :brand, vendor: drop, brand: drop, meta: drop
           end
 
           get "/blog" do
-            respond :blog_posts, posts: Liquid::Drop::Collection.new(Kaminari::PaginatableArray.new(Model::BlogPost.active).page(params[:page]))
+            respond :blog_posts, posts: ShoperbLiquid::CollectionDrop.new(Model::BlogPost.active.page(params[:page]).per(20))
           end
 
           get "/blog/:id" do
@@ -85,19 +85,19 @@ module Shoperb module Theme module Editor
           end
 
           get "/addresses/new" do
-            respond :address, address: Liquid::Drop::Address.new(Model::Address.new)
+            respond :address, address: ShoperbLiquid::AddressDrop.new(Model::Address.new)
           end
 
           post "/addresses" do
-            respond :address, address: Liquid::Drop::Address.new(Model::Address.new(params[:address]))
+            respond :address, address: ShoperbLiquid::AddressDrop.new(Model::Address.new(params[:address]))
           end
 
           patch "/addresses/:id" do
-            respond :address, address: Liquid::Drop::Address.new(current_customer.addresses.detect { |address| address.id.to_s == params[:id].to_s })
+            respond :address, address: ShoperbLiquid::AddressDrop.new(current_customer.addresses.detect { |address| address.id.to_s == params[:id].to_s })
           end
 
           put "/addresses/:id" do
-            respond :address, address: Liquid::Drop::Address.new(current_customer.addresses.detect { |address| address.id.to_s == params[:id].to_s })
+            respond :address, address: ShoperbLiquid::AddressDrop.new(current_customer.addresses.detect { |address| address.id.to_s == params[:id].to_s })
           end
 
           delete "/addresses/:id" do
@@ -111,7 +111,7 @@ module Shoperb module Theme module Editor
             else
               Model::Order.first
             end
-            entities.merge!(order: Liquid::Drop::Order.new(order))
+            entities.merge!(order: ShoperbLiquid::OrderDrop.new(order))
             customer = if order
               order.customer
             elsif params[:customer_id]
@@ -119,7 +119,7 @@ module Shoperb module Theme module Editor
             else
               Model::Customer.last
             end
-            entities.merge!(customer: Liquid::Drop::Customer.new(customer))
+            entities.merge!(customer: ShoperbLiquid::CustomerDrop.new(customer))
             respond_email params[:template], entities
           end
         end
@@ -138,35 +138,35 @@ module Shoperb module Theme module Editor
 
         def self.append_paths
           resource Model::Category do
-            Liquid::Drop::Category.new(request.env[:current_category] = Model::Category.find_by(permalink: params[:id]))
+            ShoperbLiquid::CategoryDrop.new(request.env[:current_category] = Model::Category.find_by(permalink: params[:id]))
           end
 
           resource Model::Collection do
-            Model::Collection.find_by(permalink: params[:id])
+            ShoperbLiquid::ProductCollectionDrop.new(Model::Collection.find_by(permalink: params[:id]))
           end
 
           resources Model::Collection do
-            Liquid::Drop::Collection.new(Model::Collection.all)
+            ShoperbLiquid::CollectionDrop.new(Model::Collection.all)
           end
 
           resource Model::Order do
-            Liquid::Drop::Order.new(Model::Order.find(params[:id]))
+            ShoperbLiquid::OrderDrop.new(Model::Order.find(params[:id]))
           end
 
           resources Model::Order do
-            Liquid::Drop::Collection.new(Model::Order.all)
+            ShoperbLiquid::CollectionDrop.new(Model::Order.all)
           end
 
           resources Model::Product do
-            Liquid::Drop::Products.new(Model::Product.active)
+            ShoperbLiquid::ProductsDrop.new(Model::Product.active)
           end
 
           resources Model::Address do
-            Liquid::Drop::Collection.new(current_customer.addresses)
+            ShoperbLiquid::CollectionDrop.new(current_customer.addresses)
           end
 
           resource Model::Address do
-            Liquid::Drop::Address.new(current_customer.addresses.detect { |address| address.id.to_s == params[:id].to_s })
+            ShoperbLiquid::AddressDrop.new(current_customer.addresses.detect { |address| address.id.to_s == params[:id].to_s })
           end
         end
 
@@ -174,6 +174,8 @@ module Shoperb module Theme module Editor
           name = collection.to_s.demodulize.underscore
           get "/#{name.pluralize}/:id" do
             drop = instance_exec(&block)
+            instance_variable_set("@#{name}", drop.record)
+
             respond name, name => drop, :meta => drop
           end
         end

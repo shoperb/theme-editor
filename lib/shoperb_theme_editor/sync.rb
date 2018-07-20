@@ -167,7 +167,7 @@ module Shoperb module Theme module Editor
 
       # apparently where(id: id) still queries not by ID, but by primary key, so:
       attributes["#{name}_#{primary_key}"] = klass.all.detect { |record| record[:id] == id }.try(primary_key)
-      attributes["#{name}_#{primary_key}"] || (attributes["#{name}_id"] = id if id)
+      attributes["#{name}_#{primary_key}"] ||= (attributes["#{name}_id"] = id if id)
     end
 
   end
