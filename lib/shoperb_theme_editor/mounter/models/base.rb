@@ -7,6 +7,36 @@ module Shoperb module Theme module Editor
         include ActiveHash::Associations
 
         class << self
+          delegate :sum, :minimum, :maximum, :pluck, :ids, :includes,
+            :joins, :left_joins, :references, :preload, :select, :sort_by,
+            :reject, :first, :last, :page, :per, to: :all
+
+          # make sure relation is created when necessary
+          # in order to allow chaining methods
+          def all
+            super.to_relation(self)
+          end
+
+          def none
+            [].to_relation(self)
+          end
+
+          def where(**args)
+            super(**args).to_relation(self)
+          end
+
+          def not(**args)
+            all.select do |item|
+              args.all? do |k, v|
+                if v.is_a?(Array)
+                  !v.include?(item.send(k.to_s))
+                else
+                  item.send(k.to_s) != v
+                end
+              end
+            end
+          end
+
           def belongs_to_with_auto_key(association_id, options = {})
             klass = klass_for(association_id, options)
             options.reverse_merge!(
@@ -38,8 +68,12 @@ module Shoperb module Theme module Editor
           end
           alias_method_chain :has_one, :auto_key
 
+          def has_singleton_method?(name)
+            singleton_methods.map { |method| method.to_sym }.include?(name)
+          end
+
           def load_path(path)
-            File.exists?(path) ? YAML.load_file(path) : []
+            (File.exists?(path) ? YAML.load_file(path) : [])
           end
 
           def save
@@ -93,7 +127,7 @@ module Shoperb module Theme module Editor
         end
 
         def to_liquid context=nil
-          if klass = (Liquid::Drop.const_get(self.class.to_s.demodulize))
+          if klass = (ShoperbLiquid.const_get("#{self.class.to_s.demodulize}Drop"))
             klass.new(self).tap do |drop|
               drop.context = context if context
             end

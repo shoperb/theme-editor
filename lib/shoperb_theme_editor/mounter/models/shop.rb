@@ -3,7 +3,9 @@ module Shoperb module Theme module Editor
     module Model
       class Shop < Base
 
-        fields :id, :name, :domain, :email, :time_zone, :unit_system, :tax_included, :tax_shipping, :possible_languages, :meta_description, :meta_keywords, :meta_title
+        fields :id, :name, :domain, :email, :time_zone, :unit_system,
+          :tax_included, :tax_shipping, :possible_languages, :meta_description,
+          :meta_keywords, :meta_title
 
         def self.primary_key
           :domain
@@ -27,6 +29,10 @@ module Shoperb module Theme module Editor
 
         def address
           Model::Address.all.detect { |address| address.owner_type == "Shop" && address.owner_id == attributes[:id] }
+        end
+
+        def grouped_integrations
+          { head: [], start_body: [], end_body: [] }.stringify_keys
         end
 
         belongs_to :currency

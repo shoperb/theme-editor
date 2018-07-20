@@ -2,6 +2,7 @@ require "active_support/all"
 require "haml"
 require "rack"
 require "pry"
+require "shoperb_liquid"
 
 require_relative 'shoperb_theme_editor/ext'
 
@@ -30,9 +31,6 @@ autoload :Mime,               "action_dispatch/http/mime_type"
 autoload :Slop,               "slop"
 autoload :ActiveHash,         "active_hash"
 autoload :ActiveYaml,         "active_hash"
-
-autoload :Kaminari,           "kaminari"
-Kaminari.autoload :PaginatableArray, "kaminari/models/array_extension"
 
 module Shoperb module Theme
   module Editor
@@ -137,11 +135,11 @@ module Shoperb module Theme
         asset_url,
         settings: theme_settings,
         compile: spec["compile"],
-        file_reader: DefaultFileReader.new(digests: digests)
+        file_reader: SprocketsFileReader.new(digests: digests)
       )
     end
 
-    class DefaultFileReader
+    class SprocketsFileReader
       def initialize(digests: true)
         @digests = digests
       end

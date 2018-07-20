@@ -3,10 +3,14 @@ module Shoperb module Theme module Editor
     module Model
       class Product < Base
 
-        fields :id, :name, :description, :has_options, :permalink, :handle, :state, :translations, :template, :collection_ids, :category_id, :minimum_price, :maximum_price,
-:minimum_discount_price, :maximum_discount_price, :minimum_active_price, :maximum_active_price
+        fields :id, :name, :description, :has_options, :permalink,
+          :handle, :state, :translations, :template, :collection_ids,
+          :category_id, :minimum_price, :maximum_price, :minimum_discount_price,
+          :maximum_discount_price, :minimum_active_price, :maximum_active_price
 
         translates :name, :description
+
+        attr_accessor :customer
 
         def self.primary_key
           :permalink
@@ -14,6 +18,22 @@ module Shoperb module Theme module Editor
 
         def self.active
           all.select(&:active?)
+        end
+
+        def self.by_name(dir)
+          sort_by(&:name)
+        end
+
+        def self.by_price(dir)
+          sort_by(&:minimum_price)
+        end
+
+        def self.by_created(dir)
+          sort_by(&:created_at)
+        end
+
+        def self.by_updated(dir)
+          sort_by(&:updated_at)
         end
 
         def active?
@@ -49,6 +69,10 @@ module Shoperb module Theme module Editor
 
         def minimum_active_price
           variants.min { |a, b| a.active_price <=> b.active_price }.try(:active_price)
+        end
+
+        def similar
+          category.products if category
         end
 
       end

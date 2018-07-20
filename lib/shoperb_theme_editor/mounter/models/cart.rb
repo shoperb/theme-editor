@@ -5,6 +5,8 @@ module Shoperb module Theme module Editor
 
         fields :token
 
+        attr_accessor :customer
+
         def self.primary_key
           :token
         end

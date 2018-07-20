@@ -36,11 +36,11 @@ module Shoperb module Theme module Editor
         end
 
         def low_on_stock?
-          variant.present? && variant.available? && !variant.available?(amount)
+          variant.present? && variant.available? && !variant.available?(:warehouse, amount)
         end
 
         def out_of_stock?
-          variant.nil? || !variant.available? || !variant.available?(amount)
+          variant.nil? || !variant.available? || !variant.available?(:warehouse, amount)
         end
 
       end

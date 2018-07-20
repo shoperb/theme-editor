@@ -12,17 +12,13 @@ module Shoperb module Theme module Editor
       Editor.autoload_all self, "mounter/models"
     end
 
-    module Drop
-      Editor.autoload_all self, "mounter/drops"
-    end
-
     def self.start
       Rack::Handler::WEBrick.run(Server.new,
         Port: Editor["port"],
         AccessLog: [],
         Logger: WEBrick::Log::new(Os["/dev/null"], 7),
-        StartCallback: -> { 
-           Logger.success "Server started\nBrowse http://0.0.0.0:#{Editor["port"]}\n" 
+        StartCallback: -> {
+           Logger.success "Server started\nBrowse http://0.0.0.0:#{Editor["port"]}\n"
         }
       )
     end

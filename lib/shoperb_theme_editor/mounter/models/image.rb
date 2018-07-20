@@ -6,6 +6,10 @@ module Shoperb module Theme module Editor
         fields :id, :entity_id, :entity_type, :name, :sizes,
                :url, :original_width, :original_height
 
+        def self.sorted
+          all
+        end
+
         # todo: TODOREF2
         # nothing to use as primary_key besides id right now
         # def self.primary_key
@@ -22,13 +26,15 @@ module Shoperb module Theme module Editor
         end
 
         def entity
-          (Model.const_get(entity_type, false) rescue nil).try { |klass|
+          @entity ||= (Model.const_get(entity_type, false) rescue nil).try { |klass|
             klass.all.detect { |obj| obj.attributes[:id] == entity_id }
           }
         end
 
         def image_sizes
-          sizes.map { |name, url| self.class.image_size(self, name, "/#{Editor["oauth-site"]}/images/#{id}/#{url}")}
+          @image_sizes ||= sizes.map do |name, url|
+            self.class.image_size(self, name, "/#{Editor["oauth-site"]}/images/#{id}/#{url}")
+          end
         end
       end
     end

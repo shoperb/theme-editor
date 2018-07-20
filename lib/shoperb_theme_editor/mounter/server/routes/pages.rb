@@ -6,15 +6,15 @@ module Shoperb module Theme module Editor
 
           class PageFinder
             def match str
-              result = Model::Page.active.detect { |p| "/#{p.permalink}" == str }
+              result = Model::Page.all.detect { |p| "/#{p.permalink}" == str }
               Struct.new(:captures).new([result.permalink]) if !!result
             end
           end
 
           def self.serve
             ->(id) {
-              page = Model::Page.active.detect { |p| p.permalink == id }
-              respond (page.template.try(:to_sym) || :page), page: Liquid::Drop::Page.new(page)
+              page = Model::Page.all.detect { |p| p.permalink == id }
+              respond (page.template.try(:to_sym) || :page), page: page.to_liquid
             }
           end
 

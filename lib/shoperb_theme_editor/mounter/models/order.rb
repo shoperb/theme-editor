@@ -3,7 +3,10 @@ module Shoperb module Theme module Editor
     module Model
       class Order < Base
 
-        fields :id, :number, :token, :email, :total, :subtotal, :total_shipping, :total_taxes, :require_shipping, :require_taxation, :created_at, :state, :notes, :ship_address_id, :bill_address_id; :taxation_percentage
+        fields :id, :number, :token, :email, :total, :subtotal,
+          :total_shipping, :total_taxes, :require_shipping,
+          :require_taxation, :created_at, :state, :notes, :ship_address_id,
+          :bill_address_id; :taxation_percentage
 
         def self.primary_key
           :number

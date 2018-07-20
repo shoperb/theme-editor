@@ -3,7 +3,9 @@ module Shoperb module Theme module Editor
     module Model
       class Category < Base
 
-        fields :id, :parent_id, :state, :name, :permalink, :description, :lft, :rgt, :handle, :translations
+        fields :id, :parent_id, :state, :name, :permalink, :description,
+          :lft, :rgt, :handle, :translations
+
         translates :name, :description
         fields :level
 
@@ -22,11 +24,11 @@ module Shoperb module Theme module Editor
         end
 
         def ancestors
-          self_and_ancestors - [self]
+          self_and_ancestors.reject { |category| category.id == id }
         end
 
         def self.sorted
-          all.sort_by { |root| root.lft }
+          sort_by { |root| root.lft }
         end
 
         def self.roots
@@ -71,7 +73,17 @@ module Shoperb module Theme module Editor
         end
 
         def self_and_descendants
-          [self] | Category.active.select { |category| category.ancestors.include?(self) }
+          Category.active.select do |category|
+            category.ancestors.include?(self) || category.id == id
+          end
+        end
+
+        def images
+          Image.all.select { |image| image.entity == self }
+        end
+
+        def image
+          images.first
         end
 
       end
