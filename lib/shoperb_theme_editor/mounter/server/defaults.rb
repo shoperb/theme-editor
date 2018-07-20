@@ -13,6 +13,11 @@ module Shoperb module Theme module Editor
               env['rack.request.query_hash']
             end
 
+            locals = locals.merge(
+              shop: shop,
+              template: template
+            )
+
             ShoperbLiquid.options(self, locals)
           end
 
