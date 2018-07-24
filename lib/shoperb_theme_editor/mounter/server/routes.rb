@@ -22,42 +22,42 @@ module Shoperb module Theme module Editor
           register_modules
           append_paths
 
-          get "/products/:id" do
+          get "/?:locale?/products/:id" do
             product      = ShoperbLiquid::ProductDrop.new(record = Model::Product.find_by(permalink: params[:id]))
             category     = product.category
             template     = record.template.presence || :product
             respond template.to_sym, product: product, category: category, meta: product
           end
 
-          get "/cart" do
+          get "/?:locale?/cart" do
             respond :cart
           end
 
-          get "/" do
+          get "/?:locale?/" do
             respond [:home, :index, :frontpage]
           end
 
-          get "/login" do
+          get "/?:locale?/login" do
             respond :login
           end
 
-          get "/signup" do
+          get "/?:locale?/signup" do
             respond :signup
           end
 
-          get "/recover" do
+          get "/?:locale?/recover" do
             respond :password_request
           end
 
-          get "/reset" do
+          get "/?:locale?/reset" do
             respond :password_change
           end
 
-          get "/account" do
+          get "/?:locale?/account" do
             respond :account
           end
 
-          get "/reset/:token" do
+          get "/?:locale?/reset/:token" do
             respond :password_change
           end
 
@@ -65,46 +65,46 @@ module Shoperb module Theme module Editor
             respond :not_found
           end
 
-          get "/brands" do
+          get "/?:locale?/brands" do
             respond :brands
           end
 
-          get "/brands/:id" do
+          get "/?:locale?/brands/:id" do
             drop = ShoperbLiquid::VendorDrop.new(Model::Vendor.find(params[:id]))
             respond :brand, vendor: drop, brand: drop, meta: drop
           end
 
-          get "/blog" do
+          get "/?:locale?/blog" do
             respond :blog_posts, posts: ShoperbLiquid::CollectionDrop.new(Model::BlogPost.active.page(params[:page]).per(20))
           end
 
-          get "/blog/:id" do
+          get "/?:locale?/blog/:id" do
             post = Model::BlogPost.find_by(permalink: params[:id])
             template = post.template.presence || :blog_post
             respond template, post: post, meta: post
           end
 
-          get "/addresses/new" do
+          get "/?:locale?/addresses/new" do
             respond :address, address: ShoperbLiquid::AddressDrop.new(Model::Address.new)
           end
 
-          post "/addresses" do
+          post "/?:locale?/addresses" do
             respond :address, address: ShoperbLiquid::AddressDrop.new(Model::Address.new(params[:address]))
           end
 
-          patch "/addresses/:id" do
+          patch "/?:locale?/addresses/:id" do
             respond :address, address: ShoperbLiquid::AddressDrop.new(current_customer.addresses.detect { |address| address.id.to_s == params[:id].to_s })
           end
 
-          put "/addresses/:id" do
+          put "/?:locale?/addresses/:id" do
             respond :address, address: ShoperbLiquid::AddressDrop.new(current_customer.addresses.detect { |address| address.id.to_s == params[:id].to_s })
           end
 
-          delete "/addresses/:id" do
+          delete "/?:locale?/addresses/:id" do
             redirect_to "/addresses"
           end
 
-          get "/emails/:template" do
+          get "/?:locale?/emails/:template" do
             entities = {}
             order = if params[:order_id]
               Model::Order.find(params[:order_id])
@@ -172,7 +172,7 @@ module Shoperb module Theme module Editor
 
         def self.resource collection, &block
           name = collection.to_s.demodulize.underscore
-          get "/#{name.pluralize}/:id" do
+          get "/?:locale?/#{name.pluralize}/:id" do
             drop = instance_exec(&block)
             instance_variable_set("@#{name}", drop.record)
 
@@ -182,7 +182,7 @@ module Shoperb module Theme module Editor
 
         def self.resources collection, &block
           name = collection.to_s.demodulize.underscore.pluralize
-          get "/#{name}" do
+          get "/?:locale?/#{name}" do
             respond name, name => instance_exec(&block)
           end
         end

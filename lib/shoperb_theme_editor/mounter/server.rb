@@ -11,8 +11,9 @@ end
 module Shoperb module Theme module Editor
   module Mounter
     class Server < Sinatra::Base
-
       Editor.autoload_all self, "mounter/server"
+
+      include Server::RoutesHelper
 
       set :root, Dir.pwd
       set :environment, :development

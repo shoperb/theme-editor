@@ -35,11 +35,11 @@ module Shoperb module Theme module Editor
           @per = 20
         end
 
-        delegate :each, :-, :+, :[], :|, :&, :to_yaml, :to_liquid, to: :collection
+        delegate :each, :-, :+, :[], :|, :&, :to_yaml, :to_liquid, :map, to: :collection
 
         # delegating regular enumerable methods
         # to collection
-        (Enumerable.instance_methods + [:last]).each do |method|
+        (Enumerable.instance_methods + [:last] - [:map]).each do |method|
           define_method method do |*args, &block|
             res = collection.send(method, *args, &block)
             if res.is_a?(Array) && (!res[0] || res[0].is_a?(Model::Base))

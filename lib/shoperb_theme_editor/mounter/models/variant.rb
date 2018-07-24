@@ -43,7 +43,9 @@ module Shoperb module Theme module Editor
           !track_inventory? || allow_backorder? || (!stock || stock >= amount)
         end
 
-        alias_attribute :stock, :warehouse_stock
+        def stock(*args)
+          warehouse_stock
+        end
 
         def active_price
           discount_active? ? price_discount : price

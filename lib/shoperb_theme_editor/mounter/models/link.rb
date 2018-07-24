@@ -37,25 +37,20 @@ module Shoperb module Theme module Editor
         end
 
         def path(*args)
+          return '' unless style
+
+          responder = args[0][:responder]
+          path = "store_#{style.underscore}_path"
+
           case style
-          when "CUSTOM"
-            value
-          when "HOME"
-            "/"
-          when "SEARCH"
-            "/search"
-          when "PRODUCTS"
-            "/products"
-          when "Collections"
-            "/collections"
-          when "BlogPosts"
-            if entity.present?
-              entity.try(:to_liquid).try(:url)
+            when "CUSTOM"
+              value
+            when "HOME"
+              responder.store_root_path
+            when "SEARCH"
+              responder.store_search_path
             else
-              "/blog"
-            end
-          else
-            entity.try(:to_liquid).try(:url)
+              index_action? ? responder.send(path) : (responder.send(path, entity) if entity)
           end
         end
       end

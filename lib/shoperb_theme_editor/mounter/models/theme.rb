@@ -7,6 +7,11 @@ module Shoperb module Theme module Editor
       # liquid drops/filters/tags
       #
       class Theme
+
+        def self.all
+          [Theme.new]
+        end
+
         def spec
           Spec.new
         end
@@ -17,6 +22,10 @@ module Shoperb module Theme module Editor
 
         def cache_key
           SecureRandom.hex
+        end
+
+        def attributes
+          {}
         end
 
         class Spec

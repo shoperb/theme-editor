@@ -15,6 +15,10 @@ module Shoperb module Theme module Editor
           Product.active.select { |product| product_ids.to_a.include?(product.attributes[:id]) }
         end
 
+        def vendors
+          products.map(&:vendor).uniq.compact.to_relation(Vendor)
+        end
+
         def images
           Image.all.select { |image| image.entity == self }
         end
@@ -24,9 +28,7 @@ module Shoperb module Theme module Editor
         end
 
         def to_liquid context=nil
-          ShoperbLiquid::ProductCollectionDrop.new(self).tap do |drop|
-            drop.context = context if context
-          end
+          ShoperbLiquid::ProductCollectionDrop.new(self)
         end
 
       end
