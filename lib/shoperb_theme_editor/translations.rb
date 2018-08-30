@@ -3,7 +3,7 @@ module Shoperb module Theme module Editor
     extend self
     mattr_accessor :locale
 
-    def translate(string, locale: self.locale)
+    def translate(string, locale: self.locale, **args)
       key = string.parameterize(".")
       (translations[locale.to_s] || HashWithIndifferentAccess.new).fetch(key) { key }
     end
