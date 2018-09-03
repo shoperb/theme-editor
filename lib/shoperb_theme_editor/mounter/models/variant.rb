@@ -6,7 +6,7 @@ module Shoperb module Theme module Editor
         fields :id, :sku, :warehouse_stock, :weight, :width, :height, :depth, :price,
                :price_original, :price_discount, :discount_start, :discount_end,
                :allow_backorder, :track_inventory, :charge_taxes, :require_shipping,
-               :digital, :url, :position, :stock_amounts, :product_id
+               :digital, :url, :position, :stock_amounts, :product_id, :compare_at
 
         # TODO: Make sku actually unique so it can be used as a primary key.
         def self.primary_key
