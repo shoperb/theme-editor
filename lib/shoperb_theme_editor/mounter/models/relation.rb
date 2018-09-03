@@ -147,6 +147,10 @@ module Shoperb module Theme module Editor
           @per
         end
 
+        def total_pages
+          num_pages
+        end
+
         def offset_value
           return 0 unless @per && @page
           (@page - 1) * @per

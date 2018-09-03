@@ -21,7 +21,11 @@ module Shoperb module Theme module Editor
         attr_accessor :discount
 
         def discounts
-          discount_variants.map(&:discount)
+          discount_variants.map(&:discount).compact
+        end
+
+        def discount
+          @discount || discounts.first
         end
 
         def name
