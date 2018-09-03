@@ -1,20 +1,7 @@
-Rollbar.configure do |config|
-  config.access_token = "2e62f33d5beb4a86b304080111e64c26"
-  config.environment = "production"
-  config.exception_level_filters.merge!(
-    "Shoperb::Theme::Editor::Error" => "warning",
-    "Liquid::SyntaxError" => "warning",
-    "Liquid::ArgumentError" => "warning",
-    "Liquid::FileSystemError" => "warning",
-    "OAuth2::Error" => "warning",
-    "ActiveHash::RecordNotFound" => "warning"
-  )
-  config.default_logger = lambda { Logger.new(Shoperb::Theme::Editor::Os["/dev/null"]) }
-  config.use_async = true
-  config.async_handler = Proc.new { |payload|
-    Thread.new { Rollbar.process_payload(payload) }
-  }
+Raven.configure do |config|
+  config.dsn = 'https://71ae0199b499419da0ffe2a9695871ca:bc1386ebe0d4486aac1e1b41c3011f41@sentry.io/1273398'
 end
+
 module Shoperb module Theme module Editor
   class Error < Exception
     def self.report e
@@ -22,7 +9,7 @@ module Shoperb module Theme module Editor
       display += " => #{e.message}" if e.message.presence
       puts e.backtrace#.reverse
       Logger.error "#{display}\n"
-      ::Rollbar.report_exception(e)
+      Raven.capture_exception(e)
     end
   end
 end end end

@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "actionpack", "4.2.10"
   gem.add_dependency "shoperb_liquid"
   gem.add_dependency "artisans", "~> 2"
+  gem.add_dependency "sentry-raven"
 
   gem.add_dependency "coffee-script", "~> 2"
   gem.add_dependency "sass", "~> 3"
@@ -30,7 +31,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency "active_hash", "~> 1"
   gem.add_dependency "colorize"
   gem.add_dependency "oauth2", "~> 1"
-  gem.add_dependency "rollbar", "~> 2"
   gem.add_dependency "launchy", "~> 2"
   gem.add_dependency "rubyzip", "~> 1"
   gem.add_dependency "pry"
