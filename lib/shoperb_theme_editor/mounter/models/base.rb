@@ -137,6 +137,10 @@ module Shoperb module Theme module Editor
         def id
           self.class.primary_key.to_s == "id" ? super : send(self.class.primary_key)
         end
+
+        def as_json(*attrs)
+          attributes.as_json(*attrs)
+        end
       end
     end
   end
