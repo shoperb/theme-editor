@@ -42,6 +42,8 @@ module Shoperb module Theme
       self.config = Configuration.new(options.to_hash.select { |_, value| !value.nil? }, *args)
       begin
         yield
+      rescue Interrupt => e
+        exit(130)
       rescue Exception => e
         Error.report(e)
       ensure

@@ -21,6 +21,9 @@ module Shoperb module Theme module Editor
            Logger.success "Server started\nBrowse http://0.0.0.0:#{Editor["port"]}\n"
         }
       )
+    rescue Errno::EADDRINUSE => e
+      Logger.error e.message
+      exit!
     end
 
   end
