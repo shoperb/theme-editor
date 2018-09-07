@@ -27,7 +27,6 @@ module Shoperb module Theme module Editor
         def prev
           BlogPost.active.detect { |post| post.attributes[:id] == self.prev_id }
         end
-
       end
     end
   end

@@ -6,13 +6,13 @@ module Shoperb module Theme module Editor
 
           module Helpers
             def get_locale
-              if shop.possible_languages.any? && request.path_info=~(/\A\/(#{shop.possible_languages.join("|")})(\/.*)?/)
+              if shop.all_languages.any? && request.path_info=~(/\A\/(#{shop.all_languages.join("|")})(\/.*)?/)
                 request.path_info = $2 || ""
                 $1
               elsif shop.language_code
                 shop.language_code
               else
-                shop.possible_languages.first
+                shop.all_languages.first
               end
             end
           end

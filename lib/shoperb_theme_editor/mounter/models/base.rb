@@ -119,8 +119,8 @@ module Shoperb module Theme module Editor
           def translates *args
             fields :translations
             args.each do |arg|
-              define_method arg do
-                (translations || {}).fetch("#{Translations.locale}.#{arg}", attributes[arg])
+              define_method arg do |*_|
+                ((translations || {})[Translations.locale] || {}).fetch(arg.to_s, attributes[arg])
               end
             end
           end

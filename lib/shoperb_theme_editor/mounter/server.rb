@@ -43,7 +43,7 @@ module Shoperb module Theme module Editor
         # theme setting link, but we will skip it for now.
         # just minimum required implementation.
         def url_for(locale: nil, **args)
-          request.fullpath.gsub(/\A(?=#{shop.possible_languages.map{|s|"/#{s}"}.join("|")}|)\/(.*)/, "/#{locale}/\\1") if locale
+          request.fullpath.gsub(/\A(?=#{shop.all_languages.map{|s|"/#{s}"}.join("|")}|)\/(.*)/, "/#{locale}/\\1") if locale
         end
       end
     end

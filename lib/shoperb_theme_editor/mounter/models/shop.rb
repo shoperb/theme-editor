@@ -35,6 +35,10 @@ module Shoperb module Theme module Editor
           { head: [], start_body: [], end_body: [] }.stringify_keys
         end
 
+        def all_languages
+          ([language.code] + possible_languages).compact
+        end
+
         belongs_to :currency
         belongs_to :language
 
