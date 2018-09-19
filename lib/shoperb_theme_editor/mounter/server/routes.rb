@@ -41,6 +41,10 @@ module Shoperb module Theme module Editor
             respond :login
           end
 
+          post "/?:locale?/login" do
+            respond :login
+          end
+
           get "/?:locale?/signup" do
             respond :signup
           end

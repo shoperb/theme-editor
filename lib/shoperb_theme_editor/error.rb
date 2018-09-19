@@ -8,18 +8,28 @@ Raven.configure do |config|
     "Liquid::SyntaxError",
     "Liquid::UndefinedFilter",
     "Liquid::UndefinedDropMethod",
-    "Liquid::UndefinedVariable"
+    "Liquid::UndefinedVariable",
+    "Shoperb::Theme::Editor::Error"
   ]
 end
 
 module Shoperb module Theme module Editor
   class Error < Exception
-    def self.report e
-      display = "\r#{e.class.name}"
-      display += " => #{e.message}" if e.message.presence
-      puts e.backtrace#.reverse
+    def self.report exception
+      log(exception)
+      Raven.capture_exception(exception)
+    end
+
+    def self.report_rack exception, env
+      log(exception)
+      Raven::Rack.capture_exception(exception, env)
+    end
+
+    def self.log exception
+      display = "\r#{exception.class.name}"
+      display += " => #{exception.message}" if exception.message.presence
+      puts exception.backtrace
       Logger.error "#{display}\n"
-      Raven.capture_exception(e)
     end
   end
 end end end

@@ -28,7 +28,7 @@ module Shoperb module Theme module Editor
         end
 
         def shop
-          Model::Shop.first || raise(StandardError.new("No data has been synced."))
+          Model::Shop.first || raise(Error.new("No data has been synced."))
         end
 
         def current_customer
@@ -44,6 +44,14 @@ module Shoperb module Theme module Editor
         # just minimum required implementation.
         def url_for(locale: nil, **args)
           request.fullpath.gsub(/\A(?=#{shop.all_languages.map{|s|"/#{s}"}.join("|")}|)\/(.*)/, "/#{locale}/\\1") if locale
+        end
+
+        def request_forgery_protection_token
+          "authenticity_token"
+        end
+
+        def form_authenticity_token
+          "token"
         end
       end
     end
