@@ -3,18 +3,6 @@ module Shoperb module Theme module Editor
     class Server
       module Routes
         module Cart
-          class PathFinder
-            def initialize path
-              @path = path
-            end
-
-            def match(str)
-              captures = []
-              captures << str if Pathname.new(str).sub_ext("") == Pathname.new(@path)
-              Struct.new(:captures).new(captures)
-            end
-          end
-
           def self.registered(app)
             app.helpers do
               include ::ActionView::Helpers::NumberHelper
@@ -91,7 +79,7 @@ module Shoperb module Theme module Editor
               end
             end
 
-            app.post(PathFinder.new("/cart")) do
+            app.post "/cart" do
               params[:update].each do |id, amount|
                 Model::CartItem.find(id.to_i).tap do |item|
                   item.amount = amount.to_i

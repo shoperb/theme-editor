@@ -11,7 +11,7 @@ module Shoperb module Theme module Editor
           begin
             @app.call env
           rescue Exception => e
-            Error.report(e)
+            Error.report_rack(e, env)
             raise e
           end
         end
