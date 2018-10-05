@@ -36,7 +36,7 @@ module Shoperb module Theme module Editor
         end
 
         def all_languages
-          ([language.code] + possible_languages).compact
+          ([language.code] + possible_languages).compact.uniq
         end
 
         belongs_to :currency
