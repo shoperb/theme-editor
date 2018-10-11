@@ -22,6 +22,13 @@ module Shoperb module Theme module Editor
           register_modules
           append_paths
 
+          get "/?:locale?/categories/*" do
+            params[:id] = params[:splat][0]
+            drop = ShoperbLiquid::CategoryDrop.new(request.env[:current_category] = Model::Category.find_by(permalink: params[:id]))
+            @category = drop.record
+            respond :category, category: drop, meta: drop
+          end
+
           get "/?:locale?/products/:id" do
             product      = ShoperbLiquid::ProductDrop.new(record = Model::Product.find_by(permalink: params[:id]))
             category     = product.category
@@ -141,10 +148,6 @@ module Shoperb module Theme module Editor
         end
 
         def self.append_paths
-          resource Model::Category do
-            ShoperbLiquid::CategoryDrop.new(request.env[:current_category] = Model::Category.find_by(permalink: params[:id]))
-          end
-
           resource Model::Collection do
             ShoperbLiquid::ProductCollectionDrop.new(Model::Collection.find_by(permalink: params[:id]))
           end
