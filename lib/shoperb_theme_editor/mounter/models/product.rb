@@ -12,10 +12,6 @@ module Shoperb module Theme module Editor
 
         attr_accessor :customer
 
-        def self.primary_key
-          :permalink
-        end
-
         def self.active
           all.select(&:active?)
         end
