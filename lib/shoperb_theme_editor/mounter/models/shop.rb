@@ -7,10 +7,6 @@ module Shoperb module Theme module Editor
           :tax_included, :tax_shipping, :possible_languages, :meta_description,
           :meta_keywords, :meta_title
 
-        def self.primary_key
-          :domain
-        end
-
         def self.instance
           all.first
         end

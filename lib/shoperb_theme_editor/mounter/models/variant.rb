@@ -8,11 +8,6 @@ module Shoperb module Theme module Editor
                :allow_backorder, :track_inventory, :charge_taxes, :require_shipping,
                :digital, :url, :position, :stock_amounts, :product_id, :compare_at
 
-        # TODO: Make sku actually unique so it can be used as a primary key.
-        def self.primary_key
-          "id"
-        end
-
         belongs_to :product
         has_many :variant_attributes
         has_many :discount_variants

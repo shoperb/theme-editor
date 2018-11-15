@@ -7,10 +7,6 @@ module Shoperb module Theme module Editor
 
         translates :name
 
-        def self.primary_key
-          :permalink
-        end
-
         def products
           Product.active.select { |product| product_ids.to_a.include?(product.attributes[:id]) }
         end

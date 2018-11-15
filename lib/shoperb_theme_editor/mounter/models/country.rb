@@ -6,10 +6,6 @@ module Shoperb module Theme module Editor
         fields :id, :code, :name, :iso3, :numeric, :eu, :na,
           :region_name_key, :abstract, :localized_name
 
-        def self.primary_key
-          :code
-        end
-
       end
     end
   end

@@ -6,10 +6,6 @@ module Shoperb module Theme module Editor
         fields :id, :name, :code, :type, :status, :minimum_order_amount, :target_type,
           :start_date, :end_date, :amount, :region_specific, :shipping_region_ids
 
-        def self.primary_key
-          "id"
-        end
-
         has_many :discount_variants
 
         def variants

@@ -8,9 +8,6 @@ module Shoperb module Theme module Editor
 
         translates :name, :description
 
-        def self.primary_key
-          :handle
-        end
         belongs_to :menu
 
         def parent

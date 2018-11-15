@@ -8,10 +8,6 @@ module Shoperb module Theme module Editor
           :require_taxation, :created_at, :state, :notes, :ship_address_id,
           :bill_address_id; :taxation_percentage
 
-        def self.primary_key
-          :number
-        end
-
         has_one :shipping_method
 
         def ship_address

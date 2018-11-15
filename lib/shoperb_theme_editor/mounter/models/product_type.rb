@@ -7,10 +7,6 @@ module Shoperb module Theme module Editor
 
         translates :name
 
-        def self.primary_key
-          :handle
-        end
-
         has_many :products
 
       end
