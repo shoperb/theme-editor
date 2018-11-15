@@ -9,6 +9,10 @@ module Shoperb module Theme module Editor
         translates :name, :description
         fields :level
 
+        def self.primary_key
+          :permalink
+        end
+
         has_many :products
 
         def parent

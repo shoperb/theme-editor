@@ -7,6 +7,10 @@ module Shoperb module Theme module Editor
 
         attr_accessor :customer
 
+        def self.primary_key
+          :token
+        end
+
         def items
           CartItem.all
         end

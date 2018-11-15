@@ -9,6 +9,10 @@ module Shoperb module Theme module Editor
 
         translates :name, :description, :display_name
 
+        def self.primary_key
+          :handle
+        end
+
         has_many :products
 
         def self.not_empty

@@ -7,6 +7,10 @@ module Shoperb module Theme module Editor
 
         translates :name, :content
 
+        def self.primary_key
+          :permalink
+        end
+
         def self.active
           all.select(&:active?)
         end

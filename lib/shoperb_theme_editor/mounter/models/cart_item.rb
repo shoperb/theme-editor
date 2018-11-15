@@ -7,6 +7,10 @@ module Shoperb module Theme module Editor
 
         belongs_to :variant
 
+        def self.primary_key
+          :id
+        end
+
         delegate :product, to: :variant
         delegate :sku, to: :variant
         delegate :require_shipping?,  :to => :variant

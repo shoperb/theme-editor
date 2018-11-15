@@ -8,6 +8,10 @@ module Shoperb module Theme module Editor
 
         translates :name, :content
 
+        def self.primary_key
+          :permalink
+        end
+
         def active?
           published_at.nil? || published_at <= Time.now
         end

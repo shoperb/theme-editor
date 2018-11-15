@@ -12,6 +12,10 @@ module Shoperb module Theme module Editor
           @attributes[:name] = name
         end
 
+        def self.primary_key
+          "id"
+        end
+
         belongs_to :variant
 
         def name
