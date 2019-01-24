@@ -12,7 +12,8 @@ module Shoperb module Theme module Editor
             options.reverse_merge!(
               class_name: klass.to_s,
               foreign_key: "#{association_id}_#{klass.primary_key}",
-              primary_key: klass.primary_key
+              primary_key: klass.primary_key,
+              optional: true
             )
             super(association_id, options)
           end
