@@ -6,7 +6,6 @@ Shoperb Theme Editor is a ruby gem designed to simplify the creating and updatei
 ### Install ruby
 Guides could be found  [here](https://www.ruby-lang.org/en/documentation/installation/).
 
-Note: we don't support ruby 2.5 yet.
 
 ### Setup project
 #### First option: in one line
@@ -21,7 +20,7 @@ Create Gemfile:
 source "https://rubygems.org"
 
 gem "shoperb-theme-editor", :git => 'git@github.com:shoperb/theme-editor.git'
-gem 'shoperb_liquid',  :git => 'git@github.com:shoperb/shoperb-liquid.git', branch: 'rails4'
+gem 'shoperb_liquid',  :git => 'git@github.com:shoperb/shoperb-liquid.git'
 gem "artisans", "~> 2.0",  git: "git@github.com:shoperb/artisans.git"
 ```
 And then execute:

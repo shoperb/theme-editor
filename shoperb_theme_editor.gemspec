@@ -13,12 +13,12 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency "sinatra", "~> 1"
-  gem.add_dependency "sinatra-contrib", "~> 1"
+  gem.add_dependency "sinatra"
+  gem.add_dependency "sinatra-contrib"
   gem.add_dependency "sinatra-flash"
 
-  gem.add_dependency "activesupport", "4.2.10"
-  gem.add_dependency "actionpack", "4.2.10"
+  gem.add_dependency "activesupport", "5.2.2"
+  gem.add_dependency "actionpack", "5.2.2"
   gem.add_dependency "shoperb_liquid"
   gem.add_dependency "artisans", "~> 2"
   gem.add_dependency "sentry-raven"

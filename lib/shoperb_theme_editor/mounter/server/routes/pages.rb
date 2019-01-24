@@ -5,22 +5,25 @@ module Shoperb module Theme module Editor
         module Pages
 
           class PageFinder
-            def match str
-              result = Model::Page.all.detect { |p| "/#{p.permalink}" == str }
-              Struct.new(:captures).new([result.permalink]) if !!result
+            def self.match str
+              !!Model::Page.all.detect { |p| "/#{p.permalink}" == str }
+            end
+            def self.serve
+              ->(id) {
+                page = Model::Page.all.detect { |p| p.permalink == id }
+                respond (page.template.try(:to_sym) || :page), page: page.to_liquid
+              }
             end
           end
 
-          def self.serve
-            ->(id) {
-              page = Model::Page.all.detect { |p| p.permalink == id }
-              respond (page.template.try(:to_sym) || :page), page: page.to_liquid
-            }
-          end
+          
 
           def self.registered(app)
-            app.get "/pages/:id", &serve
-            app.get PageFinder.new, &serve
+            app.get "/pages/:id", &PageFinder.serve
+            app.get "/:id" do
+              pass if !PageFinder.match(params[:id])
+              PageFinder.serve(params[:id])
+            end
           end
 
         end
