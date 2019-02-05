@@ -122,8 +122,16 @@ module Shoperb module Theme module Editor
       end
     end
 
+    def customers
+      process Mounter::Model::Customer
+    end
+
     def reviews
-      process Mounter::Model::Review
+      process Mounter::Model::Review do |review|
+        assign_relation review, Mounter::Model::Product
+        assign_relation review, Mounter::Model::Customer
+        review
+      end
     end
 
     def process klass, path=klass.to_s.demodulize.tableize, &block

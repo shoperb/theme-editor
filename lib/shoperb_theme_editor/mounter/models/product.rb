@@ -55,6 +55,8 @@ module Shoperb module Theme module Editor
 
         has_many :product_attributes
 
+        has_many :reviews
+
         def images
           Image.all.select { |image| image.entity == self }
         end

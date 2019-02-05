@@ -20,6 +20,14 @@ module Shoperb module Theme module Editor
         belongs_to :customer
         belongs_to :product
 
+        def self.visible
+          all.select { |r| ['new', 'accepted'].include?(r.state) }
+        end
+
+        def self.with_content
+          all.select { |r| r.title.present? || r.body.present? }
+        end
+
       end
     end
   end
