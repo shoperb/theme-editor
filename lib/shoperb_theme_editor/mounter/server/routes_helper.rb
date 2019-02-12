@@ -112,6 +112,10 @@ module Shoperb module Theme module Editor
           "/products"
         end
 
+        def store_reviews_path(**_)
+          "/reviews"
+        end
+
         def store_subscribers_add_path(**_)
           "/subscribers/add"
         end

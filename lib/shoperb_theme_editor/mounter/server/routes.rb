@@ -133,6 +133,10 @@ module Shoperb module Theme module Editor
             entities.merge!(customer: ShoperbLiquid::CustomerDrop.new(customer))
             respond_email params[:template], entities
           end
+
+          post "/?:locale?/reviews" do
+            redirect "/products/#{params['review']['product_id']}"
+          end
         end
 
         private
