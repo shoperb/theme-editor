@@ -40,6 +40,10 @@ module Shoperb module Theme module Editor
           state == "active"
         end
 
+        def reviewable?(customer)
+          true
+        end
+
         def collections
           Collection.all.select { |collection| collection_ids.to_a.include?(collection.attributes[:id]) }
         end
