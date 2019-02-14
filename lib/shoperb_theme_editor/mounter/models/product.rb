@@ -6,7 +6,8 @@ module Shoperb module Theme module Editor
         fields :id, :name, :description, :has_options, :permalink,
           :handle, :state, :translations, :template, :collection_ids,
           :category_id, :minimum_price, :maximum_price, :minimum_discount_price,
-          :maximum_discount_price, :minimum_active_price, :maximum_active_price
+          :maximum_discount_price, :minimum_active_price, :maximum_active_price,
+          :grouping_tags
 
         translates :name, :description
 
