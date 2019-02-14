@@ -82,6 +82,20 @@ module Shoperb module Theme module Editor
           category.products if category
         end
 
+        def rating
+          count = reviews.visible.count
+          sum   = reviews.visible.reduce(0) do |memo, item|
+            memo += item.rating
+            memo
+          end
+
+          if count == 0
+            return 0
+          end
+
+          return sum / count
+        end
+
       end
     end
   end
