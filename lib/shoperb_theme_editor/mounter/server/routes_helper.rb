@@ -108,6 +108,10 @@ module Shoperb module Theme module Editor
           "/products/#{id}"
         end
 
+        def reviews_store_product_path(obj, **_)
+          "/products/#{get_id(obj)}/reviews"
+        end
+
         def store_products_path(**_)
           "/products"
         end

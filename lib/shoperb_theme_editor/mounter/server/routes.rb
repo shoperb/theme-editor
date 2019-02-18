@@ -36,6 +36,13 @@ module Shoperb module Theme module Editor
             respond template.to_sym, product: product, category: category, meta: product
           end
 
+          get "/?:locale?/products/:id/reviews" do
+            product  = ShoperbLiquid::ProductDrop.new(record = Model::Product.find_by(permalink: params[:id]))
+            category = product.category
+            reviews  = product.reviews
+            respond :reviews, product: product, category: category, meta: product, reviews: reviews
+          end
+
           get "/?:locale?/cart" do
             respond :cart
           end
