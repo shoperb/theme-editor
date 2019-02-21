@@ -108,6 +108,10 @@ module Shoperb module Theme module Editor
           "/products/#{id}"
         end
 
+        def store_product_url(obj, **_)
+          "https://#{shop.domain}/#{Translations.locale}/products/#{get_id(obj)}"
+        end
+
         def reviews_store_product_path(obj, **_)
           "/products/#{get_id(obj)}/reviews"
         end
@@ -183,8 +187,12 @@ module Shoperb module Theme module Editor
         end
 
         after(*instance_methods) do |res, **args|
-          locale = args.symbolize_keys[:locale] || Translations.locale
-          "/#{locale}#{res}"
+          if res.try(:start_with?, "http")
+            res
+          else
+            locale = args.symbolize_keys[:locale] || Translations.locale
+            "/#{locale}#{res}"
+          end
         end
       end
     end
