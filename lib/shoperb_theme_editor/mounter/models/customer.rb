@@ -5,7 +5,7 @@ module Shoperb module Theme module Editor
 
         fields :id, :last_bill_address_id, :last_ship_address_id,
           :first_name, :last_name, :email, :newsletter, :active,
-          :discount_pct, :recommended_products_ids
+          :discount_pct, :recommended_products_ids, :custom_field_values
 
         has_many :orders
 

@@ -138,6 +138,10 @@ module Shoperb module Theme module Editor
       process Mounter::Model::Discount
     end
 
+    def custom_fields
+      process Mounter::Model::CustomField
+    end
+
     def process klass, path=klass.to_s.demodulize.tableize, &block
       result = fetch("api/v1/#{path}").map(&(block || ->(this){this})).compact
       uniq = result.uniq { |h| h[klass.primary_key.to_s] }

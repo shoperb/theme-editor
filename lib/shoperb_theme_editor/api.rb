@@ -67,6 +67,7 @@ module Shoperb module Theme module Editor
       Sync.customers
       Sync.reviews
       Sync.discounts
+      Sync.custom_fields
       Mounter::Model::Base.save
     end
 
