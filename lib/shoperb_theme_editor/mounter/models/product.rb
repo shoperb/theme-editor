@@ -30,11 +30,11 @@ module Shoperb module Theme module Editor
         end
 
         def self.by_created(dir)
-          sort_by(&:created_at)
+          sort_by(&:id)
         end
 
         def self.by_updated(dir)
-          sort_by(&:updated_at)
+          sort_by(&:id)
         end
 
         def active?
