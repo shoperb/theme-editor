@@ -74,6 +74,41 @@ module Shoperb module Theme module Editor
           get "/?:locale?/account" do
             respond :account
           end
+          
+          
+          get "/?:locale?/account/billing/payment-methods" do
+            meth = ShoperbLiquid::PaymentCardDrop.new(OpenStruct.new(
+              id: 1,
+              service:"stripe",
+              card: {"name"=>nil, "brand"=>"Visa", "last4"=>"4242","country"=>"US", "exp_year"=>2022, "exp_month"=>11, "type"=>"credit"}
+            ))
+            respond :billing_payment_methods, payment_methods: [meth]
+          end
+          get "/?:locale?/account/billing/payment-methods/add" do
+            meth     = ShoperbLiquid::PaymentCardDrop.new(OpenStruct.new)
+            provider = ShoperbLiquid::PaymentProviderDrop.new(OpenStruct.new(
+              id: 1,
+              name: "Stripe",
+              type: "stripe",
+              public_key: "pk_test_JqbMzr2NvnK25D5QEEm0OlZg"
+            ))
+            respond :billing_payment_method, payment_method: meth, providers: [provider]
+          end
+          post "/?:locale?/account/billing/payment-methods" do # create action
+            redirect "/account/billing/payment-methods"
+          end
+          get "/?:locale?/account/billing/payment-methods/:id" do
+            meth = ShoperbLiquid::PaymentCardDrop.new(OpenStruct.new(
+              id: params[:id].to_i,
+              service:"stripe",
+              card: {"name"=>nil, "brand"=>"Visa", "last4"=>"4242","country"=>"US", "exp_year"=>2022, "exp_month"=>11, "type"=>"credit"}
+            ))
+            respond :billing_payment_method, payment_method: meth
+          end
+          get "/?:locale?/account/billing/payment-methods/:id/delete" do
+            redirect "/account/billing/payment-methods"
+          end
+          
 
           get "/?:locale?/reset/:token" do
             respond :password_change

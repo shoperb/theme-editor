@@ -43,6 +43,18 @@ module Shoperb module Theme module Editor
         def store_account_path(**_)
           "/account"
         end
+        
+        def add_store_account_billing_payment_methods_path(**_)
+          "/account/billing/payment-methods/add"
+        end
+        
+        def store_account_billing_payment_method_path(id, **_)
+          "/account/billing/payment-methods/#{id}"
+        end
+        
+        def delete_store_account_billing_payment_method_path(id, **_)
+          "/account/billing/payment-methods/#{id}/delete"
+        end
 
         def store_address_path(obj, **_)
           id = get_id(obj)
