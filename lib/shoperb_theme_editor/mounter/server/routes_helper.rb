@@ -58,9 +58,13 @@ module Shoperb module Theme module Editor
 
         def store_address_path(obj, **_)
           id = get_id(obj)
-          "/address/#{id}"
+          "/addresses/#{id}"
         end
 
+        def new_store_address_path(**_)
+          "/addresses/new"
+        end
+        
         def store_addresses_path(**_)
           "/addresses"
         end
