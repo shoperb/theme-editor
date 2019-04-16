@@ -5,6 +5,7 @@ module Shoperb module Theme module Editor
 
         fields :id, :owner_id, :owner_type, :country_id, :state_id, :name,
           :first_name, :last_name, :phone, :company, :county, :city, :zip,
+          :type,
           :address1, :address2, :checksum, :account_type, :business, :email
 
         belongs_to :country
