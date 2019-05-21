@@ -18,9 +18,7 @@ module Shoperb module Theme module Editor
 
         def self.registered(app)
           self.app = app
-
           register_modules
-          append_paths
 
           get "/?:locale?/categories/*" do
             params[:id] = params[:splat][0]
@@ -179,6 +177,8 @@ module Shoperb module Theme module Editor
           post "/?:locale?/reviews" do
             redirect "/products/#{params['review']['product_id']}"
           end
+          
+          append_paths
         end
 
         private
