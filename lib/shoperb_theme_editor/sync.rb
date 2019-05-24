@@ -141,6 +141,11 @@ module Shoperb module Theme module Editor
     def custom_fields
       process Mounter::Model::CustomField
     end
+    
+    def subcriptions
+      process Mounter::Model::CustomerSubscriptionPlan
+      process Mounter::Model::CustomerSubscription
+    end
 
     def process klass, path=klass.to_s.demodulize.tableize, &block
       result = fetch("api/v1/#{path}").map(&(block || ->(this){this})).compact

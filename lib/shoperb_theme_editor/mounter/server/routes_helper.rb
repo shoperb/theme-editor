@@ -55,6 +55,20 @@ module Shoperb module Theme module Editor
         def delete_store_account_billing_payment_method_path(id, **_)
           "/account/billing/payment-methods/#{id}/delete"
         end
+        
+        def store_account_subscriptions_path(**_)
+          "/account/subscriptions"
+        end
+        
+        def store_account_subscription_plans_path(**_)
+          "/account/subscriptions/plans"
+        end
+        
+        def store_account_create_subscription_path(plan_id = nil,**_)
+          str  = "/account/subscriptions/create"
+          str += "/#{plan_id}" if plan_id
+          str
+        end
 
         def store_address_path(obj, **_)
           id = get_id(obj)

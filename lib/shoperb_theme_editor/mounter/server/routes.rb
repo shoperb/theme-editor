@@ -107,6 +107,25 @@ module Shoperb module Theme module Editor
             redirect "/account/billing/payment-methods"
           end
           
+          get "/?:locale?/account/subscriptions" do
+            respond :billing_subscriptions, subscriptions: ShoperbLiquid::CollectionDrop.new(Model::CustomerSubscription.all.map{|e| ShoperbLiquid::Subscription.new(e)})
+          end
+          get "/?:locale?/account/subscriptions/plans" do
+            respond :billing_subscription_plans, subscription: ShoperbLiquid::Subscription.new(Model::CustomerSubscription.all.detect(&:active?))
+          end
+          get "/?:locale?/account/subscriptions/create(/:plan_id)" do
+            subscription = Model::CustomerSubscription.new
+            subscription.plan_id       = params[:plan_id]
+            subscription.attributes    = params.fetch(:subscription,{}).permit(:qty)
+            subscription.customer      = current_customer
+
+            flash[:notice] = "subscription.error_occured"
+            render liquid: :billing_subscription, subscription: subscription
+          end
+          get "/?:locale?/account/subscriptions/:id/delete" do
+            flash[:notice] = "subscription.deleted"
+            redirect_to "/account/subscriptions/plans"
+          end
 
           get "/?:locale?/reset/:token" do
             respond :password_change
