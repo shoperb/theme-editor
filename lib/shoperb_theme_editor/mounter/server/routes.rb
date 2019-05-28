@@ -75,33 +75,18 @@ module Shoperb module Theme module Editor
           
           
           get "/?:locale?/account/billing/payment-methods" do
-            meth = ShoperbLiquid::PaymentCardDrop.new(OpenStruct.new(
-              id: 1,
-              service:"stripe",
-              card: {"name"=>nil, "brand"=>"Visa", "last4"=>"4242","country"=>"US", "exp_year"=>2022, "exp_month"=>11, "type"=>"credit"}
-            ))
-            respond :billing_payment_methods, payment_methods: [meth]
+            respond :billing_payment_methods, payment_methods: [Model::PaymentCard.first.to_liquid]
           end
           get "/?:locale?/account/billing/payment-methods/add" do
-            meth     = ShoperbLiquid::PaymentCardDrop.new(OpenStruct.new)
-            provider = ShoperbLiquid::PaymentProviderDrop.new(OpenStruct.new(
-              id: 1,
-              name: "Stripe",
-              type: "stripe",
-              public_key: "pk_test_JqbMzr2NvnK25D5QEEm0OlZg"
-            ))
+            meth     = Model::PaymentCard.new.to_liquid
+            provider = Model::PaymentProvider.first.to_liquid
             respond :billing_payment_method, payment_method: meth, providers: [provider]
           end
           post "/?:locale?/account/billing/payment-methods" do # create action
             redirect "/account/billing/payment-methods"
           end
           get "/?:locale?/account/billing/payment-methods/:id" do
-            meth = ShoperbLiquid::PaymentCardDrop.new(OpenStruct.new(
-              id: params[:id].to_i,
-              service:"stripe",
-              card: {"name"=>nil, "brand"=>"Visa", "last4"=>"4242","country"=>"US", "exp_year"=>2022, "exp_month"=>11, "type"=>"credit"}
-            ))
-            respond :billing_payment_method, payment_method: meth
+            respond :billing_payment_method, payment_method: Model::PaymentCard.first.to_liquid
           end
           get "/?:locale?/account/billing/payment-methods/:id/delete" do
             redirect "/account/billing/payment-methods"
@@ -122,7 +107,7 @@ module Shoperb module Theme module Editor
             subscription.customer      = current_customer
 
             flash[:notice] = "subscription.error_occured"
-            respond :billing_subscription, subscription: subscription
+            respond :billing_subscription, subscription: subscription, payment_methods: [Model::PaymentCard.first], providers: [Model::PaymentProvider.first.to_liquid]
           end
           get "/?:locale?/account/subscriptions/:id/delete" do
             flash[:notice] = "subscription.deleted"
