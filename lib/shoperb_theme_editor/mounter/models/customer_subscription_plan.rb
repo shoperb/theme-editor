@@ -4,7 +4,7 @@ module Shoperb module Theme module Editor
       class CustomerSubscriptionPlan < Base
 
         fields :id, :name, :invoice_name, :description, :handle, :interval, 
-          :interval_count, :price, :setup_cost, :trial_interval, :trial_interval_count
+          :interval_count, :item_price, :setup_cost, :trial_interval, :trial_interval_count
 
         translates :name, :invoice_name, :description
 

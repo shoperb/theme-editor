@@ -12,11 +12,21 @@ module Shoperb module Theme module Editor
         end
         
         belongs_to :plan, class_name: CustomerSubscriptionPlan.to_s, foreign_key: :plan_id
+        belongs_to :customer
         
         
         def active?
           state == "active"
         end
+        
+        def to_liquid context=nil
+          if klass = (ShoperbLiquid.const_get("SubscriptionDrop"))
+            klass.new(self).tap do |drop|
+              drop.context = context if context
+            end
+          end
+        end
+        
       end
     end
   end
