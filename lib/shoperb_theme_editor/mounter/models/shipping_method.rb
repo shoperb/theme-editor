@@ -5,6 +5,28 @@ module Shoperb module Theme module Editor
 
         belongs_to :order
 
+        def self.raw_data
+          [
+            {
+             id: 1,
+             order_id: 1,
+             name: "Delivery by courier",
+             rate: 0.0,
+             provider: nil,
+             provider_box: nil,
+             tracking_number: nil,
+           },
+           {
+            id: 2,
+            order_id: 1,
+            name: "Omniva",
+            rate: 0.2e1,
+            provider: "post24",
+            provider_box: "Haapsalu Uuemõisa Konsumi pakiautomaat",
+            tracking_number: "23131414212312",
+          },
+          ]
+        end
       end
     end
   end

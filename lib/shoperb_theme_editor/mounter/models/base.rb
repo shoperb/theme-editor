@@ -112,6 +112,10 @@ module Shoperb module Theme module Editor
           def multiple_files?
             false
           end
+          
+          def sample
+            all.to_a.sample
+          end
 
           def primary_key
             :id
