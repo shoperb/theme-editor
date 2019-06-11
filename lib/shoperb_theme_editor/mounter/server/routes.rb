@@ -140,6 +140,22 @@ module Shoperb module Theme module Editor
             template = post.template.presence || :blog_post
             respond template, post: post, meta: post
           end
+          
+          get "/?:locale?/order-returns" do
+            respond :order_returns, order_returns: ShoperbLiquid::CollectionDrop.new(Model::OrderReturn.all)
+          end
+          post "/?:locale?/order-returns" do
+            redirect "/order-returns"
+          end
+          get "/?:locale?/order-returns/new" do
+            respond :order_return, order_return: Model::OrderReturn.new.to_liquid, orders: ShoperbLiquid::CollectionDrop.new(Model::Order.per(10))
+          end
+          get "/?:locale?/order-returns/:id" do
+            respond :order_return, order_return: Model::OrderReturn.find(params[:id])&.to_liquid
+          end
+          post "/?:locale?/order-returns/:id/generate-parcel" do
+            respond :order_return, order_return: Model::OrderReturn.find(params[:id])&.to_liquid
+          end
 
           get "/?:locale?/addresses/new" do
             respond :address, address: ShoperbLiquid::AddressDrop.new(Model::Address.new)

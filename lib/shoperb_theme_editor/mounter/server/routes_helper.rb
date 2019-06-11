@@ -194,6 +194,18 @@ module Shoperb module Theme module Editor
         def checkout_store_cart_path(**_)
           "/cart/checkout"
         end
+        
+        def store_order_returns_path(**_)
+          "/order-returns"
+        end
+        
+        def store_order_return_path(id, **_)
+          "/order-returns/#{id}"
+        end
+        
+        def store_order_return_generate_parcel_path(id, **_)
+          "/order-returns/#{id}/generate-parcel"
+        end
 
         def recognize_path(**args)
           url_for(**args)
