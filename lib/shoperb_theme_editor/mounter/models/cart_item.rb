@@ -24,15 +24,19 @@ module Shoperb module Theme module Editor
         end
 
         def total
-          amount * variant.active_price.to_d
+          amount * overwritten_price(variant.active_price.to_d)
         end
 
         def neto_total
-          amount * variant.neto_active_price.to_d
+          amount * overwritten_price(variant.neto_active_price.to_d)
         end
 
         def bruto_total
-          amount * variant.bruto_active_price.to_d
+          amount * overwritten_price(variant.bruto_active_price.to_d)
+        end
+
+        def price
+          overwritten_price(variant.price)
         end
 
         def low_on_stock?
@@ -41,6 +45,14 @@ module Shoperb module Theme module Editor
 
         def out_of_stock?
           variant.nil? || !variant.available? || !variant.available?(:warehouse, amount)
+        end
+        
+        def overwritten_price sum
+          if by_subscription
+            0.to_d
+          else
+            sum
+          end
         end
 
       end
