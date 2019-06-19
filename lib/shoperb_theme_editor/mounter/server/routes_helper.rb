@@ -199,6 +199,10 @@ module Shoperb module Theme module Editor
           "/order-returns"
         end
         
+        def new_store_order_return(**_)
+          "/order-returns/new"
+        end
+        
         def store_order_return_path(id, **_)
           "/order-returns/#{id}"
         end
