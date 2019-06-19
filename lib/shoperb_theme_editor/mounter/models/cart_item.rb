@@ -3,7 +3,7 @@ module Shoperb module Theme module Editor
     module Model
       class CartItem < Base
 
-        fields :variant_sku, :name, :amount, :created_at, :updated_at
+        fields :variant_sku, :name, :amount, :created_at, :updated_at, :by_subscription
 
         belongs_to :variant
 

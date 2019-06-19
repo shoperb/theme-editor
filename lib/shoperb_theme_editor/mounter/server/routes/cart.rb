@@ -59,6 +59,7 @@ module Shoperb module Theme module Editor
             end
 
             app.post "/cart/add" do
+              by_subscription = %w(1 true).include?(params[:by_subscription])
               variant_id = params[:variant].to_i
               amount = params[:amount].to_i
 
@@ -66,7 +67,7 @@ module Shoperb module Theme module Editor
 
               cart.token ||= SecureRandom.hex(12)
 
-              item = Model::CartItem.where(variant_id: variant_id).first || Model::CartItem.new(variant_id: variant_id)
+              item = Model::CartItem.where(variant_id: variant_id, by_subscription: by_subscription).first || Model::CartItem.new(variant_id: variant_id, by_subscription: by_subscription)
               item.amount ||= 0
               item.amount += amount
 
