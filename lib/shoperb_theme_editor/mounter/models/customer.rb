@@ -28,6 +28,10 @@ module Shoperb module Theme module Editor
           possible = attributes.fetch(:recommended_products_ids, []).map(&:to_s)
           Product.active.select { |product| possible.include?(product.attributes[:id].to_s) }
         end
+        
+        def subscriptions
+          CustomerSubscription.all
+        end
       end
     end
   end

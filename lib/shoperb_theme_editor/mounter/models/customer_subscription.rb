@@ -19,6 +19,10 @@ module Shoperb module Theme module Editor
           state == "active"
         end
         
+        def self.active
+          all
+        end
+        
         def to_liquid context=nil
           if klass = (ShoperbLiquid.const_get("SubscriptionDrop"))
             klass.new(self).tap do |drop|
