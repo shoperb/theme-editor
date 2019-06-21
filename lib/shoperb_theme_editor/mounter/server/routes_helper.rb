@@ -199,7 +199,7 @@ module Shoperb module Theme module Editor
           "/order-returns"
         end
         
-        def new_store_order_return(**_)
+        def new_store_order_return_path(**_)
           "/order-returns/new"
         end
         
