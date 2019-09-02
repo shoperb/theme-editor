@@ -15,6 +15,10 @@ module Shoperb module Theme module Editor
           state.try(:name)
         end
 
+        def order_name
+          order.try(:name)
+        end
+
         def full_name
           [first_name.presence, last_name.presence].reject(&:blank?).join(" ")
         end
@@ -27,8 +31,16 @@ module Shoperb module Theme module Editor
           [company, phone].reject(&:blank?).join(", ")
         end
 
+        def state_with_country
+          [state_name.presence, country_name.presence].reject(&:blank?).join(", ")
+        end
+
         def city_state_with_zip
           [city.presence, state_name.presence, zip.presence].reject(&:blank?).join(", ")
+        end
+
+        def zip_with_city
+          [zip.presence, city.presence].reject(&:blank?).join(", ")
         end
 
         def country_name

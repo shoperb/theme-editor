@@ -43,6 +43,17 @@ Slop.parse ignore_case: true, help: true, strict: true do
     end
   end
 
+  command "pull:emails" do
+    apply_global_opts
+    description "Updates your local shoperb emails"
+    banner with_description("Usage: shoperb pull:emails [options]")
+    run do |options, args|
+      Shoperb::Theme::Editor.with_configuration(options) do
+        Shoperb::Theme::Editor::Api.pull_emails *args
+      end
+    end
+  end
+
   command "push" do
     apply_global_opts
     description "Updates your remote shoperb theme"
@@ -52,6 +63,19 @@ Slop.parse ignore_case: true, help: true, strict: true do
     run do |options, args|
       Shoperb::Theme::Editor.with_configuration(options) do
         Shoperb::Theme::Editor::Api.push **options
+      end
+    end
+  end
+
+  command "push:emails" do
+    apply_global_opts
+    description "Updates your remote shoperb emails"
+    banner with_description("Usage: shoperb push:emails [options]")
+    on :r, :reset, 'Reset all (with settings data)'
+
+    run do |options, args|
+      Shoperb::Theme::Editor.with_configuration(options) do
+        Shoperb::Theme::Editor::Api.push_emails **options
       end
     end
   end

@@ -7,6 +7,7 @@ OAuth2::Response.register_parser(:json, ["application/json"]) do |body|
 end
 
 module Shoperb module Theme module Editor
+  EMAIL_SPLITTER = "---\n"
   module Api
     extend self
     mattr_accessor :auth_code, :client, :token
@@ -18,6 +19,42 @@ module Shoperb module Theme module Editor
         faraday.headers['Current-Shop'] = Editor["oauth-site"]
       end
       Package.unzip response.parsed
+    end
+    
+    def get_emails(params: "", notify: )
+      total = 2
+      page  = 1
+      per   = 1
+      while page*per < total do
+        response = request Pathname.new(["api", "v1", "emails"].join("/")).cleanpath.to_s + "?" + params, method: :get, notify: ->{ notify } do |faraday|
+          faraday.options.timeout = 120
+          faraday.headers['Current-Shop'] = Editor["oauth-site"]
+        end
+        pagination = JSON.parse(response.headers["X-Pagination"])
+        page    = pagination["page"]
+        per     = pagination["per"]
+        total   = pagination["total"]
+        `mkdir -p emails`
+        JSON.parse(response.body).each do |email|
+          yield(email) if block_given?
+        end
+      end
+    end
+    
+    def pull_emails handle=nil, *args
+      prepare
+      old_emails = {}
+      get_emails(params: "version:1", notify: "Downloading old") do |email|
+        old_emails[email["key"]] = email
+      end
+      
+      get_emails(params: "version:2", notify: "Downloading") do |email|
+        email = old_emails[email["key"]] if old_emails[email["key"]]
+        
+        content  = EMAIL_SPLITTER + "subject: #{email["subject"]}\n" + EMAIL_SPLITTER + email["content_html"].to_s
+        File.write("emails/#{email["key"]}.html.liquid", content)
+        File.write("emails/#{email["key"]}.text.liquid", email["content_text"])
+      end
     end
 
     def push **args
@@ -31,6 +68,51 @@ module Shoperb module Theme module Editor
       end
     ensure
       Utils.rm_tempfile file
+    end
+    
+    def push_emails **args
+      prepare
+      html_end = ".html.liquid"
+      Dir["emails/*"].each do |file|
+        next unless file.end_with?(html_end)
+        key    = file.sub(html_end,"").sub("emails/","") # like: "order.confirmation"
+        ext_id = nil
+
+        # fetch old one to delete and existing one to update
+        get_emails(params: "where=key:#{key}", notify: "Getting info for #{key}") do |email|
+          if email["version"] == 1 || email["version"] == 0
+            # send to delete
+            response = request "api/v1/emails/#{email["id"]}?version=1", method: :delete, notify: -> { "Deleting old" } do |faraday|
+              faraday.headers['Current-Shop'] = Editor["oauth-site"]
+            end
+          else
+            ext_id = email["id"]
+          end
+        end
+        
+        # update existing one
+        if ext_id # patch
+          html = File.read("emails/#{key}.html.liquid").split("---\n")
+          json = {
+            id: ext_id,
+            subject: html[1].sub("subject: ","").strip,
+            content_text: File.read("emails/#{key}.text.liquid"),
+            content_html: html[2],
+            translations: {}
+          }
+          # needed while we have translations and didn't remove them
+          %w(en ru et lv).each do |locale|
+            json[:translations]["#{locale}.subject"]      = json[:subject]
+            json[:translations]["#{locale}.content_html"] = json[:content_html]
+            json[:translations]["#{locale}.content_text"] = json[:content_text]
+          end
+          response = request "api/v1/emails/#{ext_id}?version=2", method: :patch, notify: -> { "Updating #{key}" }, body: {email: json} do |faraday|
+            faraday.headers['Current-Shop'] = Editor["oauth-site"]
+          end
+        else # create
+          raise "Email #{key} was removed from DB. Contact helpdesk."
+        end
+      end
     end
 
     def zip

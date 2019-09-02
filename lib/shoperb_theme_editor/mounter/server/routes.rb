@@ -177,6 +177,16 @@ module Shoperb module Theme module Editor
             redirect_to "/addresses"
           end
 
+          get "/?:locale?/emails" do
+            out  = "<p>You have next templates:</p>"
+            out += "<ul>"
+            Dir["emails/*"].each do |file|
+              url  = file.sub(".liquid","")
+              out += %Q{<li><a href="#{url}">#{url}</a></li>}
+            end
+            out + "</ul>"
+          end
+          
           get "/?:locale?/emails/:template" do
             entities = {}
             order = if params[:order_id]
@@ -193,7 +203,10 @@ module Shoperb module Theme module Editor
               Model::Customer.last
             end
             entities.merge!(customer: ShoperbLiquid::CustomerDrop.new(customer))
-            respond_email params[:template], entities
+            tpl = params[:template]
+            
+            content_type "text/plain" if tpl.end_with?(".text")
+            respond_email tpl, entities
           end
 
           post "/?:locale?/reviews" do

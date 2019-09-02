@@ -66,6 +66,8 @@ module Shoperb module Theme module Editor
               ship_address_id: 104184, # possible nil
               bill_address_id: 104183, # possible nil
               taxation_percentage: "42",
+              neto_discount: 1,
+              bruto_discount: 2,
             }
           end
         end

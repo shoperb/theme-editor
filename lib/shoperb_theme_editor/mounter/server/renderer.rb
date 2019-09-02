@@ -41,6 +41,9 @@ module Shoperb module Theme module Editor
           def process_file file, locals, registers
             file = Pathname.new(file)
             result = File.read(file).force_encoding("UTF-8").gsub("\xC2\xA0", " ")
+            if result.start_with?("---\n")
+              result = result.split("---\n")[2] # taking only meaning part
+            end
 
             while (ext = file.extname.gsub(".", "")).to_sym != settings.destination_format
               file = Pathname.new(file.to_s.gsub(".#{ext}", ""))
@@ -52,7 +55,7 @@ module Shoperb module Theme module Editor
 
           def template_result(templates, locals={}, registers={}, dir=settings.templates_directory)
             locals, registers = registers_and_locals(locals, registers)
-            templates = [templates].flatten
+            templates = [templates] unless templates.kind_of?(Array)
             if (template = @template = template_name(templates, dir))
               locals.merge!(template_name: template.to_s)
               locals[:content_for_template] = content_for_template(template.to_s, locals, registers)
