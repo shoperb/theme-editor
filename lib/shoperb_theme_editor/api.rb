@@ -160,7 +160,7 @@ module Shoperb module Theme module Editor
       @client = OAuth2::Client.new(
         Editor["oauth-client-id"],
         Editor["oauth-client-secret"],
-        site: "#{Editor["server"]["protocol"]}://manage.#{Editor["server"]["url"]}",
+        site: "#{Editor["server"]["protocol"]}://#{Editor["server"]["url"]}",
         token_url: "/api/v1/oauth/token",
         authorize_url: "oauth/authorize?domain=#{Editor["oauth-site"]}"
       ) do |faraday|

@@ -25,7 +25,7 @@ module Shoperb module Theme module Editor
       "port" => "4000",
       "verbose" => false,
       "server" => {
-        "url" => "shoperb.me",
+        "url" => "shoperb.app",
         "protocol" => "https"
       },
       "preset" => nil
