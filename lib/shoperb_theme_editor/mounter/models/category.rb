@@ -69,7 +69,7 @@ module Shoperb module Theme module Editor
         end
 
         def self_and_ancestors
-          self.class.active.select { |category| category.lft <= lft && category.rgt >= rgt }
+          self.class.active.select { |category| category.lft.to_i <= lft.to_i && category.rgt.to_i >= rgt.to_i }
         end
 
         def self_and_descendants
