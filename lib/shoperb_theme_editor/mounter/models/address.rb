@@ -11,6 +11,10 @@ module Shoperb module Theme module Editor
         belongs_to :country
         belongs_to :state
 
+        def country_code= val
+          self.country = Country.all.detect{|o| o.code == val}
+        end
+
         def state_name
           state.try(:name)
         end
