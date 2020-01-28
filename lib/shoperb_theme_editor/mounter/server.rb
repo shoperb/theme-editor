@@ -35,7 +35,7 @@ module Shoperb module Theme module Editor
           if (id = params[:customer_id].to_i) > 0
             Model::Customer.find(id)
           else
-            Model::Customer.first
+            Model::Customer.first || Model::Customer.new(first_name: "No customer", last_name: "in customers.yml")
           end
         end
 
