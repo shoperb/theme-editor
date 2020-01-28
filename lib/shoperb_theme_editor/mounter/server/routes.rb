@@ -157,10 +157,6 @@ module Shoperb module Theme module Editor
             respond :order_return, order_return: Model::OrderReturn.find(params[:id])&.to_liquid
           end
 
-          get "/?:locale?/addresses" do
-            respond :address, addresses: ShoperbLiquid::CollectionDrop.new(Model::Address.new(current_customer.addresses))
-          end
-
           get "/?:locale?/addresses/new" do
             respond :address, address: ShoperbLiquid::AddressDrop.new(Model::Address.new)
           end
