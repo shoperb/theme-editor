@@ -32,7 +32,11 @@ module Shoperb module Theme module Editor
         end
 
         def current_customer
-          Model::Customer.first
+          if (id = params[:customer_id].to_i) > 0
+            Model::Customer.find(id)
+          else
+            Model::Customer.first
+          end
         end
 
         def current_settings
