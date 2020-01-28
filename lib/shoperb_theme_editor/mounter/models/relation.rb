@@ -164,8 +164,9 @@ module Shoperb module Theme module Editor
 
         def paginate
           return unless @per && @page
+
           @original_collection = @collection
-          @collection = @collection[(@page - 1) * @per, (@page - 1) * @per + @per - 1]
+          @collection = @collection[(@page - 1) * @per, @per]
         end
 
         def with_current_collection
