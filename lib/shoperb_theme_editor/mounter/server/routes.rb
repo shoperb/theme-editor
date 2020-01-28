@@ -72,8 +72,8 @@ module Shoperb module Theme module Editor
           get "/?:locale?/account" do
             respond :account
           end
-          
-          
+
+
           get "/?:locale?/account/billing/payment-methods" do
             respond :billing_payment_methods, payment_methods: [Model::PaymentCard.first.to_liquid]
           end
@@ -91,7 +91,7 @@ module Shoperb module Theme module Editor
           get "/?:locale?/account/billing/payment-methods/:id/delete" do
             redirect "/account/billing/payment-methods"
           end
-          
+
           get "/?:locale?/account/subscriptions" do
             respond :billing_subscriptions, subscriptions: ShoperbLiquid::CollectionDrop.new(Model::CustomerSubscription.all.map{|e| ShoperbLiquid::SubscriptionDrop.new(e)})
           end
@@ -101,7 +101,7 @@ module Shoperb module Theme module Editor
           get "/?:locale?/account/subscriptions/create/?:plan_id?" do
             subscription = Model::CustomerSubscription.new
             subscription.plan_id       = params[:plan_id]
-            subscription.instance_variable_set(:@attributes, 
+            subscription.instance_variable_set(:@attributes,
               subscription.attributes.merge(params.fetch(:subscription,{}).slice(:qty))
             )
             subscription.customer      = current_customer
@@ -140,7 +140,7 @@ module Shoperb module Theme module Editor
             template = post.template.presence || :blog_post
             respond template, post: post, meta: post
           end
-          
+
           get "/?:locale?/order-returns" do
             respond :order_returns, order_returns: ShoperbLiquid::CollectionDrop.new(Model::OrderReturn.all)
           end
@@ -155,6 +155,10 @@ module Shoperb module Theme module Editor
           end
           post "/?:locale?/order-returns/:id/generate-parcel" do
             respond :order_return, order_return: Model::OrderReturn.find(params[:id])&.to_liquid
+          end
+
+          get "/?:locale?/addresses" do
+            respond :address, addresses: ShoperbLiquid::CollectionDrop.new(Model::Address.new(current_customer.addresses))
           end
 
           get "/?:locale?/addresses/new" do
@@ -186,7 +190,7 @@ module Shoperb module Theme module Editor
             end
             out + "</ul>"
           end
-          
+
           get "/?:locale?/emails/:template" do
             entities = {}
             order = if params[:order_id]
@@ -204,7 +208,7 @@ module Shoperb module Theme module Editor
             end
             entities.merge!(customer: ShoperbLiquid::CustomerDrop.new(customer))
             tpl = params[:template]
-            
+
             content_type "text/plain" if tpl.end_with?(".text")
             respond_email tpl, entities
           end
@@ -212,7 +216,7 @@ module Shoperb module Theme module Editor
           post "/?:locale?/reviews" do
             redirect "/products/#{params['review']['product_id']}"
           end
-          
+
           append_paths
         end
 
