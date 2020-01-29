@@ -46,7 +46,11 @@ module Shoperb module Theme module Editor
         def currency
           @currency ||= Currency.sample
         end
-        
+
+        def subtotal_wo_discount
+          subtotal
+        end
+
         def self.raw_data
           500.times.map do |i|
             {
