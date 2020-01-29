@@ -51,6 +51,10 @@ module Shoperb module Theme module Editor
           subtotal
         end
 
+        def total_wo_discount
+          total
+        end
+
         def self.raw_data
           500.times.map do |i|
             {
