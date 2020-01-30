@@ -55,6 +55,10 @@ module Shoperb module Theme module Editor
           total
         end
 
+        def checkout
+          self
+        end
+
         def self.raw_data
           500.times.map do |i|
             {
