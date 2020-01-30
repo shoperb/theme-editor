@@ -9,39 +9,39 @@ module Shoperb module Theme module Editor
 
         belongs_to :order
         has_many :item_attributes, class_name: OrderItemAttribute.to_s
-        
+
         def digital?
           digital
         end
-        
+
         def category
           @category ||= [Category.first, nil].sample
         end
-        
+
         def product
           @product ||= [Product.first, nil].sample
         end
-        
+
         def variant
           @variant ||= [Variant.first, nil].sample
         end
-        
+
         def item_attributes
-          variant&.variant_attributes
+          variant&.variant_attributes || []
         end
-        
+
         def url
           variant&.url
         end
-        
+
         def product_id
           product&.id || 3
         end
-        
+
         def variant_id
           variant&.id || 4
         end
-        
+
         def self.raw_data
           [
             {
