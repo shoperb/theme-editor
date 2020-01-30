@@ -23,7 +23,13 @@ module Shoperb module Theme module Editor
         end
 
         def variant
-          @variant ||= [Variant.first, nil].sample
+          return @variant if defined?(@variant)
+
+          @variant = if order&.token.start_with?("varianted")
+            Variant.all.sample
+          else
+            [Variant.first, nil].sample
+          end
         end
 
         def item_attributes

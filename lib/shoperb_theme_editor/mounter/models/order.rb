@@ -29,7 +29,7 @@ module Shoperb module Theme module Editor
 
         def items
           # OrderItem.all.select { |item| item.attributes[:order_number] == self.id }
-          OrderItem.all
+          OrderItem.all.map{|oi| oi.order=self;oi}
         end
 
         # belongs_to :payment_method
@@ -77,7 +77,26 @@ module Shoperb module Theme module Editor
               neto_discount: 1,
               bruto_discount: 2,
             }
-          end
+          end.unshift({
+            id: 100,
+            number: "v01",
+            token: "varianted-92d40806ffccb6452a168a17768",
+            email: "mail@shoperb.com",
+            total: 0.2001e4,
+            subtotal: 0.165372e4,
+            total_shipping: 0.0,
+            total_taxes: 0.347281e3,
+            require_shipping: true,
+            require_taxation: true,
+            created_at: Time.parse("2019-05-23 11:59:50 UTC"),
+            state: "new",
+            notes: "", # possible nil
+            ship_address_id: 104184, # possible nil
+            bill_address_id: 104183, # possible nil
+            taxation_percentage: "42",
+            neto_discount: 1,
+            bruto_discount: 2,
+            })
         end
       end
     end
