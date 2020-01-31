@@ -9,6 +9,10 @@ module Shoperb module Theme module Editor
 
         has_many :orders
 
+        def name
+          "#{first_name} #{last_name}".strip
+        end
+
         def last_bill_address
           Address.all.detect { |address| attributes[:last_bill_address_id] == address.attributes[:id] }
         end
@@ -28,7 +32,7 @@ module Shoperb module Theme module Editor
           possible = attributes.fetch(:recommended_products_ids, []).map(&:to_s)
           Product.active.select { |product| possible.include?(product.attributes[:id].to_s) }
         end
-        
+
         def subscriptions
           CustomerSubscription.all
         end
