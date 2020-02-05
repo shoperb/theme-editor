@@ -5,6 +5,8 @@ module Shoperb module Theme module Editor
 
         fields :id, :code, :name, :iso3, :numeric, :eu, :na,
           :region_name_key, :abstract
+        has_many :states
+
         def localized_name
           name
         end
