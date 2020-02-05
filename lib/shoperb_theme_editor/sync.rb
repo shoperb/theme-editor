@@ -141,7 +141,7 @@ module Shoperb module Theme module Editor
     def custom_fields
       process Mounter::Model::CustomField
     end
-    
+
     def subcriptions
       process Mounter::Model::CustomerSubscriptionPlan
       process Mounter::Model::CustomerSubscription
