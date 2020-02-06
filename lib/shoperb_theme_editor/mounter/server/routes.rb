@@ -41,8 +41,8 @@ module Shoperb module Theme module Editor
           post "/?:locale?/variants" do
             pars  = JSON.parse(request.body.string,symbolize_names: true)
             scope = Model::Variant
-            scope = scope.where(id: pars[:ids]) if pars[:ids].present?
-            scope = scope.where(product_id: pars[:product_id]) if pars[:product_id].present?
+            scope = scope.where(id: pars[:ids].map(&:to_i)) if pars[:ids].present?
+            scope = scope.where(product_id: pars[:product_id].to_i) if pars[:product_id].present?
 
             if pars[:attributes].present?
               # for now lets just return some vriants
