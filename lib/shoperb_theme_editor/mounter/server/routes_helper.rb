@@ -43,37 +43,37 @@ module Shoperb module Theme module Editor
         def store_account_path(**_)
           "/account"
         end
-        
+
         def add_store_account_billing_payment_methods_path(**_)
           "/account/billing/payment-methods/add"
         end
-        
+
         def store_account_billing_payment_methods_path(**_)
           "/account/billing/payment-methods"
         end
-        
+
         def store_account_billing_payment_method_path(id, **_)
           "/account/billing/payment-methods/#{id}"
         end
-        
+
         def delete_store_account_billing_payment_method_path(id, **_)
           "/account/billing/payment-methods/#{id}/delete"
         end
-        
+
         def store_account_subscriptions_path(**_)
           "/account/subscriptions"
         end
-        
+
         def store_account_subscription_plans_path(**_)
           "/account/subscriptions/plans"
         end
-        
+
         def store_account_create_subscription_path(plan_id = nil,**_)
           str  = "/account/subscriptions/create"
           str += "/#{plan_id}" if plan_id
           str
         end
-        
+
         def store_account_delete_subscription_path(id,**_)
           "/account/subscriptions/#{id}/delete"
         end
@@ -86,7 +86,7 @@ module Shoperb module Theme module Editor
         def new_store_address_path(**_)
           "/addresses/new"
         end
-        
+
         def store_addresses_path(**_)
           "/addresses"
         end
@@ -158,6 +158,10 @@ module Shoperb module Theme module Editor
           "/products"
         end
 
+        def store_variants_path(**_)
+          "/variants"
+        end
+
         def store_reviews_path(**_)
           "/reviews"
         end
@@ -194,19 +198,19 @@ module Shoperb module Theme module Editor
         def checkout_store_cart_path(**_)
           "/cart/checkout"
         end
-        
+
         def store_order_returns_path(**_)
           "/order-returns"
         end
-        
+
         def new_store_order_return_path(**_)
           "/order-returns/new"
         end
-        
+
         def store_order_return_path(id, **_)
           "/order-returns/#{id}"
         end
-        
+
         def store_order_return_generate_parcel_path(id, **_)
           "/order-returns/#{id}/generate-parcel"
         end

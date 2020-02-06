@@ -34,6 +34,23 @@ module Shoperb module Theme module Editor
             respond template.to_sym, product: product, category: category, meta: product
           end
 
+          # params:
+          # * ids - to filter by variant ids
+          # * product_id - to filter by product_id
+          # * attrributes - hash to filter by attributes {not_translated_key: not_translated_value,..}
+          post "/?:locale?/variants" do
+            pars  = JSON.parse(request.body.string,symbolize_names: true)
+            scope = Model::Variant
+            scope = scope.where(id: pars[:ids]) if pars[:ids].present?
+            scope = scope.where(product_id: pars[:product_id]) if pars[:product_id].present?
+
+            if pars[:attributes].present?
+              # for now lets just return some vriants
+            end
+            scope = scope.page(pars[:page])
+            json variants: scope.map{|i| i.to_liquid.as_json }
+          end
+
           get "/?:locale?/products/:id/reviews" do
             product  = ShoperbLiquid::ProductDrop.new(record = Model::Product.find_by(permalink: params[:id]))
             category = product.category
