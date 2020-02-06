@@ -48,7 +48,7 @@ module Shoperb module Theme module Editor
               # for now lets just return some vriants
             end
             scope = scope.page(pars[:page])
-            json variants: scope.map{|i| i.to_liquid.as_json }
+            json variants: scope.map{|i| i.to_liquid.as_json }.shuffle
           end
 
           get "/?:locale?/products/:id/reviews" do
