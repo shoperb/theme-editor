@@ -230,7 +230,7 @@ module Shoperb module Theme module Editor
           when String then obj
           when NilClass then raise StandardError.new("missing argument for building path")
           else
-            obj.try(:to_param) || obj.try(:id)
+            obj.try(:permalink) || obj.try(:to_param) || obj.try(:id)
           end
         end
 
