@@ -48,7 +48,9 @@ module Shoperb module Theme module Editor
               # for now lets just return some vriants
             end
             scope = scope.page(pars[:page])
-            json variants: scope.map{|i| i.to_liquid.as_json }.shuffle
+            arr   = scope.to_a || []
+            arr   = arr.map{|i| i.to_liquid.as_json }.shuffle
+            json variants: arr, page: {page: pars[:page]&.to_i||1, total: scope.total_count, size: arr.size, pages: scope.total_pages}
           end
 
           get "/?:locale?/products/:id/reviews" do
