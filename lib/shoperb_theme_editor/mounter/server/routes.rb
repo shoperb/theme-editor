@@ -45,12 +45,41 @@ module Shoperb module Theme module Editor
             scope = scope.where(product_id: pars[:product_id].to_i) if pars[:product_id].present?
 
             if pars[:attributes].present?
-              # for now lets just return some vriants
+              # for now lets just return some variants
             end
             scope = scope.page(pars[:page])
             arr   = scope.to_a || []
             arr   = arr.map{|i| i.to_liquid.as_json }.shuffle
-            json variants: arr, page: {page: pars[:page]&.to_i||1, total: scope.total_count, size: arr.size, pages: scope.total_pages}
+            resp  = {
+              variants: arr,
+              page: {
+                page:  pars[:page]&.to_i||1,
+                total: scope.total_count,
+                pages: scope.total_pages
+              }
+            }
+
+            if pars[:include].is_a?(Array)
+              if pars[:product_id].present? && pars[:include].include?("left_options")
+                v_ids = Model::Variant.
+                    where(product_id: pars[:product_id].to_i).
+                    select{|v| v.warehouse_stock > 0}.
+                    map(&:id)
+                resp[:left_options] = {}
+                Model::VariantAttribute.
+                    where(variant_id: v_ids).
+                    each do |attr|
+                      doing = true
+                      pars[:attributes].to_h.each{|k,v|
+                        doing=false if attr.name == k.to_s && attr.value == v
+                      }
+                      resp[:left_options][attr.name] ||= []
+                      resp[:left_options][attr.name] |= [attr.value] if doing
+                end
+              end
+            end
+
+            json resp
           end
 
           get "/?:locale?/products/:id/reviews" do

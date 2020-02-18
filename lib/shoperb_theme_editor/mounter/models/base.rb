@@ -17,7 +17,7 @@ module Shoperb module Theme module Editor
             )
             super(association_id, options)
           end
-          
+
           def has_many(association_id, options = {})
             klass = klass_for(association_id, options)
             options.reverse_merge!(
@@ -26,7 +26,7 @@ module Shoperb module Theme module Editor
             )
             super(association_id, options)
           end
-          
+
           def has_one(association_id, options = {})
             klass = klass_for(association_id, options)
             options.reverse_merge!(
@@ -37,7 +37,7 @@ module Shoperb module Theme module Editor
           end
         end
         extend DefaultRelation
-        
+
         class << self
           delegate :sum, :minimum, :maximum, :pluck, :ids, :includes,
             :joins, :left_joins, :references, :preload, :select, :sort_by,
@@ -112,7 +112,7 @@ module Shoperb module Theme module Editor
           def multiple_files?
             false
           end
-          
+
           def sample
             all.to_a.sample
           end
