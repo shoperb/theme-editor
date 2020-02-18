@@ -69,12 +69,14 @@ module Shoperb module Theme module Editor
                 Model::VariantAttribute.
                     where(variant_id: v_ids).
                     each do |attr|
-                      doing = true
-                      pars[:attributes].to_h.each{|k,v|
-                        doing=false if attr.name == k.to_s && attr.value == v
-                      }
+                      # doing = true
+                      # pars[:attributes].to_h.each{|k,v|
+                      #   doing=false if attr.name == k.to_s && attr.value == v
+                      # }
+                      # if doing
                       resp[:left_options][attr.name] ||= []
-                      resp[:left_options][attr.name] |= [attr.value] if doing
+                      resp[:left_options][attr.name] |= [attr.value]
+                      # end
                 end
               end
             end
