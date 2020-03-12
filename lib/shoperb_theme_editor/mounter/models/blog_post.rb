@@ -27,6 +27,15 @@ module Shoperb module Theme module Editor
         def prev
           BlogPost.active.detect { |post| post.attributes[:id] == self.prev_id }
         end
+
+
+        def images
+          Image.all.select { |image| image.entity == self }
+        end
+
+        def image
+          images.first
+        end
       end
     end
   end
