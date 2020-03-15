@@ -50,10 +50,6 @@ module Shoperb module Theme module Editor
           request.fullpath.gsub(/\A(?=#{shop.all_languages.map{|s|"/#{s}"}.join("|")}|)\/(.*)/, "/#{locale}/\\1") if locale
         end
 
-        def request_forgery_protection_token
-          "authenticity_token"
-        end
-
         def form_authenticity_token
           "token"
         end
