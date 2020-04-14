@@ -1,7 +1,10 @@
+require 'pagy'
+
 module Shoperb module Theme module Editor
   module Mounter
     module Model
       class Relation
+        include Pagy::Backend
         attr_reader :collection, :klass
 
         def self.build(collection, klass)
@@ -32,7 +35,6 @@ module Shoperb module Theme module Editor
         def initialize(collection, klass)
           @collection = collection
           @klass = klass || collection[0].try(:class)
-          @per = 20
         end
 
         delegate :each, :-, :+, :[], :|, :&, :to_yaml, :to_liquid, :map, to: :collection
@@ -117,66 +119,25 @@ module Shoperb module Theme module Editor
           self
         end
 
-        # super simplified pagination
-        def per(per_page)
-          @per = per_page
-          # restore collection when 'per' is changed
-          @collection = @original_collection if @original_collection
-          paginate
-          self
-        end
-
-        def page(page_number = 1)
-          page_number = 1 if !page_number || page_number == 0
-          @page = page_number
-          paginate
-          self
-        end
-
-        def num_pages
-          return 0 unless @per && @page
-          (@original_collection.size * 1.0 / @per).ceil
-        end
-
-        def total_count
-          return count unless @per && @page
-          @original_collection.count
-        end
-
-        def limit_value
-          @per
-        end
-
-        def total_pages
-          num_pages
-        end
-
-        def offset_value
-          return 0 unless @per && @page
-          (@page - 1) * @per
-        end
-
-        def offset
-          offset_value
+        def paginate(page, per_page)
+          # copy of pagy/extras/array
+          vars = {
+            count: collection.size,
+            page:  page,
+            items: per_page
+          }
+          pagy = Pagy.new(vars)
+          return pagy, self.class.new(collection[pagy.offset, pagy.items], @klass)
         end
 
         protected
 
-        def paginate
-          return unless @per && @page
-
-          @original_collection = @collection
-          @collection = @collection[(@page - 1) * @per, @per]
-        end
 
         def with_current_collection
           old_data = klass.instance_variable_get("@records")
-          #old_all = klass.instance_variable_get("@all")
           klass.instance_variable_set("@records", collection)
-          #klass.instance_variable_set("@all", nil)
           res = yield
           klass.instance_variable_set("@records", old_data)
-          #klass.instance_variable_set("@all", old_all)
           res
         end
       end

@@ -17,6 +17,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "sinatra-contrib"
   gem.add_dependency "sinatra-flash"
 
+  gem.add_dependency "pagy"
   gem.add_dependency "activesupport", "5.2.2"
   gem.add_dependency "actionpack", "5.2.2"
   gem.add_dependency "shoperb_liquid"
