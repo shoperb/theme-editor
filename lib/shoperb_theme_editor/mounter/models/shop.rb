@@ -6,7 +6,7 @@ module Shoperb module Theme module Editor
         fields :id, :name, :domain, :email, :time_zone, :unit_system,
           :tax_included, :tax_shipping, :possible_languages, :meta_description,
           :meta_keywords, :meta_title, :reviews,
-          :customer_accounts
+          :customer_accounts, :account_types
 
         def self.primary_key
           :domain
