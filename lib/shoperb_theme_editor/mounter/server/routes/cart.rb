@@ -80,6 +80,20 @@ module Shoperb module Theme module Editor
               end
             end
 
+            app.post "/cart/update" do
+              cart = current_cart
+              params[:update].each do |item, amount|
+                item = cart.items.where(id: item.to_i).first
+                item.amount = amount.to_i
+                item.save
+              end
+              
+              respond_to do |f|
+                f.json { json(cart_json) }
+                f.html { redirect "/cart" }
+              end
+            end
+
             app.post "/cart" do
               params[:update].each do |id, amount|
                 Model::CartItem.find(id.to_i).tap do |item|
