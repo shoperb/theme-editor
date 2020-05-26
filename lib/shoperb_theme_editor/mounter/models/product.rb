@@ -7,7 +7,7 @@ module Shoperb module Theme module Editor
           :handle, :state, :translations, :template, :collection_ids,
           :category_id, :minimum_price, :maximum_price, :minimum_discount_price,
           :maximum_discount_price, :minimum_active_price, :maximum_active_price,
-          :grouping_tags, :dirty_variant_attributes
+          :grouping_tags, :dirty_variant_attributes, :related_ids
 
         translates :name, :description
 
@@ -80,6 +80,9 @@ module Shoperb module Theme module Editor
 
         def similar
           category.products if category
+        end
+        def related_products
+          Product.all.select{|pr| related_ids.include?(pr.id)}
         end
 
         def rating
