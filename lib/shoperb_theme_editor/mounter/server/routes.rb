@@ -184,7 +184,7 @@ module Shoperb module Theme module Editor
           end
 
           get "/?:locale?/blog" do
-            respond :blog_posts, posts: ShoperbLiquid::CollectionDrop.new(Model::BlogPost.active.page(params[:page]).per(20))
+            respond :blog_posts, posts: ShoperbLiquid::CollectionDrop.new(Model::BlogPost.active)
           end
 
           get "/?:locale?/blog/:id" do
