@@ -33,6 +33,10 @@ module Shoperb module Theme module Editor
           Product.active.select { |product| possible.include?(product.attributes[:id].to_s) }
         end
 
+        def purchased_variant?(variant)
+          [true, false].sample
+        end
+
         def subscriptions
           CustomerSubscription.all
         end
