@@ -82,7 +82,7 @@ module Shoperb module Theme module Editor
           category.products if category
         end
         def related_products
-          Product.all.select{|pr| related_ids.include?(pr.id)}
+          Product.all.select{|pr| related_ids.to_a.include?(pr.id)}
         end
 
         def rating
