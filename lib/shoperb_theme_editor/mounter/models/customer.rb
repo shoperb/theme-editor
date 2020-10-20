@@ -37,6 +37,10 @@ module Shoperb module Theme module Editor
           [true, false].sample
         end
 
+        def not_returned_items
+          0
+        end
+
         def subscriptions
           CustomerSubscription.all
         end
