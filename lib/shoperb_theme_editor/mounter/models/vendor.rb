@@ -3,7 +3,7 @@ module Shoperb module Theme module Editor
     module Model
       class Vendor < Base
 
-        fields :id, :handle, :name, :description, :code, :fax, :phone,
+        fields :id, :handle, :permalink, :name, :description, :code, :fax, :phone,
           :email, :website, :contact_name, :contact_phone, :contact_email,
           :translations
 
