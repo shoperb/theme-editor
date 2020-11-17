@@ -7,7 +7,7 @@ module Shoperb module Theme module Editor
                :price_original, :price_discount, :discount_start, :discount_end,
                :allow_backorder, :track_inventory, :charge_taxes, :require_shipping,
                :digital, :url, :position, :stock_amounts, :product_id, :compare_at,
-               :gift_card_value
+               :gift_card_value, :num_in_pack
 
         # TODO: Make sku actually unique so it can be used as a primary key.
         def self.primary_key
