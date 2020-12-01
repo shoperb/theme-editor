@@ -97,6 +97,7 @@ module Shoperb module Theme module Editor
     end
 
     def product_attributes
+      process Mounter::Model::AttributeKey
       process Mounter::Model::ProductAttribute do |product_attribute|
         assign_relation product_attribute, Mounter::Model::Product
         product_attribute
