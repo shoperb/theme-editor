@@ -200,7 +200,7 @@ module Shoperb module Theme module Editor
             redirect "/order-returns"
           end
           get "/?:locale?/order-returns/new" do
-            respond :order_return, order_return: Model::OrderReturn.new.to_liquid, orders: ShoperbLiquid::CollectionDrop.new(Model::Order.all.to_a[0..10])
+            respond :order_return, order_return: Model::OrderReturn.new.to_liquid, orders: ShoperbLiquid::OrdersDrop.new(Model::Order.all.to_a[0..10])
           end
           get "/?:locale?/order-returns/:id" do
             respond :order_return, order_return: Model::OrderReturn.find(params[:id])&.to_liquid
