@@ -63,6 +63,10 @@ module Shoperb module Theme module Editor
           self
         end
 
+        def self.had_subscription
+          self
+        end
+
         def self.raw_data
           500.times.map do |i|
             {
