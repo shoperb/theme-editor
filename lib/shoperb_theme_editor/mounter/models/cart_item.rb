@@ -46,7 +46,11 @@ module Shoperb module Theme module Editor
         def out_of_stock?
           variant.nil? || !variant.available? || !variant.available?(:warehouse, amount)
         end
-        
+
+        def item_original_id
+          nil
+        end
+
         def overwritten_price sum
           if by_subscription
             0.to_d
