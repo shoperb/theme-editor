@@ -5,8 +5,8 @@ module Shoperb module Theme module Editor
 
         fields :id, :name, :description, :has_options, :permalink,
           :handle, :state, :translations, :template, :collection_ids,
-          :category_id, :minimum_price, :maximum_price, :minimum_discount_price,
-          :maximum_discount_price, :minimum_active_price, :maximum_active_price,
+          :category_id, :minimum_discount_price,
+          :maximum_discount_price, :minimum_active_price,
           :grouping_tags, :dirty_variant_attributes, :related_ids
 
         translates :name, :description
@@ -76,6 +76,15 @@ module Shoperb module Theme module Editor
 
         def minimum_active_price
           variants.min { |a, b| a.active_price <=> b.active_price }.try(:active_price)
+        end
+        def maximum_active_price
+          variants.max { |a, b| a.active_price <=> b.active_price }.try(:active_price)
+        end
+        def minimum_price
+          variants.min { |a, b| a.price <=> b.price }.try(:price)
+        end
+        def maximum_price
+          variants.max { |a, b| a.price <=> b.price }.try(:price)
         end
 
         def similar
