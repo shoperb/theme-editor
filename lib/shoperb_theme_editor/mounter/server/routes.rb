@@ -29,7 +29,7 @@ module Shoperb module Theme module Editor
                 json scope.map{|el| el.to_liquid(OpenStruct.new(registers: registers,locals: locals)).as_json }
               }
               f.html{
-                respond :categories
+                respond :categories, categories: scope.map(&:to_liquid)
               }
             end
           end
