@@ -61,7 +61,7 @@ module Shoperb module Theme module Editor
 
         def products_for_self_and_children
           arr = self_and_descendants.map(&:id)
-          Product.active.select { |product| arr.include?(product.category_permalink) }
+          Product.active.select { |product| arr.include?(product.category_id) }
         end
 
         def descends_from(category)
