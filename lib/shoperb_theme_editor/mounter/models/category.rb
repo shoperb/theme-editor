@@ -10,7 +10,7 @@ module Shoperb module Theme module Editor
         fields :level
 
         def self.primary_key
-          :permalink
+          :id
         end
 
         has_many :products
