@@ -26,7 +26,8 @@ module Shoperb module Theme module Editor
             locals, registers = registers_and_locals
             respond_to do |f|
               f.json{
-                json scope.map{|el| el.to_liquid(OpenStruct.new(registers: registers,locals: locals)).as_json }
+                children = params[:include].to_s.split("|").include?("children")
+                json scope.map{|el| el.to_liquid(OpenStruct.new(registers: registers,locals: locals)).as_json(incl_children: children) }
               }
               f.html{
                 respond :categories, categories: scope.map(&:to_liquid)
