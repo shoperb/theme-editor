@@ -20,6 +20,20 @@ module Shoperb module Theme module Editor
           self.app = app
           register_modules
 
+          get "/?:locale?/categories" do
+            scope = Model::Category.where
+            scope = scope.where(parent_id: params[:parent_id].to_i) if params[:parent_id].present?
+            locals, registers = registers_and_locals
+            respond_to do |f|
+              f.json{
+                json scope.map{|el| el.to_liquid(OpenStruct.new(registers: registers,locals: locals)).as_json }
+              }
+              f.html{
+                respond :categories
+              }
+            end
+          end
+
           get "/?:locale?/categories/*" do
             params[:id] = params[:splat][0]
             drop = ShoperbLiquid::CategoryDrop.new(request.env[:current_category] = Model::Category.find_by(permalink: params[:id]))
