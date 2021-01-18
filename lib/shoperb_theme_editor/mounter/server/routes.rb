@@ -22,7 +22,10 @@ module Shoperb module Theme module Editor
 
           get "/?:locale?/categories" do
             scope = Model::Category.where
-            scope = scope.where(parent_id: params[:parent_id].to_i) if params[:parent_id].present?
+            if params[:parent_id].present?
+              params[:parent_id] = Model::Category.find_by(handle: params[:parent_id]).id if params[:parent_id].to_i.eql?(0)
+              scope = scope.where(parent_id: params[:parent_id].to_i)
+            end
             respond_to do |f|
               f.json{
                 locals, registers = registers_and_locals
