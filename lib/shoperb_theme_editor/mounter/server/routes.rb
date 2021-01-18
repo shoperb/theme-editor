@@ -100,9 +100,23 @@ module Shoperb module Theme module Editor
               end
             end
 
-
-
             json resp
+          end
+
+          get "/?:locale?/product-filters" do
+            products = Model::Product.where
+            if params[:category].present?
+              obj      = Model::Category.find_by(handle: params[:category])
+              products = products.where(category_id: obj.self_and_descendants.map(&:id))
+            end
+            if params[:collection].present?
+              obj      = Model::Collection.find_by(handle: params[:collection]).id
+              products = products.where(id: obj.product_ids)
+            end
+
+            context = OpenStruct.new(products: products.map(&:to_liquid))
+            tag     = ShoperbLiquid::ProductsFilterTag.send(:new,"","",OpenStruct.new)
+            json tag.facets(context)
           end
 
           get "/?:locale?/products/:id/reviews" do
