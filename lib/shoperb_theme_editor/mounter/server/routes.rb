@@ -110,7 +110,7 @@ module Shoperb module Theme module Editor
               products = products.where(category_id: obj.self_and_descendants.map(&:id))
             end
             if params[:collection].present?
-              obj      = Model::Collection.find_by(handle: params[:collection]).id
+              obj      = Model::Collection.find_by(handle: params[:collection])
               products = products.where(id: obj.product_ids)
             end
 
