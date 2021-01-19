@@ -116,7 +116,7 @@ module Shoperb module Theme module Editor
 
             context = OpenStruct.new(products: products.map(&:to_liquid))
             tag     = ShoperbLiquid::ProductsFilterTag.send(:new,"","",OpenStruct.new)
-            json tag.facets(context)
+            json tag.facets(context)[params[:attribute]].to_h["values"].to_h
           end
 
           get "/?:locale?/products/:id/reviews" do
