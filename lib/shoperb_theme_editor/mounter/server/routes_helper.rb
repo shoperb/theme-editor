@@ -91,6 +91,11 @@ module Shoperb module Theme module Editor
           "/addresses"
         end
 
+
+        def delete_store_address_path(id,**_)
+          "/addresses/#{id}/delete"
+        end
+
         def store_brand_path(obj, **_)
           id = get_id(obj)
           "/brands/#{id}"
