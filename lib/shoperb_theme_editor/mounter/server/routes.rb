@@ -258,7 +258,7 @@ module Shoperb module Theme module Editor
             respond :address, address: ShoperbLiquid::AddressDrop.new(current_customer.addresses.detect { |address| address.id.to_s == params[:id].to_s })
           end
 
-          delete "/?:locale?/addresses/:id" do
+          get "/?:locale?/addresses/:id/delete" do
             redirect_to "/addresses"
           end
 
