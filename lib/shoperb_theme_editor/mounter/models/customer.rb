@@ -8,7 +8,6 @@ module Shoperb module Theme module Editor
           :discount_pct, :recommended_products_ids, :custom_field_values,
           :company
 
-        has_many :orders
 
         def name
           "#{first_name} #{last_name}".strip
@@ -27,6 +26,10 @@ module Shoperb module Theme module Editor
           Address.all.select { |address|
             address.attributes.slice(:owner_type, :owner_id).with_indifferent_access == check
           }
+        end
+
+        def orders
+          Order.all
         end
 
         def recommended_products
