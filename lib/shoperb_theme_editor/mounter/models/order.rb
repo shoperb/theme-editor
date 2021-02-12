@@ -60,11 +60,11 @@ module Shoperb module Theme module Editor
         end
 
         def self.sorted
-          self
+          all
         end
 
         def self.had_subscription
-          self
+          all
         end
 
         def self.raw_data
