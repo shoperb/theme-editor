@@ -48,7 +48,7 @@ module Shoperb module Theme module Editor
         end
 
         def country_name
-          country.localized_name
+          country&.localized_name
         end
 
         def owner
