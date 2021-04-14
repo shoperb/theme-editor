@@ -82,7 +82,7 @@ module Shoperb module Theme module Editor
               # resp[:left_options] = left_options(params[:product_id])
               v_ids = Model::Variant.
                   where(product_id: pars[:product_id].to_i).
-                  select{|v| v.warehouse_stock > 0}.
+                  available.
                   map(&:id)
               resp[:left_options] = {}
 
