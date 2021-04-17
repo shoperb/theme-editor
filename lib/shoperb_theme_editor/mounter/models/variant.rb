@@ -4,6 +4,7 @@ module Shoperb module Theme module Editor
       class Variant < Base
 
         fields :id, :sku, :warehouse_stock, :weight, :width, :height, :depth, :price,
+               :barcode,
                :price_original, :price_discount, :discount_start, :discount_end,
                :allow_backorder, :track_inventory, :charge_taxes, :require_shipping,
                :digital, :url, :position, :stock_amounts, :product_id, :compare_at,
