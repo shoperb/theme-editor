@@ -41,7 +41,15 @@ module Shoperb module Theme module Editor
           [true, false].sample
         end
 
+        def existing_order_returns
+          OrderReturn.all
+        end
+
         def order_returns
+          new_order_returns
+        end
+
+        def new_order_returns
           order = Order.last
           {order.id => order}
         end
