@@ -53,7 +53,7 @@ module Shoperb module Theme module Editor
     end
 
     def images
-      Images.process
+      # Images.process
     end
 
     def menus
