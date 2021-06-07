@@ -36,7 +36,6 @@ module Shoperb module Theme module Editor
         def self.by_updated(dir)
           sort_by(&:id)
         end
-        end
 
         def self.by_product_type(dir)
           sort_by{|pr| pr.product_type&.name }
