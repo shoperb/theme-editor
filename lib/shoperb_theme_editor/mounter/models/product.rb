@@ -38,7 +38,7 @@ module Shoperb module Theme module Editor
         end
 
         def self.by_product_type(dir)
-          sort_by{|pr| pr.product_type&.name }
+          sort_by{|pr| pr.product_type&.name.to_s }
         end
 
         def active?
