@@ -71,6 +71,19 @@ module Shoperb module Theme module Editor
               item.amount ||= 0
               item.amount += amount
 
+              # to add more variants
+              params[:other].each do |key, pars|
+                variant_id2       = key.to_i
+                amount2           = pars[:amount].to_i
+                item_original_id2 = pars[:item_original_id]
+                by_subscription2  = %w(1 true).include?(pars[:by_subscription])
+                binding.pry
+                item2 = Model::CartItem.where(variant_id: variant_id2, by_subscription: by_subscription2).first || Model::CartItem.new(variant_id: variant_id2, by_subscription: by_subscription2)
+                item2.amount ||= 0
+                item2.amount  += amount2
+              end if params[:other].present?
+
+
               item.save
               cart.save
 
@@ -87,7 +100,7 @@ module Shoperb module Theme module Editor
                 item.amount = amount.to_i
                 item.save
               end
-              
+
               respond_to do |f|
                 f.json { json(cart_json) }
                 f.html { redirect "/cart" }
