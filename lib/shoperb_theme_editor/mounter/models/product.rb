@@ -45,6 +45,10 @@ module Shoperb module Theme module Editor
           sort_by{|pr| pr.variants[0]&.sku.to_s }
         end
 
+        def self.by_handle(dir)
+          sort_by{|pr| pr.handle.to_s }
+        end
+
         def active?
           state == "active"
         end
