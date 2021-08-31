@@ -41,6 +41,10 @@ module Shoperb module Theme module Editor
           sort_by{|pr| pr.product_type&.name.to_s }
         end
 
+        def self.by_tags(dir)
+          sort_by{|pr| pr.grouping_tags.to_s }
+        end
+
         def self.by_sku(dir)
           sort_by{|pr| pr.variants[0]&.sku.to_s }
         end
