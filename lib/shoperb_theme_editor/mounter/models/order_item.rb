@@ -5,7 +5,7 @@ module Shoperb module Theme module Editor
         fields :id, :name, :amount, :sku, :weight, :width, :depth,
           :price, :total_without_taxes, :total_wout_correlation,
           :total_weight, :total_taxes, :require_shipping, :charge_taxes,
-          :item_original_id, :by_subscription, :brand_id
+          :item_original_id, :by_subscription, :brand_id,:amount_step,:amount_step_unit
 
         belongs_to :order
         has_many :item_attributes, class_name: OrderItemAttribute.to_s
