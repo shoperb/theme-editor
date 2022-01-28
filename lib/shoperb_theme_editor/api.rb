@@ -147,6 +147,7 @@ module Shoperb module Theme module Editor
       Sync.blog_posts
       Sync.settings_data
       Sync.customers
+      Sync.customer_groups
       Sync.reviews
       Sync.discounts
       Sync.custom_fields

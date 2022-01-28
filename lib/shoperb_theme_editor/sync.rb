@@ -127,6 +127,11 @@ module Shoperb module Theme module Editor
       process Mounter::Model::Customer
     end
 
+    def customers
+      process Mounter::Model::CustomerGroup
+      #process Mounter::Model::CustomerCustomerGroup
+    end
+
     def reviews
       process Mounter::Model::Review do |review|
         assign_relation review, Mounter::Model::Product

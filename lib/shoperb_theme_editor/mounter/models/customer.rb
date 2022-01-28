@@ -28,6 +28,10 @@ module Shoperb module Theme module Editor
           }
         end
 
+        def customer_groups
+          CustomerGroup.select{|cg| cg.customer_ids.include?(id)}
+        end
+
         def orders
           Order.all
         end
