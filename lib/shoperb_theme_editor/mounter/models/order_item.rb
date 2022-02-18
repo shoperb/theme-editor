@@ -10,6 +10,10 @@ module Shoperb module Theme module Editor
         belongs_to :order
         has_many :item_attributes, class_name: OrderItemAttribute.to_s
 
+        def order
+          Order.first
+        end
+
         def digital?
           digital
         end
