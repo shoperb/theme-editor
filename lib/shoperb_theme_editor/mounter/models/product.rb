@@ -53,6 +53,15 @@ module Shoperb module Theme module Editor
           sort_by{|pr| pr.handle.to_s }
         end
 
+        def self.find_by_sku(sku)
+          if sku.respond_to?(:to_ary)
+            all.select{|pr| sku.include?(pr.sku}
+          else
+            all.find{|pr| sku == pr.sku}
+          end
+        end
+
+
         def active?
           state == "active"
         end
