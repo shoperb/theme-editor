@@ -127,7 +127,7 @@ module Shoperb module Theme module Editor
       process Mounter::Model::Customer
     end
 
-    def customers
+    def customer_groups
       process Mounter::Model::CustomerGroup
       #process Mounter::Model::CustomerCustomerGroup
     end
