@@ -118,11 +118,12 @@ Slop.parse ignore_case: true, help: true, strict: true do
 
   command "sync" do
     apply_global_opts
+    on "skip-images", "Skip downloading images"
     description "Syncronizes your shoperb shops products/categories/etc to your local data"
     banner with_description("Usage: shoperb sync [options]")
     run do |options, args|
       Shoperb::Theme::Editor.with_configuration(options) do
-        Shoperb::Theme::Editor::Api.sync args[0]
+        Shoperb::Theme::Editor::Api.sync args[0], options.to_hash
       end
     end
   end

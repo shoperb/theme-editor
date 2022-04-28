@@ -123,7 +123,7 @@ module Shoperb module Theme module Editor
       end
     end
 
-    def sync resource = nil
+    def sync resource = nil, opts={}
       prepare
 
       if resource
@@ -134,7 +134,7 @@ module Shoperb module Theme module Editor
 
       Sync.products
       Sync.shop
-      Sync.images
+      Sync.images unless opts[:"skip-images"]
       Sync.media_files
       Sync.collections
       Sync.vendors
