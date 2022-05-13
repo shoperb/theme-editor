@@ -28,6 +28,10 @@ module Shoperb module Theme module Editor
           {}
         end
 
+        def updated_at
+          Time.now
+        end
+
         class Spec
           def compile
             data["compile"]
