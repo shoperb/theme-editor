@@ -53,6 +53,10 @@ module Shoperb module Theme module Editor
           sort_by{|pr| pr.handle.to_s }
         end
 
+        def self.random
+          all.sample
+        end
+
 
         def active?
           state == "active"
