@@ -25,6 +25,19 @@ module Shoperb module Theme module Editor
         def handle
           attribute_key['handle']
         end
+
+
+        # for order_item_attribute
+        def owner
+          name
+        end
+        def self.from_variant
+          all
+        end
+        def self.from_product
+          all
+        end
+        # endfor order_item_attribute 
       end
     end
   end
