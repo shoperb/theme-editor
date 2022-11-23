@@ -167,7 +167,7 @@ module Shoperb module Theme module Editor
       ) do |faraday|
         faraday.request  :multipart
         faraday.request  :url_encoded
-        faraday.adapter  :patron
+        faraday.adapter  :net_http
       end
     end
 

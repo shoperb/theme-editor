@@ -30,6 +30,7 @@ autoload :Mime,               "action_dispatch/http/mime_type"
 autoload :Slop,               "slop"
 autoload :ActiveHash,         "active_hash"
 autoload :ActiveYaml,         "active_hash"
+require 'faraday/multipart'
 
 module Shoperb module Theme
   module Editor
