@@ -74,7 +74,7 @@ module Shoperb module Theme module Editor
           end
 
           def load_path(path)
-            (File.exists?(path) ? YAML.load_file(path) : [])
+            (File.exist?(path) ? YAML.load_file(path) : [])
           end
 
           def save

@@ -73,8 +73,8 @@ module Shoperb module Theme
     end
 
     def settings_data
-      unless File.exists?('config/settings_data.json')
-        if File.exists?('presets/default.json')
+      unless File.exist?('config/settings_data.json')
+        if File.exist?('presets/default.json')
           File.open('config/settings_data.json', 'w') do |f|
             settings = JSON.parse(File.read('presets/default.json'))['settings']
             f.write JSON.pretty_generate({ general: settings })
@@ -82,14 +82,14 @@ module Shoperb module Theme
         end
       end
 
-      if File.exists?('config/settings_data.json')
+      if File.exist?('config/settings_data.json')
         JSON.parse(File.read('config/settings_data.json'))
       end
     end
 
     def local_spec_content
       @local_spec_content ||= begin
-        if File.exists?(path = Utils.base + "config/spec.json")
+        if File.exist?(path = Utils.base + "config/spec.json")
           File.read(path)
         else
           new_spec_content
@@ -107,7 +107,7 @@ module Shoperb module Theme
           javascripts: ['application.js']
         }
       }.to_json
-      Dir.mkdir 'config' unless File.exists?('config')
+      Dir.mkdir 'config' unless File.exist?('config')
       File.open('config/spec.json', 'w') {|f| f.write(spec_content) }
       spec_content
     end
@@ -151,7 +151,7 @@ module Shoperb module Theme
       end
 
       def find_digest(path)
-        @digests && File.exists?(path) ? Digest::MD5.hexdigest(File.read(path)) : ''
+        @digests && File.exist?(path) ? Digest::MD5.hexdigest(File.read(path)) : ''
       end
     end
   end

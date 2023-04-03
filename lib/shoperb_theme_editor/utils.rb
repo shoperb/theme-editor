@@ -31,7 +31,7 @@ module Shoperb module Theme module Editor
     end
 
     def rm_tempfile file
-      if file && File.exists?(file)
+      if file && File.exist?(file)
         file.close
         file.unlink
       end

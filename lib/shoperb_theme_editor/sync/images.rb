@@ -49,7 +49,7 @@ module Shoperb module Theme module Editor
           rescue Exception => e
             Logger.error("#{e.message} (#{url} => #{filename})")
           end
-        }) unless File.exists?(filename)
+        }) unless File.exist?(filename)
       end
 
       def threaded_download message
