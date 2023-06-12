@@ -210,7 +210,7 @@ module Shoperb module Theme module Editor
     end
 
     def get_authented_token(code)
-      oauth_client.auth_code.get_token(code, redirect_uri: Editor["oauth-redirect-uri"], scope: "admin", headers: { 'Current-Shop' => Editor["oauth-site"] })
+      oauth_client.auth_code.get_token(code, client_id: oauth_client.id, client_secret: oauth_client.secret, redirect_uri: Editor["oauth-redirect-uri"], scope: "admin", headers: { 'Current-Shop' => Editor["oauth-site"] })
     end
 
     def access_token
