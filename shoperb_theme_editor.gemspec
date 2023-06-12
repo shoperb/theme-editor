@@ -31,6 +31,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "slop", "~> 3"
   gem.add_dependency "patron"
   gem.add_dependency "active_hash", "~> 3"
+  gem.add_dependency "activerecord" # for active_hash
   gem.add_dependency "colorize"
   gem.add_dependency "oauth2", "~> 2"
   gem.add_dependency "faraday-multipart"
