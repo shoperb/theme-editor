@@ -46,7 +46,7 @@ module Shoperb module Theme module Editor
           # make sure relation is created when necessary
           # in order to allow chaining methods
           def all
-            super.to_relation(self)
+            super.to_a.to_relation(self)
           end
 
           def none
