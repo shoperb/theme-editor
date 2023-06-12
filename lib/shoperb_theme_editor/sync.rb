@@ -157,7 +157,7 @@ module Shoperb module Theme module Editor
       result = fetch("api/v1/#{path}").map(&(block || ->(this){this})).compact
       uniq = result.uniq { |h| h[klass.primary_key.to_s] }
       Logger.info "Received #{result.count} #{path.pluralize(result.count)}, kept #{uniq.count}.\n" if Editor["verbose"]
-      klass.assign uniq
+      klass.assign uniq.map(&:to_hash)
     end
 
     def counter
