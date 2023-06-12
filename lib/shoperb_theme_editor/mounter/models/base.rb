@@ -53,8 +53,8 @@ module Shoperb module Theme module Editor
             [].to_relation(self)
           end
 
-          def where(**args)
-            super(**args).to_relation(self)
+          def where(*args)
+            super(*args).to_relation(self)
           end
 
           def not(**args)
