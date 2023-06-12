@@ -18,7 +18,7 @@ module Shoperb module Theme module Editor
               template: template
             )
 
-            ShoperbLiquid.options(self, locals)
+            ShoperbLiquid.options(self, **locals)
           end
 
           def set_pagination_defaults
