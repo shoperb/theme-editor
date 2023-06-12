@@ -46,8 +46,11 @@ module Shoperb module Theme module Editor
         # so far in liquid it's used to replace locale only
         # theme setting link, but we will skip it for now.
         # just minimum required implementation.
-        def url_for(locale: nil, **args)
-          request.fullpath.gsub(/\A(?=#{shop.all_languages.map{|s|"/#{s}"}.join("|")}|)\/(.*)/, "/#{locale}/\\1") if locale
+        def url_for(*args_main, **args)
+          args_main.each do |arg|
+            arg.each{|k,v| args[k] = v}
+          end
+          request.fullpath.gsub(/\A(?=#{shop.all_languages.map{|s|"/#{s}"}.join("|")}|)\/(.*)/, "/#{args[:locale]}/\\1") if args[:locale]
         end
 
         def form_authenticity_token
