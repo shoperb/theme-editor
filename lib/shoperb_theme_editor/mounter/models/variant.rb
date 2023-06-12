@@ -52,6 +52,13 @@ module Shoperb module Theme module Editor
         def stock(*args)
           warehouse_stock
         end
+        
+        def warehouse_stock
+          attributes[__method__].to_d
+        end
+        def amount_step
+          attributes[__method__].to_d
+        end
 
         def active_price
           discount_active? ? price_discount : price
