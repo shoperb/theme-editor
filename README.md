@@ -11,7 +11,7 @@ Guides could be found  [here](https://www.ruby-lang.org/en/documentation/install
 #### First option: in one line
 Copy-paste given command in console:
 ```
-echo -e "source \"https://rubygems.org\"\ngem \"shoperb-theme-editor\", git: \"git@github.com:shoperb/theme-editor.git\"\ngem \"shoperb_liquid\", github: \"git@github.com:shoperb/shoperb-liquid.git\"\ngem 'artisans',  git: 'git@github.com:shoperb/artisans.git'\n" > Gemfile && bundle
+echo -e "source \"https://rubygems.org\"\ngem \"shoperb-theme-editor\", git: \"https://github.com/shoperb/theme-editor.git\"\ngem \"shoperb_liquid\", git: \"https://github.com/shoperb/shoperb-liquid.git\"\ngem 'artisans',  git: 'https://github.com/shoperb/artisans.git'\n" > Gemfile && bundle
 ```
 
 #### Second option: in steps
@@ -19,9 +19,9 @@ Create Gemfile:
 ```ruby
 source "https://rubygems.org"
 
-gem "shoperb-theme-editor", git: 'git@github.com:shoperb/theme-editor.git'
-gem 'shoperb_liquid',  git: 'git@github.com:shoperb/shoperb-liquid.git'
-gem "artisans", git: "git@github.com:shoperb/artisans.git"
+gem "shoperb-theme-editor", git: 'git@github.com:shoperb/theme-editor'
+gem 'shoperb_liquid',  git: 'git@github.com:shoperb/shoperb-liquid'
+gem "artisans", git: "git@github.com:shoperb/artisans"
 ```
 And then execute:
 ```bash
