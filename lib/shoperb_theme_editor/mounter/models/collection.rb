@@ -15,7 +15,7 @@ module Shoperb module Theme module Editor
         end
 
         def products
-          Product.active.select { |product| product_ids.to_a.include?(product.attributes[:id]) }
+          Product.active.where(id: product_ids)
         end
 
         def vendors
