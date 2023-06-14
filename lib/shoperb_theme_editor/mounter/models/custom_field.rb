@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class CustomField < Base
+      class CustomField < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :name, :description, :klass, :handle,
           :customer_see, :customer_edit, :customer_delete,

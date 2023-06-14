@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Page < Base
+      class Page < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :state, :name, :content, :permalink, :handle, :translations, :template
 

@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Search < Base
+      class Search < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
         # todo: TODOREF3
       end
     end

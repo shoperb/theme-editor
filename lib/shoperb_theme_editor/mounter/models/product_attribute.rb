@@ -1,9 +1,10 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class ProductAttribute < Base
-        fields :id, :product_id, :attribute_key_id, :values,
-          :translations
+      class ProductAttribute < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
+        fields :id, :product_id, :attribute_key_id, :values
 
         translates :values
         belongs_to :attribute_key

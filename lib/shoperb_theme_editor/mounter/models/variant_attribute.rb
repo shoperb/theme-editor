@@ -1,9 +1,12 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class VariantAttribute < Base
+      class VariantAttribute < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :value, :translations, :attribute_key
+        c_fields :variant_id, cast: Integer
 
         translates :value
 
@@ -13,7 +16,7 @@ module Shoperb module Theme module Editor
         end
 
         def self.primary_key
-          "id"
+          :id
         end
 
         belongs_to :variant

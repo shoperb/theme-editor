@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Menu < Base
+      class Menu < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :name, :handle, :editable, :translations
 

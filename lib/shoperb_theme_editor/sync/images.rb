@@ -40,7 +40,7 @@ module Shoperb module Theme module Editor
             Utils.write_file(filename) do
               begin
                 Timeout::timeout(10) do
-                  open(url).read
+                  URI(url).open.read
                 end
               rescue Timeout::Error => e
                 retry

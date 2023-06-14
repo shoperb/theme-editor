@@ -1,9 +1,15 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class CartItem < Base
+      class CartItem < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
-        fields :variant_sku, :name, :amount, :created_at, :updated_at, :by_subscription
+        fields :variant_sku, :name, :created_at, :updated_at
+        c_fields :id,         cast: Integer
+        c_fields :amount,     cast: BigDecimal
+        c_fields :variant_id, cast: Integer
+        c_fields :by_subscription, cast: TrueClass
 
         belongs_to :variant
 
@@ -13,7 +19,7 @@ module Shoperb module Theme module Editor
 
         delegate :product, to: :variant
         delegate :sku, to: :variant
-        delegate :require_shipping?,  :to => :variant
+        delegate :require_shipping?,  to: :variant
 
         def cart
           Cart.first

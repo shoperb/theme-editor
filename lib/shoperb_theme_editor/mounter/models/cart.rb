@@ -1,9 +1,11 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Cart < Base
+      class Cart < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
-        fields :token
+        fields :id, :token
 
         attr_accessor :customer
 
@@ -12,19 +14,19 @@ module Shoperb module Theme module Editor
         end
 
         def items
-          CartItem.all
+          CartItem
         end
 
         def total
-          items.sum(&:total)
+          items.to_a.sum(&:total)
         end
 
         def weight
-          items.sum(&:weight)
+          items.to_a.sum(&:weight)
         end
 
         def require_shipping?
-          items.any?(&:require_shipping?)
+          items.to_a.any?(&:require_shipping?)
         end
 
       end

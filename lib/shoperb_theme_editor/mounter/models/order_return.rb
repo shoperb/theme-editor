@@ -2,7 +2,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class OrderReturn < Base
+      class OrderReturn < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
         fields :id, :delivery_date, :comment, :state, :subtotal
         
         def items

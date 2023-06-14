@@ -1,7 +1,8 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class ProductSearch < Base
+      class ProductSearch
+        include Pagy::Backend
 
         attr_reader :word, :options
 
@@ -13,7 +14,7 @@ module Shoperb module Theme module Editor
         def paginate(page: 1, per: 12)
           page = 1 if !page || page == 0
 
-          results.paginate(1, per)
+          pagy(results, items: per, page: page, count: results.count)
         end
 
         def performed
@@ -26,12 +27,13 @@ module Shoperb module Theme module Editor
 
         def results
           return Product.none if word.blank?
+          return @results if defined?(@results)
 
-          Product.select do |p|
-            terms.any? do |term|
-              term.presence && p.name.downcase.include?(term.downcase)
-            end
+          rel = Product
+          terms.each do |term|
+            rel = rel.where(Sequel.ilike(:name, "%#{term}%")) if term.presence
           end
+          @results = rel
         end
 
         def results_size

@@ -212,7 +212,7 @@ module Shoperb module Theme module Editor
           end
 
           get "/?:locale?/brands/:id" do
-            drop = ShoperbLiquid::VendorDrop.new(Model::Vendor.find(params[:id]))
+            drop = ShoperbLiquid::VendorDrop.new(Model::Vendor.find(id: params[:id]))
             respond :brand, vendor: drop, brand: drop, meta: drop
           end
 
@@ -236,10 +236,10 @@ module Shoperb module Theme module Editor
             respond :order_return, order_return: Model::OrderReturn.new.to_liquid, orders: ShoperbLiquid::OrdersDrop.new(Model::Order.all.to_a[0..10])
           end
           get "/?:locale?/order-returns/:id" do
-            respond :order_return, order_return: Model::OrderReturn.find(params[:id])&.to_liquid
+            respond :order_return, order_return: Model::OrderReturn.find(id: params[:id])&.to_liquid
           end
           post "/?:locale?/order-returns/:id/generate-parcel" do
-            respond :order_return, order_return: Model::OrderReturn.find(params[:id])&.to_liquid
+            respond :order_return, order_return: Model::OrderReturn.find(id: params[:id])&.to_liquid
           end
 
           get "/?:locale?/addresses/new" do
@@ -275,7 +275,7 @@ module Shoperb module Theme module Editor
           get "/?:locale?/emails/:template" do
             entities = {}
             order = if params[:order_id]
-              Model::Order.find(params[:order_id])
+              Model::Order.find(id: params[:order_id])
             else
               Model::Order.first
             end
@@ -283,7 +283,7 @@ module Shoperb module Theme module Editor
             customer = if order
               order.customer
             elsif params[:customer_id]
-              Model::Customer.find(params[:order_id])
+              Model::Customer.find(id: params[:order_id])
             else
               Model::Customer.last
             end
@@ -323,7 +323,7 @@ module Shoperb module Theme module Editor
           end
 
           resource Model::Order do
-            ShoperbLiquid::OrderDrop.new(Model::Order.find(params[:id]))
+            ShoperbLiquid::OrderDrop.new(Model::Order.find(id: params[:id]))
           end
 
           resources Model::Order do

@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class ShippingMethod < Base
+      class ShippingMethod < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         belongs_to :order
 

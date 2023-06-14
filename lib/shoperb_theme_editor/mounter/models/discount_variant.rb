@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class DiscountVariant < Base
+      class DiscountVariant < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :discount_id, :variant_id
 

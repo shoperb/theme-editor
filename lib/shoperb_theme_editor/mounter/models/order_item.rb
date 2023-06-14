@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class OrderItem < Base
+      class OrderItem < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
         fields :id, :name, :amount, :sku, :weight, :width, :depth,
           :price, :total_without_taxes, :total_wout_correlation,
           :total_weight, :total_taxes, :require_shipping, :charge_taxes,
@@ -37,7 +39,7 @@ module Shoperb module Theme module Editor
         end
 
         def brand
-          Vendor.find(brand_id) if brand_id
+          Vendor.find(id: brand_id) if brand_id
         end
 
         def item_attributes

@@ -1,150 +1,159 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Base < ActiveYaml::Base
+      class Base
 
-        set_root_path Utils.base + "data"
-        include ActiveHash::Associations
-
-        module DefaultRelation
-          def belongs_to(association_id, options = {})
-            klass = klass_for(association_id, options)
-            options.reverse_merge!(
-              class_name: klass.to_s,
-              foreign_key: "#{association_id}_#{klass.primary_key}",
-              primary_key: klass.primary_key,
-              optional: true
-            )
-            super(association_id, options)
+        module SequelClass
+          def fields(*args)
+            @fields_list ||= []
+            @fields_list  |= args
+            c_fields(*args, cast: String)
           end
 
-          def has_many(association_id, options = {})
-            klass = klass_for(association_id, options)
-            options.reverse_merge!(
-              class_name: klass.to_s,
-              foreign_key: "#{to_s.demodulize.underscore}_#{primary_key}",
-            )
-            super(association_id, options)
-          end
-
-          def has_one(association_id, options = {})
-            klass = klass_for(association_id, options)
-            options.reverse_merge!(
-              class_name: klass.to_s,
-              foreign_key: "#{to_s.demodulize.underscore}_#{primary_key}",
-            )
-            super(association_id, options)
-          end
-        end
-        extend DefaultRelation
-
-        class << self
-          delegate :sum, :minimum, :maximum, :pluck, :ids, :includes,
-            :joins, :left_joins, :references, :preload, :select, :sort_by,
-            :reject, :first, :last, :page, :per, to: :all
-
-          # make sure relation is created when necessary
-          # in order to allow chaining methods
-          def all
-            super.to_a.to_relation(self)
-          end
-
-          def none
-            [].to_relation(self)
-          end
-
-          def where(*args)
-            super(*args).to_relation(self)
-          end
-
-          def not(**args)
-            all.select do |item|
-              args.all? do |k, v|
-                if v.is_a?(Array)
-                  !v.include?(item.send(k.to_s))
-                else
-                  item.send(k.to_s) != v
+          def c_fields(*args, **opts)
+            @fields_casted ||= {}
+            args.each do |field|
+              @fields_casted[field] = opts
+              case opts[:cast].to_s
+              when JSON.to_s, Array.to_s
+                define_method field do
+                  JSON.parse(@values[field.to_sym]) if @values[field.to_sym]
+                end
+              when BigDecimal.to_s
+                define_method field do
+                  BigDecimal(@values[field.to_sym]) if @values[field.to_sym]
+                end
+              when Integer.to_s
+                define_method field do
+                  Integer(@values[field.to_sym]) if @values[field.to_sym]
+                end
+              when TrueClass.to_s
+                define_method field do
+                  @values[field.to_sym] == "1" || @values[field.to_sym] == "T"
+                end
+                define_method "#{field}?" do
+                  public_send field
                 end
               end
             end
           end
 
-          def has_singleton_method?(name)
-            singleton_methods.map { |method| method.to_sym }.include?(name)
+          def belongs_to(*args, **args2)
+            many_to_one(*args, **args2)
           end
-
-          def load_path(path)
-            (File.exist?(path) ? YAML.load_file(path) : [])
-          end
-
-          def save
-            (subclasses + [self] - [Base]).each do |klass|
-              Utils.write_file(klass.full_path) { klass.as_hash.to_yaml }
-            end
-          end
-
-          def klass_for association_id, options
-            options.has_key?(:class_name) ? options[:class_name].constantize : parent.const_get(association_id.to_s.classify)
-          end
-
-          def load_file
-            raw_data || []
-          end
-
-          def filename
-            name.demodulize.tableize
-          end
-
-          def as_hash
-            all.map(&:attributes).map(&:stringify_keys)
-          end
-
-          def assign records
-            self.delete_all
-            self.data = records.map(&method(:filtered_attributes))
-            records
-          end
-
-          def filtered_attributes attributes
-            attributes.slice(*field_names.map(&:to_s))
-          end
-
-          def multiple_files?
-            false
-          end
-
-          def sample
-            all.to_a.sample
-          end
-
-          def primary_key
-            :id
-          end
-
-          def translates *args
-            fields :translations
-            args.each do |arg|
-              define_method arg do |*_|
-                ((translations || {})[Translations.locale] || {}).fetch(arg.to_s, attributes[arg])
+          def has_many(*args, **args2)
+            one_to_many(*args, **args2)
+            args.each do |meth|
+              define_method meth do
+                public_send("#{meth}_dataset")
               end
             end
           end
+
+          def find_by(*args, **args2)
+            find(**args2)
+          end
+
+          def includes(*args)
+            self
+          end
+
+          def sum(*args)
+            super || 0
+          end
+          
+
+          def translates *args
+            c_fields :translations, cast: JSON
+            args.each do |arg|
+              define_method arg do |*_|
+                ((translations || {})[Translations.locale] || {}).fetch(arg.to_s, @values[arg])
+              end
+            end
+          end
+
+          def assign(records)
+            db = ::Sequel::Model.db
+            create_table
+
+            data = records.map do |record|
+              @fields_casted.each_with_object([]) do |(field, opts), arr|
+                if db.schema(table_name).to_h[field][:db_type] == "TEXT" && record[field.to_s] && !record[field.to_s].is_a?(String)
+                  arr.push(JSON.dump( record[field.to_s] ))
+                else
+                  arr.push(         ( record[field.to_s] ))
+                end
+              end
+            end
+            db[table_name].import(@fields_casted.keys,  data)
+          rescue=>e
+            binding.pry
+          end
+
+          def create_table
+            fields = @fields_casted
+            db = ::Sequel::Model.db
+            db.create_table(table_name) do
+              fields.each do |field, opts|
+                case field.to_s
+                when "id"
+                  primary_key :id
+                when /_id$/, "lft", "rgt", "level"
+                  Integer field
+                else
+                  case opts[:cast].to_s
+                  when BigDecimal.to_s
+                    BigDecimal field
+                  when Integer.to_s
+                    Integer field
+                  when TrueClass
+                    Boolean field
+                  else
+                    text field
+                  end
+                end
+              end
+            end if db["SELECT count(*) a FROM sqlite_master WHERE type='table' AND name='#{table_name}'"].first[:a] == 0
+          end
+
         end
 
-        def to_liquid context=nil
-          if klass = (ShoperbLiquid.const_get("#{self.class.to_s.demodulize}Drop"))
-            klass.new(self).tap do |drop|
-              drop.context = context if context
+
+        module Sequel
+          extend ActiveSupport::Concern
+
+          included do
+            dataset_module do
+              def none
+                where(Sequel.lit("1=1"))
+              end
             end
+          end
+
+          def to_liquid context=nil
+            if klass = (ShoperbLiquid.const_get("#{self.class.to_s.demodulize}Drop"))
+              klass.new(self).tap do |drop|
+                drop.context = context if context
+              end
+            end
+          end
+
+          def attributes
+            @values
+          end
+  
+          def id
+            self.class.primary_key.to_s == "id" ? super : send(self.class.primary_key)
           end
         end
 
-        def id
-          self.class.primary_key.to_s == "id" ? super : send(self.class.primary_key)
-        end
+        class << self
+          
+          def save
+            Cart.create_table
+            CartItem.create_table
+          end
 
-        def as_json(*attrs)
-          attributes.as_json(*attrs)
         end
       end
     end

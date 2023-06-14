@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Country < Base
+      class Country < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :code, :name, :iso3, :numeric, :eu, :na,
           :region_name_key, :abstract

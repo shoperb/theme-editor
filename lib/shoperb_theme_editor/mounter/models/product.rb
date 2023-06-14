@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Product < Base
+      class Product < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :name, :description, :has_options, :permalink,
           :handle, :state, :translations, :template, :collection_ids,
@@ -17,8 +19,10 @@ module Shoperb module Theme module Editor
           :id
         end
 
-        def self.active
-          all.select(&:active?)
+        dataset_module do
+          def active
+            where(id:  all.select(&:active?).map(&:id) )
+          end
         end
 
         def self.by_name(dir)
@@ -84,7 +88,7 @@ module Shoperb module Theme module Editor
         has_many :reviews
 
         def images
-          Image.all.select { |image| image.entity == self }
+          Image.for(self)
         end
 
         def image

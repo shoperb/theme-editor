@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Order < Base
+      class Order < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :number, :token, :email, :total, :subtotal,
           :total_shipping, :total_taxes, :require_shipping,

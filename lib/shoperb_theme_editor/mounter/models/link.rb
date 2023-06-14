@@ -1,9 +1,11 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Link < Base
+      class Link < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
-        fields :id, :entity_id, :parent_id, :entity_type, :style, :name,
+        fields :id, :entity_id, :parent_id, :entity_type, :style, :name, :menu_id,
           :value, :handle, :position, :translations
 
         translates :name, :description

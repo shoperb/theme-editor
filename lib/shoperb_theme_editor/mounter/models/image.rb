@@ -1,13 +1,22 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Image < Base
+      class Image < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
-        fields :id, :entity_id, :entity_type, :name, :sizes,
+        fields :id, :entity_id, :entity_type, :name,
                :url, :original_width, :original_height
+        c_fields :sizes, cast: JSON
 
         def self.sorted
-          all
+          self
+        end
+
+        dataset_module do
+          def for(obj)
+            where(entity_type: obj.class.name.split("::")[-1], entity_id: obj.id)
+          end
         end
 
         # todo: TODOREF2

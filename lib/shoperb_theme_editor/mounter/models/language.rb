@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Language < Base
+      class Language < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :code, :name, :native, :active
 

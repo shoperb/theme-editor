@@ -1,9 +1,12 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Collection < Base
+      class Collection < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
-        fields :id, :name, :permalink, :handle, :product_ids, :image_id, :description
+        fields :id, :name, :permalink, :handle, :image_id, :description
+        c_fields :product_ids, cast: Array
 
         translates :name
 
@@ -16,7 +19,7 @@ module Shoperb module Theme module Editor
         end
 
         def vendors
-          products.map(&:vendor).uniq.compact.to_relation(Vendor)
+          Vendor.where(id: products.map(&:vendor).uniq.compact.map(&:id) )
         end
 
         def images

@@ -2,7 +2,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class OrderReturnItem < Base
+      class OrderReturnItem < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
         fields :id, :quantity_sent, :quantity_received, :quantity_requested
         
         def order_item

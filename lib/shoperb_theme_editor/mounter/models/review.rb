@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Review < Base
+      class Review < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id,
                :product_id,

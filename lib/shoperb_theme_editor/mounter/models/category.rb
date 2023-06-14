@@ -1,7 +1,10 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Category < Base
+      class Category < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
+
 
         fields :id, :parent_id, :state, :name, :permalink, :description,
           :lft, :rgt, :handle, :translations
@@ -56,12 +59,13 @@ module Shoperb module Theme module Editor
         end
 
         def products_with_children
-          products | children.map(&:products_with_children).flatten
+          ids = products.map(&:id) | children.map(&:products_with_children).flatten.map(&:id)
+          Product.where(id: ids)
         end
 
         def products_for_self_and_children
           arr = self_and_descendants.map(&:id)
-          Product.active.select { |product| arr.include?(product.category_id) }
+          Product.where(id: Product.active.to_a.select { |product| arr.include?(product.category_id) }.map(&:id))
         end
 
         def descends_from(category)

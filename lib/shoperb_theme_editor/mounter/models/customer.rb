@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Customer < Base
+      class Customer < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :last_bill_address_id, :last_ship_address_id,
           :first_name, :last_name, :email, :newsletter, :active,

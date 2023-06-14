@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Address < Base
+      class Address < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :owner_id, :owner_type, :country_id, :state_id, :name,
           :first_name, :last_name, :phone, :company, :county, :city, :zip,

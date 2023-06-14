@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Currency < Base
+      class Currency < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :name, :code, :symbol, :rate, :date
 

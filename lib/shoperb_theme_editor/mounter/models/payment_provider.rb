@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class PaymentProvider < Base
+      class PaymentProvider < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
         
         fields :id, :name, :type, :service, :public_key
         

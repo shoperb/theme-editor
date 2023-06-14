@@ -1,5 +1,5 @@
 class Array
-  def to_relation(klass)
-    Shoperb::Theme::Editor::Mounter::Model::Relation.build(self, klass)
+  def exists?
+    size>0
   end
 end

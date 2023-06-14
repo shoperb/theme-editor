@@ -2,7 +2,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class CustomerSubscription < Base
+      class CustomerSubscription < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :plan_id, :customer_id, :auto_collection, :state, :qty,
           :custom_field_values, :starts_at, :ends_at, :trial_starts_at, :trial_ends_at,

@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class CustomerSubscriptionPlan < Base
+      class CustomerSubscriptionPlan < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :name, :invoice_name, :description, :handle, :interval, 
           :interval_count, :item_price, :setup_cost, :trial_interval, :trial_interval_count,

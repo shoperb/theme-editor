@@ -28,10 +28,10 @@ autoload :Logger,             "logger"
 autoload :URI,                "uri"
 autoload :Mime,               "action_dispatch/http/mime_type"
 autoload :Slop,               "slop"
-autoload :ActiveHash,         "active_hash"
-autoload :ActiveYaml,         "active_hash"
 autoload :ActiveRecord,       "active_record"
+autoload :Sequel,             "sequel"
 require 'faraday/multipart'
+require_relative 'shoperb_theme_editor/ext/sequel.rb'
 
 module Shoperb module Theme
   module Editor
@@ -40,8 +40,8 @@ module Shoperb module Theme
     delegate :[], :[]=, :reset, to: :config
 
     def with_configuration options, *args
-      # TODO: Use compact instead of select when updating Rails to >= 4.1
       self.config = Configuration.new(options.to_hash.select { |_, value| !value.nil? }, *args)
+      Sequel::Model.db= Sequel.sqlite((Utils.base + "data/data.db").to_s)
       begin
         yield
       rescue Interrupt => e

@@ -1,7 +1,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class BlogPost < Base
+      class BlogPost < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :name, :content, :published_at, :permalink, :template,
           :handle, :next_id, :prev_id, :state

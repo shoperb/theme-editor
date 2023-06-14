@@ -176,6 +176,9 @@ module Shoperb module Theme module Editor
       Logger.notify "Asking for permission" do
         start_server(authorize_url)
       end unless have_token?
+
+      `rm #{Sequel::Model.db.opts[:database]}`
+      Sequel::Model.db= Sequel.sqlite(Sequel::Model.db.opts[:database])
     end
 
     def request url, notify: false, method:, **options, &block

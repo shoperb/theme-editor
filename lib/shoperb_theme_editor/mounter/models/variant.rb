@@ -1,19 +1,20 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class Variant < Base
+      class Variant < Sequel::Model
+        extend Base::SequelClass
+        include Base::Sequel
 
         fields :id, :sku, :warehouse_stock, :weight, :width, :height, :depth, :price,
                :barcode,
                :price_original, :price_discount, :discount_start, :discount_end,
-               :allow_backorder, :track_inventory, :charge_taxes, :require_shipping,
+               :charge_taxes,
                :digital, :url, :position, :stock_amounts, :product_id, :compare_at,
                :gift_card_value, :num_in_pack, :amount_step,:amount_step_unit
-
-        # TODO: Make sku actually unique so it can be used as a primary key.
-        def self.primary_key
-          "id"
-        end
+        c_fields :track_inventory, cast: TrueClass
+        c_fields :allow_backorder, cast: TrueClass
+        c_fields :require_shipping, cast: TrueClass
+        c_fields :charge_taxes, cast: TrueClass
 
         belongs_to :product
         has_many :variant_attributes
@@ -41,8 +42,10 @@ module Shoperb module Theme module Editor
           variant_attributes.map(&:value)
         end
 
-        def self.available
-          all.select(&:available?)
+        dataset_module do
+          def available
+            to_a.select(&:available?)
+          end
         end
 
         def available?(_ = nil, amount = 1)

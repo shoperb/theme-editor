@@ -77,7 +77,6 @@ module Shoperb module Theme module Editor
                 amount2           = pars[:amount].to_i
                 item_original_id2 = pars[:item_original_id]
                 by_subscription2  = %w(1 true).include?(pars[:by_subscription])
-                binding.pry
                 item2 = Model::CartItem.where(variant_id: variant_id2, by_subscription: by_subscription2).first || Model::CartItem.new(variant_id: variant_id2, by_subscription: by_subscription2)
                 item2.amount ||= 0
                 item2.amount  += amount2
@@ -109,7 +108,7 @@ module Shoperb module Theme module Editor
 
             app.post "/cart" do
               params[:update].each do |id, amount|
-                Model::CartItem.find(id.to_i).tap do |item|
+                Model::CartItem.find(id: id.to_i).tap do |item|
                   item.amount = amount.to_i
                   item.save
                 end
