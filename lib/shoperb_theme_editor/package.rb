@@ -39,7 +39,7 @@ module Shoperb module Theme module Editor
       compiler = Editor.compiler("/system/assets/#{Editor["oauth-site"]}/#{Editor.handle}/", digests: true)
 
       zip = Zip::OutputStream.write_buffer do |out|
-        compiler.compiled_files do |path, content, type: :file|
+        compiler.compiled_files do |path, content, type = :file|
           case type
             when :symlink
               write_symlink(out, path, content)
