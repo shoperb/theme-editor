@@ -41,6 +41,7 @@ module Shoperb module Theme
 
     def with_configuration options, *args
       self.config = Configuration.new(options.to_hash.select { |_, value| !value.nil? }, *args)
+      `mkdir -p #{Utils.base+ "data"}`
       Sequel::Model.db= Sequel.sqlite((Utils.base + "data/data.db").to_s)
       begin
         yield
