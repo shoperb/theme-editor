@@ -19,8 +19,8 @@ module Shoperb module Theme module Editor
           
 
           def self.registered(app)
-            app.get "/pages/:id", &PageFinder.serve
-            app.get "/:id" do
+            app.get "/pages/:id/?", &PageFinder.serve
+            app.get "/:id/?" do
               pass if !PageFinder.match(params[:id])
               PageFinder.serve(params[:id])
             end
