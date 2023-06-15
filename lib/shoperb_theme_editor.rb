@@ -28,7 +28,6 @@ autoload :Logger,             "logger"
 autoload :URI,                "uri"
 autoload :Mime,               "action_dispatch/http/mime_type"
 autoload :Slop,               "slop"
-autoload :ActiveRecord,       "active_record"
 autoload :Sequel,             "sequel"
 require 'faraday/multipart'
 require_relative 'shoperb_theme_editor/ext/sequel.rb'
