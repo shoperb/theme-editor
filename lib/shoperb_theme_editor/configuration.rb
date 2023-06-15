@@ -58,6 +58,7 @@ module Shoperb module Theme module Editor
     end
 
     def save
+      Sequel::Model.db&.disconnect
       Logger.notify "Saving configuration to #{file.basename}" do
         Utils.write_file(file) {
           require "active_support/json/encoding"
