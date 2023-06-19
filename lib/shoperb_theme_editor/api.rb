@@ -132,7 +132,8 @@ module Shoperb module Theme module Editor
         return
       end
 
-      Sync.products
+      product_ids = opts[:"only-products"].present? ? opts[:"only-products"].tr(",", "|") : nil
+      Sync.products product_ids
       Sync.shop
       Sync.images unless opts[:"skip-images"]
       Sync.media_files

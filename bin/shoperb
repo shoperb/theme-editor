@@ -119,6 +119,7 @@ Slop.parse ignore_case: true, help: true, strict: true do
   command "sync" do
     apply_global_opts
     on "skip-images", "Skip downloading images"
+    on :"only-products=", "Add comma separated product ids to sync", as: String
     description "Syncronizes your shoperb shops products/categories/etc to your local data"
     banner with_description("Usage: shoperb sync [options]")
     run do |options, args|

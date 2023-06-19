@@ -67,41 +67,56 @@ module Shoperb module Theme module Editor
       end
     end
 
-    def variants
-      process Mounter::Model::Variant do |variant|
+    def variants(ids)
+      process Mounter::Model::Variant, **product_ids_lookup(ids) do |variant|
         assign_relation variant, Mounter::Model::Product
         variant
       end
     end
 
     def variant_attributes
-      process Mounter::Model::VariantAttribute do |variant_attribute|
-        assign_relation variant_attribute, Mounter::Model::Variant
-        variant_attribute
+      variant_ids = Mounter::Model::Variant.select_map(:id)
+
+      klass  = Mounter::Model::VariantAttribute
+      path   = klass.to_s.demodulize.tableize
+      opts   = {}
+      result = []
+
+      variant_ids.each_slice(50) do |list|
+        result += fetch("api/v1/#{path}", **opts).compact
       end
+      uniq = result.uniq { |h| h[klass.primary_key.to_s] }
+      Logger.info "Received #{result.count} #{path.pluralize(result.count)}, kept #{uniq.count}.\n" if Editor["verbose"]
+      klass.assign uniq.map(&:to_hash)
     end
 
-    def products
+    def products(ids)
+      lookup = {}
+      lookup = {where: "id:#{ids}"} if ids.present?
       process Mounter::Model::ProductType
       process Mounter::Model::Category
-      process Mounter::Model::Product do |product|
+      process Mounter::Model::Product, **lookup do |product|
         assign_relation product, Mounter::Model::Category
         assign_relation product, Mounter::Model::ProductType
         assign_relation product, Mounter::Model::Vendor
         product.delete("images")
         product
       end
-      product_attributes
-      variants
+      product_attributes(ids)
+      variants(ids)
       variant_attributes
     end
 
-    def product_attributes
+    def product_attributes(ids)
       process Mounter::Model::AttributeKey
-      process Mounter::Model::ProductAttribute do |product_attribute|
+      process Mounter::Model::ProductAttribute, **product_ids_lookup(ids) do |product_attribute|
         assign_relation product_attribute, Mounter::Model::Product
         product_attribute
       end
+    end
+
+    def product_ids_lookup(ids)
+      ids ? { where: "product_id:#{ids}" } : {}
     end
 
     def shop
@@ -115,7 +130,7 @@ module Shoperb module Theme module Editor
     end
 
     def settings_data
-      data = get_response "api/v1/themes/#{Editor.handle}/settings_data", 1 rescue return
+      data = get_response "api/v1/themes/#{Editor.handle}/settings_data", page: 1 rescue return
 
       if data.body.presence
         data = JSON.parse(data.body)
@@ -153,8 +168,8 @@ module Shoperb module Theme module Editor
       process Mounter::Model::CustomerSubscription
     end
 
-    def process klass, path=klass.to_s.demodulize.tableize, &block
-      result = fetch("api/v1/#{path}").map(&(block || ->(this){this})).compact
+    def process klass, path=klass.to_s.demodulize.tableize, **opts, &block
+      result = fetch("api/v1/#{path}", **opts).map(&(block || ->(this){this})).compact
       uniq = result.uniq { |h| h[klass.primary_key.to_s] }
       Logger.info "Received #{result.count} #{path.pluralize(result.count)}, kept #{uniq.count}.\n" if Editor["verbose"]
       klass.assign uniq.map(&:to_hash)
@@ -166,19 +181,23 @@ module Shoperb module Theme module Editor
 
     private
 
-    def fetch path, message="Syncing #{path}"
+    def fetch path, message="Syncing #{path}", **opts
       records, response, page = [], nil, nil
       Logger.notify message do
         begin
           Logger.info "#{message} #{page.message(&counter)}\r" if page
-          records += Array.wrap((response = get_response(path, page)).parsed)
+          response = get_response(path, **opts.merge(page: page))
+          records += Array.wrap(response.parsed)
         end while (page = Pagination.new(response).presence)
       end
       records
     end
 
-    def get_response path, page
-      Api.request path, method: :get, &as_json(page: page.try(:next_page))
+    def get_response path, **opts
+      page = opts[:page]
+      page = page.try(:next_page)
+      opts[:page] = page
+      Api.request path, method: :get, &as_json(**opts)
     end
 
     def as_json(params={})
