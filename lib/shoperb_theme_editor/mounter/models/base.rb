@@ -65,6 +65,10 @@ module Shoperb module Theme module Editor
           def size
             count
           end
+
+          def sample
+            all.sample
+          end
           
 
           def translates *args
@@ -175,6 +179,14 @@ module Shoperb module Theme module Editor
           def save
             Cart.create_table
             CartItem.create_table
+
+            [
+              Order, OrderItem, OrderReturn, OrderReturnItem,
+              OrderReturnParcel, PaymentCard, PaymentMethod, 
+              PaymentProvider, ShippingMethod
+            ].each do |klass|
+              klass.assign(klass.raw_data.map(&:stringify_keys))
+            end
           end
 
         end

@@ -5,6 +5,10 @@ module Shoperb module Theme module Editor
         extend Base::SequelClass
         include Base::Sequel
 
+        c_fields :order_id, cast: Integer
+        c_fields :rate, cast: BigDecimal
+        c_fields :name,:provider,:provider_box,:tracking_number, cast: String
+
         belongs_to :order
 
         def self.raw_data

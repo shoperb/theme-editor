@@ -10,7 +10,7 @@ module Shoperb module Theme module Editor
         c_fields :html_values, :default_values, cast: JSON
 
         def self.primary_key
-          "id"
+          :id
         end
 
         class ::ShoperbLiquid::Base::CustomField < Shoperb::Theme::Editor::Mounter::Model::CustomField

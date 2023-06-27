@@ -323,7 +323,7 @@ module Shoperb module Theme module Editor
           end
 
           resource Model::Order do
-            ShoperbLiquid::OrderDrop.new(Model::Order.find(id: params[:id]))
+            ShoperbLiquid::OrderDrop.new(Model::Order.find(id: params[:id]) || Model::Order.find(number: params[:id]))
           end
 
           resources Model::Order do

@@ -2,9 +2,9 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class OrderReturnParcel < BasSequel::Model
+      class OrderReturnParcel < Sequel::Model
         extend Base::SequelClass
-        include Base::Sequele
+        include Base::Sequel
         fields :id, :provider, :barcode, :state, :filename, :url
         
         

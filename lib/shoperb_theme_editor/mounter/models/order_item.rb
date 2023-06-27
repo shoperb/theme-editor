@@ -4,10 +4,14 @@ module Shoperb module Theme module Editor
       class OrderItem < Sequel::Model
         extend Base::SequelClass
         include Base::Sequel
-        fields :id, :name, :amount, :sku, :weight, :width, :depth,
-          :price, :total_without_taxes, :total_wout_correlation,
-          :total_weight, :total_taxes, :require_shipping, :charge_taxes,
-          :item_original_id, :by_subscription, :brand_id,:amount_step,:amount_step_unit
+        fields :id, :name, :sku
+        c_fields :order_id, :item_original_id, cast: Integer
+        c_fields :require_shipping, :charge_taxes, :brand_id, cast: TrueClass
+        c_fields :by_subscription, :digital, cast: TrueClass
+        c_fields :amount, :amount_step,:amount_step_unit, cast: BigDecimal
+        c_fields :weight, :width, :depth, cast: BigDecimal
+        c_fields :total_weight, :total_taxes, cast: BigDecimal
+        c_fields :price, :total_without_taxes, :total_wout_correlation, cast: BigDecimal
 
         belongs_to :order
         has_many :item_attributes, class_name: OrderItemAttribute.to_s
