@@ -164,6 +164,10 @@ module Shoperb module Theme module Editor
           def as_dataset(relation)
             self.class.as_dataset(relation)
           end
+
+          def to_param
+            respond_to?(:permalink) ? permalink : id
+          end
         end
 
         class << self
