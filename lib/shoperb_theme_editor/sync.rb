@@ -44,12 +44,13 @@ module Shoperb module Theme module Editor
       process Mounter::Model::MediaFile
     end
 
-    def addresses
-      process Mounter::Model::Address do |address|
-        assign_relation address, Mounter::Model::State
-        assign_relation address, Mounter::Model::Country
-        address
+    def addresses(customer_ids)
+      process Mounter::Model::Address, where: "type:AddressWarehouse|AddressShop|AddressVendor|AddressSupplier"
+      lookup = "type:AddressCustomer"
+      if customer_ids.present?
+        lookup = "owner_type:Customer,owner_id:#{customer_ids}"
       end
+      process Mounter::Model::Address, where: lookup
     end
 
     def images
@@ -138,8 +139,10 @@ module Shoperb module Theme module Editor
       end
     end
 
-    def customers
-      process Mounter::Model::Customer
+    def customers(ids)
+      lookup = {}
+      lookup = {where: "id:#{ids}"} if ids.present?
+      process Mounter::Model::Customer, **lookup
     end
 
     def customer_groups

@@ -24,6 +24,7 @@ Slop.parse ignore_case: true, help: true, strict: true do
     apply_global_opts
     on "skip-images", "Skip downloading images"
     on :"only-products=", "Add comma separated product ids to sync", as: String
+    on :"only-customers=", "Add comma separated customer ids to sync", as: String
     description "Downloads your shops shoperb theme"
     banner with_description("Usage: shoperb clone <directory> [<handle>] [options]")
     run do |options, args|
@@ -122,6 +123,7 @@ Slop.parse ignore_case: true, help: true, strict: true do
     apply_global_opts
     on "skip-images", "Skip downloading images"
     on :"only-products=", "Add comma separated product ids to sync", as: String
+    on :"only-customers=", "Add comma separated customer ids to sync", as: String
     description "Syncronizes your shoperb shops products/categories/etc to your local data"
     banner with_description("Usage: shoperb sync [options]")
     run do |options, args|

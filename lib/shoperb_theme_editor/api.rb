@@ -132,7 +132,8 @@ module Shoperb module Theme module Editor
         return
       end
 
-      product_ids = opts[:"only-products"].present? ? opts[:"only-products"].tr(",", "|") : nil
+      product_ids  = opts[:"only-products"].present?  ? opts[:"only-products"].tr(",", "|")  : nil
+      customer_ids = opts[:"only-customers"].present? ? opts[:"only-customers"].tr(",", "|") : nil
       Sync.products product_ids
       Sync.shop
       Sync.images unless opts[:"skip-images"]
@@ -143,11 +144,11 @@ module Shoperb module Theme module Editor
       Sync.menus
       Sync.countries
       Sync.states
-      Sync.addresses
+      Sync.addresses customer_ids
       Sync.links
       Sync.blog_posts
       Sync.settings_data
-      Sync.customers
+      Sync.customers customer_ids
       Sync.customer_groups
       Sync.reviews
       Sync.discounts
