@@ -16,6 +16,16 @@ module Shoperb module Theme module Editor
           :id
         end
 
+        dataset_module do
+          def roots
+            as_dataset(sorted.to_a.select(&:root?))
+          end
+
+          def active
+            as_dataset(to_a.select(&:active?))
+          end
+        end
+
         has_many :products
 
         def parent
@@ -27,16 +37,13 @@ module Shoperb module Theme module Editor
         end
 
         def ancestors
-          self_and_ancestors.reject { |category| category.id == id }
+          as_dataset(self_and_ancestors.to_a.reject { |category| category.id == id })
         end
 
         def self.sorted
           sort_by { |root| root.lft }
         end
 
-        def self.roots
-          sorted.select(&:root?)
-        end
 
         def self.active_roots
           roots.select(&:active?)
@@ -48,10 +55,6 @@ module Shoperb module Theme module Editor
 
         def root?
           parent_id.nil?
-        end
-
-        def self.active
-          all.select(&:active?)
         end
 
         def active?
@@ -73,11 +76,11 @@ module Shoperb module Theme module Editor
         end
 
         def self_and_ancestors
-          self.class.active.select { |category| category.lft.to_i <= lft.to_i && category.rgt.to_i >= rgt.to_i }
+          as_dataset(Category.active.to_a.select { |category| category.lft.to_i <= lft.to_i && category.rgt.to_i >= rgt.to_i })
         end
 
         def self_and_descendants
-          Category.active.select do |category|
+          Category.active.to_a.select do |category|
             category.ancestors.include?(self) || category.id == id
           end
         end

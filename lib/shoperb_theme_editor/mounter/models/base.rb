@@ -62,9 +62,14 @@ module Shoperb module Theme module Editor
             super || 0
           end
           
+          def size
+            count
+          end
+          
 
           def translates *args
             c_fields :translations, cast: JSON
+
             args.each do |arg|
               define_method arg do |*_|
                 ((translations || {})[Translations.locale] || {}).fetch(arg.to_s, @values[arg])
@@ -78,6 +83,10 @@ module Shoperb module Theme module Editor
 
             data = records.map do |record|
               @fields_casted.each_with_object([]) do |(field, opts), arr|
+                if opts[:cast].to_s == "TrueClass"
+                  record[field.to_s] = record[field.to_s] ? '1' : '0'
+                end
+
                 if db.schema(table_name).to_h[field][:db_type] == "TEXT" && record[field.to_s] && !record[field.to_s].is_a?(String)
                   arr.push(JSON.dump( record[field.to_s] ))
                 else
@@ -127,7 +136,13 @@ module Shoperb module Theme module Editor
               def none
                 where(Sequel.lit("1=1"))
               end
+
+              def as_dataset(relation)
+                filter(id: relation.map(&:id))
+              end
             end
+
+            c_fields :custom_field_values, cast: JSON
           end
 
           def to_liquid context=nil
@@ -144,6 +159,10 @@ module Shoperb module Theme module Editor
   
           def id
             self.class.primary_key.to_s == "id" ? super : send(self.class.primary_key)
+          end
+
+          def as_dataset(relation)
+            self.class.as_dataset(relation)
           end
         end
 

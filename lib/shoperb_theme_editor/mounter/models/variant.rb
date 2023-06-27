@@ -5,9 +5,8 @@ module Shoperb module Theme module Editor
         extend Base::SequelClass
         include Base::Sequel
 
-        fields :id, :sku, :warehouse_stock, :weight, :width, :height, :depth, :price,
-               :barcode,
-               :price_original, :price_discount, :discount_start, :discount_end,
+        fields :id, :sku, :warehouse_stock, :weight, :width, :height, :depth,
+               :barcode, :discount_start, :discount_end,
                :charge_taxes,
                :digital, :url, :position, :stock_amounts, :product_id, :compare_at,
                :gift_card_value, :num_in_pack, :amount_step,:amount_step_unit
@@ -15,6 +14,7 @@ module Shoperb module Theme module Editor
         c_fields :allow_backorder, cast: TrueClass
         c_fields :require_shipping, cast: TrueClass
         c_fields :charge_taxes, cast: TrueClass
+        c_fields :price, :price_original, :price_discount, cast: BigDecimal
 
         belongs_to :product
         has_many :variant_attributes

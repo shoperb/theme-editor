@@ -57,4 +57,9 @@ module ShoperbLiquid
             [pagy, pagy_get_items(collection, pagy)]
         end
     end
+    class ArrayDrop
+        def to_ary
+            collection
+        end
+    end
 end

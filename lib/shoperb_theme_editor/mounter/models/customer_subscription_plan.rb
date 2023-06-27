@@ -6,8 +6,7 @@ module Shoperb module Theme module Editor
         include Base::Sequel
 
         fields :id, :name, :invoice_name, :description, :handle, :interval, 
-          :interval_count, :item_price, :setup_cost, :trial_interval, :trial_interval_count,
-          :custom_field_values
+          :interval_count, :item_price, :setup_cost, :trial_interval, :trial_interval_count
 
         translates :name, :invoice_name, :description
 

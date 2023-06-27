@@ -4,7 +4,8 @@ module Shoperb module Theme module Editor
       class ProductAttribute < Sequel::Model
         extend Base::SequelClass
         include Base::Sequel
-        fields :id, :product_id, :attribute_key_id, :values
+        fields :id, :product_id, :attribute_key_id
+        c_fields :values, cast: JSON
 
         translates :values
         belongs_to :attribute_key
@@ -19,6 +20,10 @@ module Shoperb module Theme module Editor
 
         def handle
           attribute_key.handle
+        end
+
+        def value
+          values.join("; ")
         end
 
       end

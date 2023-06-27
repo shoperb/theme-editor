@@ -22,12 +22,14 @@ module Shoperb module Theme module Editor
         belongs_to :customer
         belongs_to :product
 
-        def self.visible
-          all.select { |r| ['new', 'accepted'].include?(r.state) }
-        end
+        dataset_module do
+          def visible
+            as_dataset(to_a.select { |r| ['new', 'accepted'].include?(r.state) })
+          end
 
-        def self.with_content
-          all.select { |r| r.title.present? || r.body.present? }
+          def with_content
+            as_dataset(to_a.select { |r| r.title.present? || r.body.present? })
+          end
         end
 
       end

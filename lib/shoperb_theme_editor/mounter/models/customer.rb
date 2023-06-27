@@ -7,8 +7,8 @@ module Shoperb module Theme module Editor
 
         fields :id, :last_bill_address_id, :last_ship_address_id,
           :first_name, :last_name, :email, :newsletter, :active,
-          :discount_pct, :recommended_products_ids, :custom_field_values,
-          :company
+          :discount_pct, :recommended_products_ids
+        c_fields :company, cast: TrueClass
 
 
         def name
