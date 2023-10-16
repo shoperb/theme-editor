@@ -10,6 +10,7 @@ module Shoperb module Theme module Editor
           :created_at, :state, :notes, :ship_address_id,
           :bill_address_id; :taxation_percentage
         c_fields :require_shipping, :require_taxation, cast: TrueClass
+        c_fields :neto_discount, :bruto_discount, cast: BigDecimal
 
         def self.primary_key
           :number
