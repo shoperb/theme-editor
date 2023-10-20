@@ -65,7 +65,7 @@ module Shoperb module Theme module Editor
         end
 
         def subscriptions
-          CustomerSubscription.all
+          CustomerSubscription.dataset
         end
       end
     end
