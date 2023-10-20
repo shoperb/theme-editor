@@ -35,7 +35,7 @@ module Shoperb module Theme module Editor
         end
 
         def orders
-          Order.all
+          Order.dataset
         end
 
         def recommended_products
@@ -48,7 +48,7 @@ module Shoperb module Theme module Editor
         end
 
         def existing_order_returns
-          OrderReturn.all
+          OrderReturn.dataset
         end
 
         def order_returns
