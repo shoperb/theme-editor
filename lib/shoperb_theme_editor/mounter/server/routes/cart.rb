@@ -98,7 +98,7 @@ module Shoperb module Theme module Editor
                 item = cart.items.where(id: item.to_i).first
                 item.amount = amount.to_i
                 item.save
-              end
+              end if params[:update]
 
               respond_to do |f|
                 f.json { json(cart_json) }
