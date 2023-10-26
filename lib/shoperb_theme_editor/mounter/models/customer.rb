@@ -37,6 +37,10 @@ module Shoperb module Theme module Editor
         def orders
           Order.dataset
         end
+        
+        def credits
+          []
+        end
 
         def recommended_products
           possible = attributes.fetch(:recommended_products_ids, []).map(&:to_s)

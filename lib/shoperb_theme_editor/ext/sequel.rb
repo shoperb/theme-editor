@@ -48,6 +48,20 @@ class Sequel::SQLite::Dataset
     end
 end
 
+class Sequel::Model
+    def cache_key
+        if id.nil?
+          "#{model.table_name}/new"
+        else
+          if respond_to?(:updated_at)
+            "#{model.table_name}/#{id}-#{updated_at}"
+          else
+            "#{model.table_name}/#{id}"
+          end
+        end
+      end
+end
+
 
 module ShoperbLiquid
     class CollectionDrop
