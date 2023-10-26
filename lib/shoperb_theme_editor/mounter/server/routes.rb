@@ -47,7 +47,7 @@ module Shoperb module Theme module Editor
           end
 
           get "/?:locale?/products/:id" do
-            product      = ShoperbLiquid::ProductDrop.new(record = Model::Product.find_by(permalink: params[:id])||Model::Product.new(name: "Product not found!"))
+            product      = ShoperbLiquid::ProductDrop.new(record = Model::Product.find_by(permalink: params[:id])||Model::Product.new(name: "Product not found!", id: -1))
             category     = product.category
             template     = record.template.presence || :product
             respond template.to_sym, product: product, category: category, meta: product
