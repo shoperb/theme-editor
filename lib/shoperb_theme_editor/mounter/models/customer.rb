@@ -31,7 +31,7 @@ module Shoperb module Theme module Editor
         end
 
         def customer_groups
-          CustomerGroup.where(customer_ids: id)
+          CustomerGroup.where(customer_ids: /[\[,]#{id}[,\]]/)
         end
 
         def orders
