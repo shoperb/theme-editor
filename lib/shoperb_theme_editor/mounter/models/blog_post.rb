@@ -9,6 +9,7 @@ module Shoperb module Theme module Editor
           :handle, :next_id, :prev_id, :state
 
         translates :name, :content
+        belongs_to :category, class: :BlogCategory
 
         def self.primary_key
           :permalink

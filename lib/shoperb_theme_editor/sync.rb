@@ -33,6 +33,7 @@ module Shoperb module Theme module Editor
     end
 
     def blog_posts
+      process Mounter::Model::BlogCategory, 'blog-categories'
       process Mounter::Model::BlogPost
     end
 
