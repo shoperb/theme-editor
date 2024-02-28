@@ -227,7 +227,7 @@ module Shoperb module Theme module Editor
           end
 
           get "/?:locale?/order-returns" do
-            respond :order_returns, order_returns: ShoperbLiquid::CollectionDrop.new(Model::OrderReturn.all)
+            respond :order_returns, order_returns: ShoperbLiquid::OrderReturnsDrop.new(Model::OrderReturn.all)
           end
           post "/?:locale?/order-returns" do
             redirect "/order-returns"

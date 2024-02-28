@@ -6,6 +6,12 @@ module Shoperb module Theme module Editor
         extend Base::SequelClass
         include Base::Sequel
         fields :id, :delivery_date, :comment, :state, :subtotal
+
+        dataset_module do
+          def by_id(dir)
+            sort_by(&:id)
+          end
+        end
         
         def items
           OrderReturnItem.all
