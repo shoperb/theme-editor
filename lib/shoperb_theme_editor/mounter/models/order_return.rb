@@ -9,7 +9,8 @@ module Shoperb module Theme module Editor
 
         dataset_module do
           def by_id(dir)
-            sort_by(&:id)
+            list = sort_by(&:id)
+            dir == "desc" ? list.reverse : list
           end
         end
         
