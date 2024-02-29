@@ -2,25 +2,21 @@
 module Shoperb module Theme module Editor
   module Mounter
     module Model
-      class OrderReturnItem < Sequel::Model
+      class OrderReturnItemEntity < Sequel::Model
         extend Base::SequelClass
         include Base::Sequel
-        fields :id, :amount
+        fields :id, :customer_comment
         
         def order_item
           OrderItem.first
         end
-
-        def entities
-          OrderReturnItemEntity.all
-        end
         
         def self.raw_data
           [
-            {id:1, amount: 0 },
-            {id:2, amount: 0 },
-            {id:3, amount: 0 },
-            {id:4, amount: 3 },
+            {id:1, customer_comment: "Lorem impsum" },
+            {id:2, customer_comment: "Came broken" },
+            {id:3, customer_comment: "Lost shiny surface" },
+            {id:4, customer_comment: "Didn't like it" },
           ]
         end
       end
