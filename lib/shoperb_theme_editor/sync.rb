@@ -85,7 +85,7 @@ module Shoperb module Theme module Editor
       result = []
 
       variant_ids.each_slice(50) do |list|
-        option[:variant_id] = list
+        opts[:variant_id] = list
         result += fetch("api/v1/#{path}", **opts).compact
       end
       uniq = result.uniq { |h| h[klass.primary_key.to_s] }
