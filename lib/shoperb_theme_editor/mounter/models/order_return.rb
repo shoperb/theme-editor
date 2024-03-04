@@ -21,6 +21,10 @@ module Shoperb module Theme module Editor
         def return_parcel
           [OrderReturnParcel.first, nil].sample
         end
+
+        def labeled_number
+          "R-#{id}"
+        end
         
         def self.raw_data
           [
