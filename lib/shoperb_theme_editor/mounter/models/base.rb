@@ -181,7 +181,7 @@ module Shoperb module Theme module Editor
             CartItem.create_table
 
             [
-              Order, OrderItem, OrderReturn, OrderReturnItem,
+              Order, OrderItem, OrderReturn, OrderReturnItem, OrderReturnItemEntity,
               OrderReturnParcel, PaymentCard, PaymentMethod, 
               PaymentProvider, ShippingMethod
             ].each do |klass|
