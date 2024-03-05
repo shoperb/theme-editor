@@ -36,6 +36,10 @@ module Shoperb module Theme module Editor
           OrderItem.all.map{|oi| oi.order=self;oi}
         end
 
+        def shipping_items
+          items.map{|i| ShoperbLiquid::ShippingItemDrop.new(i)}
+        end
+
         # belongs_to :payment_method
         def payment_method
           @payment_method ||= PaymentMethod.sample
