@@ -66,6 +66,10 @@ module Shoperb module Theme module Editor
           variant&.id || 4
         end
 
+        def created_at
+          Time.now - 3600
+        end
+
         def self.raw_data
           [
             {
