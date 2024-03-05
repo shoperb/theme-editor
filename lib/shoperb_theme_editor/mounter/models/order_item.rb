@@ -46,6 +46,10 @@ module Shoperb module Theme module Editor
           Vendor.find(id: brand_id) if brand_id
         end
 
+        def order_item
+          self
+        end
+
         def item_attributes
           variant&.variant_attributes || []
         end
