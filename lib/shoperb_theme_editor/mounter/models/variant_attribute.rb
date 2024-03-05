@@ -10,16 +10,27 @@ module Shoperb module Theme module Editor
 
         translates :value
 
-        def initialize(*args)
-          super(*args)
-          @attributes[:name] = name
-        end
+        belongs_to :variant
+
 
         def self.primary_key
           :id
         end
 
-        belongs_to :variant
+        dataset_module do
+          def from_variant
+            where(Sequel.lit("1=1"))
+          end
+
+          def from_product
+            where(Sequel.lit("1=1"))
+          end
+        end
+
+        def initialize(*args)
+          super(*args)
+          @attributes[:name] = name
+        end
 
         def name
           attribute_key['name']
@@ -29,18 +40,6 @@ module Shoperb module Theme module Editor
           attribute_key['handle']
         end
 
-
-        # for order_item_attribute
-        def owner
-          name
-        end
-        def self.from_variant
-          all
-        end
-        def self.from_product
-          all
-        end
-        # endfor order_item_attribute 
       end
     end
   end
