@@ -7,15 +7,15 @@ module Shoperb module Theme module Editor
             app.helpers do
               include ::ActionView::Helpers::NumberHelper
 
-              def cart_json
+              def cart_json(cart)
                 json = { }
 
-                json[:count] = current_cart.items.count
-                json[:total] = number_with_precision(current_cart.total, :precision => 2)
-                json[:weight] = number_with_precision(current_cart.weight, :precision => 2)
-                json[:requires_shipping] = current_cart.require_shipping?
+                json[:count] = cart.items.count
+                json[:total] = number_with_precision(cart.total, :precision => 2)
+                json[:weight] = number_with_precision(cart.weight, :precision => 2)
+                json[:requires_shipping] = cart.require_shipping?
 
-                json[:items] = current_cart.items.map do |item|
+                json[:items] = cart.items.map do |item|
                   {:id                 => item.id,
                     :sku                => item.sku,
                     :name               => item.variant.name,
@@ -87,7 +87,7 @@ module Shoperb module Theme module Editor
               cart.save
 
               respond_to do |f|
-                f.json { json(cart_json) }
+                f.json { json(cart_json(current_cart)) }
                 f.html { redirect "/cart" }
               end
             end
@@ -101,7 +101,7 @@ module Shoperb module Theme module Editor
               end if params[:update]
 
               respond_to do |f|
-                f.json { json(cart_json) }
+                f.json { json(cart_json(current_cart)) }
                 f.html { redirect "/cart" }
               end
             end
@@ -115,7 +115,7 @@ module Shoperb module Theme module Editor
               end
 
               respond_to do |f|
-                f.json { json(cart_json) }
+                f.json { json(cart_json(current_cart)) }
                 f.html { redirect "/cart" }
               end
             end

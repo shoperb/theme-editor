@@ -191,6 +191,9 @@ module Shoperb module Theme module Editor
         def store_cart_path(**_)
           "/cart"
         end
+        def store_carts_path(**_)
+          "/carts"
+        end
 
         def add_store_cart_path(**_)
           "/cart/add"
@@ -202,6 +205,18 @@ module Shoperb module Theme module Editor
 
         def checkout_store_cart_path(**_)
           "/cart/checkout"
+        end
+
+        def add_store_multi_cart_path(obj,**_)
+          "/cart/#{get_id(obj)}/add"
+        end
+
+        def update_store_multi_cart_path(obj,**_)
+          "/cart/#{get_id(obj)}/update"
+        end
+
+        def checkout_store_multi_cart_path(obj,**_)
+          "/cart/#{get_id(obj)}/checkout"
         end
 
         def store_order_returns_path(**_)

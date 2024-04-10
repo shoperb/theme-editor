@@ -27,6 +27,10 @@ module Shoperb module Theme module Editor
           Model::Cart.first || Model::Cart.new
         end
 
+        def current_carts
+          current_cart.id ? Model::Cart.all : []
+        end
+
         def shop
           Model::Shop.first || raise(Error.new("No data has been synced."))
         end
