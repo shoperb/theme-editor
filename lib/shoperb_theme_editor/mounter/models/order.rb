@@ -40,6 +40,15 @@ module Shoperb module Theme module Editor
           items.map{|i| ShoperbLiquid::ShippingItemDrop.new(i)}
         end
 
+        def refunds
+          [
+            ShoperbLiquid::RefundDrop.new(OpenStruct.new(
+              state: "initial", amount: 30.to_d, reason: "Other", 
+              refund_items: items.map{|i| ShoperbLiquid::RefundItemDrop.new(OpenStruct.new(count: i.amount, order_item_id: i.id, order_item: i, id: i.id))}
+            )) 
+          ]
+        end
+
         # belongs_to :payment_method
         def payment_method
           @payment_method ||= PaymentMethod.sample
