@@ -32,128 +32,147 @@ autoload :Sequel,             "sequel"
 require 'faraday/multipart'
 require_relative 'shoperb_theme_editor/ext/sequel.rb'
 
-module Shoperb module Theme
-  module Editor
-    extend self
-    mattr_accessor :config
-    delegate :[], :[]=, :reset, to: :config
+module Shoperb
+  module Theme
+    module Editor
+      extend self
+      mattr_accessor :config
+      delegate :[], :[]=, :reset, to: :config
 
-    def with_configuration options, *args
-      self.config = Configuration.new(options.to_hash.select { |_, value| !value.nil? }, *args)
-      `mkdir -p #{Utils.base+ "data"}`
-      Sequel::Model.db= Sequel.sqlite((Utils.base + "data/data.db").to_s, setup_regexp_function: true)
-      begin
-        yield
-      rescue Interrupt => e
-        exit(130)
-      rescue Exception => e
-        Error.report(e)
-      ensure
-        self.config.save
+      def with_configuration options, *args
+        self.config = Configuration.new(options.to_hash.select { |_, value| !value.nil? }, *args)
+        `mkdir -p #{Utils.base+ "data"}`
+        Sequel::Model.db= Sequel.sqlite((Utils.base + "data/data.db").to_s, setup_regexp_function: true)
+        begin
+          yield
+        rescue Interrupt => e
+          exit(130)
+        rescue Exception => e
+          Error.report(e)
+        ensure
+          self.config.save
+        end
       end
-    end
 
-    def autoload_all mod, folder
-      Gem.find_files(
-        Pathname.new("shoperb_theme_editor/#{folder}/*.rb").cleanpath.to_s
-      ).each { |path|
-        name = Pathname.new(path).basename(".rb")
-        mod.autoload :"#{name.to_s.sub(/.*\./, '').camelize}",
-          Pathname.new("shoperb_theme_editor/#{folder}/#{name}").cleanpath.to_s
-      }
-    end
+      def autoload_all mod, folder
+        Gem.find_files(
+          Pathname.new("shoperb_theme_editor/#{folder}/*.rb").cleanpath.to_s
+        ).each { |path|
+          name = Pathname.new(path).basename(".rb")
+          mod.autoload :"#{name.to_s.sub(/.*\./, '').camelize}",
+            Pathname.new("shoperb_theme_editor/#{folder}/#{name}").cleanpath.to_s
+        }
+      end
 
-    autoload_all self, "/"
+      autoload_all self, "/"
 
-    def handle content=local_spec_content
-      spec(content)["handle"]
-    end
+      def handle content=local_spec_content
+        spec(content)["handle"]
+      end
 
-    def spec content=local_spec_content
-      JSON.parse(content)
-    end
+      def spec content=local_spec_content
+        JSON.parse(content)
+      end
 
-    def settings_data
-      unless File.exist?('config/settings_data.json')
-        if File.exist?('presets/default.json')
+      # Manages the retrieval and initialization of application settings data.
+      #
+      # This method follows these steps:
+      # 1. If settings_defaults.json exists, use it to create/update settings_data.json.
+      # 2. If settings_defaults.json doesn't exist, try to create settings_data.json from presets/default.json.
+      # 3. If neither exists, attempt to read existing settings_data.json.
+      #
+      # @return [Hash, nil] The parsed settings data if it exists, nil otherwise.
+      def settings_data
+        if File.exist?('config/settings_defaults.json')
+          defaults = JSON.parse(File.read('config/settings_defaults.json'))
           File.open('config/settings_data.json', 'w') do |f|
-            settings = JSON.parse(File.read('presets/default.json'))['settings']
-            f.write JSON.pretty_generate({ general: settings })
+            f.write JSON.pretty_generate(defaults)
+          end
+        end
+
+        unless File.exist?('config/settings_defaults.json')
+          if File.exist?('presets/default.json')
+            File.open('config/settings_data.json', 'w') do |f|
+              settings = JSON.parse(File.read('presets/default.json'))['settings']
+              f.write JSON.pretty_generate({ general: settings })
+            end
+          end
+        end
+
+        unless File.exist?('config/settings_defaults.json')
+          if File.exist?('config/settings_data.json')
+            JSON.parse(File.read('config/settings_data.json'))
           end
         end
       end
 
-      if File.exist?('config/settings_data.json')
-        JSON.parse(File.read('config/settings_data.json'))
+      def local_spec_content
+        @local_spec_content ||= begin
+          if File.exist?(path = Utils.base + "config/spec.json")
+            File.read(path)
+          else
+            new_spec_content
+          end
+        end
       end
-    end
 
-    def local_spec_content
-      @local_spec_content ||= begin
-        if File.exist?(path = Utils.base + "config/spec.json")
-          File.read(path)
-        else
-          new_spec_content
+      # if spec is missing (for old themes)
+      def new_spec_content
+        content = JSON.parse(File.read(path = Utils.base + '.shoperb'))
+        spec_content = {
+          handle: content['handle'],
+          compile: {
+            stylesheets: ['application.css'],
+            javascripts: ['application.js']
+          }
+        }.to_json
+        Dir.mkdir 'config' unless File.exist?('config')
+        File.open('config/spec.json', 'w') {|f| f.write(spec_content) }
+        spec_content
+      end
+
+      # general theme settings (styles)
+      def theme_settings
+        (settings_data ? settings_data['general'].presence : nil) || {}
+      end
+
+      def presets
+        res = []
+
+        Pathname.glob(Utils.base + "presets/*.json") do |path|
+          content = File.read(path)
+          data = JSON.parse(content) rescue { "settings" => { } }
+
+          res.push([nil, data["settings"]]) if data["default"]
+          res.push([data["name_key"], data["settings"]])
+        end
+
+        res.to_h
+      end
+
+      def compiler asset_url, digests: true, **options
+        Artisans::ThemeCompiler.new(
+          File.expand_path(Utils.base),
+          asset_url,
+          settings: theme_settings,
+          compile: spec["compile"],
+          file_reader: SprocketsFileReader.new(digests: digests)
+        )
+      end
+
+      class SprocketsFileReader
+        def initialize(digests: true)
+          @digests = digests
+        end
+
+        def read(file)
+          File.read(file) if File.file?(file)
+        end
+
+        def find_digest(path)
+          @digests && File.exist?(path) ? Digest::MD5.hexdigest(File.read(path)) : ''
         end
       end
     end
-
-    # if spec is missing (for old themes)
-    def new_spec_content
-      content = JSON.parse(File.read(path = Utils.base + '.shoperb'))
-      spec_content = {
-        handle: content['handle'],
-        compile: {
-          stylesheets: ['application.css'],
-          javascripts: ['application.js']
-        }
-      }.to_json
-      Dir.mkdir 'config' unless File.exist?('config')
-      File.open('config/spec.json', 'w') {|f| f.write(spec_content) }
-      spec_content
-    end
-
-    # general theme settings (styles)
-    def theme_settings
-      (settings_data ? settings_data['general'].presence : nil) || {}
-    end
-
-    def presets
-      res = []
-
-      Pathname.glob(Utils.base + "presets/*.json") do |path|
-        content = File.read(path)
-        data = JSON.parse(content) rescue { "settings" => { } }
-
-        res.push([nil, data["settings"]]) if data["default"]
-        res.push([data["name_key"], data["settings"]])
-      end
-
-      res.to_h
-    end
-
-    def compiler asset_url, digests: true, **options
-      Artisans::ThemeCompiler.new(
-        File.expand_path(Utils.base),
-        asset_url,
-        settings: theme_settings,
-        compile: spec["compile"],
-        file_reader: SprocketsFileReader.new(digests: digests)
-      )
-    end
-
-    class SprocketsFileReader
-      def initialize(digests: true)
-        @digests = digests
-      end
-
-      def read(file)
-        File.read(file) if File.file?(file)
-      end
-
-      def find_digest(path)
-        @digests && File.exist?(path) ? Digest::MD5.hexdigest(File.read(path)) : ''
-      end
-    end
   end
-end end
+end
