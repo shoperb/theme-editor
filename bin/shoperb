@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
 
+require 'tty-prompt'
+require 'fileutils'
+require 'json'
 require_relative "../lib/shoperb_theme_editor"
+require_relative '../lib/shoperb_theme_editor/build'
 
 def apply_global_opts
   Shoperb::Theme::Editor::Configuration::OPTIONS.each do |option, msg|
@@ -144,4 +148,28 @@ Slop.parse ignore_case: true, help: true, strict: true do
     end
   end
 
+  command "build" do
+    apply_global_opts
+    description "Adds or modifies sections"
+    banner with_description("Usage: shoperb build")
+
+    run do |options, args|
+      prompt = TTY::Prompt.new
+      sections_dir = File.join(Dir.pwd, "config/sections")
+
+      FileUtils.mkdir_p(sections_dir)
+      section_files = Dir[File.join(sections_dir, "*.json")].map { |f| File.basename(f, ".json") }
+
+      choices = section_files + ["Create a new section"]
+      section_handle = prompt.select('Select a section to modify or create a new one:', choices)
+
+      if section_handle == "Create a new section"
+        section_handle = prompt.ask('Enter the new section handle:', required: true)
+      end
+
+      Shoperb::Theme::Editor.with_configuration(options) do
+        Shoperb::Theme::Editor.create_section(section_handle)
+      end
+    end
+  end
 end
