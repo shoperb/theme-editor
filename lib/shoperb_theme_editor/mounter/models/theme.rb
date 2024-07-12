@@ -20,6 +20,10 @@ module Shoperb module Theme module Editor
           SettingsData.new
         end
 
+        def settings_defaults
+          SettingsDefaults.new
+        end
+
         def cache_key
           SecureRandom.hex
         end
@@ -56,7 +60,27 @@ module Shoperb module Theme module Editor
           private
 
           def file
-            File.join(Dir.pwd, "config", "settings_data.json")
+            if File.exist?('config/settings_data.json')
+              File.join(Dir.pwd, "config", "settings_data.json")
+            elsif File.exist?('config/settings_defaults.json')
+              File.join(Dir.pwd, "config", "settings_defaults.json")
+            end
+          end
+        end
+
+        class SettingsDefaults
+          def data
+            JSON.parse(File.read(file).presence || "{}")
+          end
+
+          private
+
+          def file
+            if File.exist?('config/settings_defaults.json')
+              File.join(Dir.pwd, "config", "settings_defaults.json")
+            elsif File.exist?('config/settings_data.json')
+              File.join(Dir.pwd, "config", "settings_data.json")
+            end
           end
         end
       end
