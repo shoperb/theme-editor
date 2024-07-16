@@ -6,9 +6,18 @@ require 'json'
 require_relative "../lib/shoperb_theme_editor"
 require_relative '../lib/shoperb_theme_editor/build'
 
+# Trap Ctrl + C
+trap("INT") do
+  puts "\nAll done, exiting..."
+  exit(0)
+end
+
 def apply_global_opts
   Shoperb::Theme::Editor::Configuration::OPTIONS.each do |option, msg|
     on option, msg
+  end
+  on :verbose, "Enable verbose mode" do
+    $logger.level = Logger::DEBUG
   end
 end
 
@@ -18,6 +27,30 @@ def with_description base
 
 #{base}
   eos
+end
+
+def clear_screen
+  print "\e[2J\e[f"
+end
+
+def display_banner
+  banner = <<-BANNER
+
++-------------------------------------------------------------------------------------------------------+
+|                                                                                                       |
+|    ________       ___  ___      ________      ________    _______       ________      ________        |
+|   |\\   ____\\     |\\  \\|\\  \\    |\\   __  \\    |\\   __  \\  |\\  ___ \\     |\\   __  \\    |\\   __  \\       |
+|   \\ \\  \\___|_    \\ \\  \\\\\\  \\   \\ \\  \\|\\  \\   \\ \\  \\|\\  \\ \\ \\   __/|    \\ \\  \\|\\  \\   \\ \\  \\|\\ /_      |
+|    \\ \\_____  \\    \\ \\   __  \\   \\ \\  \\\\\\  \\   \\ \\   ____\\ \\ \\  \\_|/__   \\ \\   _  _\\   \\ \\   __  \\     |
+|     \\|____|\\  \\    \\ \\  \\ \\  \\   \\ \\  \\\\\\  \\   \\ \\  \\___|  \\ \\  \\_|\\ \\   \\ \\  \\\\  \\|   \\ \\  \\|\\  \\    |
+|       ____\\_\\  \\    \\ \\__\\ \\__\\   \\ \\_______\\   \\ \\__\\      \\ \\_______\\   \\ \\__\\\\ _\\    \\ \\_______\\   |
+|      |\\_________\\    \\|__|\\|__|    \\|_______|    \\|__|       \\|_______|    \\|__|\\|__|    \\|_______|   |
+|      \\|_________|                                                                                     |
+|                                                                                                       |
++-------------------------------------------------------------------------------------------------------+
+
+  BANNER
+  puts banner
 end
 
 Slop.parse ignore_case: true, help: true, strict: true do
@@ -153,22 +186,148 @@ Slop.parse ignore_case: true, help: true, strict: true do
     description "Adds or modifies sections"
     banner with_description("Usage: shoperb build")
 
+    on "verbose", "Enable verbose mode"
+
     run do |options, args|
       prompt = TTY::Prompt.new
-      sections_dir = File.join(Dir.pwd, "config/sections")
+      verbose_mode = options[:verbose] || false
 
+      sections_dir = File.join(Dir.pwd, "config/sections")
       FileUtils.mkdir_p(sections_dir)
       section_files = Dir[File.join(sections_dir, "*.json")].map { |f| File.basename(f, ".json") }
 
-      choices = section_files + ["Create a new section"]
-      section_handle = prompt.select('Select a section to modify or create a new one:', choices)
+      section_handle = nil
 
-      if section_handle == "Create a new section"
-        section_handle = prompt.ask('Enter the new section handle:', required: true)
-      end
+      begin
+        loop do
+          clear_screen
+          display_banner
 
-      Shoperb::Theme::Editor.with_configuration(options) do
-        Shoperb::Theme::Editor.create_section(section_handle)
+          choices = section_files.map do |f|
+            json = JSON.parse(File.read(File.join(sections_dir, "#{f}.json")))
+            { name: "# #{json['name']} (#{f})", value: f }
+          end
+          choices << { name: "", disabled: "" }
+          choices << { name: "+ Create new section", value: :create }
+          choices << { name: "- Remove section", value: :remove }
+          choices << { name: "← Exit", value: :exit }
+
+          section_choice = prompt.select('Select a section to modify or create a new one:', choices, per_page: 20, cycle: true)
+
+          case section_choice
+          when :create
+            section_handle = prompt.ask('Enter the new section handle (or type "back" to go back):', required: true)
+            next if section_handle == 'back'
+
+            if section_files.include?(section_handle)
+              modify = prompt.yes?("Section '#{section_handle}' already exists. Do you want to modify it?")
+              unless modify
+                prompt.say("Section handle already exists. Please enter a different handle.")
+                next
+              end
+            end
+
+            generated_name = section_handle.split('_').map(&:capitalize).join(' ')
+            section_name = prompt.ask('Enter the section name (or type "back" to go back):', default: generated_name, required: true)
+            next if section_name == 'back'
+
+            verbose_mode && puts("DEBUG: Creating section with handle: #{section_handle}, name: #{section_name}")
+
+            Shoperb::Theme::Editor.with_configuration(options) do
+              Shoperb::Theme::Editor.create_section(section_handle, section_name)
+            end
+
+            Shoperb::Theme::Editor.with_configuration(options) do
+              Shoperb::Theme::Editor.add_settings(section_handle)
+            end
+
+            # Refresh the section_files list
+            section_files = Dir[File.join(sections_dir, "*.json")].map { |f| File.basename(f, ".json") }
+
+          when :remove
+            loop do
+              clear_screen
+              display_banner
+
+              remove_choices = section_files.map do |f|
+                json = JSON.parse(File.read(File.join(sections_dir, "#{f}.json")))
+                { name: "# #{json['name']} (#{f})", value: f }
+              end
+              remove_choices << { name: "", disabled: "" }
+              remove_choices << { name: "← Sections", value: :back }
+
+              section_to_remove = prompt.select('Select a section to remove:', remove_choices, per_page: 20, cycle: true)
+
+              break if section_to_remove == :back
+
+              confirm = prompt.yes?("Are you sure you want to remove the section '#{section_to_remove}'?")
+
+              if confirm
+                verbose_mode && puts("DEBUG: Removing section with handle: #{section_to_remove}")
+                Shoperb::Theme::Editor.with_configuration(options) do
+                  Shoperb::Theme::Editor.remove_section(section_to_remove)
+                end
+                section_files.delete(section_to_remove)
+                prompt.say("Section '#{section_to_remove}' has been removed successfully.")
+              end
+            end
+
+          when :exit
+            break
+
+          else
+            section_handle = section_choice
+            json_file_path = File.join(sections_dir, "#{section_handle}.json")
+            json_content = JSON.parse(File.read(json_file_path))
+
+            verbose_mode && puts("DEBUG: Modifying section with handle: #{section_handle}")
+
+            loop do
+              clear_screen
+              display_banner
+
+              setting_choices = json_content["settings"].map { |s| { name: "# #{s['handle']} (#{s['type']})", value: s['handle'] } }
+              setting_choices << { name: "", disabled: "" }
+              setting_choices << { name: "+ Add setting", value: :add }
+              setting_choices << { name: "- Remove setting", value: :remove }
+              setting_choices << { name: "← Back to Sections", value: :back }
+
+              setting_choice = prompt.select('Select a setting to modify, add, delete, or go back:', setting_choices, per_page: 20, cycle: true)
+
+              verbose_mode && puts("DEBUG: Setting choice: #{setting_choice}")
+
+              if setting_choice == :add
+                Shoperb::Theme::Editor.with_configuration(options) do
+                  Shoperb::Theme::Editor.add_settings(section_handle)
+                end
+                # Refresh the json_content
+                json_content = JSON.parse(File.read(json_file_path))
+              elsif setting_choice == :remove
+                Shoperb::Theme::Editor.with_configuration(options) do
+                  Shoperb::Theme::Editor.delete_settings(section_handle)
+                end
+                # Refresh the json_content
+                json_content = JSON.parse(File.read(json_file_path))
+              elsif setting_choice == :back
+                verbose_mode && puts("DEBUG: Back to section selection")
+                break
+              else
+                handle_to_modify = setting_choice
+                prompt.say("Selected setting handle: #{handle_to_modify}")
+
+                Shoperb::Theme::Editor.with_configuration(options) do
+                  verbose_mode && puts("DEBUG: Modifying setting: #{handle_to_modify}")
+                  Shoperb::Theme::Editor.modify_setting(section_handle, handle_to_modify)
+                end
+                # Refresh the json_content
+                json_content = JSON.parse(File.read(json_file_path))
+              end
+            end
+          end
+        end
+      rescue TTY::Reader::InputInterrupt
+        puts "\nAll done, exiting..."
+        exit(0)
       end
     end
   end
