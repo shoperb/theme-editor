@@ -11,16 +11,13 @@ module Shoperb
             @prompt = TTY::Prompt.new
           end
 
-          def add_settings(verbose_mode = false)
+          def add_settings
             loop do
               if @json_manager.json_content["settings"].empty?
-                verbose_mode && puts("DEBUG: No current settings found.")
 
                 handle = @prompt.ask('Enter the config handle:', required: true)
                 type = @prompt.select('Select the config type:', %w[text richtext select number checkbox radio range color video collection product menu image blog_post category subcategory], per_page: 18)
-                additional_args = collect_additional_args(type, verbose_mode)
-
-                verbose_mode && puts("DEBUG: Adding new setting - Handle: #{handle}, Type: #{type}, Additional Args: #{additional_args.inspect}")
+                additional_args = collect_additional_args(type)
 
                 @json_manager.add_config(handle, type, *additional_args)
 
@@ -34,9 +31,7 @@ module Shoperb
                   q.messages[:valid?] = 'Handle must be unique'
                 end
                 type = @prompt.select('Select the config type:', %w[text richtext select number checkbox radio range color video collection product menu image blog_post category subcategory], per_page: 18)
-                additional_args = collect_additional_args(type, verbose_mode)
-
-                verbose_mode && puts("DEBUG: Adding new setting - Handle: #{handle}, Type: #{type}, Additional Args: #{additional_args.inspect}")
+                additional_args = collect_additional_args(type)
 
                 @json_manager.add_config(handle, type, *additional_args)
 
@@ -49,15 +44,13 @@ module Shoperb
             end
           end
 
-          def modify_setting(setting_handle, verbose_mode = false)
+          def modify_setting(setting_handle)
             settings = @json_manager.json_content["settings"]
             setting = settings.find { |s| s["handle"] == setting_handle }
 
             if setting
               type = setting["type"]
               handle = setting["handle"]
-
-              verbose_mode && puts("DEBUG: Modifying setting - Handle: #{handle}, Type: #{type}")
 
               loop do
                 options = [
@@ -77,7 +70,7 @@ module Shoperb
                 when :type
                   new_type = @prompt.select('Select the new type:', %w[text richtext select number checkbox radio range color video collection product menu image blog_post category subcategory], per_page: 18, default: type)
                   setting["type"] = new_type
-                  additional_args = collect_additional_args(new_type, verbose_mode)
+                  additional_args = collect_additional_args(new_type)
                   setting.merge!(build_config_item(new_handle, new_type, *additional_args))
                 when :default
                   new_default = @prompt.ask('Enter the new default value:', default: setting['default'])
@@ -88,8 +81,6 @@ module Shoperb
                 when :save
                   break
                 end
-
-                verbose_mode && puts("DEBUG: Updated setting - #{setting.inspect}")
               end
 
               File.open(File.join(Dir.pwd, "config/sections/#{@section_handle}.json"), 'w') do |file|
@@ -102,7 +93,7 @@ module Shoperb
             end
           end
 
-          def delete_settings(verbose_mode = false)
+          def delete_settings
             settings = @json_manager.json_content["settings"]
 
             if settings.empty?
@@ -111,8 +102,6 @@ module Shoperb
             end
 
             handle_to_delete = @prompt.select('Select the setting to delete:', settings.map { |s| "- #{s['handle']} (#{s['type']})" }, per_page: 18)
-
-            verbose_mode && puts("DEBUG: Deleting setting: #{handle_to_delete}")
 
             setting = settings.find { |s| s["handle"] == handle_to_delete }
 
@@ -129,11 +118,10 @@ module Shoperb
 
           private
 
-          def collect_additional_args(type, verbose_mode = false)
+          def collect_additional_args(type)
             case type
             when 'text', 'richtext'
               default = @prompt.ask('Enter the default value for text:', default: '')
-              verbose_mode && puts("DEBUG: Collected Args for #{type} - Default: #{default}")
               [default]
             when 'select', 'radio'
               default = @prompt.ask('Enter the default value for select:', required: true)
@@ -144,17 +132,14 @@ module Shoperb
                 option_handle = @prompt.ask('Enter the option handle:')
                 options << { "value" => value, "handle" => option_handle }
               end
-              verbose_mode && puts("DEBUG: Collected Args for #{type} - Default: #{default}, Options: #{options.inspect}")
               [default, options]
             when 'range'
               min = @prompt.ask('Enter the minimum value for range:', convert: :int, required: true)
               max = @prompt.ask('Enter the maximum value for range:', convert: :int, required: true)
               step = @prompt.ask('Enter the step value for range:', convert: :int, required: true)
-              verbose_mode && puts("DEBUG: Collected Args for #{type} - Min: #{min}, Max: #{max}, Step: #{step}")
               [min, max, step]
             when 'checkbox'
               default = @prompt.yes?('Should the checkbox default to true?')
-              verbose_mode && puts("DEBUG: Collected Args for #{type} - Default: #{default}")
               [default]
             when 'subcategory'
               sub_settings = []
@@ -165,16 +150,14 @@ module Shoperb
                 sub_settings << build_config_item(sub_handle, sub_type, sub_default)
                 break unless @prompt.yes?('Do you want to add another sub-setting?')
               end
-              verbose_mode && puts("DEBUG: Collected Args for #{type} - Sub-settings: #{sub_settings.inspect}")
               [sub_settings]
             else
               default = @prompt.ask("Enter the default value for #{type}:", default: '')
-              verbose_mode && puts("DEBUG: Collected Args for #{type} - Default: #{default}")
               [default]
             end
           end
 
-          def show_current_settings(settings, verbose_mode = false)
+          def show_current_settings(settings)
             if settings.empty?
               puts "No current settings."
             else
@@ -189,7 +172,6 @@ module Shoperb
                 end
               end
             end
-            verbose_mode && puts("DEBUG: Current settings - #{settings.inspect}")
           end
 
           def build_config_item(handle, type, *args)

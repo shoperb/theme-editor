@@ -47,12 +47,7 @@ module Shoperb module Theme
       rescue Interrupt => e
         exit(130)
       rescue Exception => e
-        if config.verbose
-          puts e.message
-          puts e.backtrace.join("\n")
-        else
-          Error.report(e)
-        end
+        Error.report(e)
       ensure
         self.config.save
       end
