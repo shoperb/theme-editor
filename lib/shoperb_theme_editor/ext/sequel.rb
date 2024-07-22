@@ -67,7 +67,7 @@ module ShoperbLiquid
     class CollectionDrop
         def pagy(collection, vars = {})
             vars[:count] = collection.count
-            pagy = Pagy.new(pagy_get_vars(collection, vars))
+            pagy = Pagy.new(**pagy_get_vars(collection, vars))
             [pagy, pagy_get_items(collection, pagy)]
         end
     end
