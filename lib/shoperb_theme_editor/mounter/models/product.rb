@@ -37,7 +37,7 @@ module Shoperb module Theme module Editor
 
         dataset_module do
           def active
-            as_dataset(all.select(&:active?))
+            where(state: 'active')
           end
 
           def by_name(dir)
