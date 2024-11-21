@@ -33,7 +33,7 @@ module Shoperb module Theme module Editor
         end
 
         def children
-          Category.active.select { |child| child.parent_id == attributes[:id] }
+          Category.active.where(parent_id: id)
         end
 
         def ancestors
