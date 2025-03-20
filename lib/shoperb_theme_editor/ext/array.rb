@@ -10,4 +10,8 @@ class Array
       self
     end
   end
+
+  def active
+    filter{|item| item.state == 'active'}
+  end
 end
