@@ -30,10 +30,20 @@ module Shoperb module Theme module Editor
       end
     end
 
-    def rm_tempfile file
-      if file && File.exist?(file)
-        file.close
-        file.unlink
+    def rm_tempfile(file)
+      return unless file
+      if defined?(Tempfile) && file.is_a?(Tempfile)
+        begin
+          file.close unless file.closed?
+        rescue IOError
+        end
+        begin
+          file.unlink
+        rescue Errno::ENOENT, IOError
+        end
+      else
+        path = file.respond_to?(:to_path) ? file.to_path : file.to_s
+        File.delete(path) if path && !path.empty? && File.exist?(path)
       end
     end
   end
