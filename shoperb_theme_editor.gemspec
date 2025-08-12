@@ -1,45 +1,60 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |gem|
   gem.name    = "shoperb-theme-editor"
-  gem.version = "0.7.8"
+  gem.version = "0.8.0"
   gem.required_ruby_version = ">= 3.2.0"
 
   gem.authors  = ["Shoperb"]
-  gem.email    = ["support@shoperb.com"]
-  gem.summary  = %q{shoperb_theme_editor is a theme manager for Shoperb}
-  gem.homepage = "https://www.shoperb.com"
+  gem.email    = ["engineering@shoperb.com"]
+  gem.summary = "CLI toolkit for building, editing, and managing Shoperb storefront themes."
+  gem.homepage = "https://shoperb.dev"
   gem.license = "MIT"
 
-  gem.files         = `git ls-files`.split($/)
-  gem.executables   = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
+  gem.files = Dir[
+    "bin/*",
+    "lib/**/*",
+    "shoperb_theme_editor.gemspec",
+    "README*",
+    "LICENSE*",
+    "CONTRIBUTING*",
+  ].select { |f| File.file?(f) }
   gem.require_paths = ["lib"]
+  gem.bindir = "bin"
+  gem.executables = ["shoperb"]
+  gem.metadata = {
+    "rubygems_mfa_required" => "true",
+    "homepage_uri"=> "https://www.shoperb.com",
+    "documentation_uri"=> "https://shoperb.dev",
+    "source_code_uri"  => "https://github.com/shoperb/theme-editor",
+    "bug_tracker_uri"  => "https://github.com/shoperb/theme-editor/issues"
+  }
 
-  gem.add_dependency "webrick"
-  gem.add_dependency "sinatra"
-  gem.add_dependency "sinatra-contrib"
-  gem.add_dependency "sinatra-flash"
+  gem.add_dependency "webrick", "~> 1.8"
+  gem.add_dependency "sinatra", "~> 3.0"
+  gem.add_dependency "sinatra-contrib", "~> 3.0"
+  gem.add_dependency "sinatra-flash", "~> 0.3"
 
-  gem.add_dependency "pagy"
-  gem.add_dependency "activesupport"
-  gem.add_dependency "actionpack"
-  gem.add_dependency "shoperb_liquid"
-  gem.add_dependency "artisans", "~> 2"
-  gem.add_dependency "sentry-raven"
-  gem.add_dependency "tty-prompt"
+  gem.add_dependency "pagy", "~> 9.3.5"
+  gem.add_dependency "activesupport", "~> 7.0"
+  gem.add_dependency "actionpack", "~> 7.0"
+  gem.add_dependency "shoperb_liquid", "~> 0.0.1"
+  gem.add_dependency "artisans", "~> 2.0"
+  gem.add_dependency "sentry-raven", "~> 3.1"      # (or migrate to sentry-ruby, "~> 5.0")
+  gem.add_dependency "tty-prompt", "~> 0.23"
 
   gem.add_dependency "coffee-script", "~> 2"
   gem.add_dependency "sass", "~> 3"
   gem.add_dependency "haml", "~> 6"
   gem.add_dependency "slop", "~> 3"
-  gem.add_dependency "patron"
-  gem.add_dependency "sqlite3"
-  gem.add_dependency "sequel"
-  gem.add_dependency "colorize"
+  gem.add_dependency "patron", "~> 0.13"
+  gem.add_dependency "sqlite3", "~> 2.7"
+  gem.add_dependency "sequel", "~> 5.0"
+  gem.add_dependency "colorize", "~> 1.1"
   gem.add_dependency "oauth2", "~> 2"
-  gem.add_dependency "faraday-multipart"
-  gem.add_dependency "launchy", "~> 2"
-  gem.add_dependency "rubyzip", "~> 2"
-  gem.add_dependency "pry"
-  gem.add_dependency "rubycritic"
+  gem.add_dependency "faraday", "~> 2"
+  gem.add_dependency "faraday-multipart", "~> 1.0"
+  gem.add_dependency "launchy", "~> 2.5"
+  gem.add_dependency "rubyzip", "~> 2.3"
+  gem.add_dependency "pry", "~> 0.14"
+  gem.add_dependency "rubycritic", "~> 4.0"
 end
