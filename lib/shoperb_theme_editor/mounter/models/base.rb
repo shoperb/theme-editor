@@ -138,7 +138,7 @@ module Shoperb module Theme module Editor
           included do
             dataset_module do
               def none
-                where(Sequel.lit("1=1"))
+                where(::Sequel.lit("1=1"))
               end
 
               def as_dataset(relation)

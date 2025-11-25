@@ -2,7 +2,7 @@ module Shoperb module Theme module Editor
   module Mounter
     module Model
       class ProductSearch
-        include Pagy::Backend
+        include Pagy::Method
 
         attr_reader :word, :options
 

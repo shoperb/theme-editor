@@ -34,9 +34,9 @@ Gem::Specification.new do |gem|
   gem.add_dependency "sinatra-contrib", "~> 3.0"
   gem.add_dependency "sinatra-flash", "~> 0.3"
 
-  gem.add_dependency "pagy", "~> 9.3.5"
-  gem.add_dependency "activesupport", "~> 7.0"
-  gem.add_dependency "actionpack", "~> 7.0"
+  gem.add_dependency "pagy", "~> 43.1.0"
+  gem.add_dependency "activesupport", "~> 8.1"
+  gem.add_dependency "actionpack", "~> 8.1"
   gem.add_dependency "shoperb_liquid", "~> 0.0.1"
   gem.add_dependency "artisans", "~> 2.0"
   gem.add_dependency "sentry-raven", "~> 3.1"      # (or migrate to sentry-ruby, "~> 5.0")
@@ -44,7 +44,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "coffee-script", "~> 2"
   gem.add_dependency "sass", "~> 3"
-  gem.add_dependency "haml", "~> 6"
+  gem.add_dependency "haml", "~> 7"
   gem.add_dependency "slop", "~> 3"
   gem.add_dependency "patron", "~> 0.13"
   gem.add_dependency "sqlite3", "~> 2.7"
@@ -54,7 +54,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "faraday", "~> 2"
   gem.add_dependency "faraday-multipart", "~> 1.0"
   gem.add_dependency "launchy", "~> 2.5"
-  gem.add_dependency "rubyzip", "~> 2.3"
-  gem.add_dependency "pry", "~> 0.14"
+  gem.add_dependency "rubyzip", "~> 3.2.2"
+  gem.add_dependency "pry", "~> 0.15"
   gem.add_dependency "rubycritic", "~> 4.0"
 end

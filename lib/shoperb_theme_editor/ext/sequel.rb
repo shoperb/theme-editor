@@ -67,11 +67,8 @@ module ShoperbLiquid
     class CollectionDrop
         def pagy(collection, vars = {})
             vars[:count] = collection.count
-            vars[:limit] ||= pagy_get_limit(vars)
-            vars[:page]  ||= pagy_get_page(vars)
-            pagy = Pagy.new(**vars)
-
-            [pagy, pagy_get_items(collection, pagy)]
+            pagy = Pagy::Offset.new(**vars)
+            [pagy, collection.instance_of?(Array) ? collection[pagy.offset, pagy.limit] : pagy.records(collection)]
         end
     end
     class ArrayDrop
