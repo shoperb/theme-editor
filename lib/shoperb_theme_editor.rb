@@ -138,11 +138,11 @@ module Shoperb module Theme
         asset_url,
         settings: theme_settings,
         compile: spec["compile"],
-        file_reader: SprocketsFileReader.new(digests: digests)
+        file_reader: CliFileReader.new(digests: digests)
       )
     end
 
-    class SprocketsFileReader
+    class CliFileReader
       def initialize(digests: true)
         @digests = digests
       end

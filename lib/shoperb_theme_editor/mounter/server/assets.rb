@@ -7,10 +7,18 @@ module Shoperb module Theme module Editor
 
         def self.asset_wrapper app, root
           compiler = Editor.compiler(root, domain: Editor["oauth-site"], theme: Editor.handle, digests: false)
+          artisans_gem_path = Gem.loaded_specs["artisans"].full_gem_path
+          theme_path = Dir.getwd
+          tmp_dir = "#{theme_path}/tmp"
+          asset_path = "#{theme_path}/assets/"
           app.get "#{root}*" do |path|
-            env_sprockets = request.env.dup
-            env_sprockets['PATH_INFO'] = path
-            compiler.rack_response(env_sprockets)
+            file_path = "#{asset_path}#{path}"
+            out_file = nil
+            compiler.compile_file(file: file_path).each do |file_name, data|
+              out_file = "#{tmp_dir}/#{file_name}"
+              File.binwrite(out_file, data)
+            end
+            send_file out_file
           end
         end
 
