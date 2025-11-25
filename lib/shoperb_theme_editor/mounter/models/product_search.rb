@@ -14,7 +14,7 @@ module Shoperb module Theme module Editor
         def paginate(page: 1, per: 12)
           page = 1 if !page || page == 0
 
-          pagy(results, items: per, page: page, count: results.count)
+          results.paginate(page: page, per: per)
         end
 
         def performed

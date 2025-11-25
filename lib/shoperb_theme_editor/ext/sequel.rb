@@ -46,6 +46,13 @@ class Sequel::SQLite::Dataset
     def to_liquid
         to_a.map(&:to_liquid)
     end
+
+    def paginate(page: 1, per: 12)
+        page = 1 if !page || page == 0
+
+        pagy = Pagy::Offset.new(count: count,  page:  page, limit: per)
+        [pagy, pagy.records(self)]
+    end
 end
 
 class Sequel::Model

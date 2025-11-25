@@ -66,14 +66,14 @@ module Shoperb module Theme module Editor
             if pars[:attributes].present?
               # for now lets just return some variants
             end
-            pagy, scope = scope.paginate(pars[:page]||1, 10)
+            pagy, scope = scope.paginate(page: pars[:page]||1, per: 10)
             arr   = scope.to_a || []
             arr   = arr.map{|i| i.to_liquid.as_json }.shuffle
             resp  = {
               variants: arr,
               page: {
                 page:  pagy.page,
-                total: pagy.items,
+                total: pagy.count,
                 pages: pagy.pages
               }
             }

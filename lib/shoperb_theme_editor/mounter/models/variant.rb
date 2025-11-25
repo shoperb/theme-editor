@@ -14,7 +14,7 @@ module Shoperb module Theme module Editor
         c_fields :allow_backorder, cast: TrueClass
         c_fields :require_shipping, cast: TrueClass
         c_fields :charge_taxes, cast: TrueClass
-        c_fields :price, :price_original, :price_discount, cast: BigDecimal
+        c_fields :price, :price_original, :price_discount, :pkg_deposit, cast: BigDecimal
 
         belongs_to :product
         has_many :variant_attributes
