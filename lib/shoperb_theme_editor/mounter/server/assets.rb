@@ -1,4 +1,5 @@
 require 'artisans'
+require 'fileutils'
 
 module Shoperb module Theme module Editor
   module Mounter
@@ -11,6 +12,8 @@ module Shoperb module Theme module Editor
           theme_path = Dir.getwd
           tmp_dir = "#{theme_path}/tmp"
           asset_path = "#{theme_path}/assets/"
+          FileUtils.mkdir_p(tmp_dir)
+
           app.get "#{root}*" do |path|
             file_path = "#{asset_path}#{path}"
             out_file = nil
