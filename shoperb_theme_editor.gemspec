@@ -43,7 +43,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency "tty-prompt", "~> 0.23"
 
   gem.add_dependency "coffee-script", "~> 2"
-  gem.add_dependency "sass", "~> 3"
   gem.add_dependency "haml", "~> 7"
   gem.add_dependency "slop", "~> 3"
   gem.add_dependency "patron", "~> 0.13"
