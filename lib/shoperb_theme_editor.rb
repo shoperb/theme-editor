@@ -143,6 +143,7 @@ module Shoperb module Theme
     end
 
     class CliFileReader
+      attr_reader :digests
       def initialize(digests: true)
         @digests = digests
       end
@@ -151,8 +152,24 @@ module Shoperb module Theme
         File.read(file) if File.file?(file)
       end
 
+      def file_exist?(file)
+        File.exist?(file)
+      end
+
+      def binread(*args)
+        File.binread(*args)
+      end
+
+      def binwrite(*args)
+        File.binwrite(*args)
+      end
+
+      def mkdir_p(*args)
+        FileUtils.mkdir_p(*args)
+      end
+
       def find_digest(path)
-        @digests && File.exist?(path) ? Digest::MD5.hexdigest(File.read(path)) : ''
+        @digests && File.exist?(path) ? Artisans::ThemeCompiler.hexdigest(File.read(path)) : ''
       end
     end
   end
