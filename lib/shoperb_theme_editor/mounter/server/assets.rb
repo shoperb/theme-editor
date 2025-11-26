@@ -30,12 +30,8 @@ module Shoperb module Theme module Editor
           asset_wrapper app, "/system/assets/"
 
           app.get "/#{Editor["oauth-site"]}/images/*/*" do |id, filename|
-            env_sprockets = request.env.dup
-            env_sprockets['PATH_INFO'] = "images/#{filename}"
             Model::Image.find(id: id)
-            ::Sprockets::Environment.new do |env|
-              env.append_path "data/assets"
-            end.call(env_sprockets)
+            send_file "data/assets/images/#{filename}"
           end
 
         end
