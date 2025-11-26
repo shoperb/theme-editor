@@ -14,4 +14,8 @@ class Array
   def active
     filter{|item| item.state == 'active'}
   end
+
+  def preload(*args)
+    self
+  end
 end
